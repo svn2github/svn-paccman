@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="categoryLbl" alignment="1" min="-2" pref="45" max="-2" attributes="1"/>
+                  <Component id="dateLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="noteLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="payeeLbl" alignment="1" min="-2" max="-2" attributes="1"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labelEdt" alignment="1" pref="641" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="splitBtn" pref="281" max="32767" attributes="0"/>
+                          <Component id="dateEdt" alignment="1" pref="281" max="32767" attributes="0"/>
+                          <Component id="categorySelectorCmb" alignment="1" pref="281" max="32767" attributes="0"/>
+                          <Component id="payeeCmb" alignment="1" pref="281" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="amountLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="valueDateLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="paymentLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="toFromAccountLbl" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="valueDateChooser" alignment="0" pref="271" max="32767" attributes="0"/>
+                          <Component id="amountEdt" alignment="0" pref="271" max="32767" attributes="0"/>
+                          <Component id="payementCmb" alignment="0" pref="271" max="32767" attributes="0"/>
+                          <Component id="toFromAccountCmb" alignment="0" pref="271" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="noteScrollPane" alignment="0" pref="641" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="categorySelectorCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="amountLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="amountEdt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="categoryLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="dateLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateEdt" min="-2" max="-2" attributes="0"/>
+                  <Component id="valueDateLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="valueDateChooser" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labelLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelEdt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="noteLbl" min="-2" max="-2" attributes="0"/>
+                  <Component id="noteScrollPane" pref="120" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="payeeCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="payeeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="paymentLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="payementCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="splitBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="toFromAccountLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="toFromAccountCmb" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="categoryLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Category"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.transactions.form.CategorySelectorComboBox" name="categorySelectorCmb">
+    </Component>
+    <Component class="javax.swing.JLabel" name="amountLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Amount"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.common.AmountTextField" name="amountEdt">
+    </Component>
+    <Component class="javax.swing.JLabel" name="dateLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.common.MyDateChooser" name="dateEdt">
+    </Component>
+    <Component class="javax.swing.JLabel" name="valueDateLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Value date"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.common.MyDateChooser" name="valueDateChooser">
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Label"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="labelEdt">
+    </Component>
+    <Component class="javax.swing.JLabel" name="noteLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Note"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="noteScrollPane">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="noteEdt">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="payeeLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Payee"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.transactions.form.PayeeSelectorComboBox" name="payeeCmb">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="paymentLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Payment Method"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.transactions.form.PaymentMethodSelectorComboBox" name="payementCmb">
+    </Component>
+    <Component class="javax.swing.JButton" name="splitBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Split"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="toFromAccountLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="To/From account"/>
+      </Properties>
+    </Component>
+    <Component class="org.paccman.ui.transactions.form.AccountSelectorComboBox" name="toFromAccountCmb">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

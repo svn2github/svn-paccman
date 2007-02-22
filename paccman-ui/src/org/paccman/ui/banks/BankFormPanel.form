@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="numbersPanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="addressPanel" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="nameLbl" min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="bankNameEdt" pref="444" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="agencyLbl" min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Component id="agencyEdt" pref="444" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" max="-2" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="nameLbl" linkSize="15" max="32767" attributes="1"/>
+                  <Component id="bankNameEdt" linkSize="15" alignment="0" min="-2" pref="20" max="-2" attributes="1"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="agencyLbl" linkSize="15" min="-2" max="-2" attributes="0"/>
+                  <Component id="agencyEdt" linkSize="15" min="-2" pref="20" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="addressPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="numbersPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="nameLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="bankNameEdt">
+    </Component>
+    <Component class="javax.swing.JLabel" name="agencyLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agency"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="agencyEdt">
+    </Component>
+    <Container class="javax.swing.JPanel" name="addressPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Address"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="codeLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="numberLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="countryLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="addressNumberEdt" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="codeEdt" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" min="-2" max="-2" attributes="0">
+                              <Component id="streetLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cityLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cityEdt" pref="303" max="32767" attributes="0"/>
+                              <Component id="addressLine2Edt" alignment="0" pref="303" max="32767" attributes="0"/>
+                              <Component id="addressLine1Edt" pref="303" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="countryCmb" pref="433" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="numberLbl" linkSize="14" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="addressNumberEdt" linkSize="14" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="streetLbl" linkSize="14" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="addressLine1Edt" linkSize="14" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="addressLine2Edt" linkSize="14" min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="codeEdt" linkSize="14" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="codeLbl" linkSize="14" min="-2" max="-2" attributes="0"/>
+                      <Component id="cityLbl" linkSize="14" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="cityEdt" linkSize="14" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="countryCmb" linkSize="14" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="countryLbl" linkSize="14" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="numberLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Number"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="streetLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Street"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="addressNumberEdt">
+        </Component>
+        <Component class="javax.swing.JTextField" name="addressLine1Edt">
+        </Component>
+        <Component class="javax.swing.JTextField" name="addressLine2Edt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="codeLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Code"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="codeEdt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="cityLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="City"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="cityEdt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="countryLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Country"/>
+          </Properties>
+        </Component>
+        <Component class="org.paccman.ui.common.CountryComboBox" name="countryCmb">
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="numbersPanel">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Contact"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="emailLbl" linkSize="13" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="faxLbl" linkSize="13" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="internetLbl" linkSize="13" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="phoneLbl" linkSize="13" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="emailEdt" pref="429" max="32767" attributes="0"/>
+                      <Component id="faxEdt" pref="429" max="32767" attributes="0"/>
+                      <Component id="phoneEdt" alignment="0" pref="429" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="internetEdt" pref="372" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="goBtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="phoneLbl" linkSize="12" alignment="0" max="32767" attributes="1"/>
+                      <Component id="phoneEdt" linkSize="12" alignment="0" min="-2" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="faxEdt" linkSize="12" max="32767" attributes="1"/>
+                      <Component id="faxLbl" linkSize="12" alignment="1" max="32767" attributes="1"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="emailLbl" linkSize="12" min="-2" max="-2" attributes="0"/>
+                      <Component id="emailEdt" linkSize="12" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="internetLbl" linkSize="12" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="goBtn" linkSize="12" alignment="0" min="0" max="32767" attributes="1"/>
+                      <Component id="internetEdt" linkSize="12" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="phoneLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Telephone"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="phoneEdt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="faxLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Fax"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="faxEdt">
+        </Component>
+        <Component class="javax.swing.JLabel" name="internetLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Internet"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="internetEdt">
+        </Component>
+        <Component class="javax.swing.JButton" name="goBtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Go"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="emailLbl">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="E-mail"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="emailEdt">
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
