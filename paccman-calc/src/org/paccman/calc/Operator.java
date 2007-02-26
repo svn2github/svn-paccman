@@ -16,9 +16,11 @@ import java.math.BigDecimal;
  * @author public
  */
 public abstract class Operator {
-    public StringBuffer compute(StringBuffer operand_1, StringBuffer operand_2) {
-        BigDecimal result = compute(new BigDecimal(new String(operand_1)), new BigDecimal(new String(operand_2)));
-        return new StringBuffer(result.stripTrailingZeros().toPlainString());
-    }
+    /**
+     * :TODO:do javadoc
+     * @param operand_1 
+     * @param operand_2 
+     * @return 
+     */
     protected abstract BigDecimal compute(BigDecimal operand_1, BigDecimal operand_2);
 }

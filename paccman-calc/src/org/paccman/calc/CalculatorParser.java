@@ -49,7 +49,9 @@ public class CalculatorParser {
     enum Token { DIGIT, POINT, OPERATOR, EQUAL, SIGN, PC, CE }
     enum State { INIT, OPERAND_1, OPERATOR_1, OPERAND_2, OPERATOR_2, EVALUATED }
 
-    /** Creates a new instance of CalculatorParser */
+    /** Creates a new instance of CalculatorParser 
+     * @param calc 
+     */
     public CalculatorParser(Calculator calc) {
 //:TODO:remove this        this.calc = calc;
     }
@@ -161,6 +163,11 @@ public class CalculatorParser {
         return State.OPERAND_1;
     }
     
+    private StringBuffer compute(StringBuffer op1, StringBuffer op2)
+    {
+        return  null;
+    }
+    
     State doOperand2(Token token, String key) {
         switch (token) {
             case DIGIT:
@@ -193,19 +200,19 @@ public class CalculatorParser {
                 return State.OPERAND_2;
             
             case OPERATOR:
-                operand_1 = lastOperator.compute(operand_1, operand_2);
+//                operand_1 = lastOperator.compute(operand_1, operand_2); 
                 operand_2 = null;
                 return State.OPERATOR_2;
                 
             case EQUAL:
-                operand_1 = lastOperator.compute(operand_1, operand_2);
+//                operand_1 = lastOperator.compute(operand_1, operand_2);
                 operand_2 = null;
                 return State.EVALUATED;
                 
             case PC:
-                operand_2 = multOperator.compute(operand_1, operand_2);
-                operand_2 = divOperator.compute(operand_2, new StringBuffer("100.0"));
-                operand_1 = lastOperator.compute(operand_1, operand_2);
+//                operand_2 = multOperator.compute(operand_1, operand_2);
+//                operand_2 = divOperator.compute(operand_2, new StringBuffer("100.0"));
+//                operand_1 = lastOperator.compute(operand_1, operand_2);
                 operand_2 = null;
                 return State.EVALUATED;
 

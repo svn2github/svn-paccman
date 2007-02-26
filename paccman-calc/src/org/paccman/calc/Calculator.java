@@ -59,7 +59,6 @@ public class Calculator extends javax.swing.JPanel {
         currentDisplayEdt.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         currentDisplayEdt.setText("0");
         currentDisplayEdt.setFocusable(false);
-        currentDisplayEdt.setFont(new java.awt.Font("Lucida Sans Typewriter", 0, 14));
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
