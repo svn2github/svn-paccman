@@ -9,6 +9,8 @@
 
 package org.paccman.calc.parser;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author joao
@@ -25,6 +27,14 @@ public class OperandToken extends CalcToken {
      */
     public void append(char c) {
         token.append(c);
+    }
+    
+    /**
+     * :TODO:
+     * @return 
+     */
+    public BigDecimal getValue() {
+        return new BigDecimal(token.toString());
     }
     
 }
