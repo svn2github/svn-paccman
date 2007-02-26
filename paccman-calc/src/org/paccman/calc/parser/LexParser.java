@@ -82,21 +82,26 @@ public class LexParser {
      * @param c
      * @return
      */
-    public Token parseChar(char c) {
+    public CalcToken parseChar(char c) {
+        
         if ((c == '.') || ((c >= '0') && (c <= '9'))) {
-            OperandToken ot;
+            
             if (currentToken instanceof OperandToken) {
                 // Current token is an operand token: append read char to current.
-                ot = (OperandToken)currentToken;
+                OperandToken ot = (OperandToken)currentToken;
                 ot.append(c);
+                return null;
             } else {
                 // New token detected
-                ot = new OperandToken();
+                OperandToken ot = new OperandToken();
                 ot.append(c);
                 lastToken = currentToken;
                 currentToken = ot;
+                return lastToken;
             }
+            
         } else {
+            
             switch(c) {
             case '+':
             case '-':
@@ -104,9 +109,11 @@ public class LexParser {
             case '*':
                 lastToken = currentToken;
                 currentToken = new OperatorToken(c);
-                break;
+                return lastToken;
+
             case '=':
                 break;
+            
             default:
                 ; //:TODO: parse error
             }
