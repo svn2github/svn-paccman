@@ -21,6 +21,10 @@ public class EndToken extends CalcToken {
     
     private static EndToken theEndToken = new EndToken();
     
+    /**
+     * 
+     * @return 
+     */
     public static EndToken getEndToken() {
         return theEndToken;
     }
