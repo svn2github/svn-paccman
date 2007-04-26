@@ -45,14 +45,27 @@ public class Account extends PaccmanObject {
     private ArrayList<TransactionBase> transactions = new ArrayList<TransactionBase>();
     private ArrayList<ScheduledTransaction> scheduledTransactions = new ArrayList<ScheduledTransaction>();
     
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<TransactionBase> getTransactions() {
         return transactions;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Collection<ScheduledTransaction> getScheduledTransactions() {
         return scheduledTransactions;
     }
     
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public ScheduledTransaction getScheduledTransaction(int index) {
         return scheduledTransactions.get(index);
     }
@@ -101,26 +114,55 @@ public class Account extends PaccmanObject {
     }
     
     // add split payment
+    /**
+     * 
+     * @param p 
+     * @param updateBalances 
+     * @return 
+     */
     public int addSplitPayment(SplitPayment p, boolean updateBalances) {
         return addTransactionBase(p, updateBalances);
     }
     
     // add simple payment
+    /**
+     * 
+     * @param p 
+     * @param updateBalances 
+     * @return 
+     */
     public int addSimplePayment(SimplePayment p, boolean updateBalances) {
         return addTransactionBase(p, updateBalances);
     }
     
     // add a transaction. return the index where the transaction has been inserted
+    /**
+     * 
+     * @param transfer 
+     * @param updateBalances 
+     * @return 
+     */
     public int addTransfer(Transfer transfer, boolean updateBalances) {
         return addTransactionBase(transfer, updateBalances);
     }
     
     // add a scheduled transaction
+    /**
+     * 
+     * @param scheduledTransaction 
+     * @return 
+     */
     public int addScheduledTransaction(ScheduledTransaction scheduledTransaction) {
         scheduledTransactions.add(scheduledTransaction);
         return scheduledTransactions.size() - 1; // return index (= last element)
     }
     
+    /**
+     * 
+     * @param t 
+     * @param updateBalances 
+     * @return 
+     */
     public int addTransaction(TransactionBase t, boolean updateBalances) {
         if (t instanceof Transfer) {
             return addTransfer((Transfer)t, updateBalances);
@@ -134,6 +176,11 @@ public class Account extends PaccmanObject {
         }
     }
     
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public TransactionBase removeTransaction(int index) {
         TransactionBase t = transactions.get(index);
         transactions.remove(index);
@@ -141,22 +188,38 @@ public class Account extends PaccmanObject {
         return t;
     }
     
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public ScheduledTransaction removeScheduledTransaction(int index) {
         ScheduledTransaction st = scheduledTransactions.get(index);
         scheduledTransactions.remove(index);
         return st;
     }
     
+    /**
+     * 
+     */
     public void updateBalances() {
         if (transactions.size() == 0)
             return;
         updateBalances(0);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * 
+     * @param name 
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -165,34 +228,66 @@ public class Account extends PaccmanObject {
         return name;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Bank getBank() {
         return bank;
     }
     
+    /**
+     * 
+     * @param bank 
+     */
     public void setBank(Bank bank) {
         this.bank = bank;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getNote() {
         return note;
     }
     
+    /**
+     * 
+     * @param note 
+     */
     public void setNote(String note) {
         this.note = note;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public BigDecimal getInitialBalance() {
         return initialBalance;
     }
     
+    /**
+     * 
+     * @param accountNumber 
+     */
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public String getAccountNumber() {
         return accountNumber;
     }
     
+    /**
+     * 
+     * @param initialBalance 
+     */
     public void setInitialBalance(BigDecimal initialBalance) {
         if ((this.initialBalance == null) || (this.initialBalance.compareTo(initialBalance) != 0)) {
             this.initialBalance = initialBalance;
@@ -200,14 +295,27 @@ public class Account extends PaccmanObject {
         }
     }
     
+    /**
+     * 
+     * @return 
+     */
     public int getNumberOfTransactions() {
         return transactions.size();
     }
     
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public TransactionBase getTransaction(int index) {
         return transactions.get(index);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public BigDecimal getCurrentBalance() {
         if (transactions.size() > 0) {
             return transactions.get(transactions.size() - 1).getBalance();
@@ -216,6 +324,11 @@ public class Account extends PaccmanObject {
         }
     }
     
+    /**
+     * 
+     * @param date 
+     * @return 
+     */
     public BigDecimal getBalance(Calendar date) {
         TransactionBase lastTransactionBefore = null;
         for (TransactionBase tb: transactions) {
@@ -228,6 +341,11 @@ public class Account extends PaccmanObject {
     
     // should be called when the transaction date or amount has changed
     // to update the balances of transactions
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public int updateTransaction(int index) {
         TransactionBase t = removeTransaction(index);
         return addTransactionBase(t, true);
@@ -424,6 +542,10 @@ public class Account extends PaccmanObject {
         this.pendingReconciliation = pendingReconciliation;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public BigDecimal getMarkedAmount() {
         BigDecimal markedAmount = BigDecimal.ZERO;
         for (TransactionBase tb: transactions) {
