@@ -36,6 +36,10 @@ public class MainPrefs {
     public MainPrefs() {
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static Point getLocation() {
         int posx = prefs.getInt(POSX, 100);
         int posy = prefs.getInt(POSY, 100);
@@ -43,6 +47,10 @@ public class MainPrefs {
         return new Point(posx, posy);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static Dimension getSize() {
         int height = prefs.getInt(HEIGHT, 600);
         int width  = prefs.getInt(WIDTH, 800);
@@ -50,36 +58,65 @@ public class MainPrefs {
         return new Dimension(width, height);
     }
     
+    /**
+     * 
+     * @param p 
+     */
     public static void putLocation(Point p) {
         prefs.putInt(POSX, p.x);
         prefs.putInt(POSY, p.y);
         
     }
     
+    /**
+     * 
+     * @param p 
+     */
     public static void putSize(Dimension p) {
         prefs.putInt(HEIGHT, p.height);
         prefs.putInt(WIDTH, p.width);
         
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static String getDataDirectory() {
         return prefs.get(DATA_DIRECTORY, System.getProperty("user.home"));
     }
     
+    /**
+     * 
+     * @param dataDirectory 
+     */
     public static void putDataDirectory(String dataDirectory) {
         prefs.put(DATA_DIRECTORY, dataDirectory);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static int getMruSize() {
         int size = prefs.getInt(MRU_SIZE, 0);
         return size;
     }
     
+    /**
+     * 
+     * @param index 
+     * @return 
+     */
     public static String getMruFile(int index) {
         int size = getMruSize();
         return prefs.get(MRU_FILE + Integer.toString(index), null);
     }
     
+    /**
+     * 
+     * @param filename 
+     */
     public static void addFilenameToMru(String filename) {
         int size= getMruSize();
 
@@ -95,34 +132,66 @@ public class MainPrefs {
         prefs.putInt(MRU_SIZE, size);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static boolean getOpenLastSelectedFile() {
         return prefs.getBoolean(OPEN_LAST_SELECTED_FILE, false);
     }
 
+    /**
+     * 
+     * @param openLastSelectedFile 
+     */
     public static void setOpenLastSelectedFile(boolean openLastSelectedFile) {
         prefs.putBoolean(OPEN_LAST_SELECTED_FILE, openLastSelectedFile);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static boolean getShowStartDialog() {
         return prefs.getBoolean(SHOW_START_DIALOG, true);
     }
 
+    /**
+     * 
+     * @param showStartDialog 
+     */
     public static void setShowStartDialog(boolean showStartDialog) {
         prefs.putBoolean(SHOW_START_DIALOG, showStartDialog);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static String getLastSelectedFile() {
         return prefs.get(LAST_SELECTED_FILE, "");
     }
 
+    /**
+     * 
+     * @param lastSelectedFile 
+     */
     public static void setLastSelectedFile(String lastSelectedFile) {
         prefs.put(LAST_SELECTED_FILE, lastSelectedFile);
     }
     
+    /**
+     * 
+     * @return 
+     */
     public static boolean isMaximized() {
         return prefs.getBoolean(IS_MAXIMIZED, false);
     }
 
+    /**
+     * 
+     * @param isMaximized 
+     */
     public static void setMaximized(boolean isMaximized) {
         prefs.putBoolean(IS_MAXIMIZED, isMaximized);
     }
