@@ -21,9 +21,7 @@
 
 package org.paccman.controller;
 
-import java.math.BigDecimal;
 import org.paccman.paccman.Account;
-import org.paccman.paccman.Bank;
 
 /**
  *
@@ -36,6 +34,10 @@ public class AccountController extends Controller {
         super(new Account());
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Account getAccount() {
         return (Account)paccObj;
     }

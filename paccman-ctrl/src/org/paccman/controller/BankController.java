@@ -34,6 +34,10 @@ public class BankController extends Controller {
         super(new Bank());
     }
     
+    /**
+     * 
+     * @return 
+     */
     public Bank getBank() {
         return (Bank)super.getObject();
     }
