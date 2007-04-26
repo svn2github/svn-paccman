@@ -22,11 +22,22 @@ import java.util.logging.Logger;
  */
 public class LexParser {
     
+    private int parenLevelCnt;
+    
+    /**
+     * 
+     */
+    public LexParser() {
+    }
     
     /**
      * 
      */
     public class LexParseException extends Exception {
+        /**
+         * 
+         * @param message 
+         */
         public LexParseException(String message) {
             super(message);
         }
@@ -45,8 +56,22 @@ public class LexParser {
             this.c = c;
         }
 
+        /**
+         * 
+         * @param c 
+         * @param msg 
+         */
+        public InvalidCharException(char c, String msg) {
+            super("Unexpected character: '" + Character.toString(c) + "' [" + msg + "]");
+            this.c = c;
+        }
+
         private char c;
 
+        /**
+         * 
+         * @return 
+         */
         public char getC() {
             return c;
         }
@@ -118,10 +143,15 @@ public class LexParser {
             
             switch(c) {
             case '(':
+                parenLevelCnt++;
                 switchToNewToken(LeftParen.getLeftParen());
                 return lastToken;
                 
             case ')':
+                if (parenLevelCnt == 0) {
+                    throw  new InvalidCharException(c, "No matching '('");
+                }
+                parenLevelCnt--;
                 switchToNewToken(RightParen.getRightParen());
                 return lastToken;
                 
@@ -133,6 +163,9 @@ public class LexParser {
                 return lastToken;
                 
             case '=':
+                if (parenLevelCnt > 0) {
+                    throw  new InvalidCharException(c, "Missing ')'");
+                }
                 switchToNewToken(EndToken.getEndToken());
                 return lastToken; 
                 
