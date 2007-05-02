@@ -9,6 +9,7 @@
 
 package org.paccman.calc.yaccparser;
 
+import java.util.Stack;
 import org.paccman.calc.lexparser.CalcToken;
 
 /**
@@ -16,6 +17,16 @@ import org.paccman.calc.lexparser.CalcToken;
  * @author joao
  */
 public class ExpressionParser {
+    
+    Stack<CalcToken> tokenStack = new Stack<CalcToken>();
+    
+    protected void pushToken(CalcToken token) {
+        tokenStack.push(token);
+    }
+    
+    protected CalcToken popToken() {
+        return tokenStack.pop();
+    }
     
     /** Creates a new instance of ExprParser */
     public ExpressionParser() {
@@ -26,7 +37,7 @@ public class ExpressionParser {
      * @param token 
      */
     public void parseToken(CalcToken token) {
-        //:TODO:
+        pushToken(token);
     }
     
 }

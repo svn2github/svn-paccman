@@ -26,6 +26,12 @@ public abstract class CalcButton extends javax.swing.JButton {
         initComponents();
     }
     
+    /**
+     * 
+     * @param calc 
+     * @param parser 
+     * @param key 
+     */
     public CalcButton(Calculator calc, CalculatorParser parser, String key) {
         this.parser = parser;
         this.key = key;
@@ -34,6 +40,11 @@ public abstract class CalcButton extends javax.swing.JButton {
         initComponents();
     }
     
+    /**
+     * 
+     * @param rootPane 
+     * @param key 
+     */
     public void registerKey(JRootPane rootPane, char key) {
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         StringBuffer sb = new StringBuffer(CalcButton.class.getName());
@@ -47,6 +58,11 @@ public abstract class CalcButton extends javax.swing.JButton {
         });
     }
     
+    /**
+     * 
+     * @param rootPane 
+     * @param keyCode 
+     */
     public void registerKey(JRootPane rootPane, int keyCode) {
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         StringBuffer sb = new StringBuffer(CalcButton.class.getName());
@@ -82,6 +98,9 @@ public abstract class CalcButton extends javax.swing.JButton {
         doPressed();
     }//GEN-LAST:event_formActionPerformed
 
+    /**
+     * 
+     */
     protected abstract void doPressed();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
