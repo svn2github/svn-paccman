@@ -56,7 +56,27 @@ public class ScheduledTransaction extends PaccmanObject {
         this.transactionBase = transactionBase;
     }
 
-    public static enum PeriodUnit {DAY, WEEK, MONTH, YEAR }
+    /**
+     * 
+     */
+    public static enum PeriodUnit {
+        /**
+         * 
+         */
+        DAY, 
+        /**
+         * 
+         */
+        WEEK, 
+        /**
+         * 
+         */
+        MONTH, 
+        /**
+         * 
+         */
+        YEAR 
+    }
 
     /**
      * Holds value of property PeriodUnit.
@@ -74,7 +94,8 @@ public class ScheduledTransaction extends PaccmanObject {
 
     /**
      * Setter for property PeriodUnit.
-     * @param PeriodUnit New value of property PeriodUnit.
+     * 
+     * @param periodUnit New value of property periodUnit
      */
     public void setPeriodUnit(PeriodUnit periodUnit) {
 
@@ -121,7 +142,8 @@ public class ScheduledTransaction extends PaccmanObject {
 
     /**
      * Setter for property name.
-     * @param name New value of property name.
+     * 
+     * @param identifier New value of property identifier
      */
     public void setIdentifier(String identifier) {
 

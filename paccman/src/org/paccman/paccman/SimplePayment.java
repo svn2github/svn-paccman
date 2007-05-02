@@ -21,10 +21,6 @@
 
 package org.paccman.paccman;
 
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Vector;
-
 /**
  *
  * @author joao
@@ -33,10 +29,18 @@ public class SimplePayment extends Payment {
     
     CategoryBase    category;
     
+    /**
+     * 
+     * @return 
+     */
     public CategoryBase getCategory() {
         return category;
     }
     
+    /**
+     * 
+     * @param category 
+     */
     public void setCategory(CategoryBase category) {
         this.category = category;
     }
@@ -45,6 +49,11 @@ public class SimplePayment extends Payment {
     public SimplePayment() {
     }
     
+    /**
+     * 
+     * @param transaction 
+     */
+    @Override
     public void copyTo(TransactionBase transaction) {
         assert transaction instanceof SimplePayment;
         
