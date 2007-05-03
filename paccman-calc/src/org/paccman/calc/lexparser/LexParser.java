@@ -108,11 +108,10 @@ public class LexParser {
     }
     
     /**
-     *
-     * @param c
-     * @return
-     * @throws org.paccman.calc.parser.LexParser.LexParseException 
      * 
+     * @param c 
+     * @return 
+     * @throws org.paccman.calc.lexparser.LexParser.LexParseException 
      */
     public CalcToken parseChar(char c) throws LexParseException {
         if ((c == '±') || (c == '.') || ((c >= '0') && (c <= '9'))) {
@@ -143,6 +142,11 @@ public class LexParser {
             
             switch(c) {
             case '(':
+                // Check that previous token is either null (first token) 
+                // either an operator (e.g. '3(' is invalid.
+                if ((currentToken != null) && ! (currentToken instanceof OperatorToken)) {
+                    throw new InvalidCharException(c);
+                }
                 parenLevelCnt++;
                 switchToNewToken(LeftParen.getLeftParen());
                 return lastToken;

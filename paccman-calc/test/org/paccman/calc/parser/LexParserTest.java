@@ -141,6 +141,20 @@ public class LexParserTest {
         System.out.println();
     }
 
+    /**
+     * 
+     */
+    @Test 
+    public void testInvalidParen() {
+        try {
+            testParseExpression("2+3(3-4=");  // missing operator before '('
+            testParseExpression("(1.6+2)=");  // OK
+        } catch (Exception ex) {
+            fail("Exception caught: " + ex.getMessage());
+        }
+        System.out.println();
+    }
+    
     private void testParseExpression(String expression)
             throws IOException, LexParser.LexParseException {
         System.out.println("Parsing: '" + expression + "'");
