@@ -67,7 +67,8 @@ public class LexParserTest {
     @Test
     public void validExpr() {
         try {
-            testParseExpression("12+34*(13-52.25)-.3/15=");
+            assertEquals( "12 + 34 * ( 13 - 52.25 ) - 0.3 / 15",
+                    testParseExpression("12+34*(13-52.25)-.3/15="));
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -80,8 +81,10 @@ public class LexParserTest {
     @Test
     public void invalidDotDot() {
         try {
-            testParseExpression("12+34..45=");
-            testParseExpression("12+34....98=");
+            // 12 + 34.45
+            assertEquals(testParseExpression("12+34..45="), "12 + 34.45");
+            // 12 + 34.98
+            assertEquals(testParseExpression("12+34....98="), "12 + 34.98");
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -94,7 +97,8 @@ public class LexParserTest {
     @Test
     public void invalidDotOperandDot() {
         try {
-            testParseExpression("12+34.45678.12=");
+            // 12 + 34.4567812
+            assertEquals(testParseExpression("12+34.45678.12="), "12 + 34.4567812");
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -107,7 +111,8 @@ public class LexParserTest {
     @Test
     public void invalidCharA() {
         try {
-            testParseExpression("12+34a56=");
+            // 12 + 3456
+            assertEquals(testParseExpression("12+34a56="), "12 + 3456");
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -120,7 +125,7 @@ public class LexParserTest {
     @Test
     public void negOperand() {
         try {
-            testParseExpression("2±+6*(3*5±±=");
+            assertEquals("-2 + 6 * ( 3 * 52 )", testParseExpression("2±+6*(3*5±±=2)="));
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -133,8 +138,10 @@ public class LexParserTest {
     @Test
     public void testParenLevel() {
         try {
-            testParseExpression("2+3*(3-4))=");     // extra '('
-            testParseExpression("2+3*(((3-4)+2)="); // missing ')'
+            assertEquals(testParseExpression("2+3*(3-4))="), 
+                    "2 + 3 * ( 3 - 4 )");     // extra ')'
+            assertEquals(testParseExpression("2+3*(((3-4)+2)=.3*12)=)="), 
+                    "2 + 3 * ( ( ( 3 - 4 ) + 2.3 * 12 ) )"); 
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
@@ -147,16 +154,22 @@ public class LexParserTest {
     @Test 
     public void testInvalidParen() {
         try {
-            testParseExpression("2+3(3-4=");  // missing operator before '('
-            testParseExpression("(1.6+2)=");  // OK
+            // 2 + 33 - 4
+            assertEquals(testParseExpression("2+3(3-4=") ,
+                    "2 + 33 - 4");  // missing operator before '('
+            System.out.println();
+            // ( 1.6 + 2 )
+            assertEquals(testParseExpression("(1.6+2)="),
+                    "( 1.6 + 2 )");  // OK
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
         System.out.println();
     }
     
-    private void testParseExpression(String expression)
+    private String testParseExpression(String expression)
             throws IOException, LexParser.LexParseException {
+        StringBuilder sb = new StringBuilder();
         System.out.println("Parsing: '" + expression + "'");
         StringReader sr = new StringReader(expression);
         LexParser instance = new LexParser();
@@ -168,6 +181,10 @@ public class LexParserTest {
             try {
                 if (c != -1) {
                     if ((ct = instance.parseChar((char)c)) != null) {
+                        if (sb.length() > 0) {
+                            sb.append(' ');
+                        }
+                        sb.append(ct.tokenString());
                         java.lang.System.out.printf("ReadToken = %s\n", ct);
                     }
                 }
@@ -175,6 +192,7 @@ public class LexParserTest {
                 System.out.printf("%s\n    => Ignoring.\n", ex.getMessage());
             }
         } while (c != -1);
+        return sb.toString();
     }
     
 }

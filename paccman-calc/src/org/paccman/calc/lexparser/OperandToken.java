@@ -22,8 +22,17 @@ public class OperandToken extends CalcToken {
     }
     
     private boolean decimalPoint = false;
+    /**
+     * 
+     */
     public enum OperandSign { 
+        /**
+         * 
+         */
         POSITIVE, 
+        /**
+         * 
+         */
         NEGATIVE;
                 
         @Override
@@ -34,6 +43,9 @@ public class OperandToken extends CalcToken {
     
     OperandSign sign = OperandSign.POSITIVE;
     
+    /**
+     * 
+     */
     public void invertSign() {
         sign = (sign == OperandSign.POSITIVE) ? OperandSign.NEGATIVE : OperandSign.POSITIVE;
     }
@@ -51,6 +63,10 @@ public class OperandToken extends CalcToken {
      * @param c 
      */
     public void append(char c) {
+        // If first character is decimal point, prepend '0'
+        if ((c == '.') && (token.length() == 0)) {
+            token.append('0');
+        }
         token.append(c);
         decimalPoint = decimalPoint || (c == '.');
     }
@@ -66,6 +82,11 @@ public class OperandToken extends CalcToken {
     @Override
     public String toString() {
         return "OPERAND [" + sign.toString() + token.toString() + "]";
+    }
+    
+    @Override
+    public String tokenString() {
+        return sign.toString() + token.toString();
     }
     
 }

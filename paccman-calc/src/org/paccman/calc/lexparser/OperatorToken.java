@@ -27,5 +27,9 @@ public class OperatorToken extends CalcToken {
     public String toString() {
         return "OPERATOR [" + token.toString() + "]";
     }
+
+    public String tokenString() {
+        return token.toString();
+    }
     
 }

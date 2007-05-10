@@ -13,7 +13,7 @@ package org.paccman.calc.lexparser;
  *
  * @author joao
  */
-public class CalcToken {
+public abstract class CalcToken {
     
     /**
      * :TODO:
@@ -23,5 +23,11 @@ public class CalcToken {
     /** Creates a new instance of Token */
     public CalcToken() {
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    abstract public String tokenString();
     
 }

@@ -21,6 +21,10 @@ public class RightParen extends CalcToken {
     
     private static RightParen theRightParenToken = new RightParen();
     
+    /**
+     * 
+     * @return 
+     */
     public static RightParen getRightParen() {
         return theRightParenToken;
     }
@@ -28,6 +32,10 @@ public class RightParen extends CalcToken {
     @Override
     public String toString() {
         return "RIGHT_PAREN [)]";
+    }
+
+    public String tokenString() {
+        return ")";
     }
     
 }

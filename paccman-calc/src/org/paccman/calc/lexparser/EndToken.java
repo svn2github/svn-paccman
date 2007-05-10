@@ -33,5 +33,9 @@ public class EndToken extends CalcToken {
     public String toString() {
         return "END";
     }
+
+    public String tokenString() {
+        return "";
+    }
     
 }

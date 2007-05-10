@@ -25,18 +25,18 @@ public class LexParser {
     private int parenLevelCnt;
     
     /**
-     * 
+     *
      */
     public LexParser() {
     }
     
     /**
-     * 
+     *
      */
     public class LexParseException extends Exception {
         /**
-         * 
-         * @param message 
+         *
+         * @param message
          */
         public LexParseException(String message) {
             super(message);
@@ -44,39 +44,39 @@ public class LexParser {
     }
     
     /**
-     * 
+     *
      */
     public class InvalidCharException extends LexParseException {
         /**
-         * 
-         * @param c 
+         *
+         * @param c
          */
         public InvalidCharException(char c) {
             super("Unexpected character: '" + Character.toString(c) + "'");
             this.c = c;
         }
-
+        
         /**
-         * 
-         * @param c 
-         * @param msg 
+         *
+         * @param c
+         * @param msg
          */
         public InvalidCharException(char c, String msg) {
             super("Unexpected character: '" + Character.toString(c) + "' [" + msg + "]");
             this.c = c;
         }
-
+        
         private char c;
-
+        
         /**
-         * 
-         * @return 
+         *
+         * @return
          */
         public char getC() {
             return c;
         }
     }
-            
+    
     static class MyFormatter extends Formatter {
         // This method is called for every log records
         public String format(LogRecord rec) {
@@ -107,25 +107,29 @@ public class LexParser {
         currentToken = token;
     }
     
+    private void appendOperandChar(char c) throws LexParseException {
+        // Current token is an operand token: append read char to current.
+        OperandToken ot = (OperandToken)currentToken;
+        if ((c == '.') && ot.hasDecimalPoint()) {
+            throw new InvalidCharException(c);
+        }
+        if (c == '±') {
+            ot.invertSign();
+        } else {
+            ot.append(c);
+        }
+    }
+    
     /**
-     * 
-     * @param c 
-     * @return 
-     * @throws org.paccman.calc.lexparser.LexParser.LexParseException 
+     *
+     * @param c
+     * @return
+     * @throws org.paccman.calc.lexparser.LexParser.LexParseException
      */
     public CalcToken parseChar(char c) throws LexParseException {
         if ((c == '±') || (c == '.') || ((c >= '0') && (c <= '9'))) {
             if (currentToken instanceof OperandToken) {
-                // Current token is an operand token: append read char to current.
-                OperandToken ot = (OperandToken)currentToken;
-                if ((c == '.') && ot.hasDecimalPoint()) {
-                    throw new InvalidCharException(c);
-                }
-                if (c == '±') {
-                    ot.invertSign();
-                } else {
-                    ot.append(c);
-                }
+                appendOperandChar(c);
                 return null;
             } else {
                 if (c == '±') {
@@ -142,9 +146,9 @@ public class LexParser {
             
             switch(c) {
             case '(':
-                // Check that previous token is either null (first token) 
-                // either an operator (e.g. '3(' is invalid.
-                if ((currentToken != null) && ! (currentToken instanceof OperatorToken)) {
+                // Check that previous token is not an operand
+                // e.g '3(' is invalid
+                if (currentToken instanceof OperandToken) {
                     throw new InvalidCharException(c);
                 }
                 parenLevelCnt++;
@@ -171,7 +175,7 @@ public class LexParser {
                     throw  new InvalidCharException(c, "Missing ')'");
                 }
                 switchToNewToken(EndToken.getEndToken());
-                return lastToken; 
+                return lastToken;
                 
             case (char)-1:
                 switchToNewToken(null);

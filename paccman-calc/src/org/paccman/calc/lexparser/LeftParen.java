@@ -29,5 +29,9 @@ public class LeftParen extends CalcToken {
     public String toString() {
         return "LEFT_PAREN [(]";
     }
+
+    public String tokenString() {
+        return "(";
+    }
     
 }
