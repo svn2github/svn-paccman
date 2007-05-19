@@ -138,10 +138,10 @@ public class LexParserTest {
     @Test
     public void testParenLevel() {
         try {
-            assertEquals(testParseExpression("2+3*(3-4))="), 
-                    "2 + 3 * ( 3 - 4 )");     // extra ')'
-            assertEquals(testParseExpression("2+3*(((3-4)+2)=.3*12)=)="), 
-                    "2 + 3 * ( ( ( 3 - 4 ) + 2.3 * 12 ) )"); 
+            assertEquals("2 + 3 * ( 3 - 4 )",
+                    testParseExpression("2+3*(3-4))="));
+            assertEquals("2 + 3 * ( ( ( 3 - 4 ) + 2.3 * 12 ) )",
+                    testParseExpression("2+3*(((3-4)+2=.3*12)=)="));
         } catch (Exception ex) {
             fail("Exception caught: " + ex.getMessage());
         }
