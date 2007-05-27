@@ -71,7 +71,7 @@
     <!-- LINUX -->
     <property name="xmlbeans-home" location="/opt/xmlbeans" />
     <property name="scomp-cmd" value="scomp" />
-    <property name="java-compiler" location="/opt/jdk1.6/bin/javac" />
+    <property name="java-compiler" location="/opt/jdk/bin/javac" />
     <!-- -->
 
     <!-- WINDOWS - ->
