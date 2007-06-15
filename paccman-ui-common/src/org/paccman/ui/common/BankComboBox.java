@@ -20,12 +20,13 @@
 */
 
 package org.paccman.ui.common;
+import java.util.logging.Logger;
 import org.paccman.controller.BankController;
 import org.paccman.controller.ControllerManager;
+import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Bank;
 import org.paccman.ui.common.*;
-//:TODO:import org.paccman.ui.main.Main;
 
 /**
  *
@@ -35,18 +36,23 @@ public class BankComboBox extends PaccmanObjectComboBox implements PaccmanView {
     
     /** Creates a new instance of BankComboBox */
     public BankComboBox() {
-//        setModel(new BankComboModel());
+        setModel(new PaccmanComboModel());
     }
    
+    Logger logger = org.paccman.tools.Logger.getNewDefaultLogger(this.getClass().getName());
+    
     public void onChange(org.paccman.controller.Controller controller) {
-/*:TODO:        if (controller == Main.getDocumentCtrl()) {
+        if (controller instanceof DocumentController) {
+            DocumentController ctrl = (DocumentController)controller;
             removeAllItems();
             addItem(null);
-            for (Bank bank: Main.getDocumentCtrl().getDocument().getBanks()) {
+            for (Bank bank: ctrl.getDocument().getBanks()) {
                 BankController bankCtrl = (BankController)ControllerManager.getController(bank);
                 addItem(bankCtrl);
             }
-        } */
+        } else {
+            logger.warning("Received unhandled notification.");
+        }
     }
 
 }
