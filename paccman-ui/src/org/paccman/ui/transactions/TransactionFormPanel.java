@@ -443,7 +443,7 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
         toAccountCmb = new org.paccman.ui.transactions.AccountSelectorComboBox();
         splitBtn = new javax.swing.JButton();
 
-        categoryLbl.setText("Category");
+        categoryLbl.setText("Categoryy");
 
         categorySelectorCmb.setEnabled(false);
 
@@ -494,25 +494,26 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(categoryLbl)
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(categoryLbl)
-                            .add(layout.createSequentialGroup()
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(labelLbl)
-                                    .add(transactionDateLbl)
-                                    .add(noteLbl)
-                                    .add(org.jdesktop.layout.GroupLayout.LEADING, paymentMethodLbl)
-                                    .add(toAccountLbl))
-                                .add(4, 4, 4)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(labelLbl)
+                            .add(transactionDateLbl)
+                            .add(noteLbl)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, paymentMethodLbl)
+                            .add(toAccountLbl))
+                        .add(4, 4, 4)))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, labelEdt, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+                    .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(toAccountCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(transactionDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(categorySelectorCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(paymentMethodCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                            .add(toAccountCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(transactionDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(categorySelectorCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(paymentMethodCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                         .add(14, 14, 14)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, amountLbl)
@@ -520,15 +521,11 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, payeeLbl))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(payeeCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(splitBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(amountEdt, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .add(valueDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(85, 85, 85)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, noteScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, labelEdt, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))))
+                            .add(payeeCmb, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(splitBtn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(amountEdt, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                            .add(valueDateChooser, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
+                    .add(noteScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
