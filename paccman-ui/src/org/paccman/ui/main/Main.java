@@ -1,25 +1,21 @@
 /*
- 
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net
- 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
- 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
+Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+http://paccman.sourceforge.net
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 package org.paccman.ui.main;
+
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 import java.awt.Frame;
 import java.io.File;
@@ -65,19 +61,19 @@ import org.paccman.xml.PaccmanIOException;
  */
 
 public class Main extends javax.swing.JFrame implements PaccmanView {
-    
+
     DocumentController documentController;
-    
+
     public TransactionFormTab getTransactionFormTab() {
         return transactionFormTab;
     }
-    
+
     /** Creates new form Main */
     public Main() {
         initComponents();
         initMyComponents();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -235,37 +231,55 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    // </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
+    // </editor-fold>
+// </editor-fold>
     CalculatorFrame calculatorFrame = new CalculatorFrame();
-    
+
     private void calculatorMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatorMnuActionPerformed
         calculatorFrame.setVisible(true);
     }//GEN-LAST:event_calculatorMnuActionPerformed
-    
+
     private void forwardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forwardBtnActionPerformed
         JOptionPane.showMessageDialog(this, ":TODO: NOT IMPLEMENTED YET", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_forwardBtnActionPerformed
-    
+
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         JOptionPane.showMessageDialog(this, ":TODO: NOT IMPLEMENTED YET", "Error", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_backBtnActionPerformed
-    
+
     private void openLastFileMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openLastFileMnuActionPerformed
-        MainPrefs.setOpenLastSelectedFile(! MainPrefs.getOpenLastSelectedFile());
+        MainPrefs.setOpenLastSelectedFile(!MainPrefs.getOpenLastSelectedFile());
     }//GEN-LAST:event_openLastFileMnuActionPerformed
-    
-    public enum OperationStatus { OK, CANCEL, FAILED };
-    
+
+    public enum OperationStatus {
+
+        OK, CANCEL, FAILED
+    }
+    {
+    }
+
     private int confirmSave() {
         assert (documentController != null) && documentController.isHasChanged();
-        
-        return JOptionPane.showConfirmDialog(this, "Do you want to save the changes ?", "Confirm",
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        return JOptionPane.showConfirmDialog(this, "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
-    
+
     private File selectSaveFile() {
         assert (documentController != null);
-        
+
         PaccmanFileChooser pfc = new PaccmanFileChooser();
         if (pfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             return pfc.getSelectedFile();
@@ -273,30 +287,33 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             return null;
         }
     }
-    
+
     private File selectOpenFile() {
-        
+
         JFileChooser fc = new PaccmanFileChooser();
-        
+
+        // Actually show the open file dialog
+        // Actually show the open file dialog
+
+        // Actually show the open file dialog
         // Actually show the open file dialog
         int s = fc.showOpenDialog(this);
-        
+
         // Check return value
         if (s == JFileChooser.APPROVE_OPTION) {
             return fc.getSelectedFile();
         } else {
             return null;
         }
-        
     }
-    
+
     public OperationStatus closeDocument() {
-        assert isDocumentLoaded(): "Can not close if no document is loaded";
-        
+        assert isDocumentLoaded() : "Can not close if no document is loaded";
+
         // Save changes if any
         if (documentController.isHasChanged()) {
             int save = confirmSave();
-            if ( save == JOptionPane.CANCEL_OPTION) {
+            if (save == JOptionPane.CANCEL_OPTION) {
                 return OperationStatus.CANCEL;
             } else if (save == JOptionPane.YES_OPTION) {
                 OperationStatus saveDiag;
@@ -310,44 +327,51 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 }
             }
         }
-        
+
         // Do close the document
         // Remove all the tabs from the main tabbed pane
         mainTabbedPane.removeAll();
-        
+
         documentController = null;
         documentControllerUpdated();
-        
+
         updateAction();
-        
+
         return OperationStatus.OK;
     }
-    
+
     private void copyFile(File inputFile, File outputFile) throws IOException {
         // Create channel on the source
+        // Create channel on the source
+        // Create channel on the source
+        // Create channel on the source
         FileChannel srcChannel = new FileInputStream(inputFile).getChannel();
-        
+
+        // Create channel on the destination
+        // Create channel on the destination
+
+        // Create channel on the destination
         // Create channel on the destination
         FileChannel dstChannel = new FileOutputStream(outputFile).getChannel();
-        
+
         // Copy file contents from source to destination
         dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
-        
+
         // Close the channels
         srcChannel.close();
         dstChannel.close();
     }
-    
+
     class ReadWorker extends SwingWorker<Object, Object> {
-        
+
         File file;
         Main main;
-        
+
         public ReadWorker(File file, Main main) {
             this.file = file;
             this.main = main;
         }
-        
+
         @Override
         protected Object doInBackground() throws Exception {
             PaccmanFile paccmanFile = new PaccmanFile();
@@ -355,7 +379,11 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             logger.fine("Opening file " + file.getAbsolutePath());
             paccmanFile.read(file, newDocumentController);
             logger.fine("File opened");
-            
+
+            // Make a copy of the file
+            // Make a copy of the file
+
+            // Make a copy of the file
             // Make a copy of the file
             File fileOut = new File(file.getAbsolutePath() + new SimpleDateFormat("-yyMMddHHmmss").format(new Date()));
             try {
@@ -369,21 +397,27 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             } catch (IOException ex) {
                 throw new PaccmanIOException("Failed to make a save copy of the file");
             }
-            
+
             // Register views
             newDocumentController.registerView(main);
+            // Register views
             newDocumentController.notifyChange();
+            // Register views
             documentController = newDocumentController;
-            
+
             documentController.setFile(file);
-            
+
+            // Keep last directory in preferences
+            // Keep last directory in preferences
+
+            // Keep last directory in preferences
             // Keep last directory in preferences
             String path = file.getParent();
             MainPrefs.putDataDirectory(path);
-            
+
             // Add file to MRU list
             try {
-                
+
                 // Add file to MRU list
                 MainPrefs.addFilenameToMru(file.getCanonicalPath());
                 MainPrefs.setLastSelectedFile(file.getCanonicalPath());
@@ -392,12 +426,12 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
             return null;
         }
-        
+
         @Override
         protected void process(List<Object> chunks) {
             //:TODO:
         }
-        
+
         @Override
         protected void done() {
             super.done();
@@ -405,27 +439,25 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             updateAction();
             documentController.notifyChange();
         }
-        
     }
-    
+
     public void openFile(File file) throws PaccmanIOException {
         ReadWorker rw = new ReadWorker(file, this);
         rw.execute();
     }
-    
+
     private OperationStatus doOpenFile(File filein) {
         try {
             openFile(filein);
             return OperationStatus.OK;
         } catch (PaccmanIOException ex) {
-            JOptionPane.showMessageDialog(this, "Failed to open file '" +
-                    filein.getAbsolutePath() + "' (" + ex.getMessage() + ")", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to open file '" + filein.getAbsolutePath() + "' (" + ex.getMessage() + ")", "Error", JOptionPane.ERROR_MESSAGE);
             return OperationStatus.FAILED;
         }
     }
-    
+
     public OperationStatus openDocument(File file) {
-        
+
         // Close current document if open
         if (isDocumentLoaded()) {
             OperationStatus closeDiag = closeDocument();
@@ -433,15 +465,19 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 return closeDiag;
             }
         }
-        
+
+        // Do open a new document
+        // Do open a new document
+
+        // Do open a new document
         // Do open a new document
         OperationStatus result = OperationStatus.FAILED;
-        
+
         File fileToOpen = file == null ? selectOpenFile() : file;
         while (result == OperationStatus.FAILED) {
             if (fileToOpen == null) {
                 return OperationStatus.CANCEL;
-            } else  {
+            } else {
                 result = doOpenFile(fileToOpen);
                 if (result == OperationStatus.FAILED) {
                     fileToOpen = selectOpenFile();
@@ -450,9 +486,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
         return result;
     }
-    
+
     public OperationStatus newDocument() {
-        
+
         // Close current document if open
         if (isDocumentLoaded()) {
             OperationStatus closeDiag = closeDocument();
@@ -460,26 +496,30 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 return closeDiag;
             }
         }
-        
+
         // Make a new document
-        String title = (String)JOptionPane.showInputDialog(this, "Enter the title for the new account file", "Document title",
+        // Make a new document
+
+        // Make a new document
+        // Make a new document
+        String title = (String) JOptionPane.showInputDialog(this, "Enter the title for the new account file", "Document title",
                 JOptionPane.QUESTION_MESSAGE, null, null, "NewDocument" );
         if (title != null) {
             documentController = new DocumentController();
             documentController.getDocument().setTitle(title);
             documentController.setHasChanged(true);
-            
+
             documentControllerUpdated();
-            
+
             updateAction();
-            
+
             return OperationStatus.OK;
         } else {
-            
+
             return OperationStatus.CANCEL;
         }
     }
-    
+
     public OperationStatus saveDocument(File saveFile) {
         PaccmanFile pf = new PaccmanFile();
         try {
@@ -490,50 +530,54 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
         return OperationStatus.OK;
     }
-    
+
     public OperationStatus saveDocument() {
-        assert isDocumentLoaded(): "'save' should not be called when no document loaded";
-        assert documentController.getFile() != null: "'save' should be called when the document has a file";
-        
+        assert isDocumentLoaded() : "'save' should not be called when no document loaded";
+        assert documentController.getFile() != null : "'save' should be called when the document has a file";
+
         // Actually save the document to the file
         if (saveDocument(documentController.getFile()) == OperationStatus.OK) {
-            
+
             // Update document controller
             documentController.setFile(documentController.getFile());
             setDocumentChanged(false);
-            
+
             return OperationStatus.OK;
         } else {
-            
+
             return OperationStatus.FAILED;
         }
     }
-    
+
     public OperationStatus saveAsDocument() {
-        assert isDocumentLoaded(): "'saveAs' should not be called when no document loaded";
-        
+        assert isDocumentLoaded() : "'saveAs' should not be called when no document loaded";
+
+        // Select the file
+        // Select the file
+
+        // Select the file
         // Select the file
         File saveFile = selectSaveFile();
         if (saveFile == null) {
             return OperationStatus.CANCEL;
         }
-        
+
         // Actually save the document to the file
         if (saveDocument(saveFile) == OperationStatus.OK) {
-            
+
             // Update document controller
             documentController.setFile(saveFile);
             setDocumentChanged(false);
-            
+
             return OperationStatus.OK;
         } else {
-            
+
             return OperationStatus.FAILED;
         }
     }
-    
+
     public OperationStatus quit() {
-        
+
         // Close current document if open
         if (isDocumentLoaded()) {
             OperationStatus closeDiag = closeDocument();
@@ -541,7 +585,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 return closeDiag;
             }
         }
-        
+
         // Save preferences
         if ((getState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
             MainPrefs.setMaximized(true);
@@ -550,61 +594,62 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             MainPrefs.putLocation(getLocationOnScreen());
             MainPrefs.putSize(getSize());
         }
-        
+
         System.exit(0);
         return OperationStatus.OK;
     }
-    
+
     public abstract class PaccmanAction extends AbstractAction {
+
         public PaccmanAction(String name, Icon icon, boolean enabled) {
             super(name, icon);
             setEnabled(enabled);
         }
+
         public PaccmanAction(String name, Icon icon) {
             super(name, icon);
         }
     }
-    
+
     public final class NewAction extends PaccmanAction {
-        
+
         public NewAction() {
             super("New...", new javax.swing.ImageIcon(OpenAction.class.getResource("/org/paccman/ui/resources/images/new.png")));
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             newDocument();
         }
     }
-    
+
     public final class OpenAction extends PaccmanAction {
-        
+
         public OpenAction() {
             super("Open", new javax.swing.ImageIcon(OpenAction.class.getResource("/org/paccman/ui/resources/images/open.png")));
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             openDocument(null);
         }
     }
-    
+
     public final class CloseAction extends PaccmanAction {
-        
+
         public CloseAction() {
             super("Close", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/close.png")), false);
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             closeDocument();
         }
     }
-    
+
     public final class SaveAction extends PaccmanAction {
-        
+
         public SaveAction() {
-            super("Save", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/save.png")),
-                    false);
+            super("Save", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/save.png")), false);
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             if (documentController.getFile() != null) {
                 saveDocument();
@@ -613,55 +658,54 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
         }
     }
-    
+
     public final class SaveAsAction extends PaccmanAction {
-        
+
         public SaveAsAction() {
             super("Save as...", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/save_as.png")), false);
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             saveAsDocument();
         }
     }
-    
+
     public final class QuitAction extends PaccmanAction {
-        
+
         public QuitAction() {
             super("Quit", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/exit.png")));
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             quit();
         }
     }
-    
+
     public final class PropertiesAction extends PaccmanAction {
-        
+
         public PropertiesAction() {
             super("Properties", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/properties.png")), false);
         }
-        
+
         public void actionPerformed(java.awt.event.ActionEvent e) {
             PropertiesFrame pf = new PropertiesFrame();
             documentController.registerView(pf);
             pf.onChange(documentController);
             pf.setVisible(true);
         }
-        
     }
-    
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         quit();
     }//GEN-LAST:event_formWindowClosing
-    
+
     private void showStartDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStartDialogActionPerformed
-        MainPrefs.setShowStartDialog(! MainPrefs.getShowStartDialog());
+        MainPrefs.setShowStartDialog(!MainPrefs.getShowStartDialog());
     }//GEN-LAST:event_showStartDialogActionPerformed
-    
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         String fileToOpen = null;
-        
+
         if (startOption.getFilename() != null) {
             // If the user entered a filename in the command line, open the
             // entered file
@@ -670,17 +714,17 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             // If the "Open last file" option is set, open the last file
             fileToOpen = MainPrefs.getLastSelectedFile();
         }
-        
+
         if (fileToOpen != null) {
             //:DEBUG             try {
             //                openFile(new File(fileToOpen));
             openDocument(new File(fileToOpen));
             return;
 /*:DEBUG            } catch (PaccmanIOException ex) {
-                ex.printStackTrace();//:TODO:
+            ex.printStackTrace();//:TODO:
             }*/
         }
-        
+
         // If "show start dialog" option is true, show the start dialog
         if (MainPrefs.getShowStartDialog()) {
             StartDialog startDialog = new StartDialog(this, true);
@@ -699,71 +743,69 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
             showStartDialog.setSelected(MainPrefs.getShowStartDialog());
         }
-        
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void initMyComponents() {
         // Look and feel menu
         optionMnu.addSeparator();
         optionMnu.add(new LookAndFeelMenu(this));
-        
+
         calculatorFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        
     }
-    
+
     private void showTabbedPanes() {
-        assert documentController != null: "The document controller must exists";
-        
+        assert documentController != null : "The document controller must exists";
+
         // Welcome pane
         welcomePane = new WelcomePaneTab();
         mainTabbedPane.addTab("Welcome", welcomePane);
         welcomePane.registerToDocumentCtrl();
-        
+
         // Transactions pane
         transactionFormTab = new TransactionFormTab();
         mainTabbedPane.addTab("Transactions", transactionFormTab);
         transactionFormTab.registerToDocumentCtrl();
-        
+
         // Accounts pane
         accountsPanel = new AccountFormTab();
         mainTabbedPane.addTab("Accounts", accountsPanel);
         accountsPanel.registerToDocumentCtrl();
-        
+
         // Banks pane
         bankFormTab = new BankFormTab();
         mainTabbedPane.addTab("Banks", bankFormTab);
         bankFormTab.registerToDocumentCtrl();
-        
+
         // Categories pane
         categoryFormTab = new CategoryFormTab();
         mainTabbedPane.addTab("Categories", categoryFormTab);
         categoryFormTab.registerToDocumentCtrl();
-        
+
         // Payee pane
         payeeFormTab = new PayeeFormTab();
         mainTabbedPane.addTab("Payees", payeeFormTab);
         payeeFormTab.registerToDocumentCtrl();
-        
+
         // PaymentMethod pane
         paymentMethodFormTab = new PaymentMethodFormTab();
         mainTabbedPane.addTab("Payment Method", paymentMethodFormTab);
         paymentMethodFormTab.registerToDocumentCtrl();
-        
+
         // Schedules pane
         scheduleFormTab = new ScheduleFormTab();
         mainTabbedPane.addTab("Schedules", scheduleFormTab);
         scheduleFormTab.registerToDocumentCtrl();
-        
     }
-    
+
     public void gotoAccountTransactionTab(AccountController account) {
         transactionFormTab.setSelectedAccount(account);
         mainTabbedPane.setSelectedComponent(transactionFormTab);
     }
+
     public void gotoWelcomeTab() {
         mainTabbedPane.setSelectedComponent(welcomePane);
     }
-    
+
     private int showQuitDialog() {
         if (JOptionPane.showConfirmDialog(this, "Do you really want to quit ?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             return JOptionPane.YES_OPTION;
@@ -771,47 +813,57 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             return JOptionPane.NO_OPTION;
         }
     }
-    
+
     static Main main;
-    
+
     public static Main getMain() {
         return main;
     }
-    
+
     public static DocumentController getDocumentCtrl() {
         return main != null ? main.documentController : null;
     }
-    
+
     static class StartOption {
+
         String filename;
-        public String getFilename() { return filename; }
-        
+
+        public String getFilename() {
+            return filename;
+        }
+
         public void parse(String[] options) {
             if (options.length == 1) {
                 filename = options[0];
             }
         }
     }
-    
+
     static StartOption startOption;
     static {
         startOption = new StartOption();
     }
-    
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         //:TODO:START:trying a new look and feel
         try {
-            UIManager.installLookAndFeel("Toto", "Plastic3DLookAndFeel");
+            UIManager.installLookAndFeel("Plastic3DLookAndFeel", "Plastic3DLookAndFeel");
             UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         //:TODO:END:
         startOption.parse(args);
+        //:TODO:END:
         java.awt.EventQueue.invokeLater(new Runnable() {
+
+            @Override
             public void run() {
-                main = new Main();
+                main = new Main
+                //:TODO:END:
+                ();
                 main.setLocation(MainPrefs.getLocation());
                 if (MainPrefs.isMaximized()) {
                     main.setState(MAXIMIZED_BOTH);
@@ -822,14 +874,15 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
         });
     }
-    
+
+    @Override
     public void onChange(org.paccman.controller.Controller controller) {
-        DocumentController docCtrl = (DocumentController)controller;
+        DocumentController docCtrl = (DocumentController) controller;
         setTitle(docCtrl.getDocument().getTitle());
         updateAction();
         setTitle(getTitleString());
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton backBtn;
     public javax.swing.JMenuItem calculatorMnu;
@@ -858,23 +911,25 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public javax.swing.JPanel toolbarsPanel;
     public javax.swing.JMenu toolsMnu;
     // End of variables declaration//GEN-END:variables
-    
-    WelcomePaneTab welcomePane               ;
-    AccountFormTab accountsPanel             ;
-    BankFormTab bankFormTab                  ;
-    CategoryFormTab categoryFormTab          ;
-    TransactionFormTab transactionFormTab    ;
-    PayeeFormTab payeeFormTab                ;
+    // End of variables declaration
+    // End of variables declaration
+    // End of variables declaration
+    WelcomePaneTab welcomePane;
+    AccountFormTab accountsPanel;
+    BankFormTab bankFormTab;
+    CategoryFormTab categoryFormTab;
+    TransactionFormTab transactionFormTab;
+    PayeeFormTab payeeFormTab;
     PaymentMethodFormTab paymentMethodFormTab;
-    ScheduleFormTab scheduleFormTab          ;
-    
-    OpenAction    openAction   = new OpenAction()  ;
-    CloseAction   closeAction  = new CloseAction() ;
-    SaveAction    saveAction   = new SaveAction()  ;
-    SaveAsAction  saveAsAction = new SaveAsAction();
-    NewAction     newAction    = new NewAction()   ;
-    QuitAction    quitAction   = new QuitAction()  ;
-    
+    ScheduleFormTab scheduleFormTab;
+
+    OpenAction openAction = new OpenAction();
+    CloseAction closeAction = new CloseAction();
+    SaveAction saveAction = new SaveAction();
+    SaveAsAction saveAsAction = new SaveAsAction();
+    NewAction newAction = new NewAction();
+    QuitAction quitAction = new QuitAction();
+
     /**
      * Getter for property documentLoaded.
      * @return Value of property documentLoaded.
@@ -882,12 +937,12 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public boolean isDocumentLoaded() {
         return documentController != null;
     }
-    
+
     /**
      * Title when no document is being edited
      */
-    private final String  NO_DOCUMENT_TITLE = "[No document]";
-    
+    private final String NO_DOCUMENT_TITLE = "[No document]";
+
     private String getTitleString() {
         if (documentController == null) {
             return NO_DOCUMENT_TITLE;
@@ -899,7 +954,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
         }
     }
-    
+
     /**
      * Called when the DocumentController changes
      */
@@ -913,29 +968,28 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             documentController.notifyChange();
         }
     }
-    
+
     public static void setDocumentChanged(boolean changed) {
         main.getDocumentCtrl().setHasChanged(changed);
         main.onChange(main.getDocumentCtrl());
     }
-    
+
     private void updateAction() {
         closeMnu.getAction().setEnabled(isDocumentLoaded());
         saveMnu.getAction().setEnabled(isDocumentLoaded() && (documentController.isHasChanged()));
         saveAsMnu.getAction().setEnabled(isDocumentLoaded());
         propertiesMnu.getAction().setEnabled(isDocumentLoaded());
     }
-    
+
     //
     // Logging
     //
-    private static Logger   logger         = Logger.getLogger("org.paccman");
-    private static Handler  consoleHandler = new ConsoleHandler();
+    private static Logger logger = Logger.getLogger("org.paccman");
+    private static Handler consoleHandler = new ConsoleHandler();
     {
         consoleHandler.setLevel(Level.ALL);
         logger.setLevel(Level.ALL);
         logger.addHandler(consoleHandler);
         logger.setUseParentHandlers(false);
     }
-    
 }
