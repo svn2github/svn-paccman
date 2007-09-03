@@ -1,0 +1,100 @@
+options
+{
+    LOOKAHEAD=1;
+}
+PARSER_BEGIN(Calculator)
+package org.paccman.calc.parser;
+
+import java.math.BigDecimal;
+
+public class Calculator
+{
+    public static void displayValue(BigDecimal d, String op) {
+        System.out.println("DISPLAY[" + op +"]: " + d.toString());
+    }
+
+/*:TODO: remove this
+    public static void main(String args[]) throws ParseException 
+    {
+        Calculator parser = new Calculator(NewJFrame.reader);
+        while (true)
+        {
+            parser.parseOneLine();
+        }
+    }
+*/
+}
+PARSER_END(Calculator)
+TOKEN:
+{
+    < NUMBER: ("-")? (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+|   < DIGIT: ["0"-"9"] >
+|   < PLUS: "+" >
+|   < MINUS: "-" >
+|   < TIMES: "*" >
+|   < DIVIDE: "/" >
+|   < OPEN_PAR: "(" >
+|   < CLOSE_PAR: ")" >
+|   < EOL: "=" >
+}
+
+void parseOneLine():
+{
+    BigDecimal a;
+}
+{
+    a=Expression() <EOL>      { System.out.println(a.toString()); }
+  | <EOL>
+  | <EOF>               { System.exit(-1); }
+}
+
+BigDecimal Expression() throws NumberFormatException :
+{
+      BigDecimal i ;
+      BigDecimal value ;
+}
+{
+      value = Term()
+      (
+           <PLUS>
+           i = Term()
+           { value = value.add(i); displayValue(value, "+"); }
+      |
+           <MINUS>
+           i = Term()
+           { value = value.add(i) ; displayValue(value, "-"); }
+      )*
+      { return value ; }
+}
+
+BigDecimal Term() throws NumberFormatException :
+{
+  BigDecimal i ;
+  BigDecimal value ;
+}
+{
+  value = Primary()
+  (
+       <TIMES>
+       i = Primary()
+       { value = value.multiply(i) ; displayValue(value, "*");}
+  |
+       <DIVIDE>
+       i = Primary()
+       { value = value.divide(i) ; displayValue(value, "/");}
+  )*
+  { return value ; }
+}
+
+BigDecimal Primary() throws NumberFormatException :
+{
+      Token t ;
+      BigDecimal d ;
+}
+{
+      t=<NUMBER>
+      { return new BigDecimal( t.image ) ; }
+|
+      <OPEN_PAR> d=Expression() <CLOSE_PAR>
+      { displayValue(d, ")"); return d ; }
+}
