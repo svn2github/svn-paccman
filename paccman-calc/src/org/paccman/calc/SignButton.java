@@ -11,6 +11,7 @@ package org.paccman.calc;
  * @author  joao
  */
 public class SignButton extends CalcButton {
+    static final String SIGN_CHAR = "±";
     
     /** Creates new form BeanForm */
     public SignButton() {
@@ -18,7 +19,7 @@ public class SignButton extends CalcButton {
     }
     
     public SignButton(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, "\u00B1");
+        super(calc, parser,SIGN_CHAR);
         initComponents();
     }
 
