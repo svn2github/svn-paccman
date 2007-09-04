@@ -79,6 +79,7 @@ public class LexParser {
     
     static class MyFormatter extends Formatter {
         // This method is called for every log records
+        @Override
         public String format(LogRecord rec) {
             StringBuffer buf = new StringBuffer(1000);
             buf.append(rec.getLevel());

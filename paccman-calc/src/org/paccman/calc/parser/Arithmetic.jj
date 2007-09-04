@@ -1,6 +1,8 @@
 options
 {
+    STATIC=false;
     LOOKAHEAD=1;
+    JDK_VERSION="1.5";
 }
 PARSER_BEGIN(Calculator)
 package org.paccman.calc.parser;
@@ -12,17 +14,6 @@ public class Calculator
     public static void displayValue(BigDecimal d, String op) {
         System.out.println("DISPLAY[" + op +"]: " + d.toString());
     }
-
-/*:TODO: remove this
-    public static void main(String args[]) throws ParseException 
-    {
-        Calculator parser = new Calculator(NewJFrame.reader);
-        while (true)
-        {
-            parser.parseOneLine();
-        }
-    }
-*/
 }
 PARSER_END(Calculator)
 TOKEN:
