@@ -30,7 +30,7 @@ public class Calculator extends javax.swing.JPanel {
     }
     PipedReader pr;
     PipedWriter pw;
-    org.paccman.calc.parser.Calculator parser;
+//    org.paccman.calc.parser.Calculator parser;
     {
         pr = new PipedReader();
         try {
@@ -39,7 +39,7 @@ public class Calculator extends javax.swing.JPanel {
             Logger.getLogger("").severe("Exception creating PipedWriter");
             //:TODO: throw e;
         }
-        parser = new org.paccman.calc.parser.Calculator(pr);
+//        parser = new org.paccman.calc.parser.Calculator(pr);
     }
 
     /** Creates new form Calculator */
@@ -58,29 +58,29 @@ public class Calculator extends javax.swing.JPanel {
 
         currentDisplayEdt = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
-        resetBtn = new org.paccman.calc.ResetBtn(this, calcParser);
-        clearEntryBtn1 = new org.paccman.calc.ClearEntryBtn(this, calcParser);
-        clearEntryBtn2 = new org.paccman.calc.ClearEntryBtn(this, calcParser);
-        clearEntryBtn3 = new org.paccman.calc.ClearEntryBtn(this, calcParser);
-        offBtn = new org.paccman.calc.ClearEntryBtn(this, calcParser);
+        resetBtn = new org.paccman.calc.ResetBtn(this);
+        clearEntryBtn1 = new org.paccman.calc.ClearEntryBtn(this);
+        clearEntryBtn2 = new org.paccman.calc.ClearEntryBtn(this);
+        clearEntryBtn3 = new org.paccman.calc.ClearEntryBtn(this);
+        offBtn = new org.paccman.calc.ClearEntryBtn(this);
         _7Btn = new org.paccman.calc.DigitCalcButton(this, "7");
         _4Btn = new org.paccman.calc.DigitCalcButton(this, "4");
         _1Btn = new org.paccman.calc.DigitCalcButton(this, "1");
         _0Btn = new org.paccman.calc.DigitCalcButton(this, "0");
-        equalButton = new org.paccman.calc.EqualButton(this, calcParser);
+        equalButton = new org.paccman.calc.EqualButton(this);
         pointBtn = new org.paccman.calc.PointCalcButton(this);
-        addBtn = new org.paccman.calc.OperCalcButton(this, calcParser, "+");
-        _8Btn = new org.paccman.calc.DigitCalcButton(this, calcParser, "8");
-        _9Btn = new org.paccman.calc.DigitCalcButton(this, calcParser, "9");
-        divBtn = new org.paccman.calc.OperCalcButton(this, calcParser, "/");
-        pcBtn = new org.paccman.calc.PcCalcButton(this, calcParser);
-        _5Btn = new org.paccman.calc.DigitCalcButton(this, calcParser, "5");
-        _6Btn = new org.paccman.calc.DigitCalcButton(this, calcParser, "6");
+        addBtn = new org.paccman.calc.OperCalcButton(this, "+");
+        _8Btn = new org.paccman.calc.DigitCalcButton(this, "8");
+        _9Btn = new org.paccman.calc.DigitCalcButton(this, "9");
+        divBtn = new org.paccman.calc.OperCalcButton(this, "/");
+        pcBtn = new org.paccman.calc.PcCalcButton(this);
+        _5Btn = new org.paccman.calc.DigitCalcButton(this, "5");
+        _6Btn = new org.paccman.calc.DigitCalcButton(this, "6");
         _3Btn = new org.paccman.calc.DigitCalcButton(this, "3");
         _2Btn = new org.paccman.calc.DigitCalcButton(this, "2");
-        multBtn = new org.paccman.calc.OperCalcButton(this, calcParser, "*");
-        signButton = new org.paccman.calc.SignButton(this, calcParser);
-        minusBtn = new org.paccman.calc.OperCalcButton(this, calcParser, "-");
+        multBtn = new org.paccman.calc.OperCalcButton(this, "*");
+        signButton = new org.paccman.calc.SignButton(this);
+        minusBtn = new org.paccman.calc.OperCalcButton(this, "-");
         typingLbl = new javax.swing.JLabel();
 
         currentDisplayEdt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
