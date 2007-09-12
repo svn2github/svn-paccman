@@ -17,15 +17,11 @@ public class EqualButton extends CalcButton {
         initComponents();
     }
     
-    public EqualButton(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, "=");
+    public EqualButton(Calculator calc) {
+        super(calc, "=");
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processEqual();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

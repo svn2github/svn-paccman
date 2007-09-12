@@ -17,15 +17,11 @@ public class PointCalcButton extends CalcButton {
         initComponents();
     }
     
-    public PointCalcButton(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, ".");
+    public PointCalcButton(Calculator calc) {
+        super(calc, ".");
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processPoint();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

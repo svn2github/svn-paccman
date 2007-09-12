@@ -18,7 +18,7 @@ public class Calculator
 PARSER_END(Calculator)
 TOKEN:
 {
-    < NUMBER: ("-")? (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
+    < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
 |   < DIGIT: ["0"-"9"] >
 |   < PLUS: "+" >
 |   < MINUS: "-" >

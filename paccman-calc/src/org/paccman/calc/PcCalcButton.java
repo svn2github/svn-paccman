@@ -17,15 +17,11 @@ public class PcCalcButton extends CalcButton {
         initComponents();
     }
     
-    public PcCalcButton(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, "%");
+    public PcCalcButton(Calculator calc) {
+        super(calc, "%");
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processPc();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

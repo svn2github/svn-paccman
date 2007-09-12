@@ -18,15 +18,11 @@ public class SignButton extends CalcButton {
         initComponents();
     }
     
-    public SignButton(Calculator calc, CalculatorParser parser) {
-        super(calc, parser,SIGN_CHAR);
+    public SignButton(Calculator calc) {
+        super(calc, SIGN_CHAR);
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processSign();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

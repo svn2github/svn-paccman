@@ -17,15 +17,11 @@ public class OperCalcButton extends CalcButton {
         initComponents();
     }
     
-    public OperCalcButton(Calculator calc, CalculatorParser parser, String key) {
-        super(calc, parser, key);
+    public OperCalcButton(Calculator calc, String key) {
+        super(calc, key);
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processOperator(getKey());
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

@@ -17,15 +17,11 @@ public class ClearEntryBtn extends CalcButton {
         initComponents();
     }
     
-    public ClearEntryBtn(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, "CE");
+    public ClearEntryBtn(Calculator calc) {
+        super(calc, "CE");
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processClearEntry();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

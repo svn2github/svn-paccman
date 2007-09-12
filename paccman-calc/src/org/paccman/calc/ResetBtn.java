@@ -17,15 +17,11 @@ public class ResetBtn extends CalcButton {
         initComponents();
     }
     
-    public ResetBtn(Calculator calc, CalculatorParser parser) {
-        super(calc, parser, "RST");
+    public ResetBtn(Calculator calc) {
+        super(calc, "RST");
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processReset();
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

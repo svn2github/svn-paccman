@@ -17,16 +17,12 @@ public class DigitCalcButton extends CalcButton {
         initComponents();
     }
     
-    public DigitCalcButton(Calculator calc, CalculatorParser parser, String key) {
-        super(calc, parser, key);
+    public DigitCalcButton(Calculator calc, String key) {
+        super(calc,key);
         setText(key);
         initComponents();
     }
 
-    protected void doPressed() {
-        parser.processDigit(getKey());
-    }
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
