@@ -77,7 +77,7 @@
         <delete>
             <fileset 
                 dir="${src.dir}/org/paccman/calc/parser" 
-                excludes="Arithmetic.jj,LexParser.java,LexToken.java" />
+                excludes="Arithmetic.jj,LexParser.java,LexToken.java,CalcParser.java" />
         </delete>
     </target>
 </project>
