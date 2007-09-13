@@ -18,7 +18,7 @@ public class PointCalcButton extends CalcButton {
     }
     
     public PointCalcButton(Calculator calc) {
-        super(calc, ".");
+        super(".");
         initComponents();
     }
 

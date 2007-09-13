@@ -21,10 +21,12 @@ public class AddOperator extends Operator {
     public AddOperator() {
     }
     
+    @Override
     public BigDecimal compute(BigDecimal operand_1, BigDecimal operand_2) {
         return operand_1.add(operand_2);
     }
 
+    @Override
     public String toString() {
         return "+";
     }

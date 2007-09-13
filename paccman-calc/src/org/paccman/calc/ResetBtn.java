@@ -18,7 +18,7 @@ public class ResetBtn extends CalcButton {
     }
     
     public ResetBtn(Calculator calc) {
-        super(calc, "RST");
+        super("RST");
         initComponents();
     }
 

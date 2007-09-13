@@ -6,10 +6,6 @@
 
 package org.paccman.calc;
 
-import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 
 /**
@@ -27,19 +23,6 @@ public class Calculator extends javax.swing.JPanel {
     public void setShowTyping(boolean showTyping) {
         this.showTyping = showTyping;
         typingLbl.setVisible(showTyping);
-    }
-    PipedReader pr;
-    PipedWriter pw;
-//    org.paccman.calc.parser.Calculator parser;
-    {
-        pr = new PipedReader();
-        try {
-            pw = new PipedWriter(pr);
-        } catch (IOException e) {
-            Logger.getLogger("").severe("Exception creating PipedWriter");
-            //:TODO: throw e;
-        }
-//        parser = new org.paccman.calc.parser.Calculator(pr);
     }
 
     /** Creates new form Calculator */
@@ -63,21 +46,21 @@ public class Calculator extends javax.swing.JPanel {
         clearEntryBtn2 = new org.paccman.calc.ClearEntryBtn(this);
         clearEntryBtn3 = new org.paccman.calc.ClearEntryBtn(this);
         offBtn = new org.paccman.calc.ClearEntryBtn(this);
-        _7Btn = new org.paccman.calc.DigitCalcButton(this, "7");
-        _4Btn = new org.paccman.calc.DigitCalcButton(this, "4");
-        _1Btn = new org.paccman.calc.DigitCalcButton(this, "1");
-        _0Btn = new org.paccman.calc.DigitCalcButton(this, "0");
+        _7Btn = new org.paccman.calc.CalcButton("7");
+        _4Btn = new org.paccman.calc.CalcButton("4");
+        _1Btn = new org.paccman.calc.CalcButton("1");
+        _0Btn = new org.paccman.calc.CalcButton("0");
         equalButton = new org.paccman.calc.EqualButton(this);
         pointBtn = new org.paccman.calc.PointCalcButton(this);
         addBtn = new org.paccman.calc.OperCalcButton(this, "+");
-        _8Btn = new org.paccman.calc.DigitCalcButton(this, "8");
-        _9Btn = new org.paccman.calc.DigitCalcButton(this, "9");
+        _8Btn = new org.paccman.calc.CalcButton("8");
+        _9Btn = new org.paccman.calc.CalcButton("9");
         divBtn = new org.paccman.calc.OperCalcButton(this, "/");
         pcBtn = new org.paccman.calc.PcCalcButton(this);
-        _5Btn = new org.paccman.calc.DigitCalcButton(this, "5");
-        _6Btn = new org.paccman.calc.DigitCalcButton(this, "6");
-        _3Btn = new org.paccman.calc.DigitCalcButton(this, "3");
-        _2Btn = new org.paccman.calc.DigitCalcButton(this, "2");
+        _5Btn = new org.paccman.calc.CalcButton("5");
+        _6Btn = new org.paccman.calc.CalcButton("6");
+        _3Btn = new org.paccman.calc.CalcButton("3");
+        _2Btn = new org.paccman.calc.CalcButton("2");
         multBtn = new org.paccman.calc.OperCalcButton(this, "*");
         signButton = new org.paccman.calc.SignButton(this);
         minusBtn = new org.paccman.calc.OperCalcButton(this, "-");
@@ -354,20 +337,11 @@ public class Calculator extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void calcButtonPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonPressed
-        if ((evt.getSource() instanceof DigitCalcButton) || 
-                (evt.getSource() instanceof OperCalcButton) ||
-                (evt.getSource() instanceof PointCalcButton)) {
+        if ((evt.getSource() instanceof CalcButton) || (evt.getSource() instanceof OperCalcButton) || (evt.getSource() instanceof PointCalcButton)) {
             CalcButton cb = (CalcButton) evt.getSource();
-            try {
-                pw.write(cb.getKey());
-                typingLbl.setText(typingLbl.getText() + cb.getKey());
-            } catch (IOException e) {
-                Logger.getAnonymousLogger().severe(e.getMessage());
-                //:TODO:
-            }
+            typingLbl.setText(typingLbl.getText() + cb.getKey());
         }
     }//GEN-LAST:event_calcButtonPressed
-    
     //
     // Preferences
     //
@@ -377,40 +351,18 @@ public class Calculator extends javax.swing.JPanel {
     static int getDecPrecision() {
         return prefs.getInt(DEC_PRECISION, 5);
     }
-
-    void updateDisplay(CalculatorParser.State currentState, StringBuffer operand_1, StringBuffer operand_2) {
-        String sDisplay;
-        switch (currentState) {
-
-            case INIT:
-                sDisplay = "0";
-                break;
-            case OPERAND_1:
-            case OPERATOR_1:
-            case EVALUATED:
-            case OPERATOR_2:
-                sDisplay = operand_1.toString();
-                break;
-            case OPERAND_2:
-                sDisplay = operand_2.toString();
-                break;
-            default:
-                sDisplay = "?";
-        }
-        currentDisplayEdt.setText(sDisplay);
-    }
-    
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.paccman.calc.DigitCalcButton _0Btn;
-    private org.paccman.calc.DigitCalcButton _1Btn;
-    private org.paccman.calc.DigitCalcButton _2Btn;
-    private org.paccman.calc.DigitCalcButton _3Btn;
-    private org.paccman.calc.DigitCalcButton _4Btn;
-    private org.paccman.calc.DigitCalcButton _5Btn;
-    private org.paccman.calc.DigitCalcButton _6Btn;
-    private org.paccman.calc.DigitCalcButton _7Btn;
-    private org.paccman.calc.DigitCalcButton _8Btn;
-    private org.paccman.calc.DigitCalcButton _9Btn;
+    private org.paccman.calc.CalcButton _0Btn;
+    private org.paccman.calc.CalcButton _1Btn;
+    private org.paccman.calc.CalcButton _2Btn;
+    private org.paccman.calc.CalcButton _3Btn;
+    private org.paccman.calc.CalcButton _4Btn;
+    private org.paccman.calc.CalcButton _5Btn;
+    private org.paccman.calc.CalcButton _6Btn;
+    private org.paccman.calc.CalcButton _7Btn;
+    private org.paccman.calc.CalcButton _8Btn;
+    private org.paccman.calc.CalcButton _9Btn;
     private org.paccman.calc.OperCalcButton addBtn;
     private org.paccman.calc.ClearEntryBtn clearEntryBtn1;
     private org.paccman.calc.ClearEntryBtn clearEntryBtn2;
@@ -428,7 +380,5 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.SignButton signButton;
     private javax.swing.JLabel typingLbl;
     // End of variables declaration//GEN-END:variables
-    
-    CalculatorParser calcParser = new CalculatorParser(this);
 
 }

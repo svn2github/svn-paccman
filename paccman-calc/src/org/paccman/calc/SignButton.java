@@ -19,7 +19,7 @@ public class SignButton extends CalcButton {
     }
     
     public SignButton(Calculator calc) {
-        super(calc, SIGN_CHAR);
+        super(SIGN_CHAR);
         initComponents();
     }
 

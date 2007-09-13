@@ -18,7 +18,7 @@ public class EqualButton extends CalcButton {
     }
     
     public EqualButton(Calculator calc) {
-        super(calc, "=");
+        super("=");
         initComponents();
     }
 

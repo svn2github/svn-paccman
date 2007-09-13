@@ -18,7 +18,7 @@ public class PcCalcButton extends CalcButton {
     }
     
     public PcCalcButton(Calculator calc) {
-        super(calc, "%");
+        super("%");
         initComponents();
     }
 

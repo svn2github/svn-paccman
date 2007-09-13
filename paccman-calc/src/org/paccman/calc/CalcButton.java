@@ -17,7 +17,7 @@ import javax.swing.KeyStroke;
  *
  * @author  joao
  */
-public abstract class CalcButton extends javax.swing.JButton {
+public class CalcButton extends javax.swing.JButton {
     
     /** Creates new form BeanForm */
     public CalcButton() {
@@ -26,14 +26,12 @@ public abstract class CalcButton extends javax.swing.JButton {
     
     /**
      * 
-     * @param calc 
      * @param parser 
      * @param key 
      */
-    public CalcButton(Calculator calc, String key) {
+    public CalcButton(String key) {
         this.key = key;
         setText(key);
-        calc.add(this);
         initComponents();
     }
     

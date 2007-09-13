@@ -18,7 +18,7 @@ public class ClearEntryBtn extends CalcButton {
     }
     
     public ClearEntryBtn(Calculator calc) {
-        super(calc, "CE");
+        super("CE");
         initComponents();
     }
 
