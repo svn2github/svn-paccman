@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import org.paccman.calc.parser.CalcParser;
+import org.paccman.calc.parser.ParseException;
 
 /**
  *
@@ -44,6 +45,8 @@ public class Calculator extends javax.swing.JPanel {
         try {
             parser = new CalcParser();
         } catch (IOException ex) {
+            Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
@@ -377,10 +380,10 @@ public class Calculator extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, currentDisplayEdt)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(27, Short.MAX_VALUE))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
-                        .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                        .add(14, 14, 14))))
+                        .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -401,6 +404,9 @@ public class Calculator extends javax.swing.JPanel {
             CalcButton cb = (CalcButton) evt.getSource();
             if (!parser.parseChar(cb.getKey().charAt(0))) {
                 Toolkit.getDefaultToolkit().beep();
+            }
+            if (showTyping) {
+                typingLbl.setText(typingLbl.getText() + cb.getKey());
             }
         }
     }//GEN-LAST:event_calcButtonPressed

@@ -28,20 +28,32 @@ public class CalcParser {
     Calculator calc;
 
     /**
-     * 
-     * @throws java.io.IOException 
+     *
+     * @throws java.io.IOException
+     * @throws org.paccman.calc.parser.ParseException
      */
-    public CalcParser() throws IOException {
+    public CalcParser() throws IOException, org.paccman.calc.parser.ParseException {
         reader = new PipedReader();
         writer = new PipedWriter(reader);
         lexParser = new LexParser(writer);
         calc = new Calculator(reader);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    calc.parse();
+                } catch (org.paccman.calc.parser.ParseException ex) {
+                    Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
     }
-    
+
     /**
-     * 
-     * @param c 
-     * @return 
+     *
+     * @param c
+     * @return
      */
     public boolean parseChar(char c) {
         try {

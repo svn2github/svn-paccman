@@ -29,11 +29,18 @@ public class LexParser {
         }
 
         public void out(String strOut) throws IOException {
+            System.out.println("  S> " + strOut);
             outputWriter.write(strOut);
+            outputWriter.write(" "); //:TODO:is this necessary ?
+            outputWriter.flush();
         }
 
         public void out(char charOut) throws IOException {
+            System.out.print("  C> ");
+            System.out.println(charOut);
             outputWriter.write(charOut);
+            outputWriter.write(" "); //:TODO:is this necessary ?
+            outputWriter.flush();
         }
     }
     Output output;
@@ -67,6 +74,24 @@ public class LexParser {
     boolean negative;
     int parenLvl = 0;
     char lastOperator;
+
+    private void resetValue() {
+        intValue = null;
+        decValue = null;
+        negative = false;
+    }
+
+    private void outValue() throws IOException {
+        if (negative) {
+            output.out("-");
+        }
+        output.out(intValue.toString());
+        if (decValue != null) {
+            output.out(LexToken.DEC_POINT);
+            output.out(decValue.toString());
+        }
+        resetValue();
+    }
 
     private enum State {
 
@@ -118,7 +143,6 @@ public class LexParser {
             intValue.append(c);
             return State.ParseInt;
         } else if (c == LexToken.DEC_POINT) {
-            intValue = new StringBuffer("0");
             decValue = new StringBuffer();
             return State.ParseDec;
         } else if (c == LexToken.OPEN_PAR) {
@@ -143,16 +167,14 @@ public class LexParser {
             return State.ParseDec;
         } else if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                if (negative) {
-                    output.out("-");
-                }
-                output.out(intValue.toString());
+                outValue();
                 output.out(LexToken.CLOSE_PAR);
                 return State.WaitOp;
             } else {
                 throw new ParseException(c);
             }
         } else if (LexToken.isOperator(c)) {
+            outValue();
             lastOperator = c;
             return State.ReadOp;
         } else if (c == LexToken.SIGN_CHAR) {
@@ -211,8 +233,6 @@ public class LexParser {
 
     private State doWaitNext(char c) throws ParseException {
         if (c == LexToken.DEC_POINT) {
-            negative = false;
-            intValue = new StringBuffer("");
             decValue.append(c);
             return State.ParseDec;
         } else if (c == LexToken.OPEN_PAR) {
@@ -220,7 +240,8 @@ public class LexParser {
             return State.WaitOp;
         } else if (Character.isDigit(c)) {
             negative = false;
-            intValue = new StringBuffer(c);
+            intValue = new StringBuffer();
+            intValue.append(c);
             return State.ParseInt;
         }
         throw new ParseException(c);
@@ -247,18 +268,18 @@ public class LexParser {
         throw new ParseException(c);
     }
 
-    private State doReadOp(char c) throws ParseException {
+    private State doReadOp(char c) throws ParseException, IOException {
         if (LexToken.isOperator(c)) {
             lastOperator = c;
             return State.ReadOp;
         } else if (Character.isDigit(c)) {
-            negative = false;
-            intValue = new StringBuffer(c);
+            output.out(lastOperator);
+            intValue = new StringBuffer();
+            intValue.append(c);
             return State.ParseInt;
         } else if (c == LexToken.DEC_POINT) {
-            negative = false;
-            intValue = new StringBuffer("0");
-            decValue = new StringBuffer(c);
+            decValue = new StringBuffer();
+            decValue.append(c);
             return State.ParseDec;
         }
         throw new ParseException(c);
