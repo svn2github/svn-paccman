@@ -6,7 +6,12 @@
 
 package org.paccman.calc;
 
+import java.awt.Toolkit;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import org.paccman.calc.parser.CalcParser;
 
 /**
  *
@@ -14,12 +19,21 @@ import java.util.prefs.Preferences;
  */
 public class Calculator extends javax.swing.JPanel {
 
+    private static final long serialVersionUID = 1L;
     boolean showTyping = true;
 
+    /**
+     *
+     * @return
+     */
     public boolean getShowTyping() {
         return showTyping;
     }
 
+    /**
+     *
+     * @param showTyping
+     */
     public void setShowTyping(boolean showTyping) {
         this.showTyping = showTyping;
         typingLbl.setVisible(showTyping);
@@ -27,6 +41,11 @@ public class Calculator extends javax.swing.JPanel {
 
     /** Creates new form Calculator */
     public Calculator() {
+        try {
+            parser = new CalcParser();
+        } catch (IOException ex) {
+            Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
     }
 
@@ -42,28 +61,28 @@ public class Calculator extends javax.swing.JPanel {
         currentDisplayEdt = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         resetBtn = new org.paccman.calc.ResetBtn(this);
-        clearEntryBtn1 = new org.paccman.calc.ClearEntryBtn(this);
-        clearEntryBtn2 = new org.paccman.calc.ClearEntryBtn(this);
-        clearEntryBtn3 = new org.paccman.calc.ClearEntryBtn(this);
+        openParBtn = new org.paccman.calc.CalcButton("(");
+        closeParBtn = new org.paccman.calc.CalcButton(")");
+        clearEntryBtn = new org.paccman.calc.ClearEntryBtn(this);
         offBtn = new org.paccman.calc.ClearEntryBtn(this);
         _7Btn = new org.paccman.calc.CalcButton("7");
         _4Btn = new org.paccman.calc.CalcButton("4");
         _1Btn = new org.paccman.calc.CalcButton("1");
         _0Btn = new org.paccman.calc.CalcButton("0");
         equalButton = new org.paccman.calc.EqualButton(this);
-        pointBtn = new org.paccman.calc.PointCalcButton(this);
-        addBtn = new org.paccman.calc.OperCalcButton(this, "+");
+        pointBtn = new org.paccman.calc.CalcButton(".");
+        addBtn = new org.paccman.calc.CalcButton("+");
         _8Btn = new org.paccman.calc.CalcButton("8");
         _9Btn = new org.paccman.calc.CalcButton("9");
-        divBtn = new org.paccman.calc.OperCalcButton(this, "/");
+        divBtn = new org.paccman.calc.CalcButton("/");
         pcBtn = new org.paccman.calc.PcCalcButton(this);
         _5Btn = new org.paccman.calc.CalcButton("5");
         _6Btn = new org.paccman.calc.CalcButton("6");
         _3Btn = new org.paccman.calc.CalcButton("3");
         _2Btn = new org.paccman.calc.CalcButton("2");
-        multBtn = new org.paccman.calc.OperCalcButton(this, "*");
+        multBtn = new org.paccman.calc.CalcButton("*");
         signButton = new org.paccman.calc.SignButton(this);
-        minusBtn = new org.paccman.calc.OperCalcButton(this, "-");
+        minusBtn = new org.paccman.calc.CalcButton("-");
         typingLbl = new javax.swing.JLabel();
 
         currentDisplayEdt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -80,23 +99,33 @@ public class Calculator extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
         jPanel1.add(resetBtn, gridBagConstraints);
 
-        clearEntryBtn1.setText("CE");
+        openParBtn.setText("(");
+        openParBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(clearEntryBtn1, gridBagConstraints);
+        jPanel1.add(openParBtn, gridBagConstraints);
 
-        clearEntryBtn2.setText("CE");
+        closeParBtn.setText(")");
+        closeParBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(clearEntryBtn2, gridBagConstraints);
+        jPanel1.add(closeParBtn, gridBagConstraints);
 
-        clearEntryBtn3.setText("CE");
+        clearEntryBtn.setText("CE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(clearEntryBtn3, gridBagConstraints);
+        jPanel1.add(clearEntryBtn, gridBagConstraints);
 
         offBtn.setText("Off");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -158,6 +187,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(_0Btn, gridBagConstraints);
 
         equalButton.setText("=");
+        equalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
@@ -180,6 +214,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(pointBtn, gridBagConstraints);
 
         addBtn.setText("+");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
@@ -214,6 +253,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(_9Btn, gridBagConstraints);
 
         divBtn.setText("/");
+        divBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -282,6 +326,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(_2Btn, gridBagConstraints);
 
         multBtn.setText("*");
+        multBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -290,6 +339,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(multBtn, gridBagConstraints);
 
         signButton.setText("±");
+        signButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 2;
@@ -298,6 +352,11 @@ public class Calculator extends javax.swing.JPanel {
         jPanel1.add(signButton, gridBagConstraints);
 
         minusBtn.setText("-");
+        minusBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calcButtonPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -318,7 +377,7 @@ public class Calculator extends javax.swing.JPanel {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, currentDisplayEdt)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(15, Short.MAX_VALUE))
+                        .addContainerGap(27, Short.MAX_VALUE))
                     .add(layout.createSequentialGroup()
                         .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                         .add(14, 14, 14))))
@@ -335,11 +394,14 @@ public class Calculator extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    private CalcParser parser;
 
     private void calcButtonPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonPressed
-        if ((evt.getSource() instanceof CalcButton) || (evt.getSource() instanceof OperCalcButton) || (evt.getSource() instanceof PointCalcButton)) {
+        if (evt.getSource().getClass() == CalcButton.class) {
             CalcButton cb = (CalcButton) evt.getSource();
-            typingLbl.setText(typingLbl.getText() + cb.getKey());
+            if (!parser.parseChar(cb.getKey().charAt(0))) {
+                Toolkit.getDefaultToolkit().beep();
+            }
         }
     }//GEN-LAST:event_calcButtonPressed
     //
@@ -351,7 +413,6 @@ public class Calculator extends javax.swing.JPanel {
     static int getDecPrecision() {
         return prefs.getInt(DEC_PRECISION, 5);
     }
-  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.calc.CalcButton _0Btn;
     private org.paccman.calc.CalcButton _1Btn;
@@ -363,22 +424,21 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.CalcButton _7Btn;
     private org.paccman.calc.CalcButton _8Btn;
     private org.paccman.calc.CalcButton _9Btn;
-    private org.paccman.calc.OperCalcButton addBtn;
-    private org.paccman.calc.ClearEntryBtn clearEntryBtn1;
-    private org.paccman.calc.ClearEntryBtn clearEntryBtn2;
-    private org.paccman.calc.ClearEntryBtn clearEntryBtn3;
+    private org.paccman.calc.CalcButton addBtn;
+    private org.paccman.calc.ClearEntryBtn clearEntryBtn;
+    private org.paccman.calc.CalcButton closeParBtn;
     private javax.swing.JFormattedTextField currentDisplayEdt;
-    private org.paccman.calc.OperCalcButton divBtn;
+    private org.paccman.calc.CalcButton divBtn;
     private org.paccman.calc.EqualButton equalButton;
     private javax.swing.JPanel jPanel1;
-    private org.paccman.calc.OperCalcButton minusBtn;
-    private org.paccman.calc.OperCalcButton multBtn;
+    private org.paccman.calc.CalcButton minusBtn;
+    private org.paccman.calc.CalcButton multBtn;
     private org.paccman.calc.ClearEntryBtn offBtn;
+    private org.paccman.calc.CalcButton openParBtn;
     private org.paccman.calc.PcCalcButton pcBtn;
-    private org.paccman.calc.PointCalcButton pointBtn;
+    private org.paccman.calc.CalcButton pointBtn;
     private org.paccman.calc.ResetBtn resetBtn;
     private org.paccman.calc.SignButton signButton;
     private javax.swing.JLabel typingLbl;
     // End of variables declaration//GEN-END:variables
-
 }

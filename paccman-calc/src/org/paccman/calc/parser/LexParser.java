@@ -20,31 +20,40 @@ import org.paccman.calc.parser.LexParser.ParseException;
 public class LexParser {
 
     class Output {
+
         // Output to JavaCC parser
         Writer outputWriter;
+
         Output(Writer outputWriter) {
             this.outputWriter = outputWriter;
         }
+
         public void out(String strOut) throws IOException {
             outputWriter.write(strOut);
         }
+
         public void out(char charOut) throws IOException {
             outputWriter.write(charOut);
         }
     }
     Output output;
-    
+
+    /**
+     *
+     * @param outputWriter
+     */
     public LexParser(Writer outputWriter) {
         output = new Output(outputWriter);
     }
 
-    /**
-     * 
+/**
+     *
      */
     public static class ParseException extends Exception {
+
         private static final long serialVersionUID = 1L;
-        
-        public ParseException(char c) {
+
+        private ParseException(char c) {
             super("Unexpected char: " + Character.toString(c));
         }
 
@@ -52,7 +61,6 @@ public class LexParser {
             super(msg);
         }
     }
-    
     // Parser context data
     StringBuffer intValue;
     StringBuffer decValue;
@@ -73,10 +81,10 @@ public class LexParser {
     }
 
     /**
-     * 
-     * @param c 
-     * @throws org.paccman.calc.parser.LexParser.ParseException 
-     * @throws java.io.IOException 
+     *
+     * @param c
+     * @throws org.paccman.calc.parser.LexParser.ParseException
+     * @throws java.io.IOException
      */
     public void parseChar(char c) throws ParseException, IOException {
         switch (state) {
@@ -255,6 +263,4 @@ public class LexParser {
         }
         throw new ParseException(c);
     }
-
 }
-

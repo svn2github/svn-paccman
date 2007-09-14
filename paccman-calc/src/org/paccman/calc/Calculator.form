@@ -23,7 +23,7 @@
                           <Component id="currentDisplayEdt" alignment="0" max="32767" attributes="1"/>
                           <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
                       </Group>
-                      <EmptySpace pref="15" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="typingLbl" pref="256" max="32767" attributes="1"/>
@@ -78,12 +78,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn1">
+        <Component class="org.paccman.calc.CalcButton" name="openParBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CE"/>
+            <Property name="text" type="java.lang.String" value="("/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;(&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -91,12 +94,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn2">
+        <Component class="org.paccman.calc.CalcButton" name="closeParBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CE"/>
+            <Property name="text" type="java.lang.String" value=")"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;)&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -104,7 +110,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn3">
+        <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="CE"/>
           </Properties>
@@ -198,6 +204,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="="/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.EqualButton(this)"/>
           </AuxValues>
@@ -207,7 +216,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.PointCalcButton" name="pointBtn">
+        <Component class="org.paccman.calc.CalcButton" name="pointBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="."/>
           </Properties>
@@ -215,7 +224,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.PointCalcButton(this)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;.&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -223,12 +232,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.OperCalcButton" name="addBtn">
+        <Component class="org.paccman.calc.CalcButton" name="addBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="+"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.OperCalcButton(this, &quot;+&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;+&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -268,12 +280,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.OperCalcButton" name="divBtn">
+        <Component class="org.paccman.calc.CalcButton" name="divBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="/"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.OperCalcButton(this, &quot;/&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;/&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -358,12 +373,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.OperCalcButton" name="multBtn">
+        <Component class="org.paccman.calc.CalcButton" name="multBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="*"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.OperCalcButton(this, &quot;*&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;*&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -375,6 +393,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xb1;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.SignButton(this)"/>
           </AuxValues>
@@ -384,12 +405,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="org.paccman.calc.OperCalcButton" name="minusBtn">
+        <Component class="org.paccman.calc.CalcButton" name="minusBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="-"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.OperCalcButton(this, &quot;-&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;-&quot;)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
