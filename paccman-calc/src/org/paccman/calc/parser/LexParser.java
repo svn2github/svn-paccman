@@ -30,16 +30,16 @@ public class LexParser {
 
         public void out(String strOut) throws IOException {
             System.out.println("  S> " + strOut);
-            outputWriter.write(strOut);
             outputWriter.write(" "); //:TODO:is this necessary ?
+            outputWriter.write(strOut);
             outputWriter.flush();
         }
 
         public void out(char charOut) throws IOException {
             System.out.print("  C> ");
             System.out.println(charOut);
-            outputWriter.write(charOut);
             outputWriter.write(" "); //:TODO:is this necessary ?
+            outputWriter.write(charOut);
             outputWriter.flush();
         }
     }

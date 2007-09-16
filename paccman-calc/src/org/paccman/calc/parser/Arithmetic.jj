@@ -19,6 +19,7 @@ public class Calculator
     }
 }
 PARSER_END(Calculator)
+
 TOKEN:
 {
     < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
@@ -29,7 +30,6 @@ TOKEN:
 |   < DIVIDE: "/" >
 |   < OPEN_PAR: "(" >
 |   < CLOSE_PAR: ")" >
-|   < EOL: "=" >
 }
 
 void parse():
@@ -37,9 +37,8 @@ void parse():
     BigDecimal a;
 }
 {
-    a=Expression() <EOL>      { System.out.println(a.toString()); }
-  | <EOL>
-  | <EOF>               { System.exit(-1); }
+    a=Expression() <EOF>      { System.out.println(a.toString()); }
+  | <EOF>
 }
 
 BigDecimal Expression() throws NumberFormatException :
