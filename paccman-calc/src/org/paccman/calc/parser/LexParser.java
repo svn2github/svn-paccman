@@ -28,17 +28,18 @@ public class LexParser {
             this.outputWriter = outputWriter;
         }
 
+        private int iter = 0;
+        
         public void out(String strOut) throws IOException {
-            System.out.println("  S> " + strOut);
-            outputWriter.write(" "); //:TODO:is this necessary ?
+            System.out.printf("  S%1$d> %2$s", iter, strOut);
+            iter++;
             outputWriter.write(strOut);
             outputWriter.flush();
         }
 
         public void out(char charOut) throws IOException {
-            System.out.print("  C> ");
+            System.out.printf("  S%1$d> %2$c", iter, charOut);
             System.out.println(charOut);
-            outputWriter.write(" "); //:TODO:is this necessary ?
             outputWriter.write(charOut);
             outputWriter.flush();
         }
