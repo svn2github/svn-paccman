@@ -10,10 +10,8 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PipedReader;
 import java.io.PipedWriter;
-import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -55,14 +53,17 @@ public class CalculatorTest {
         String[] expectedResults;
 
         TestData(CharSequence inputs, String[] expectedResults) {
-            assert inputs.length() != expectedResults.length : 
+            assert inputs.length() == expectedResults.length : 
                 "Number of expected result does not match number of input characters";
             this.inputs = inputs;
             this.expectedResults = expectedResults;
         }
     }
+    
     private TestData[] testData = {
-        new TestData("12+34", new String[]{"1", "12", "12", "3", "34", "46"})
+        new TestData("12+34=", new String[]{"1", "12", "12", "3", "34", "46"}),
+        new TestData("12+34+*2=", new String[]{"1", "12", "12", "3", "34", "46", "46", "2", "92"}),
+        new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15"})
     };
 
     private void parseExpression(TestData testData) {
@@ -113,8 +114,8 @@ public class CalculatorTest {
     @Test
     public void parse() throws Exception {
         System.out.println("parse");
-        for (String s : exprs) {
-            parseExpression(s);
+        for (TestData d : testData) {
+            parseExpression(d);
         }
         fail("The test case is a prototype.");
     } /* Test of parse method, of class Calculator. */
