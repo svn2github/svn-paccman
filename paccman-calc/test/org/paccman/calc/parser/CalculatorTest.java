@@ -47,11 +47,32 @@ public class CalculatorTest {
     @After
     public void tearDown() throws Exception {
     }
-    private String[] exprs = {
-        // "12+34", 
-        "12+34+56", 
-        // "a12+34*56", 
-        "12a34+5678", "1234+56g78", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3"};
+    private String[] exprs = {"12+34+56", "12a34+5678", "1234+56g78", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3", "12+(52+6)*3"};
+
+    private class TestData {
+
+        CharSequence inputs;
+        String[] expectedResults;
+
+        TestData(CharSequence inputs, String[] expectedResults) {
+            assert inputs.length() != expectedResults.length : 
+                "Number of expected result does not match number of input characters";
+            this.inputs = inputs;
+            this.expectedResults = expectedResults;
+        }
+    }
+    private TestData[] testData = {
+        new TestData("12+34", new String[]{"1", "12", "12", "3", "34", "46"})
+    };
+
+    private void parseExpression(TestData testData) {
+        for (int i = 0; i < testData.inputs.length(); i++) {
+            int c = testData.inputs.charAt(i);
+            c += 0; //:TODO: parse this char
+            String actual = ""; //:TODO:
+            assertEquals(testData.expectedResults[i], actual);
+        }
+    }
 
     private void parseExpression(String s) throws ParseException, IOException, InterruptedException {
         System.out.println("\n--------------------------------------");
