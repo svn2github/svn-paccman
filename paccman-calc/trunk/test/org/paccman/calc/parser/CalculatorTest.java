@@ -117,6 +117,5 @@ public class CalculatorTest {
         for (TestData d : testData) {
             parseExpression(d);
         }
-        fail("The test case is a prototype.");
     } /* Test of parse method, of class Calculator. */
 }
