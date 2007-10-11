@@ -23,7 +23,7 @@ PARSER_END(Calculator)
 TOKEN:
 {
     < NUMBER: (<DIGIT>)+ ( "." (<DIGIT>)+ )? >
-|   < DIGIT: ["0"-"9"] >
+|   < DIGIT: ["0"-"9"] >  
 |   < PLUS: "+" >
 |   < MINUS: "-" >
 |   < TIMES: "*" >

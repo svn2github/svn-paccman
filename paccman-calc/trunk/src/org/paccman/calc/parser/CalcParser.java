@@ -50,21 +50,24 @@ public class CalcParser {
         }).start();
     }
 
+    private String display;
+    
     /**
      *
      * @param c
      * @return
      */
-    public boolean parseChar(char c) {
+    public String parseChar(char c) {
         try {
             lexParser.parseChar(c);
-            return true;
+            return display;
         } catch (ParseException ex) {
             Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return null;
         } catch (IOException ex) {
             Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return null;
         }
     }
+    
 }

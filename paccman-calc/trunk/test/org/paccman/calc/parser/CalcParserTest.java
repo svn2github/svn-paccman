@@ -25,9 +25,9 @@ import static org.junit.Assert.*;
  *
  * @author joao
  */
-public class CalculatorTest {
+public class CalcParserTest {
 
-    public CalculatorTest() {
+    public CalcParserTest() {
     }
 
     @BeforeClass
@@ -66,11 +66,11 @@ public class CalculatorTest {
         new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15"})
     };
 
-    private void parseExpression(TestData testData) {
+    private void parseExpression(TestData testData) throws IOException, ParseException {
+        CalcParser parser = new CalcParser();
         for (int i = 0; i < testData.inputs.length(); i++) {
             int c = testData.inputs.charAt(i);
-            c += 0; //:TODO: parse this char
-            String actual = ""; //:TODO:
+            String actual = parser.parseChar((char)c);
             assertEquals(testData.expectedResults[i], actual);
         }
     }
@@ -88,9 +88,9 @@ public class CalculatorTest {
                     new org.paccman.calc.parser.Calculator(pr).parse();
                     pr.close();
                 } catch (ParseException ex) {
-                    Logger.getLogger(CalculatorTest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CalcParserTest.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
-                    Logger.getLogger(CalculatorTest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CalcParserTest.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

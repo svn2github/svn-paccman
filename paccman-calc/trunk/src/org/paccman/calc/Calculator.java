@@ -94,13 +94,7 @@ public class Calculator extends javax.swing.JPanel {
         currentDisplayEdt.setText("0");
         currentDisplayEdt.setFocusable(false);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
         resetBtn.setText("RST");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(resetBtn, gridBagConstraints);
 
         openParBtn.setText("(");
         openParBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -108,10 +102,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(openParBtn, gridBagConstraints);
 
         closeParBtn.setText(")");
         closeParBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -119,22 +109,10 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(closeParBtn, gridBagConstraints);
 
         clearEntryBtn.setText("CE");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(clearEntryBtn, gridBagConstraints);
 
         offBtn.setText("Off");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(offBtn, gridBagConstraints);
 
         _7Btn.setText("7");
         _7Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -142,12 +120,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_7Btn, gridBagConstraints);
 
         _4Btn.setText("4");
         _4Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -155,12 +127,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_4Btn, gridBagConstraints);
 
         _1Btn.setText("1");
         _1Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -168,12 +134,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_1Btn, gridBagConstraints);
 
         _0Btn.setText("0");
         _0Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -181,13 +141,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_0Btn, gridBagConstraints);
 
         equalButton.setText("=");
         equalButton.addActionListener(new java.awt.event.ActionListener() {
@@ -195,13 +148,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(equalButton, gridBagConstraints);
 
         pointBtn.setText(".");
         pointBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,12 +155,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(pointBtn, gridBagConstraints);
 
         addBtn.setText("+");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -222,12 +162,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(addBtn, gridBagConstraints);
 
         _8Btn.setText("8");
         _8Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -235,12 +169,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_8Btn, gridBagConstraints);
 
         _9Btn.setText("9");
         _9Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -248,12 +176,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_9Btn, gridBagConstraints);
 
         divBtn.setText("/");
         divBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -261,20 +183,8 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(divBtn, gridBagConstraints);
 
         pcBtn.setText("%");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(pcBtn, gridBagConstraints);
 
         _5Btn.setText("5");
         _5Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -282,12 +192,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_5Btn, gridBagConstraints);
 
         _6Btn.setText("6");
         _6Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -295,12 +199,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_6Btn, gridBagConstraints);
 
         _3Btn.setText("3");
         _3Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -308,12 +206,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_3Btn, gridBagConstraints);
 
         _2Btn.setText("2");
         _2Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -321,12 +213,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(_2Btn, gridBagConstraints);
 
         multBtn.setText("*");
         multBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -334,12 +220,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(multBtn, gridBagConstraints);
 
         signButton.setText("±");
         signButton.addActionListener(new java.awt.event.ActionListener() {
@@ -347,12 +227,6 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(signButton, gridBagConstraints);
 
         minusBtn.setText("-");
         minusBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -360,12 +234,109 @@ public class Calculator extends javax.swing.JPanel {
                 calcButtonPressed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(1, 1, 1, 1);
-        jPanel1.add(minusBtn, gridBagConstraints);
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(resetBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(openParBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(closeParBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(clearEntryBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(offBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(_7Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(_8Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(_9Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(divBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(pcBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(_4Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(_5Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(_6Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(multBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(signButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(jPanel1Layout.createSequentialGroup()
+                                .add(_1Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 32, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(2, 2, 2)
+                                .add(_2Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(_0Btn, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(2, 2, 2)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(_3Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(pointBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(2, 2, 2)
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(minusBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(addBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(2, 2, 2)
+                        .add(equalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 28, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(new java.awt.Component[] {_1Btn, _2Btn, _3Btn, _4Btn, _5Btn, _6Btn, _7Btn, _8Btn, _9Btn, addBtn, clearEntryBtn, closeParBtn, divBtn, equalButton, minusBtn, multBtn, offBtn, openParBtn, pcBtn, pointBtn, resetBtn, signButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(resetBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(openParBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(closeParBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(clearEntryBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(offBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(2, 2, 2)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(_7Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(_8Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(_9Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(divBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(pcBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(2, 2, 2)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(_4Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(_5Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(_6Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(multBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(signButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(2, 2, 2)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(_1Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(_2Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(2, 2, 2)
+                        .add(_0Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(_3Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(pointBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(minusBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(2, 2, 2)
+                        .add(addBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(equalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         typingLbl.setText(" ");
 
@@ -399,7 +370,7 @@ public class Calculator extends javax.swing.JPanel {
     private void calcButtonPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonPressed
         if (evt.getSource().getClass() == CalcButton.class) {
             CalcButton cb = (CalcButton) evt.getSource();
-            if (!parser.parseChar(cb.getKey().charAt(0))) {
+            if (parser.parseChar(cb.getKey().charAt(0)) == null) {
                 Toolkit.getDefaultToolkit().beep();
             }
             if (showTyping) {
