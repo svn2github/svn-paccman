@@ -10,8 +10,6 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.paccman.calc.parser.LexParser.ParseException;
@@ -22,36 +20,34 @@ import org.paccman.calc.parser.LexParser.ParseException;
  */
 public class CalcParser {
 
-    PipedReader reader;
-    PipedWriter writer;
     LexParser lexParser;
-    Calculator calc;
+    YaccParser yaccParser;
 
     /**
      *
      * @throws java.io.IOException
-     * @throws org.paccman.calc.parser.ParseException
+     * @throws org.paccman.calc.parser.LexParser.ParseException
+     *
      */
-    public CalcParser() throws IOException, org.paccman.calc.parser.ParseException {
-        reader = new PipedReader();
-        writer = new PipedWriter(reader);
-        lexParser = new LexParser(writer);
-        calc = new Calculator(reader);
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    calc.parse();
-                } catch (org.paccman.calc.parser.ParseException ex) {
-                    Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }).start();
+    public CalcParser() throws IOException, ParseException {
+        yaccParser = new YaccParser();
+        lexParser = new LexParser(yaccParser);
+        reset();
     }
 
-    private String display;
-    
+    private String getDisplay() {
+        switch (lexParser.state) {
+            case ParseInt:
+                return lexParser.getLastOperand().toString();
+            case Idle:
+            case ReadOp:
+            case WaitNext:
+            case WaitOp:
+                return yaccParser.getTopOperand().toString();
+        }
+        throw new IllegalStateException("Invalid state: " + lexParser.state.toString());
+    }
+
     /**
      *
      * @param c
@@ -60,7 +56,7 @@ public class CalcParser {
     public String parseChar(char c) {
         try {
             lexParser.parseChar(c);
-            return display;
+            return getDisplay();
         } catch (ParseException ex) {
             Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -69,5 +65,14 @@ public class CalcParser {
             return null;
         }
     }
-    
+
+    /**
+     *
+     * @throws org.paccman.calc.parser.LexParser.ParseException
+     * @throws java.io.IOException
+     */
+    public void reset() throws ParseException, IOException {
+        lexParser.reset();
+        yaccParser.reset();
+    }
 }

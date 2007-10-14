@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
 import org.paccman.calc.parser.CalcParser;
-import org.paccman.calc.parser.ParseException;
+import org.paccman.calc.parser.LexParser.ParseException;
 
 /**
  *
@@ -48,7 +48,7 @@ public class Calculator extends javax.swing.JPanel {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         initComponents();
     }
 

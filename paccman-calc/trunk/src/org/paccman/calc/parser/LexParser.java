@@ -10,7 +10,7 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
-import java.io.Writer;
+import java.math.BigDecimal;
 import org.paccman.calc.parser.LexParser.ParseException;
 
 /**
@@ -19,39 +19,14 @@ import org.paccman.calc.parser.LexParser.ParseException;
  */
 public class LexParser {
 
-    class Output {
-
-        // Output to JavaCC parser
-        Writer outputWriter;
-
-        Output(Writer outputWriter) {
-            this.outputWriter = outputWriter;
-        }
-
-        private int iter = 0;
-        
-        public void out(String strOut) throws IOException {
-            System.out.printf("  S%1$d> %2$s", iter, strOut);
-            iter++;
-            outputWriter.write(strOut);
-            outputWriter.flush();
-        }
-
-        public void out(char charOut) throws IOException {
-            System.out.printf("  S%1$d> %2$c", iter, charOut);
-            System.out.println(charOut);
-            outputWriter.write(charOut);
-            outputWriter.flush();
-        }
-    }
-    Output output;
+    YaccParser yaccParser;
 
     /**
      *
-     * @param outputWriter
+     * @param yaccParser
      */
-    public LexParser(Writer outputWriter) {
-        output = new Output(outputWriter);
+    public LexParser(YaccParser yaccParser) {
+        this.yaccParser = yaccParser;
     }
 
 /**
@@ -76,34 +51,27 @@ public class LexParser {
     int parenLvl = 0;
     char lastOperator;
 
-    private void resetValue() {
-        intValue = null;
-        decValue = null;
-        negative = false;
-    }
+    enum State {
 
-    private void outValue() throws IOException {
-        if (negative) {
-            output.out("-");
-        }
-        output.out(intValue.toString());
-        if (decValue != null) {
-            output.out(LexToken.DEC_POINT);
-            output.out(decValue.toString());
-        }
+        Init, Idle, ParseInt, ParseDec, WaitOp, ReadOp, WaitNext
+    }
+    State state;
+
+    /**
+     *
+     * @throws org.paccman.calc.parser.LexParser.ParseException
+     * @throws java.io.IOException
+     */
+    public void reset() throws ParseException, IOException {
         resetValue();
+        state = State.Idle;
+        parseChar('0');
     }
 
-    private enum State {
-
-        Init, ParseInt, ParseDec, WaitOp, ReadOp, WaitNext
-    }
-    State state = State.Init;
-
-    private State reset() {
-        intValue = decValue = null;
+    private void resetValue() {
+        intValue = new StringBuffer();
+        decValue = new StringBuffer();
         negative = false;
-        return State.Init;
     }
 
     /**
@@ -114,8 +82,8 @@ public class LexParser {
      */
     public void parseChar(char c) throws ParseException, IOException {
         switch (state) {
-            case Init:
-                state = doInit(c);
+            case Idle:
+                state = doIdle(c);
                 break;
             case ParseInt:
                 state = doParseInt(c);
@@ -137,7 +105,7 @@ public class LexParser {
         }
     }
 
-    private State doInit(char c) throws ParseException {
+    private State doIdle(char c) throws ParseException {
         if (Character.isDigit(c)) {
             negative = false;
             intValue = new StringBuffer();
@@ -148,34 +116,53 @@ public class LexParser {
             return State.ParseDec;
         } else if (c == LexToken.OPEN_PAR) {
             return State.WaitNext;
+        } else if (LexToken.isOperator(c)) {
+            //:TODO:
+            return State.ReadOp;
         }
         throw new ParseException(c);
     }
 
+    /**
+     *
+     * @return
+     */
+    public BigDecimal getLastOperand() {
+        StringBuffer sb = new StringBuffer();
+        if (negative) {
+            sb.append("-");
+        }
+        sb.append(intValue);
+        sb.append(LexToken.DEC_POINT);
+        sb.append(decValue);
+        return new BigDecimal(sb.toString());
+    }
+
+    private static final int PAREN_PRIO_ADJUST = 10;
+    
     private State doParseInt(char c) throws ParseException, IOException {
         if (c == LexToken.EVAL_CHAR) {
             if (parenLvl > 0) {
                 throw new ParseException("Missing closing parenthesis");
             }
-            if (negative) {
-                output.out("-");
-            }
-            output.out(intValue.toString());
-            output.out(""); //TODO: replace this by EOL or anything else
-            return reset();
+            yaccParser.parseOperand(getLastOperand());
+            yaccParser.parseEnd();
+            return State.Idle;
         } else if (c == LexToken.DEC_POINT) {
             decValue = new StringBuffer();
             return State.ParseDec;
         } else if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                outValue();
-                output.out(LexToken.CLOSE_PAR);
+                yaccParser.parseOperand(getLastOperand());
+                yaccParser.parseClosePar(parenLvl*PAREN_PRIO_ADJUST);
+                parenLvl--;
                 return State.WaitOp;
             } else {
                 throw new ParseException(c);
             }
         } else if (LexToken.isOperator(c)) {
-            outValue();
+            yaccParser.parseOperand(getLastOperand());
+            yaccParser.parseOperator(new OperatorToken(c, parenLvl*PAREN_PRIO_ADJUST));
             lastOperator = c;
             return State.ReadOp;
         } else if (c == LexToken.SIGN_CHAR) {
@@ -193,33 +180,15 @@ public class LexParser {
             if (parenLvl > 0) {
                 throw new ParseException("Missing closing parenthesis");
             }
-            if (negative) {
-                output.out(LexToken.NEG_SIGN);
-            }
-            output.out(intValue.toString());
-            output.out(LexToken.DEC_POINT);
-            output.out(decValue.toString());
-            return reset();
+            return State.Idle;
         } else if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                if (negative) {
-                    output.out(LexToken.NEG_SIGN);
-                }
-                output.out(intValue.toString());
-                output.out(LexToken.DEC_POINT);
-                output.out(decValue.toString());
                 return State.WaitOp;
             } else {
                 throw new ParseException(LexToken.CLOSE_PAR);
             }
         } else if (LexToken.isOperator(c)) {
             if (parenLvl > 0) {
-                if (negative) {
-                    output.out(LexToken.NEG_SIGN);
-                }
-                output.out(intValue.toString());
-                output.out(LexToken.DEC_POINT);
-                output.out(decValue.toString());
                 return State.ReadOp;
             }
         } else if (c == LexToken.SIGN_CHAR) {
@@ -251,7 +220,6 @@ public class LexParser {
     private State doWaitOp(char c) throws IOException, ParseException {
         if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                output.out(LexToken.CLOSE_PAR);
                 parenLvl--;
                 return State.WaitOp;
             } else {
@@ -264,7 +232,7 @@ public class LexParser {
             if (parenLvl > 0) {
                 throw new ParseException("Missing ')'");
             }
-            return reset();
+            return State.Idle;
         }
         throw new ParseException(c);
     }
@@ -272,16 +240,19 @@ public class LexParser {
     private State doReadOp(char c) throws ParseException, IOException {
         if (LexToken.isOperator(c)) {
             lastOperator = c;
+            yaccParser.replaceOperator(new OperatorToken(c, parenLvl*PAREN_PRIO_ADJUST));
             return State.ReadOp;
         } else if (Character.isDigit(c)) {
-            output.out(lastOperator);
-            intValue = new StringBuffer();
+            resetValue();
             intValue.append(c);
             return State.ParseInt;
         } else if (c == LexToken.DEC_POINT) {
             decValue = new StringBuffer();
             decValue.append(c);
             return State.ParseDec;
+        } else if (c == LexToken.OPEN_PAR) {
+            parenLvl++;
+            return state.WaitNext;
         }
         throw new ParseException(c);
     }

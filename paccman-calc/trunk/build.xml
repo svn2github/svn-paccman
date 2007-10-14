@@ -66,18 +66,4 @@
     nbproject/build-impl.xml file. 
 
     -->
-    <target name="-pre-compile">
-        <javacc
-            target="${src.dir}/org/paccman/calc/parser/Arithmetic.jj"
-            outputdirectory="${src.dir}/org/paccman/calc/parser"
-            javacchome="/opt/javacc"
-        />
-    </target>
-    <target name="-post-clean" description="Clean javacc files">
-        <delete>
-            <fileset 
-                dir="${src.dir}/org/paccman/calc/parser" 
-                excludes="Arithmetic.jj,LexParser.java,LexToken.java,CalcParser.java" />
-        </delete>
-    </target>
 </project>

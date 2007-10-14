@@ -10,15 +10,12 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
-import java.io.PipedReader;
-import java.io.PipedWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.paccman.calc.parser.LexParser.ParseException;
 import static org.junit.Assert.*;
 
 /**
@@ -61,9 +58,17 @@ public class CalcParserTest {
     }
     
     private TestData[] testData = {
-        new TestData("12+34=", new String[]{"1", "12", "12", "3", "34", "46"}),
-        new TestData("12+34+*2=", new String[]{"1", "12", "12", "3", "34", "46", "46", "2", "92"}),
-        new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15"})
+//        new TestData("12+34=", new String[]{"1", "12", "12", "3", "34", "46"}),
+//        new TestData("12+34+56=", new String[]{"1", "12", "12", "3", "34", "46", "5", "56", "102"}),
+//        new TestData("1+2*3=", new String[]{"1", "1", "2", "2", "3", "7"}),
+//        new TestData("2*3+4=", new String[]{"2", "2", "3", "6", "4", "10"}),
+//        new TestData("12+34+*2=", new String[]{"1", "12", "12", "3", "34", "46", "46", "2", "92"}),
+        new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "15"}),
+        new TestData("1+2*(3*4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "12", "25"}),
+//        new TestData("1+2*(3+4)+2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15", "15", "17"}),
+//        new TestData("1+2*(3+4)*2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15", "15", "17"}),
+//        new TestData("1+2*(3+4)*3+5=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15", "15", "17", "17", "1", "1"}),
+        null
     };
 
     private void parseExpression(TestData testData) throws IOException, ParseException {
@@ -75,47 +80,13 @@ public class CalcParserTest {
         }
     }
 
-    private void parseExpression(String s) throws ParseException, IOException, InterruptedException {
-        System.out.println("\n--------------------------------------");
-        System.out.println("------------- Parsing: " + s);
-        final PipedReader pr = new PipedReader();
-        PipedWriter pw = new PipedWriter(pr);
-        Thread t = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    new org.paccman.calc.parser.Calculator(pr).parse();
-                    pr.close();
-                } catch (ParseException ex) {
-                    Logger.getLogger(CalcParserTest.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(CalcParserTest.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        t.start();
-        for (int i = 0; i < s.length(); i++) {
-            int c = s.charAt(i);
-            pw.write(c);
-            System.out.printf("->->->->->->->->->->->->->%1$c\n", c);
-            Thread.sleep(5000);
-            pw.flush();
-        }
-        pw.close();
-        t.join();
-
-//        StringReader sr = new StringReader(s);
-//        Calculator instance = new org.paccman.calc.parser.Calculator(sr);
-//        instance.parse();
-        System.out.println("Done --------------------------------------");
-    }
-
     @Test
     public void parse() throws Exception {
         System.out.println("parse");
-        for (TestData d : testData) {
-            parseExpression(d);
+        int i = 0;
+        while (testData[i] != null) {
+            parseExpression(testData[i]);
+            i++;
         }
     } /* Test of parse method, of class Calculator. */
 }
