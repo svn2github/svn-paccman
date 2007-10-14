@@ -153,7 +153,6 @@ public class LexParser {
             return State.ParseDec;
         } else if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                yaccParser.parseOperand(getLastOperand());
                 yaccParser.parseClosePar(parenLvl*PAREN_PRIO_ADJUST);
                 parenLvl--;
                 return State.WaitOp;
