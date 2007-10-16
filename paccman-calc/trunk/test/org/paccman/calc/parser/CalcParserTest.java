@@ -66,8 +66,12 @@ public class CalcParserTest {
 //        new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "15"}),
 //        new TestData("1+2*(3*4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "12", "25"}),
 //        new TestData("1+2*(3+4)+2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "15", "2", "17"}),
-//        new TestData("1+2*(3+4)*2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "4", "15", "15", "17"}),
-        new TestData("1+2*(3+4)*3+5=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "14", "3", "43", "5", "48"}),
+//        new TestData("1+2*(3+4)*2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "14", "2", "29"}),
+//        new TestData("1+2*(3+4)*3+5=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "14", "3", "43", "5", "48"}),
+//        new TestData("1+2=+5=", new String[]{"1", "1", "2", "3", "3", "5", "8"}),
+//        new TestData("1.2+3.4=", new String[] {"1", "1", "1.2", "1.2", "3", "3", "3.4", "4.6"}),
+//        new TestData("1.2+.4=", new String[] {"1", "1", "1.2", "1.2", "0", "0.4", "1.6"}),
+        new TestData(".2*.4=", new String[] {"0", "0.2", "0.2", "0", "0.4", "0.08"}),
         null
     };
 
@@ -76,15 +80,17 @@ public class CalcParserTest {
         for (int i = 0; i < testData.inputs.length(); i++) {
             int c = testData.inputs.charAt(i);
             String actual = parser.parseChar((char)c);
+            System.out.printf("    Read: '%1$c'. Display: %2$s%n", (char)c, actual);
             assertEquals(testData.expectedResults[i], actual);
         }
+        System.out.println();
     }
 
     @Test
     public void parse() throws Exception {
-        System.out.println("parse");
         int i = 0;
         while (testData[i] != null) {
+            System.out.printf("Parsing[%1$d]: '%2$s'%n", i, testData[i].inputs);
             parseExpression(testData[i]);
             i++;
         }

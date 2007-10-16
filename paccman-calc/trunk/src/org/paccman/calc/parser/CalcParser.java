@@ -10,6 +10,7 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.paccman.calc.parser.LexParser.ParseException;
@@ -37,8 +38,8 @@ public class CalcParser {
 
     private String getDisplay() {
         switch (lexParser.state) {
-            case ParseInt:
-                return lexParser.getLastOperand().toString();
+            case ParseOperand:
+                return new BigDecimal(lexParser.operandValue.toString()).toString();
             case Idle:
             case ReadOp:
             case WaitNext:
