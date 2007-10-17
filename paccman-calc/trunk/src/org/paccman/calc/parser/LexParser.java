@@ -45,8 +45,15 @@ public class LexParser {
         }
     }
     // Parser context data
+    boolean isNegative = false;
     StringBuffer operandValue;
     int parenLvl = 0;
+
+    private void negateCurrentOperand() {
+        if (! new BigDecimal(operandValue.toString()).equals(BigDecimal.ZERO)) {
+            isNegative = !isNegative;
+        }
+    }
 
     enum State {
 
@@ -62,10 +69,6 @@ public class LexParser {
     public void reset() throws ParseException, IOException {
         state = State.Idle;
         parseChar('0');
-    }
-
-    private void resetValue() {
-        operandValue = new StringBuffer();
     }
 
     /**
@@ -108,18 +111,31 @@ public class LexParser {
         } else if (LexToken.isOperator(c)) {
             yaccParser.parseOperator(new OperatorToken(c, 0));
             return State.ReadOp;
+        } else if (c == LexToken.SIGN_CHAR) {
+            yaccParser.parseNegate();
+            return State.Idle;
         }
         throw new ParseException(c);
     }
 
     private static final int PAREN_PRIO_ADJUST = 10;
 
+    /**
+     * 
+     * @return 
+     */
+    public BigDecimal getOperandValue() {
+        assert operandValue != null;
+        BigDecimal rv = new BigDecimal(operandValue.toString());
+        return isNegative ? rv.negate() : rv;
+    }
+    
     private State doParseOperand(char c) throws ParseException, IOException {
         if (c == LexToken.EVAL_CHAR) {
             if (parenLvl > 0) {
                 throw new ParseException("Missing closing parenthesis");
             }
-            yaccParser.parseOperand(new BigDecimal(operandValue.toString()));
+            yaccParser.parseOperand(getOperandValue());
             yaccParser.parseEnd();
             return State.Idle;
         } else if (c == LexToken.DEC_POINT) {
@@ -131,7 +147,7 @@ public class LexParser {
             return State.ParseOperand;
         } else if (c == LexToken.CLOSE_PAR) {
             if (parenLvl > 0) {
-                yaccParser.parseOperand(new BigDecimal(operandValue.toString()));
+                yaccParser.parseOperand(getOperandValue());
                 yaccParser.parseClosePar(parenLvl * PAREN_PRIO_ADJUST);
                 parenLvl--;
                 return State.WaitOp;
@@ -139,10 +155,11 @@ public class LexParser {
                 throw new ParseException(c);
             }
         } else if (LexToken.isOperator(c)) {
-            yaccParser.parseOperand(new BigDecimal(operandValue.toString()));
+            yaccParser.parseOperand(getOperandValue());
             yaccParser.parseOperator(new OperatorToken(c, parenLvl * PAREN_PRIO_ADJUST));
             return State.ReadOp;
         } else if (c == LexToken.SIGN_CHAR) {
+            negateCurrentOperand();
             return State.ParseOperand;
         } else if (Character.isDigit(c)) {
             operandValue.append(c);

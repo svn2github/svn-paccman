@@ -22,7 +22,7 @@
                       <Component id="currentDisplayEdt" alignment="0" max="32767" attributes="1"/>
                       <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <Component id="typingLbl" alignment="0" pref="133" max="32767" attributes="1"/>
+                  <Component id="typingLbl" alignment="0" pref="192" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -398,7 +398,7 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;*&quot;)"/>
           </AuxValues>
         </Component>
-        <Component class="org.paccman.calc.SignButton" name="signButton">
+        <Component class="org.paccman.calc.CalcButton" name="signButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#xb1;"/>
           </Properties>
@@ -406,7 +406,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.SignButton(this)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton("±")"/>
           </AuxValues>
         </Component>
         <Component class="org.paccman.calc.CalcButton" name="minusBtn">

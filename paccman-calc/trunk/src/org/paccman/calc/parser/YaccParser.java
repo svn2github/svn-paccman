@@ -62,6 +62,11 @@ public class YaccParser {
         operatorStack.pop();
         operatorStack.push(token);
     }
+
+    void parseNegate() {
+        assert  ! operandStack.isEmpty();
+        operandStack.push(operandStack.pop().negate());
+    }
     
     /**
      * Unstack until the specified priority

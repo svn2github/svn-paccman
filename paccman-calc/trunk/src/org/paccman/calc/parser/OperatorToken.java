@@ -82,10 +82,14 @@ public class OperatorToken {
      */
     public BigDecimal evaluate(BigDecimal oper1, BigDecimal oper2) {
         switch (operator) {
-            case LexToken.MULT_CHAR:
-                return oper1.multiply(oper2);
             case LexToken.PLUS_CHAR:
                 return oper1.add(oper2);
+            case LexToken.MINUS_CHAR:
+                return oper1.subtract(oper2);
+            case LexToken.MULT_CHAR:
+                return oper1.multiply(oper2);
+            case LexToken.DIV_CHAR:
+                return oper1.divide(oper2);
             default:
                 throw new IllegalStateException("Unknown operator: " + Character.toString(operator));
         }

@@ -19,6 +19,8 @@ import javax.swing.KeyStroke;
  */
 public class CalcButton extends javax.swing.JButton {
     
+    private static final long serialVersionUID = 1L;
+    
     /** Creates new form BeanForm */
     public CalcButton() {
         initComponents();
@@ -26,7 +28,6 @@ public class CalcButton extends javax.swing.JButton {
     
     /**
      * 
-     * @param parser 
      * @param key 
      */
     public CalcButton(String key) {
@@ -40,6 +41,7 @@ public class CalcButton extends javax.swing.JButton {
      * @param rootPane 
      * @param key 
      */
+    @SuppressWarnings("serial")
     public void registerKey(JRootPane rootPane, char key) {
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         StringBuffer sb = new StringBuffer(CalcButton.class.getName());
@@ -59,6 +61,7 @@ public class CalcButton extends javax.swing.JButton {
      * @param rootPane 
      * @param keyCode 
      */
+    @SuppressWarnings("serial")
     public void registerKey(JRootPane rootPane, int keyCode) {
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         StringBuffer sb = new StringBuffer(CalcButton.class.getName());

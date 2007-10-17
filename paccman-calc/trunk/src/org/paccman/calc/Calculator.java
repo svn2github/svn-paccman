@@ -59,7 +59,6 @@ public class Calculator extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         currentDisplayEdt = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
@@ -84,7 +83,7 @@ public class Calculator extends javax.swing.JPanel {
         _3Btn = new org.paccman.calc.CalcButton("3");
         _2Btn = new org.paccman.calc.CalcButton("2");
         multBtn = new org.paccman.calc.CalcButton("*");
-        signButton = new org.paccman.calc.SignButton(this);
+        signButton = new org.paccman.calc.CalcButton("±");
         minusBtn = new org.paccman.calc.CalcButton("-");
         typingLbl = new javax.swing.JLabel();
 
@@ -350,7 +349,7 @@ public class Calculator extends javax.swing.JPanel {
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                         .add(org.jdesktop.layout.GroupLayout.LEADING, currentDisplayEdt)
                         .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                    .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -370,8 +369,11 @@ public class Calculator extends javax.swing.JPanel {
     private void calcButtonPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonPressed
         if (evt.getSource().getClass() == CalcButton.class) {
             CalcButton cb = (CalcButton) evt.getSource();
-            if (parser.parseChar(cb.getKey().charAt(0)) == null) {
+            final String display = parser.parseChar(cb.getKey().charAt(0));
+            if (display == null) {
                 Toolkit.getDefaultToolkit().beep();
+            } else {
+                currentDisplayEdt.setText(display);
             }
             if (showTyping) {
                 typingLbl.setText(typingLbl.getText() + cb.getKey());
@@ -412,7 +414,7 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.PcCalcButton pcBtn;
     private org.paccman.calc.CalcButton pointBtn;
     private org.paccman.calc.ResetBtn resetBtn;
-    private org.paccman.calc.SignButton signButton;
+    private org.paccman.calc.CalcButton signButton;
     private javax.swing.JLabel typingLbl;
     // End of variables declaration//GEN-END:variables
 }
