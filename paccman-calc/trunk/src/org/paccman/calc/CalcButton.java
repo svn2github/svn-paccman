@@ -19,8 +19,6 @@ import javax.swing.KeyStroke;
  */
 public class CalcButton extends javax.swing.JButton {
     
-    private static final long serialVersionUID = 1L;
-    
     /** Creates new form BeanForm */
     public CalcButton() {
         initComponents();
