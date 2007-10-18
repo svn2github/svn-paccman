@@ -38,18 +38,6 @@ public final class LexToken {
     /**
      * 
      */
-    public static final char NEG_SIGN = '-';
-    /**
-     * 
-     */
-    public static final char MIN_DIGIT = '0';
-    /**
-     * 
-     */
-    public static final char MAX_DIGIT = '0';
-    /**
-     * 
-     */
     public static final char MULT_CHAR = '*';
     /**
      * 
@@ -74,15 +62,6 @@ public final class LexToken {
                 (c == PLUS_CHAR);
     }
     
-    /**
-     * 
-     * @param c 
-     * @return 
-     */
-    public static boolean isDigit(char c) {
-        return (c >= MIN_DIGIT) && (c <= MAX_DIGIT);
-    }
-
     private LexToken() {
     }
 }

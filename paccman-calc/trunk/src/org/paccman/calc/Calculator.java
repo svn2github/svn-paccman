@@ -70,7 +70,7 @@ public class Calculator extends javax.swing.JPanel {
         _4Btn = new org.paccman.calc.CalcButton("4");
         _1Btn = new org.paccman.calc.CalcButton("1");
         _0Btn = new org.paccman.calc.CalcButton("0");
-        equalButton = new org.paccman.calc.EqualButton(this);
+        equalButton = new org.paccman.calc.CalcButton("=");
         pointBtn = new org.paccman.calc.CalcButton(".");
         addBtn = new org.paccman.calc.CalcButton("+");
         _8Btn = new org.paccman.calc.CalcButton("8");
@@ -404,7 +404,7 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.CalcButton closeParBtn;
     private javax.swing.JFormattedTextField currentDisplayEdt;
     private org.paccman.calc.CalcButton divBtn;
-    private org.paccman.calc.EqualButton equalButton;
+    private org.paccman.calc.CalcButton equalButton;
     private javax.swing.JPanel jPanel1;
     private org.paccman.calc.CalcButton minusBtn;
     private org.paccman.calc.CalcButton multBtn;

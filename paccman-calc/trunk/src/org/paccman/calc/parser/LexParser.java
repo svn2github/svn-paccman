@@ -48,7 +48,7 @@ public class LexParser {
     int parenLvl = 0;
 
     private void negateCurrentOperand() {
-        if (! new BigDecimal(operandValue.toString()).equals(BigDecimal.ZERO)) {
+        if (!new BigDecimal(operandValue.toString()).equals(BigDecimal.ZERO)) {
             isNegative = !isNegative;
         }
     }
@@ -100,9 +100,11 @@ public class LexParser {
     private State doIdle(char c) throws ParseException {
         if (Character.isDigit(c)) {
             operandValue = new StringBuffer(new String(new char[]{c}));
+            isNegative = false;
             return State.ParseOperand;
         } else if (c == LexToken.DEC_POINT) {
             operandValue = new StringBuffer();
+            isNegative = false;
             return State.ParseOperand;
         } else if (c == LexToken.OPEN_PAR) {
             return State.WaitNext;
@@ -115,19 +117,18 @@ public class LexParser {
         }
         throw new ParseException(c);
     }
-
     private static final int PAREN_PRIO_ADJUST = 10;
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public BigDecimal getOperandValue() {
         assert operandValue != null;
         BigDecimal rv = new BigDecimal(operandValue.toString());
         return isNegative ? rv.negate() : rv;
     }
-    
+
     private State doParseOperand(char c) throws ParseException, IOException {
         if (c == LexToken.EVAL_CHAR) {
             if (parenLvl > 0) {
@@ -169,6 +170,7 @@ public class LexParser {
     private State doWaitNext(char c) throws ParseException {
         if (c == LexToken.DEC_POINT) {
             operandValue.append(c);
+            isNegative = false;
             return State.ParseOperand;
         } else if (c == LexToken.OPEN_PAR) {
             parenLvl++;
@@ -176,6 +178,7 @@ public class LexParser {
         } else if (Character.isDigit(c)) {
             operandValue = new StringBuffer();
             operandValue.append(c);
+            isNegative = false;
             return State.ParseOperand;
         }
         throw new ParseException(c);
@@ -186,6 +189,7 @@ public class LexParser {
             if (parenLvl == 0) {
                 throw new ParseException(c);
             }
+            yaccParser.parseClosePar(parenLvl * PAREN_PRIO_ADJUST);
             parenLvl--;
             return State.WaitOp;
         } else if (LexToken.isOperator(c)) {
@@ -207,12 +211,14 @@ public class LexParser {
             return State.ReadOp;
         } else if (Character.isDigit(c)) {
             operandValue = new StringBuffer(new String(new char[]{c}));
+            isNegative = false;
             return State.ParseOperand;
         } else if (c == LexToken.OPEN_PAR) {
             parenLvl++;
             return state.WaitNext;
         } else if (c == LexToken.DEC_POINT) {
             operandValue = new StringBuffer("0.");
+            isNegative = false;
             return State.ParseOperand;
         }
         throw new ParseException(c);
