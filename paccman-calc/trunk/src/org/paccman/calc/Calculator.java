@@ -20,7 +20,6 @@ import org.paccman.calc.parser.LexParser.ParseException;
  */
 public class Calculator extends javax.swing.JPanel {
 
-    private static final long serialVersionUID = 1L;
     boolean showTyping = true;
 
     /**
