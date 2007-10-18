@@ -34,8 +34,6 @@ public class LexParser {
      */
     public static class ParseException extends Exception {
 
-        private static final long serialVersionUID = 1L;
-
         private ParseException(char c) {
             super("Unexpected char: " + Character.toString(c));
         }
