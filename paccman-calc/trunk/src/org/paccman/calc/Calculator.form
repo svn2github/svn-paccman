@@ -22,7 +22,7 @@
                       <Component id="currentDisplayEdt" alignment="0" max="32767" attributes="1"/>
                       <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
                   </Group>
-                  <Component id="typingLbl" alignment="0" pref="192" max="32767" attributes="1"/>
+                  <Component id="typingLbl" alignment="0" pref="283" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -116,7 +116,7 @@
                               <Component id="minusBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="addBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="equalButton" linkSize="4" min="-2" pref="28" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -152,7 +152,7 @@
                       <Component id="signButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="_1Btn" min="-2" max="-2" attributes="0"/>
@@ -171,7 +171,7 @@
                           <EmptySpace min="2" pref="2" max="2" attributes="0"/>
                           <Component id="addBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="equalButton" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Component id="equalButton" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -406,7 +406,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;±&quot;)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;&#xb1;&quot;)"/>
           </AuxValues>
         </Component>
         <Component class="org.paccman.calc.CalcButton" name="minusBtn">

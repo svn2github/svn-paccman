@@ -70,7 +70,7 @@ public class Calculator extends javax.swing.JPanel {
         _4Btn = new org.paccman.calc.CalcButton("4");
         _1Btn = new org.paccman.calc.CalcButton("1");
         _0Btn = new org.paccman.calc.CalcButton("0");
-        equalButton = new org.paccman.calc.CalcButton("=");
+        equalButton = new org.paccman.calc.EqualButton(this);
         pointBtn = new org.paccman.calc.CalcButton(".");
         addBtn = new org.paccman.calc.CalcButton("+");
         _8Btn = new org.paccman.calc.CalcButton("8");
@@ -317,7 +317,7 @@ public class Calculator extends javax.swing.JPanel {
                     .add(multBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(signButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(2, 2, 2)
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jPanel1Layout.createSequentialGroup()
                         .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(_1Btn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +332,7 @@ public class Calculator extends javax.swing.JPanel {
                         .add(minusBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(2, 2, 2)
                         .add(addBtn, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(equalButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 52, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(equalButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,7 +348,7 @@ public class Calculator extends javax.swing.JPanel {
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                         .add(org.jdesktop.layout.GroupLayout.LEADING, currentDisplayEdt)
                         .add(org.jdesktop.layout.GroupLayout.LEADING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                    .add(typingLbl, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -404,7 +404,7 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.CalcButton closeParBtn;
     private javax.swing.JFormattedTextField currentDisplayEdt;
     private org.paccman.calc.CalcButton divBtn;
-    private org.paccman.calc.CalcButton equalButton;
+    private org.paccman.calc.EqualButton equalButton;
     private javax.swing.JPanel jPanel1;
     private org.paccman.calc.CalcButton minusBtn;
     private org.paccman.calc.CalcButton multBtn;
