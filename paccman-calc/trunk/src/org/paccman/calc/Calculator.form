@@ -15,16 +15,67 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="currentDisplayEdt" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="currentDisplayEdt" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="resetBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="openParBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="closeParBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="clearEntryBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="offBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="typingLbl" alignment="0" pref="283" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="_7Btn" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="_8Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="_9Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="divBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="pcBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="_4Btn" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="_5Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="_6Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="multBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Component id="signButton" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="_1Btn" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                              <Component id="_2Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                              <Component id="_3Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                              <Component id="minusBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="_0Btn" min="-2" pref="108" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="pointBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="addBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="equalButton" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -32,11 +83,49 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="currentDisplayEdt" min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="currentDisplayEdt" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="typingLbl" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="openParBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="closeParBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="clearEntryBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="offBtn" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="_7Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="_8Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="_9Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="divBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="pcBtn" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="_4Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="_5Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="_6Btn" min="-2" max="-2" attributes="0"/>
+                  <Component id="multBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="signButton" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="_1Btn" min="-2" max="-2" attributes="0"/>
+                          <Component id="_2Btn" min="-2" max="-2" attributes="0"/>
+                          <Component id="_3Btn" min="-2" max="-2" attributes="0"/>
+                          <Component id="minusBtn" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="addBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pointBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="_0Btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="equalButton" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -45,6 +134,9 @@
   <SubComponents>
     <Component class="javax.swing.JFormattedTextField" name="currentDisplayEdt">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder/>
@@ -54,378 +146,251 @@
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="text" type="java.lang.String" value="0"/>
         <Property name="focusable" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Monospaced" size="14" style="0"/>
+        </Property>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="resetBtn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="openParBtn" linkSize="4" min="-2" pref="19" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="closeParBtn" linkSize="4" min="-2" pref="19" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="clearEntryBtn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="offBtn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="_7Btn" linkSize="4" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="_8Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="_9Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="divBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="pcBtn" linkSize="4" min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="_4Btn" linkSize="4" min="-2" pref="32" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="_5Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="_6Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="multBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="signButton" linkSize="4" min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="_1Btn" linkSize="4" min="-2" pref="32" max="-2" attributes="0"/>
-                                  <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                                  <Component id="_2Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="_0Btn" max="32767" attributes="1"/>
-                          </Group>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_3Btn" linkSize="4" min="-2" max="-2" attributes="0"/>
-                              <Component id="pointBtn" linkSize="4" min="-2" pref="19" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="minusBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="addBtn" linkSize="4" min="-2" pref="25" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="equalButton" linkSize="4" min="-2" pref="28" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="openParBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="closeParBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="clearEntryBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="offBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_7Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="_8Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="_9Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="divBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="pcBtn" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_4Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="_5Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="_6Btn" min="-2" max="-2" attributes="0"/>
-                      <Component id="multBtn" min="-2" max="-2" attributes="0"/>
-                      <Component id="signButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_1Btn" min="-2" max="-2" attributes="0"/>
-                              <Component id="_2Btn" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="_0Btn" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="_3Btn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="pointBtn" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="minusBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="2" attributes="0"/>
-                          <Component id="addBtn" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="equalButton" alignment="0" max="32767" attributes="1"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="org.paccman.calc.ResetBtn" name="resetBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="RST"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ResetBtn(this)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="openParBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="("/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;(&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="closeParBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value=")"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;)&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CE"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.ClearEntryBtn" name="offBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Off"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_7Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="7"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;7&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_4Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="4"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;4&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_1Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;1&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_0Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="0"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;0&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.EqualButton" name="equalButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="="/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.EqualButton(this)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="pointBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="."/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;.&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="addBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="+"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;+&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_8Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="8"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;8&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_9Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="9"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;9&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="divBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="/"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;/&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.PcCalcButton" name="pcBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="%"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.PcCalcButton(this)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_5Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="5"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;5&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_6Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="6"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;6&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_3Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="3"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;3&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="_2Btn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="2"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;2&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="multBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="*"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;*&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="signButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#xb1;"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;&#xb1;&quot;)"/>
-          </AuxValues>
-        </Component>
-        <Component class="org.paccman.calc.CalcButton" name="minusBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="-"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;-&quot;)"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JLabel" name="typingLbl">
+    <Component class="org.paccman.calc.ResetBtn" name="resetBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
+        <Property name="text" type="java.lang.String" value="RST"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ResetBtn(this)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="openParBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="("/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;(&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="closeParBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=")"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;)&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CE"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.ClearEntryBtn" name="offBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Off"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_7Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="7"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;7&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_8Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="8"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;8&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_9Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="9"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;9&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="divBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="/"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;/&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.PcCalcButton" name="pcBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="%"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.PcCalcButton(this)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_4Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="4"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;4&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_5Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="5"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;5&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_6Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="6"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;6&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="multBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;*&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="signButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xb1;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;&#xb1;&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_1Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;1&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_2Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;2&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_3Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="3"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;3&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="minusBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="-"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;-&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.EqualButton" name="equalButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="="/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.EqualButton(this)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="_0Btn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;0&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="pointBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;.&quot;)"/>
+      </AuxValues>
+    </Component>
+    <Component class="org.paccman.calc.CalcButton" name="addBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="+"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;+&quot;)"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
