@@ -16,11 +16,12 @@ import java.math.BigDecimal;
  * @author public
  */
 public abstract class Operator {
+
     /**
-     * :TODO:do javadoc
-     * @param operand_1 
-     * @param operand_2 
-     * @return 
+     *
+     * @param operand_1
+     * @param operand_2
+     * @return
      */
     protected abstract BigDecimal compute(BigDecimal operand_1, BigDecimal operand_2);
 }

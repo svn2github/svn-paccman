@@ -17,6 +17,11 @@ public class OperCalcButton extends CalcButton {
         initComponents();
     }
     
+    /**
+     * 
+     * @param calc 
+     * @param key 
+     */
     public OperCalcButton(Calculator calc, String key) {
         super(key);
         initComponents();
