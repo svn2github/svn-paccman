@@ -53,23 +53,23 @@
                       <Component id="signButton" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="_1Btn" linkSize="2" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                               <Component id="_2Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                              <Component id="_3Btn" linkSize="2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                              <Component id="minusBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="_0Btn" min="-2" pref="108" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pointBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="addBtn" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="_0Btn" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="pointBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="_3Btn" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="addBtn" max="32767" attributes="1"/>
+                          <Component id="minusBtn" linkSize="2" alignment="0" pref="47" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="equalButton" linkSize="2" min="-2" pref="47" max="-2" attributes="0"/>
@@ -119,9 +119,9 @@
                       </Group>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="addBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="pointBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="_0Btn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pointBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="addBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="equalButton" max="32767" attributes="0"/>
@@ -348,7 +348,7 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;-&quot;)"/>
       </AuxValues>
     </Component>
-    <Component class="org.paccman.calc.EqualButton" name="equalButton">
+    <Component class="org.paccman.calc.CalcButton" name="equalButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="="/>
       </Properties>
@@ -356,7 +356,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.EqualButton(this)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;=&quot;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_0Btn">

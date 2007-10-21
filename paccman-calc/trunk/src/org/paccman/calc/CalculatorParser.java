@@ -22,8 +22,6 @@ import java.util.logging.Logger;
  */
 public class CalculatorParser {
     
-//:TODO:remove this    Calculator calc;
-    
     static class MyFormatter extends Formatter {
         // This method is called for every log records
         public String format(LogRecord rec) {
@@ -49,13 +47,6 @@ public class CalculatorParser {
     enum Token { DIGIT, POINT, OPERATOR, EQUAL, SIGN, PC, CE }
     enum State { INIT, OPERAND_1, OPERATOR_1, OPERAND_2, OPERATOR_2, EVALUATED }
 
-    /** Creates a new instance of CalculatorParser 
-     * @param calc 
-     */
-    public CalculatorParser(Calculator calc) {
-//:TODO:remove this        this.calc = calc;
-    }
-    
     State state = State.INIT;
     
     StringBuffer operand_1;
