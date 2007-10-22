@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import javax.swing.JFrame;
 import org.paccman.calc.parser.CalcParser;
 import org.paccman.calc.parser.LexParser.ParseException;
 
@@ -22,12 +23,17 @@ import org.paccman.calc.parser.LexParser.ParseException;
  */
 public class Calculator extends javax.swing.JPanel {
 
-    private static final int PRECISION = 5;
+    private static final String DEC_PRECISION = "DEC_PRECISION";
+    static Preferences prefs = Preferences.userNodeForPackage(Calculator.class);
+
+    static int getDecPrecision() {
+        return prefs.getInt(DEC_PRECISION, 5);
+    }
 
     /** Creates new form Calculator */
     public Calculator() {
         try {
-            parser = new CalcParser(new MathContext(PRECISION, RoundingMode.HALF_DOWN));
+            parser = new CalcParser(new MathContext(getDecPrecision(), RoundingMode.HALF_DOWN));
         } catch (IOException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -96,6 +102,11 @@ public class Calculator extends javax.swing.JPanel {
         clearEntryBtn.setText("CE");
 
         offBtn.setText("Off");
+        offBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                offBtnActionPerformed(evt);
+            }
+        });
 
         _7Btn.setText("7");
         _7Btn.addActionListener(new java.awt.event.ActionListener() {
@@ -334,15 +345,12 @@ public class Calculator extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_calcButtonPressed
-    //
-    // Preferences
-    //
-    private static final String DEC_PRECISION = "DEC_PRECISION";
-    static Preferences prefs = Preferences.userNodeForPackage(Calculator.class);
 
-    static int getDecPrecision() {
-        return prefs.getInt(DEC_PRECISION, 5);
-    }
+    private void offBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offBtnActionPerformed
+        getRootPane().getParent().setVisible(false);
+        ((JFrame)(getRootPane().getParent())).dispose();
+    }//GEN-LAST:event_offBtnActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.calc.CalcButton _0Btn;
     private org.paccman.calc.CalcButton _1Btn;
