@@ -26,11 +26,11 @@ public class CalcButton extends javax.swing.JButton {
     
     /**
      * 
-     * @param key 
+     * @param key Key to be pressed. It is also the character to be used by the
+     * calculator parser (see :TODO:add reference to LexToken:)
      */
     public CalcButton(String key) {
         this.key = key;
-        setText(key);
         initComponents();
     }
     

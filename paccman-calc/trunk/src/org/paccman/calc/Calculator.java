@@ -16,6 +16,7 @@ import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import org.paccman.calc.parser.CalcParser;
 import org.paccman.calc.parser.LexParser.ParseException;
+import org.paccman.calc.parser.LexToken;
 
 /**
  *
@@ -51,21 +52,21 @@ public class Calculator extends javax.swing.JPanel {
     private void initComponents() {
 
         currentDisplayEdt = new javax.swing.JFormattedTextField();
-        resetBtn = new org.paccman.calc.ResetBtn(this);
+        resetBtn = new org.paccman.calc.CalcButton("Z");
         openParBtn = new org.paccman.calc.CalcButton("(");
         closeParBtn = new org.paccman.calc.CalcButton(")");
-        clearEntryBtn = new org.paccman.calc.ClearEntryBtn(this);
-        offBtn = new org.paccman.calc.ClearEntryBtn(this);
+        clearEntryBtn = new org.paccman.calc.CalcButton("C");
+        offBtn = new org.paccman.calc.CalcButton("X");
         _7Btn = new org.paccman.calc.CalcButton("7");
         _8Btn = new org.paccman.calc.CalcButton("8");
         _9Btn = new org.paccman.calc.CalcButton("9");
         divBtn = new org.paccman.calc.CalcButton("/");
-        pcBtn = new org.paccman.calc.PcCalcButton(this);
+        pcBtn = new org.paccman.calc.CalcButton("%");
         _4Btn = new org.paccman.calc.CalcButton("4");
         _5Btn = new org.paccman.calc.CalcButton("5");
         _6Btn = new org.paccman.calc.CalcButton("6");
         multBtn = new org.paccman.calc.CalcButton("*");
-        signButton = new org.paccman.calc.CalcButton("±");
+        signButton = new org.paccman.calc.CalcButton(Character.toString(LexToken.SIGN_CHAR));
         _1Btn = new org.paccman.calc.CalcButton("1");
         _2Btn = new org.paccman.calc.CalcButton("2");
         _3Btn = new org.paccman.calc.CalcButton("3");
@@ -348,9 +349,8 @@ public class Calculator extends javax.swing.JPanel {
 
     private void offBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_offBtnActionPerformed
         getRootPane().getParent().setVisible(false);
-        ((JFrame)(getRootPane().getParent())).dispose();
+        ((JFrame) (getRootPane().getParent())).dispose();
     }//GEN-LAST:event_offBtnActionPerformed
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.calc.CalcButton _0Btn;
     private org.paccman.calc.CalcButton _1Btn;
@@ -363,18 +363,18 @@ public class Calculator extends javax.swing.JPanel {
     private org.paccman.calc.CalcButton _8Btn;
     private org.paccman.calc.CalcButton _9Btn;
     private org.paccman.calc.CalcButton addBtn;
-    private org.paccman.calc.ClearEntryBtn clearEntryBtn;
+    private org.paccman.calc.CalcButton clearEntryBtn;
     private org.paccman.calc.CalcButton closeParBtn;
     private javax.swing.JFormattedTextField currentDisplayEdt;
     private org.paccman.calc.CalcButton divBtn;
     private org.paccman.calc.CalcButton equalButton;
     private org.paccman.calc.CalcButton minusBtn;
     private org.paccman.calc.CalcButton multBtn;
-    private org.paccman.calc.ClearEntryBtn offBtn;
+    private org.paccman.calc.CalcButton offBtn;
     private org.paccman.calc.CalcButton openParBtn;
-    private org.paccman.calc.PcCalcButton pcBtn;
+    private org.paccman.calc.CalcButton pcBtn;
     private org.paccman.calc.CalcButton pointBtn;
-    private org.paccman.calc.ResetBtn resetBtn;
+    private org.paccman.calc.CalcButton resetBtn;
     private org.paccman.calc.CalcButton signButton;
     // End of variables declaration//GEN-END:variables
 }

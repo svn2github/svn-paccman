@@ -21,7 +21,7 @@ public abstract class Operator {
      *
      * @param operand_1
      * @param operand_2
-     * @return
+     * @return The result of <code>operand_1 <b>op<b> operand_2<code> where <code><b>op<b><code> is this operator.
      */
     protected abstract BigDecimal compute(BigDecimal operand_1, BigDecimal operand_2);
 }
