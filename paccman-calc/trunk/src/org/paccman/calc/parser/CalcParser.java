@@ -10,6 +10,7 @@
 package org.paccman.calc.parser;
 
 import java.io.IOException;
+import java.math.MathContext;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.paccman.calc.parser.LexParser.ParseException;
@@ -25,12 +26,13 @@ public class CalcParser {
 
     /**
      *
+     * @param mathContext 
      * @throws java.io.IOException
      * @throws org.paccman.calc.parser.LexParser.ParseException
      *
      */
-    public CalcParser() throws IOException, ParseException {
-        yaccParser = new YaccParser();
+    public CalcParser(MathContext mathContext) throws IOException, ParseException {
+        yaccParser = new YaccParser(mathContext);
         lexParser = new LexParser(yaccParser);
         reset();
     }

@@ -74,15 +74,14 @@ public class OperatorToken {
         this.operator = operator;
     }
     
-    private static final int PRECISION = 5;
-
     /**
      *
      * @param oper1
      * @param oper2
+     * @param mathContext 
      * @return
      */
-    public BigDecimal evaluate(BigDecimal oper1, BigDecimal oper2) {
+    public BigDecimal evaluate(BigDecimal oper1, BigDecimal oper2, MathContext mathContext) {
         switch (operator) {
             case LexToken.PLUS_CHAR:
                 return oper1.add(oper2);
@@ -91,7 +90,7 @@ public class OperatorToken {
             case LexToken.MULT_CHAR:
                 return oper1.multiply(oper2);
             case LexToken.DIV_CHAR:
-                return oper1.divide(oper2, new MathContext(PRECISION, RoundingMode.HALF_DOWN));
+                return oper1.divide(oper2, mathContext);
             default:
                 throw new IllegalStateException("Unknown operator: " + Character.toString(operator));
         }

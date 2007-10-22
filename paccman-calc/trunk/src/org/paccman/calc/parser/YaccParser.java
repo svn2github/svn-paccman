@@ -10,6 +10,7 @@
 package org.paccman.calc.parser;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Stack;
 
 /**
@@ -20,6 +21,10 @@ public class YaccParser {
 
     Stack<BigDecimal> operandStack = new Stack<BigDecimal>();
     Stack<OperatorToken> operatorStack = new Stack<OperatorToken>();
+
+    public YaccParser(MathContext mathContext) {
+        this.mathContext = mathContext;
+    }
 
     /**
      *
@@ -68,6 +73,8 @@ public class YaccParser {
         operandStack.push(operandStack.pop().negate());
     }
     
+    private MathContext mathContext;
+    
     /**
      * Unstack until the specified priority
      * @param priority 
@@ -78,7 +85,7 @@ public class YaccParser {
             ot = operatorStack.pop();
             BigDecimal oper2nd = operandStack.pop();
             BigDecimal oper1st = operandStack.pop();
-            oper1st = ot.evaluate(oper1st, oper2nd);
+            oper1st = ot.evaluate(oper1st, oper2nd, mathContext);
             operandStack.push(oper1st);
         }
     }

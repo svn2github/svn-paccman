@@ -8,6 +8,8 @@ package org.paccman.calc;
 
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
@@ -20,15 +22,17 @@ import org.paccman.calc.parser.LexParser.ParseException;
  */
 public class Calculator extends javax.swing.JPanel {
 
+    private static final int PRECISION = 5;
+
     /** Creates new form Calculator */
     public Calculator() {
         try {
-            parser = new CalcParser();
+            parser = new CalcParser(new MathContext(PRECISION, RoundingMode.HALF_DOWN));
         } catch (IOException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         initComponents();
     }
 
