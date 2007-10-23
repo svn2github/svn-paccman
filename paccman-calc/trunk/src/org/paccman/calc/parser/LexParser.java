@@ -163,6 +163,10 @@ public class LexParser {
         } else if (Character.isDigit(c)) {
             operandValue.append(c);
             return State.ParseOperand;
+        } else if (c == LexToken.CE_CHAR) {
+            operandValue = new StringBuffer("0");
+            isNegative = false;
+            return State.ParseOperand;
         }
         throw new ParseException(c);
     }

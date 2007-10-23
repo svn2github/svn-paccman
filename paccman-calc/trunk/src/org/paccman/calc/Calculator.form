@@ -26,7 +26,7 @@
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Component id="closeParBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                      <Component id="CalcButton" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="clearEntryBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Component id="offBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -89,7 +89,7 @@
                   <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="openParBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="closeParBtn" min="-2" max="-2" attributes="0"/>
-                  <Component id="CalcButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="clearEntryBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="offBtn" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="6" pref="6" max="6" attributes="0"/>
@@ -155,8 +155,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="RST"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;Character.toString(LexToken.RST_CHAR)&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.RST_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="openParBtn">
@@ -167,7 +170,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;(&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.OPEN_PAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="closeParBtn">
@@ -178,15 +181,18 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;)&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.CLOSE_PAR)"/>
       </AuxValues>
     </Component>
-    <Component class="org.paccman.calc.CalcButton" name="CalcButton">
+    <Component class="org.paccman.calc.CalcButton" name="clearEntryBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="CE"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
+      </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(this)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.CE_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="offBtn">
@@ -197,7 +203,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="offBtnActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(this)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;Q&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_7Btn">
@@ -208,7 +214,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;7&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;7&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_8Btn">
@@ -219,7 +225,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;8&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;8&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_9Btn">
@@ -230,7 +236,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;9&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;9&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="divBtn">
@@ -241,7 +247,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;/&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.DIV_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="pcBtn">
@@ -249,7 +255,7 @@
         <Property name="text" type="java.lang.String" value="%"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;%&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.PC_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_4Btn">
@@ -260,7 +266,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;4&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;4&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_5Btn">
@@ -271,7 +277,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;5&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;5&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_6Btn">
@@ -282,7 +288,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;6&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;6&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="multBtn">
@@ -293,7 +299,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;*&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.MULT_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="signButton">
@@ -304,7 +310,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(Character.toString(LexToken.SIGN_CHAR))"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_1Btn">
@@ -315,7 +321,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;1&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;1&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_2Btn">
@@ -326,7 +332,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;2&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;2&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_3Btn">
@@ -337,7 +343,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;3&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;3&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="minusBtn">
@@ -348,7 +354,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;-&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.MINUS_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="equalButton">
@@ -359,7 +365,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;=&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.EVAL_CHAR)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_0Btn">
@@ -370,7 +376,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;0&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;0&apos;)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="pointBtn">
@@ -381,7 +387,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;.&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.DEC_POINT)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="addBtn">
@@ -392,7 +398,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;+&quot;)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.PLUS_CHAR)"/>
       </AuxValues>
     </Component>
   </SubComponents>

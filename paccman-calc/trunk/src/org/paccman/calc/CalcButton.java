@@ -29,7 +29,7 @@ public class CalcButton extends javax.swing.JButton {
      * @param key Key to be pressed. It is also the character to be used by the
      * calculator parser (see :TODO:add reference to LexToken:)
      */
-    public CalcButton(String key) {
+    public CalcButton(char key) {
         this.key = key;
         initComponents();
     }
@@ -93,13 +93,13 @@ public class CalcButton extends javax.swing.JButton {
     /**
      * Holds value of property key.
      */
-    private String key;
+    private char key;
 
     /**
      * Getter for property key.
      * @return Value of property key.
      */
-    public String getKey() {
+    public char getKey() {
         return this.key;
     }
 
@@ -107,7 +107,7 @@ public class CalcButton extends javax.swing.JButton {
      * Setter for property key.
      * @param key New value of property key.
      */
-    public void setKey(String key) {
+    public void setKey(char key) {
         this.key = key;
     }
 
