@@ -26,7 +26,7 @@
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Component id="closeParBtn" linkSize="2" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
-                      <Component id="clearEntryBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="CalcButton" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="6" attributes="0"/>
                       <Component id="offBtn" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -89,7 +89,7 @@
                   <Component id="resetBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="openParBtn" min="-2" max="-2" attributes="0"/>
                   <Component id="closeParBtn" min="-2" max="-2" attributes="0"/>
-                  <Component id="clearEntryBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="CalcButton" min="-2" max="-2" attributes="0"/>
                   <Component id="offBtn" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="6" pref="6" max="6" attributes="0"/>
@@ -181,15 +181,15 @@
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&quot;)&quot;)"/>
       </AuxValues>
     </Component>
-    <Component class="org.paccman.calc.ClearEntryBtn" name="clearEntryBtn">
+    <Component class="org.paccman.calc.CalcButton" name="CalcButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="CE"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(this)"/>
       </AuxValues>
     </Component>
-    <Component class="org.paccman.calc.ClearEntryBtn" name="offBtn">
+    <Component class="org.paccman.calc.CalcButton" name="offBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Off"/>
       </Properties>
@@ -197,7 +197,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="offBtnActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.ClearEntryBtn(this)"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(this)"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_7Btn">
