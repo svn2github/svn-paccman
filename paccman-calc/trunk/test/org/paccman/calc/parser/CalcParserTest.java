@@ -51,19 +51,50 @@ public class CalcParserTest {
         String[] expectedResults;
 
         TestData(CharSequence inputs, String[] expectedResults) {
-            assert inputs.length() == expectedResults.length : "Number of expected result does not match number of input characters";
+            assert inputs.length() == expectedResults.length : 
+                "Number of expected result does not match number of input characters";
             this.inputs = inputs;
             this.expectedResults = expectedResults;
         }
     }
-    private TestData[] testData = {new TestData("1+(2S+(3+4))+6/2=", new String[]{"1", "1", "1", "2", "-2", "-2", "-2", "3", "3", "4", "7", "5", "6", "6", "6", "2", "9"}), null};
+    
+    private TestData[] testData = {
+        new TestData("12+34=", new String[]{"1", "12", "12", "3", "34", "46"}),
+        new TestData("12+34+56=", new String[]{"1", "12", "12", "3", "34", "46", "5", "56", "102"}),
+        new TestData("1+2*3=", new String[]{"1", "1", "2", "2", "3", "7"}),
+        new TestData("2*3+4=", new String[]{"2", "2", "3", "6", "4", "10"}),
+        new TestData("12+34+*2=", new String[]{"1", "12", "12", "3", "34", "46", "46", "2", "92"}),
+        new TestData("1+2*(3+4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "15"}),
+        new TestData("1+2*(3*4)=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "12", "25"}),
+        new TestData("1+2*(3+4)+2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "15", "2", "17"}),
+        new TestData("1+2*(3+4)*2=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "14", "2", "29"}),
+        new TestData("1+2*(3+4)*3+5=", new String[]{"1", "1", "2", "2", "2", "3", "3", "4", "7", "14", "3", "43", "5", "48"}),
+        new TestData("1+2=+5=", new String[]{"1", "1", "2", "3", "3", "5", "8"}),
+        new TestData("1.2+3.4=", new String[] {"1", "1", "1.2", "1.2", "3", "3", "3.4", "4.6"}),
+        new TestData("1.2+.4=", new String[] {"1", "1", "1.2", "1.2", "0", "0.4", "1.6"}),
+        new TestData(".2*.4=", new String[] {"0", "0.2", "0.2", "0", "0.4", "0.08"}),
+        new TestData("1.2*0.4*+234.56789=/2=", new String[] {"1", "1", "1.2", "1.2", "0", "0", "0.4",
+                "0.48", "0.48", "2", "23", "234", "234", "234.5", "234.56", "234.567", 
+                "234.5678", "234.56789", "235.04789", "235.04789", "2", "117.523945"}), 
+        new TestData("1+-+2=", new String[] {"1", "1", "1", "1", "2", "3"}),
+        new TestData("1+2S=", new String[] {"1", "1", "2", "-2", "-1"}),
+        new TestData("1+2SS=", new String[] {"1", "1", "2", "-2", "2", "3"}),
+        new TestData("1+0S.S2=", new String[] {"1", "1", "0", "0", "0", "0", "0.2", "1.2"}),
+        new TestData("1+2=S*5=", new String[] {"1", "1", "2", "3", "-3", "-3", "5", "-15"}),
+        new TestData("1S+0.2S5=+3S=", new String[] {"1", "-1", "-1", "0", "0", "0.2", "-0.2", "-0.25", "-1.25", "-1.25","3", "-3", "-4.25"}),
+        new TestData("1+(2+(3+4))+6/2=", new String[] {
+                "1", "1", "1", "2", "2", "2", "3", "3", "4", "7", "9", "10", "6", "6", "2", "13"}),
+        new TestData("1+(2S+(3+4))+6/2=", new String[] {
+                "1", "1", "1", "2", "-2", "-2", "-2", "3", "3", "4", "7", "5", "6", "6", "6", "2", "9"}),
+        null
+    };
 
     private void parseExpression(TestData testData) throws IOException, ParseException {
-        CalcParser parser = new CalcParser(new MathContext(5, RoundingMode.HALF_DOWN));
+        CalcParser parser = new CalcParser(new MathContext(10, RoundingMode.HALF_DOWN));
         for (int i = 0; i < testData.inputs.length(); i++) {
             int c = testData.inputs.charAt(i);
-            String actual = parser.parseChar((char) c);
-            System.out.printf("    Read: '%1$c'. Display: %2$s%n", (char) c, actual);
+            String actual = parser.parseChar((char)c);
+            System.out.printf("    Read: '%1$c'. Display: %2$s%n", (char)c, actual);
             assertEquals(testData.expectedResults[i], actual);
         }
         System.out.println();
