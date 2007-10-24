@@ -10,8 +10,6 @@
 package org.paccman.calc.parser;
 
 import java.math.MathContext;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.paccman.calc.parser.LexParser.ParseException;
 
 /**
@@ -32,7 +30,7 @@ public class CalcParser {
     private String getDisplay() {
         switch (lexParser.state) {
             case ParseOperand:
-                return lexParser.getOperandValue().toString();
+                return lexParser.getOperandDisplay();
             case Idle:
             case ReadOp:
             case WaitNext:
