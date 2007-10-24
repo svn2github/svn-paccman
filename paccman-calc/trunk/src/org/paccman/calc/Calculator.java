@@ -5,7 +5,6 @@
  */
 package org.paccman.calc;
 
-import java.awt.Component;
 import java.awt.Toolkit;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -63,7 +62,7 @@ public class Calculator extends javax.swing.JPanel {
         _5Btn = new org.paccman.calc.CalcButton('5', new int[0], new char[] {'5'});
         _6Btn = new org.paccman.calc.CalcButton('6', new int[0], new char[] {'6'});
         multBtn = new org.paccman.calc.CalcButton(LexToken.MULT_CHAR, new int[0], new char[] {LexToken.MULT_CHAR});
-        signButton = new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[0], new char[] {LexToken.SIGN_CHAR});
+        signButton = new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[] {}, new char[] {LexToken.SIGN_CHAR});
         _1Btn = new org.paccman.calc.CalcButton('1', new int[0], new char[] {'1'});
         _2Btn = new org.paccman.calc.CalcButton('2', new int[0], new char[] {'2'});
         _3Btn = new org.paccman.calc.CalcButton('3', new int[0], new char[] {'3'});
@@ -73,7 +72,6 @@ public class Calculator extends javax.swing.JPanel {
         pointBtn = new org.paccman.calc.CalcButton(LexToken.DEC_POINT, new int[0], new char[] {LexToken.DEC_POINT});
         addBtn = new org.paccman.calc.CalcButton(LexToken.PLUS_CHAR, new int[0], new char[] {LexToken.PLUS_CHAR});
 
-        currentDisplayEdt.setBackground(new java.awt.Color(255, 255, 255));
         currentDisplayEdt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         currentDisplayEdt.setEditable(false);
         currentDisplayEdt.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
@@ -366,7 +364,7 @@ public class Calculator extends javax.swing.JPanel {
             parser.reset();//GEN-LAST:event_resetBtnActionPerformed
         } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

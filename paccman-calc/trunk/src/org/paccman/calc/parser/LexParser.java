@@ -28,7 +28,7 @@ public class LexParser {
         this.yaccParser = yaccParser;
     }
 
-/**
+    /**
      *
      */
     public static class ParseException extends Exception {

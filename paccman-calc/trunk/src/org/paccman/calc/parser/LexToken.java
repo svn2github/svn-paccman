@@ -18,7 +18,7 @@ public final class LexToken {
     /**
      * 
      */
-    public static final char SIGN_CHAR = 'S';
+    public static final char SIGN_CHAR = 's';
     /**
      * 
      */
@@ -54,11 +54,11 @@ public final class LexToken {
     /**
      * Clear entry
      */
-    public static final char CE_CHAR = 'C';
+    public static final char CE_CHAR = 'c';
     /**
      * Reset 
      */
-    public static final char RST_CHAR = 'Z';
+    public static final char RST_CHAR = 'z';
     /**
      * Per cent 
      */

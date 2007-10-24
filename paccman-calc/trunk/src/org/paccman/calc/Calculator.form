@@ -134,9 +134,6 @@
   <SubComponents>
     <Component class="javax.swing.JFormattedTextField" name="currentDisplayEdt">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
             <LineBorder/>
@@ -313,7 +310,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[0], new char[] {LexToken.SIGN_CHAR})"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[] {}, new char[] {LexToken.SIGN_CHAR})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_1Btn">

@@ -54,6 +54,7 @@ public class CalcButton extends javax.swing.JButton {
             sb.append(keyCode);
             String strKey = sb.toString();
             inputMap.put(KeyStroke.getKeyStroke(keyCode, 0), strKey);
+            inputMap.put(KeyStroke.getKeyStroke(keyCode, java.awt.event.InputEvent.SHIFT_DOWN_MASK), strKey);
             rootPane.getActionMap().put(strKey, new AbstractAction(strKey) {
 
                         @Override
@@ -64,12 +65,12 @@ public class CalcButton extends javax.swing.JButton {
         }
 
         // Register KeyChars
-        for (int keyChar : keyChars) {
+        for (char keyChar : keyChars) {
             StringBuffer sb = new StringBuffer(CalcButton.class.getName());
             sb.append("_KEYCODE_");
             sb.append(keyChar);
             String strKey = sb.toString();
-            inputMap.put(KeyStroke.getKeyStroke(keyChar, 0), strKey);
+            inputMap.put(KeyStroke.getKeyStroke(keyChar), strKey);
             rootPane.getActionMap().put(strKey, new AbstractAction(strKey) {
 
                         @Override
@@ -96,23 +97,8 @@ public class CalcButton extends javax.swing.JButton {
     // End of variables declaration//GEN-END:variables
 
     private int[] keyCodes;
-
-    /**
-     * 
-     * @return
-     */
-    public int[] getKeyCodes() {
-        return this.keyCodes;
-    }
     private char[] keyChars;
 
-    /**
-     * 
-     * @return
-     */
-    public char[] getKeyChars() {
-        return this.keyChars;
-    }
     private char token;
 
     public char getToken() {
