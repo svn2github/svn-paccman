@@ -3,7 +3,6 @@
  *
  * Created on 20 janvier 2006, 07:54
  */
-
 package org.paccman.calc;
 
 import java.awt.event.ActionEvent;
@@ -18,62 +17,69 @@ import javax.swing.KeyStroke;
  * @author  joao
  */
 public class CalcButton extends javax.swing.JButton {
-    
+
     /** Creates new form BeanForm */
     public CalcButton() {
         initComponents();
     }
-    
+
     /**
      * 
-     * @param key Key to be pressed. It is also the character to be used by the
-     * calculator parser (see :TODO:add reference to LexToken:)
+     * @param token The token to be passed to the calculator parser.
+     * @param keyCodes
+     * @param keyChars 
+     * 
+     * 
      */
-    public CalcButton(char key) {
-        this.key = key;
+    public CalcButton(char token, int[] keyCodes, char[] keyChars) {
+        this.token = token;
+        this.keyChars = keyChars;
+        this.keyCodes = keyCodes;
         initComponents();
     }
-    
+
     /**
      * 
      * @param rootPane 
-     * @param key 
-     */
-    @SuppressWarnings("serial")
-    public void registerKey(JRootPane rootPane, char key) {
-        InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        StringBuffer sb = new StringBuffer(CalcButton.class.getName());
-        sb.append("_KEY_"); sb.append(key);
-        String strKey = sb.toString();
-        inputMap.put(KeyStroke.getKeyStroke(key), strKey);
-        rootPane.getActionMap().put(strKey,new AbstractAction(strKey) {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                doClick();
-            }
-        });
-    }
-    
-    /**
      * 
-     * @param rootPane 
-     * @param keyCode 
      */
     @SuppressWarnings("serial")
-    public void registerKey(JRootPane rootPane, int keyCode) {
+    public void registerKey(JRootPane rootPane) {
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        StringBuffer sb = new StringBuffer(CalcButton.class.getName());
-        sb.append("_KEYCODE_"); sb.append(keyCode);
-        String strKey = sb.toString();
-        inputMap.put(KeyStroke.getKeyStroke(keyCode, 0), strKey);
-        rootPane.getActionMap().put(strKey,new AbstractAction(strKey) {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                doClick();
-            }
-        });
+
+        // Register KeyCodes
+        for (int keyCode : keyCodes) {
+            StringBuffer sb = new StringBuffer(CalcButton.class.getName());
+            sb.append("_KEYCODE_");
+            sb.append(keyCode);
+            String strKey = sb.toString();
+            inputMap.put(KeyStroke.getKeyStroke(keyCode, 0), strKey);
+            rootPane.getActionMap().put(strKey, new AbstractAction(strKey) {
+
+                        @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                            doClick();
+                        }
+                    });
+        }
+
+        // Register KeyChars
+        for (int keyChar : keyChars) {
+            StringBuffer sb = new StringBuffer(CalcButton.class.getName());
+            sb.append("_KEYCODE_");
+            sb.append(keyChar);
+            String strKey = sb.toString();
+            inputMap.put(KeyStroke.getKeyStroke(keyChar, 0), strKey);
+            rootPane.getActionMap().put(strKey, new AbstractAction(strKey) {
+
+                        @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                            doClick();
+                        }
+                    });
+        }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -86,29 +92,30 @@ public class CalcButton extends javax.swing.JButton {
         setFocusable(false);
     }// </editor-fold>//GEN-END:initComponents
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * Holds value of property key.
-     */
-    private char key;
+    private int[] keyCodes;
 
     /**
-     * Getter for property key.
-     * @return Value of property key.
+     * 
+     * @return
      */
-    public char getKey() {
-        return this.key;
+    public int[] getKeyCodes() {
+        return this.keyCodes;
     }
+    private char[] keyChars;
 
     /**
-     * Setter for property key.
-     * @param key New value of property key.
+     * 
+     * @return
      */
-    public void setKey(char key) {
-        this.key = key;
+    public char[] getKeyChars() {
+        return this.keyChars;
     }
+    private char token;
 
+    public char getToken() {
+        return token;
+    }
 }

@@ -9,7 +9,6 @@
 
 package org.paccman.calc.parser;
 
-import java.io.IOException;
 import java.math.MathContext;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,14 +23,7 @@ public class CalcParser {
     LexParser lexParser;
     YaccParser yaccParser;
 
-    /**
-     *
-     * @param mathContext 
-     * @throws java.io.IOException
-     * @throws org.paccman.calc.parser.LexParser.ParseException
-     *
-     */
-    public CalcParser(MathContext mathContext) throws IOException, ParseException {
+    public CalcParser(MathContext mathContext) throws ParseException {
         yaccParser = new YaccParser(mathContext);
         lexParser = new LexParser(yaccParser);
         reset();
@@ -51,29 +43,22 @@ public class CalcParser {
     }
 
     /**
-     *
+     * 
      * @param c
      * @return
+     * @throws org.paccman.calc.parser.LexParser.ParseException
      */
-    public String parseChar(char c) {
-        try {
-            lexParser.parseChar(c);
-            return getDisplay();
-        } catch (ParseException ex) {
-            Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } catch (IOException ex) {
-            Logger.getLogger(CalcParser.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    public String parseChar(char c) throws ParseException {
+        lexParser.parseChar(c);
+        return getDisplay();
     }
 
     /**
      *
      * @throws org.paccman.calc.parser.LexParser.ParseException
-     * @throws java.io.IOException
+     * 
      */
-    public void reset() throws ParseException, IOException {
+    public void reset() throws ParseException {
         lexParser.reset();
         yaccParser.reset();
     }

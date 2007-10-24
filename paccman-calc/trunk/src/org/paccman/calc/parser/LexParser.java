@@ -9,7 +9,6 @@
 
 package org.paccman.calc.parser;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import org.paccman.calc.parser.LexParser.ParseException;
 
@@ -62,9 +61,9 @@ public class LexParser {
     /**
      *
      * @throws org.paccman.calc.parser.LexParser.ParseException
-     * @throws java.io.IOException
+     * 
      */
-    public void reset() throws ParseException, IOException {
+    public void reset() throws ParseException {
         state = State.Idle;
         parseChar('0');
     }
@@ -73,9 +72,9 @@ public class LexParser {
      *
      * @param c
      * @throws org.paccman.calc.parser.LexParser.ParseException
-     * @throws java.io.IOException
+     * 
      */
-    public void parseChar(char c) throws ParseException, IOException {
+    public void parseChar(char c) throws ParseException {
         switch (state) {
             case Idle:
                 state = doIdle(c);
@@ -114,6 +113,9 @@ public class LexParser {
         } else if (c == LexToken.SIGN_CHAR) {
             yaccParser.parseNegate();
             return State.Idle;
+        } else if (c == LexToken.CE_CHAR) {
+            yaccParser.parseClearEntry();
+            return State.Idle;
         }
         throw new ParseException(c);
     }
@@ -129,7 +131,7 @@ public class LexParser {
         return isNegative ? rv.negate() : rv;
     }
 
-    private State doParseOperand(char c) throws ParseException, IOException {
+    private State doParseOperand(char c) throws ParseException {
         if (c == LexToken.EVAL_CHAR) {
             if (parenLvl > 0) {
                 throw new ParseException("Missing closing parenthesis");
@@ -188,7 +190,7 @@ public class LexParser {
         throw new ParseException(c);
     }
 
-    private State doWaitOp(char c) throws IOException, ParseException {
+    private State doWaitOp(char c) throws ParseException {
         if (c == LexToken.CLOSE_PAR) {
             if (parenLvl == 0) {
                 throw new ParseException(c);
@@ -209,7 +211,7 @@ public class LexParser {
         throw new ParseException(c);
     }
 
-    private State doReadOp(char c) throws ParseException, IOException {
+    private State doReadOp(char c) throws ParseException {
         if (LexToken.isOperator(c)) {
             yaccParser.replaceOperator(new OperatorToken(c, parenLvl * PAREN_PRIO_ADJUST));
             return State.ReadOp;

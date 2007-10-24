@@ -86,7 +86,9 @@ public class CalcParserTest {
 //                "1", "1", "1", "2", "2", "2", "3", "3", "4", "7", "9", "10", "6", "6", "2", "13"}),
 //        new TestData("1+(2S+(3+4))+6/2=", new String[] {
 //                "1", "1", "1", "2", "-2", "-2", "-2", "3", "3", "4", "7", "5", "6", "6", "6", "2", "9"}),
-        new TestData("12+3C4=", new String[]{"1", "12", "12", "3", "0", "4", "16"}),
+//        new TestData("12+3C4=", new String[]{"1", "12", "12", "3", "0", "4", "16"}),
+//        new TestData("12+3.4C5=", new String[]{"1", "12", "12", "3", "3", "3.4", "0", "5", "17"}),
+        new TestData("1.2.3+4=", new String[]{"1", "1", "1.2", null, "1.23", "1.23", "4", "5.23"}),
         null
     };
 
@@ -94,9 +96,13 @@ public class CalcParserTest {
         CalcParser parser = new CalcParser(new MathContext(10, RoundingMode.HALF_DOWN));
         for (int i = 0; i < testData.inputs.length(); i++) {
             int c = testData.inputs.charAt(i);
-            String actual = parser.parseChar((char)c);
-            System.out.printf("    Read: '%1$c'. Display: %2$s%n", (char)c, actual);
-            assertEquals(testData.expectedResults[i], actual);
+            try {
+                String actual = parser.parseChar((char)c);
+                System.out.printf("    Read: '%1$c'. Display: %2$s%n", (char)c, actual);
+                assertEquals(testData.expectedResults[i], actual);
+            } catch (ParseException ex) {
+                assertNull(testData.expectedResults[i]);
+            }
         }
         System.out.println();
     }

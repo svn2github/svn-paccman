@@ -5,8 +5,8 @@
  */
 package org.paccman.calc;
 
+import java.awt.Component;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.logging.Level;
@@ -34,8 +34,6 @@ public class Calculator extends javax.swing.JPanel {
     public Calculator() {
         try {
             parser = new CalcParser(new MathContext(getDecPrecision(), RoundingMode.HALF_DOWN));
-        } catch (IOException ex) {
-            Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -51,29 +49,29 @@ public class Calculator extends javax.swing.JPanel {
     private void initComponents() {
 
         currentDisplayEdt = new javax.swing.JFormattedTextField();
-        resetBtn = new org.paccman.calc.CalcButton(LexToken.RST_CHAR);
-        openParBtn = new org.paccman.calc.CalcButton(LexToken.OPEN_PAR);
-        closeParBtn = new org.paccman.calc.CalcButton(LexToken.CLOSE_PAR);
-        clearEntryBtn = new org.paccman.calc.CalcButton(LexToken.CE_CHAR);
-        offBtn = new org.paccman.calc.CalcButton('Q');
-        _7Btn = new org.paccman.calc.CalcButton('7');
-        _8Btn = new org.paccman.calc.CalcButton('8');
-        _9Btn = new org.paccman.calc.CalcButton('9');
-        divBtn = new org.paccman.calc.CalcButton(LexToken.DIV_CHAR);
-        pcBtn = new org.paccman.calc.CalcButton(LexToken.PC_CHAR);
-        _4Btn = new org.paccman.calc.CalcButton('4');
-        _5Btn = new org.paccman.calc.CalcButton('5');
-        _6Btn = new org.paccman.calc.CalcButton('6');
-        multBtn = new org.paccman.calc.CalcButton(LexToken.MULT_CHAR);
-        signButton = new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR);
-        _1Btn = new org.paccman.calc.CalcButton('1');
-        _2Btn = new org.paccman.calc.CalcButton('2');
-        _3Btn = new org.paccman.calc.CalcButton('3');
-        minusBtn = new org.paccman.calc.CalcButton(LexToken.MINUS_CHAR);
-        equalButton = new org.paccman.calc.CalcButton(LexToken.EVAL_CHAR);
-        _0Btn = new org.paccman.calc.CalcButton('0');
-        pointBtn = new org.paccman.calc.CalcButton(LexToken.DEC_POINT);
-        addBtn = new org.paccman.calc.CalcButton(LexToken.PLUS_CHAR);
+        resetBtn = new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[0], new char[] { LexToken.RST_CHAR });
+        openParBtn = new org.paccman.calc.CalcButton(LexToken.OPEN_PAR, new int[0], new char[] { LexToken.OPEN_PAR });
+        closeParBtn = new org.paccman.calc.CalcButton(LexToken.CLOSE_PAR, new int[0], new char[] {LexToken.CLOSE_PAR});
+        clearEntryBtn = new org.paccman.calc.CalcButton(LexToken.CE_CHAR, new int[0], new char[] {LexToken.CE_CHAR});
+        offBtn = new org.paccman.calc.CalcButton('Q', new int[0], new char[] {'Q'});
+        _7Btn = new org.paccman.calc.CalcButton('7', new int[0], new char[] {'7'});
+        _8Btn = new org.paccman.calc.CalcButton('8', new int[0], new char[] {'8'});
+        _9Btn = new org.paccman.calc.CalcButton('9', new int[0], new char[] {'9'});
+        divBtn = new org.paccman.calc.CalcButton(LexToken.DIV_CHAR, new int[0], new char[] {LexToken.DIV_CHAR});
+        pcBtn = new org.paccman.calc.CalcButton(LexToken.PC_CHAR, new int[0], new char[] {LexToken.PC_CHAR});
+        _4Btn = new org.paccman.calc.CalcButton('4', new int[0], new char[] {'4'});
+        _5Btn = new org.paccman.calc.CalcButton('5', new int[0], new char[] {'5'});
+        _6Btn = new org.paccman.calc.CalcButton('6', new int[0], new char[] {'6'});
+        multBtn = new org.paccman.calc.CalcButton(LexToken.MULT_CHAR, new int[0], new char[] {LexToken.MULT_CHAR});
+        signButton = new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[0], new char[] {LexToken.SIGN_CHAR});
+        _1Btn = new org.paccman.calc.CalcButton('1', new int[0], new char[] {'1'});
+        _2Btn = new org.paccman.calc.CalcButton('2', new int[0], new char[] {'2'});
+        _3Btn = new org.paccman.calc.CalcButton('3', new int[0], new char[] {'3'});
+        minusBtn = new org.paccman.calc.CalcButton(LexToken.MINUS_CHAR, new int[0], new char[] {LexToken.MINUS_CHAR});
+        equalButton = new org.paccman.calc.CalcButton(LexToken.EVAL_CHAR,new int[] { java.awt.event.KeyEvent.VK_ENTER }, new char[] { LexToken.EVAL_CHAR});
+        _0Btn = new org.paccman.calc.CalcButton('0', new int[0], new char[] {'0'});
+        pointBtn = new org.paccman.calc.CalcButton(LexToken.DEC_POINT, new int[0], new char[] {LexToken.DEC_POINT});
+        addBtn = new org.paccman.calc.CalcButton(LexToken.PLUS_CHAR, new int[0], new char[] {LexToken.PLUS_CHAR});
 
         currentDisplayEdt.setBackground(new java.awt.Color(255, 255, 255));
         currentDisplayEdt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -86,7 +84,7 @@ public class Calculator extends javax.swing.JPanel {
         resetBtn.setText("RST");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcButtonPressed(evt);
+                resetBtnActionPerformed(evt);
             }
         });
 
@@ -177,6 +175,7 @@ public class Calculator extends javax.swing.JPanel {
         });
 
         signButton.setText("±");
+        signButton.setToolTipText( String.format("Sign [%1$c]", LexToken.SIGN_CHAR));
         signButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcButtonPressed(evt);
@@ -347,12 +346,12 @@ public class Calculator extends javax.swing.JPanel {
 
     private void calcButtonPressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonPressed
         if (evt.getSource().getClass() == CalcButton.class) {
-            CalcButton cb = (CalcButton) evt.getSource();
-            final String display = parser.parseChar(cb.getKey());
-            if (display == null) {
-                Toolkit.getDefaultToolkit().beep();
-            } else {
+            try {
+                CalcButton cb = (CalcButton) evt.getSource();
+                final String display = parser.parseChar(cb.getToken());
                 currentDisplayEdt.setText(display);
+            } catch (ParseException ex) {
+                Toolkit.getDefaultToolkit().beep();
             }
         }
     }//GEN-LAST:event_calcButtonPressed
@@ -361,6 +360,14 @@ public class Calculator extends javax.swing.JPanel {
         getRootPane().getParent().setVisible(false);
         ((JFrame) (getRootPane().getParent())).dispose();
     }//GEN-LAST:event_offBtnActionPerformed
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        try {
+            parser.reset();//GEN-LAST:event_resetBtnActionPerformed
+        } catch (ParseException ex) {
+            Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.calc.CalcButton _0Btn;

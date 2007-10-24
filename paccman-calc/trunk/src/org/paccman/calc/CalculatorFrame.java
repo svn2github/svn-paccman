@@ -6,6 +6,8 @@
 
 package org.paccman.calc;
 
+import java.awt.Component;
+
 /**
  *
  * @author  joao
@@ -15,6 +17,11 @@ public class CalculatorFrame extends javax.swing.JFrame {
     /** Creates new form CalculatorFrame */
     public CalculatorFrame() {
         initComponents();
+        for(Component comp: calculatorPanel.getComponents()) {
+            if (comp instanceof CalcButton) {
+                ((CalcButton)comp).registerKey(getRootPane());
+            }
+        }
     }
     
     /** This method is called from within the constructor to

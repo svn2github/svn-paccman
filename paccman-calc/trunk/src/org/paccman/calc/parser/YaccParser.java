@@ -68,6 +68,12 @@ public class YaccParser {
         operatorStack.push(token);
     }
 
+    void parseClearEntry() {
+        assert  ! operandStack.isEmpty();
+        operandStack.pop();
+        operandStack.push(BigDecimal.ZERO);
+    }
+
     void parseNegate() {
         assert  ! operandStack.isEmpty();
         operandStack.push(operandStack.pop().negate());
