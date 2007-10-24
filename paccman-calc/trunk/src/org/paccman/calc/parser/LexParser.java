@@ -147,7 +147,7 @@ public class LexParser {
             if (operandValue.charAt(0) == '-') {
                 operandValue.deleteCharAt(0);
             } else {
-                operandValue.insert(0, c);
+                operandValue.insert(0, '-');
             }
             return State.ParseOperand;
         } else if (c == LexToken.EVAL_CHAR) {
