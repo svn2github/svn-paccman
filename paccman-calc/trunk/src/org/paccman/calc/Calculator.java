@@ -48,7 +48,7 @@ public class Calculator extends javax.swing.JPanel {
     private void initComponents() {
 
         currentDisplayEdt = new javax.swing.JFormattedTextField();
-        resetBtn = new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[0], new char[] { LexToken.RST_CHAR });
+        resetBtn = new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[] { java.awt.event.KeyEvent.VK_ESCAPE}, new char[] {});
         openParBtn = new org.paccman.calc.CalcButton(LexToken.OPEN_PAR, new int[0], new char[] { LexToken.OPEN_PAR });
         closeParBtn = new org.paccman.calc.CalcButton(LexToken.CLOSE_PAR, new int[0], new char[] {LexToken.CLOSE_PAR});
         clearEntryBtn = new org.paccman.calc.CalcButton(LexToken.CE_CHAR, new int[0], new char[] {LexToken.CE_CHAR});
@@ -80,6 +80,7 @@ public class Calculator extends javax.swing.JPanel {
         currentDisplayEdt.setFont(new java.awt.Font("Monospaced", 0, 14));
 
         resetBtn.setText("RST");
+        resetBtn.setToolTipText("Reset [ESC]");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -101,6 +102,7 @@ public class Calculator extends javax.swing.JPanel {
         });
 
         clearEntryBtn.setText("CE");
+        clearEntryBtn.setToolTipText("Clear Entry [C]");
         clearEntryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcButtonPressed(evt);
@@ -108,6 +110,7 @@ public class Calculator extends javax.swing.JPanel {
         });
 
         offBtn.setText("Off");
+        offBtn.setToolTipText("Quit [Q]");
         offBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 offBtnActionPerformed(evt);
@@ -173,7 +176,7 @@ public class Calculator extends javax.swing.JPanel {
         });
 
         signButton.setText("±");
-        signButton.setToolTipText( String.format("Sign [%1$c]", LexToken.SIGN_CHAR));
+        signButton.setToolTipText("Sign [S]");
         signButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcButtonPressed(evt);
@@ -209,6 +212,7 @@ public class Calculator extends javax.swing.JPanel {
         });
 
         equalButton.setText("=");
+        equalButton.setToolTipText("[ENTER]");
         equalButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calcButtonPressed(evt);
@@ -361,11 +365,12 @@ public class Calculator extends javax.swing.JPanel {
 
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
         try {
-            parser.reset();//GEN-LAST:event_resetBtnActionPerformed
+            parser.reset();
+            currentDisplayEdt.setText("0");
         } catch (ParseException ex) {
             Logger.getLogger(Calculator.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }//GEN-LAST:event_resetBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.calc.CalcButton _0Btn;

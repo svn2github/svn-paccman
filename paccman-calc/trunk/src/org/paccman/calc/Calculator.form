@@ -151,12 +151,13 @@
     <Component class="org.paccman.calc.CalcButton" name="resetBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="RST"/>
+        <Property name="toolTipText" type="java.lang.String" value="Reset [ESC]"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetBtnActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[0], new char[] { LexToken.RST_CHAR })"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[] { java.awt.event.KeyEvent.VK_ESCAPE}, new char[] {})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="openParBtn">
@@ -184,6 +185,7 @@
     <Component class="org.paccman.calc.CalcButton" name="clearEntryBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="CE"/>
+        <Property name="toolTipText" type="java.lang.String" value="Clear Entry [C]"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
@@ -195,6 +197,7 @@
     <Component class="org.paccman.calc.CalcButton" name="offBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Off"/>
+        <Property name="toolTipText" type="java.lang.String" value="Quit [Q]"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="offBtnActionPerformed"/>
@@ -302,9 +305,7 @@
     <Component class="org.paccman.calc.CalcButton" name="signButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xb1;"/>
-        <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code=" String.format(&quot;Sign [%1$c]&quot;, LexToken.SIGN_CHAR)" type="code"/>
-        </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Sign [S]"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
@@ -360,6 +361,7 @@
     <Component class="org.paccman.calc.CalcButton" name="equalButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="="/>
+        <Property name="toolTipText" type="java.lang.String" value="[ENTER]"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>

@@ -54,7 +54,6 @@ public class CalcButton extends javax.swing.JButton {
             sb.append(keyCode);
             String strKey = sb.toString();
             inputMap.put(KeyStroke.getKeyStroke(keyCode, 0), strKey);
-            inputMap.put(KeyStroke.getKeyStroke(keyCode, java.awt.event.InputEvent.SHIFT_DOWN_MASK), strKey);
             rootPane.getActionMap().put(strKey, new AbstractAction(strKey) {
 
                         @Override
