@@ -27,7 +27,11 @@ public class CalcParser {
         reset();
     }
 
-    private String getDisplay() {
+    /**
+     * Returns the current displayed value.
+     * @return
+     */
+    public String getDisplay() {
         switch (lexParser.state) {
             case ParseOperand:
                 return lexParser.getOperandDisplay();

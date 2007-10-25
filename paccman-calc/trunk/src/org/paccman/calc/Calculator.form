@@ -6,7 +6,7 @@
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
@@ -157,7 +157,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetBtnActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[] { java.awt.event.KeyEvent.VK_ESCAPE}, new char[] {})"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.RST_CHAR, new int[] { java.awt.event.KeyEvent.VK_ESCAPE}, new char[] { &apos;z&apos;, &apos;Z&apos;})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="openParBtn">
@@ -191,7 +191,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.CE_CHAR, new int[0], new char[] {LexToken.CE_CHAR})"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.CE_CHAR, new int[0], new char[] {&apos;c&apos;, &apos;C&apos;})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="offBtn">
@@ -203,7 +203,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="offBtnActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;Q&apos;, new int[0], new char[] {&apos;Q&apos;})"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(&apos;Q&apos;, new int[0], new char[] {&apos;q&apos;, &apos;Q&apos;})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_7Btn">
@@ -311,7 +311,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calcButtonPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[] {}, new char[] {LexToken.SIGN_CHAR})"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new org.paccman.calc.CalcButton(LexToken.SIGN_CHAR, new int[] {}, new char[] {&apos;s&apos;, &apos;S&apos;})"/>
       </AuxValues>
     </Component>
     <Component class="org.paccman.calc.CalcButton" name="_1Btn">
