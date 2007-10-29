@@ -26,7 +26,6 @@ import org.paccman.controller.ControllerManager;
 import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Bank;
-import org.paccman.ui.common.*;
 
 /**
  *
@@ -39,8 +38,13 @@ public class BankComboBox extends PaccmanObjectComboBox implements PaccmanView {
         setModel(new PaccmanComboModel());
     }
    
-    Logger logger = org.paccman.tools.Logger.getNewDefaultLogger(this.getClass().getName());
+    Logger logger = org.paccman.tools.Logger.getDefaultLogger(this.getClass().getName());
     
+    /**
+     * 
+     * @param controller
+     */
+    @Override
     public void onChange(org.paccman.controller.Controller controller) {
         if (controller instanceof DocumentController) {
             DocumentController ctrl = (DocumentController)controller;
