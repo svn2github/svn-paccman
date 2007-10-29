@@ -19,7 +19,12 @@ import java.util.logging.Level;
  */
 public class Logger {
 
-    public static java.util.logging.Logger getNewDefaultLogger(String name) {
+    /**
+     * 
+     * @param name
+     * @return
+     */
+    public static java.util.logging.Logger getDefaultLogger(String name) {
         java.util.logging.Logger logger = java.util.logging.Logger.getLogger(name);
         Handler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.ALL);
@@ -27,5 +32,26 @@ public class Logger {
         logger.addHandler(consoleHandler);
         logger.setUseParentHandlers(false);
         return logger;
+    }
+
+    /**
+     * Create or get the logger with the name of the class of the given object.
+     * @param o The object.
+     * @return The logger.
+     */
+    public static java.util.logging.Logger getDefaultLogger(Object o) {
+        return getDefaultLogger(o.getClass());
+    }
+    
+    /**
+     * Create or get the logger with the name of the given class.
+     * @param c The class.
+     * @return The logger.
+     */
+    public static java.util.logging.Logger getDefaultLogger(Class c) {
+        return getDefaultLogger(c.getName());
+    }
+    
+    private Logger() {
     }
 }
