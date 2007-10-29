@@ -13,7 +13,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
-
 package org.paccman.ui.main;
 
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
@@ -59,7 +58,6 @@ import org.paccman.xml.PaccmanIOException;
  *
  * @author  joao
  */
-
 public class Main extends javax.swing.JFrame implements PaccmanView {
 
     DocumentController documentController;
@@ -231,21 +229,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    // </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
-    // </editor-fold>
-// </editor-fold>
+
     CalculatorFrame calculatorFrame = new CalculatorFrame();
 
     private void calculatorMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatorMnuActionPerformed
@@ -268,7 +252,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         OK, CANCEL, FAILED
     }
-    {
+     {
     }
 
     private int confirmSave() {
@@ -292,10 +276,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         JFileChooser fc = new PaccmanFileChooser();
 
-        // Actually show the open file dialog
-        // Actually show the open file dialog
-
-        // Actually show the open file dialog
         // Actually show the open file dialog
         int s = fc.showOpenDialog(this);
 
@@ -342,15 +322,8 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
     private void copyFile(File inputFile, File outputFile) throws IOException {
         // Create channel on the source
-        // Create channel on the source
-        // Create channel on the source
-        // Create channel on the source
         FileChannel srcChannel = new FileInputStream(inputFile).getChannel();
 
-        // Create channel on the destination
-        // Create channel on the destination
-
-        // Create channel on the destination
         // Create channel on the destination
         FileChannel dstChannel = new FileOutputStream(outputFile).getChannel();
 
@@ -381,10 +354,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             logger.fine("File opened");
 
             // Make a copy of the file
-            // Make a copy of the file
-
-            // Make a copy of the file
-            // Make a copy of the file
             File fileOut = new File(file.getAbsolutePath() + new SimpleDateFormat("-yyMMddHHmmss").format(new Date()));
             try {
                 copyFile(file, fileOut);
@@ -408,10 +377,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             documentController.setFile(file);
 
             // Keep last directory in preferences
-            // Keep last directory in preferences
-
-            // Keep last directory in preferences
-            // Keep last directory in preferences
             String path = file.getParent();
             MainPrefs.putDataDirectory(path);
 
@@ -429,7 +394,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         @Override
         protected void process(List<Object> chunks) {
-            //:TODO:
+        //:TODO:
         }
 
         @Override
@@ -467,10 +432,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
 
         // Do open a new document
-        // Do open a new document
-
-        // Do open a new document
-        // Do open a new document
         OperationStatus result = OperationStatus.FAILED;
 
         File fileToOpen = file == null ? selectOpenFile() : file;
@@ -498,12 +459,8 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
 
         // Make a new document
-        // Make a new document
-
-        // Make a new document
-        // Make a new document
         String title = (String) JOptionPane.showInputDialog(this, "Enter the title for the new account file", "Document title",
-                JOptionPane.QUESTION_MESSAGE, null, null, "NewDocument" );
+                JOptionPane.QUESTION_MESSAGE, null, null, "NewDocument");
         if (title != null) {
             documentController = new DocumentController();
             documentController.getDocument().setTitle(title);
@@ -552,10 +509,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public OperationStatus saveAsDocument() {
         assert isDocumentLoaded() : "'saveAs' should not be called when no document loaded";
 
-        // Select the file
-        // Select the file
-
-        // Select the file
         // Select the file
         File saveFile = selectSaveFile();
         if (saveFile == null) {
@@ -617,6 +570,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("New...", new javax.swing.ImageIcon(OpenAction.class.getResource("/org/paccman/ui/resources/images/new.png")));
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             newDocument();
         }
@@ -628,6 +582,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Open", new javax.swing.ImageIcon(OpenAction.class.getResource("/org/paccman/ui/resources/images/open.png")));
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             openDocument(null);
         }
@@ -639,6 +594,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Close", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/close.png")), false);
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             closeDocument();
         }
@@ -650,6 +606,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Save", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/save.png")), false);
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             if (documentController.getFile() != null) {
                 saveDocument();
@@ -665,6 +622,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Save as...", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/save_as.png")), false);
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             saveAsDocument();
         }
@@ -676,6 +634,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Quit", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/exit.png")));
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             quit();
         }
@@ -687,6 +646,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super("Properties", new javax.swing.ImageIcon(SaveAction.class.getResource("/org/paccman/ui/resources/images/properties.png")), false);
         }
 
+        @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             PropertiesFrame pf = new PropertiesFrame();
             documentController.registerView(pf);
@@ -720,7 +680,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             //                openFile(new File(fileToOpen));
             openDocument(new File(fileToOpen));
             return;
-/*:DEBUG            } catch (PaccmanIOException ex) {
+        /*:DEBUG            } catch (PaccmanIOException ex) {
             ex.printStackTrace();//:TODO:
             }*/
         }
@@ -813,7 +773,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             return JOptionPane.NO_OPTION;
         }
     }
-
     static Main main;
 
     public static Main getMain() {
@@ -838,7 +797,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
         }
     }
-
     static StartOption startOption;
     static {
         startOption = new StartOption();
@@ -849,30 +807,29 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      */
     public static void main(String[] args) {
         //:TODO:START:trying a new look and feel
-        try {
-            UIManager.installLookAndFeel("Plastic3DLookAndFeel", "Plastic3DLookAndFeel");
-            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
-        } catch (Exception e) {
-        }
+//        try {
+//            UIManager.installLookAndFeel("Plastic3DLookAndFeel", "Plastic3DLookAndFeel");
+//            UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+//        } catch (Exception e) {
+//        }
         //:TODO:END:
         startOption.parse(args);
         //:TODO:END:
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            @Override
+                    @Override
             public void run() {
-                main = new Main
-                //:TODO:END:
-                ();
-                main.setLocation(MainPrefs.getLocation());
-                if (MainPrefs.isMaximized()) {
-                    main.setState(MAXIMIZED_BOTH);
-                } else {
-                    main.setSize(MainPrefs.getSize());
-                }
-                main.setVisible(true);
-            }
-        });
+                        main = new Main //:TODO:END:
+                                ();
+                        main.setLocation(MainPrefs.getLocation());
+                        if (MainPrefs.isMaximized()) {
+                            main.setState(MAXIMIZED_BOTH);
+                        } else {
+                            main.setSize(MainPrefs.getSize());
+                        }
+                        main.setVisible(true);
+                    }
+                });
     }
 
     @Override
@@ -911,9 +868,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public javax.swing.JPanel toolbarsPanel;
     public javax.swing.JMenu toolsMnu;
     // End of variables declaration//GEN-END:variables
-    // End of variables declaration
-    // End of variables declaration
-    // End of variables declaration
+
     WelcomePaneTab welcomePane;
     AccountFormTab accountsPanel;
     BankFormTab bankFormTab;
@@ -922,7 +877,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     PayeeFormTab payeeFormTab;
     PaymentMethodFormTab paymentMethodFormTab;
     ScheduleFormTab scheduleFormTab;
-
     OpenAction openAction = new OpenAction();
     CloseAction closeAction = new CloseAction();
     SaveAction saveAction = new SaveAction();
@@ -984,9 +938,10 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     //
     // Logging
     //
+
     private static Logger logger = Logger.getLogger("org.paccman");
     private static Handler consoleHandler = new ConsoleHandler();
-    {
+     {
         consoleHandler.setLevel(Level.ALL);
         logger.setLevel(Level.ALL);
         logger.addHandler(consoleHandler);
