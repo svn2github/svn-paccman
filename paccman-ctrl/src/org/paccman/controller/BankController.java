@@ -36,12 +36,13 @@ public class BankController extends Controller {
     
     /**
      * 
-     * @return 
+     * @return
      */
     public Bank getBank() {
         return (Bank)super.getObject();
     }
     
+    @Override
     public String toString() {
         return getBank().getName();
     }

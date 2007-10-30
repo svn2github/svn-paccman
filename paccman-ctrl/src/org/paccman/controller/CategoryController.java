@@ -33,10 +33,15 @@ public class CategoryController extends CategoryBaseController {
         super(new Category());
     }
     
+    /**
+     * 
+     * @return
+     */
     public Category getCategory() {
         return (Category)paccObj;
     }
     
+    @Override
     public String toString() {
         return getCategory().getName();
     }

@@ -28,7 +28,9 @@ import org.paccman.paccman.CategoryBase;
  */
 public abstract class CategoryBaseController extends Controller {
     
-    /** Creates a new instance of DocumentController */
+    /** Creates a new instance of DocumentController
+     * @param categoryBase 
+     */
     public CategoryBaseController(CategoryBase categoryBase) {
 	super(categoryBase);
     }

@@ -42,6 +42,7 @@ public class AccountController extends Controller {
         return (Account)paccObj;
     }
     
+    @Override
     public String toString() {
         return getAccount().getName();
     }
