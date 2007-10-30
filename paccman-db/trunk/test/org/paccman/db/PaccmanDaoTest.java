@@ -5,7 +5,6 @@
 
 package org.paccman.db;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -39,13 +38,18 @@ public class PaccmanDaoTest {
     public void tearDown() {
     }
 
+    private final String MY_TEST_DATABASE = "/tmp/testdb.paccman";
+    
+    private void createDatabase() {
+    }
+    
     /**
      * Test of create method, of class PaccmanDao.
      */
     @Test
     public void create() {
         System.out.println("create");
-        PaccmanDao instance = new PaccmanDao("/tmp/testdb.paccman");
+        PaccmanDao instance = new PaccmanDao(MY_TEST_DATABASE);
         try {
             instance.create();
         } catch (SQLException ex) {
@@ -59,7 +63,7 @@ public class PaccmanDaoTest {
     @Test
     public void open() {
         System.out.println("open");
-        PaccmanDao instance = new PaccmanDao("/tmp/testdb.paccman");
+        PaccmanDao instance = new PaccmanDao(MY_TEST_DATABASE);
         try {
             instance.open();
         } catch (SQLException ex) {
