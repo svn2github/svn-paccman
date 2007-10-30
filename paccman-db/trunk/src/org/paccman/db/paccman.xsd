@@ -131,29 +131,6 @@
         <xsd:attribute name="name" type="xsd:string"/>
     </xsd:complexType>
 
-    <xsd:complexType name="TransactionBaseType">
-        <xsd:sequence>
-            <xsd:element name="amount" type ="xsd:decimal" />
-            <xsd:element name="value-date" type ="xsd:date" />
-            <xsd:element name="transaction-date" type ="xsd:date" />
-            <xsd:element name="note" type="xsd:string" minOccurs="0" />
-            <xsd:element name="label" type="xsd:string" minOccurs="0" />
-            <xsd:element name="reconciliationState" type="pm:reconciled-status" />
-            <xsd:element name="reconciliationDate" type="xsd:date" minOccurs="0" />
-        </xsd:sequence>
-    </xsd:complexType>
-
-    <xsd:complexType name="PaymentType">
-        <xsd:complexContent>
-            <xsd:extension base="pm:TransactionBaseType" >
-                <xsd:sequence>
-                    <xsd:element name="payee" type ="xsd:string" />
-                    <xsd:element name="payment-type" type="xsd:string" />
-                </xsd:sequence>
-            </xsd:extension>
-        </xsd:complexContent>
-    </xsd:complexType>
-
     <xsd:complexType name="SimplePaymentType">
         <xsd:complexContent>
             <xsd:extension base="pm:PaymentType" >
@@ -200,25 +177,6 @@
         </xsd:choice>
     </xsd:group>
     
-    <xsd:complexType name="ScheduledTransactionType">
-        <xsd:sequence>
-            <xsd:element name="identifier" type ="xsd:string" />
-            <xsd:element name="description" type ="xsd:string" />
-            <xsd:element name="period" type ="xsd:int" />
-            <xsd:element name="period-unit" type ="pm:period-unit" />
-            <xsd:element name="next-occurence" type="xsd:date" />
-            <xsd:element name="automatic" type="xsd:boolean" />
-            <xsd:element name="fixed-amount" type="xsd:boolean" />
-            <xsd:element name="schedule-days" type="xsd:int" /> <!-- number of days between the registration 
-                                                                     of the transaction and the scheduled date 
-                                                                     of the transaction -->
-            <xsd:choice>
-                <xsd:element name="simple_payment" type="pm:SimplePaymentType" />
-                <xsd:element name="split_payment" type="pm:SplitPaymentType" />
-                <xsd:element name="transfer" type="pm:TransferType" />
-            </xsd:choice>
-        </xsd:sequence>
-    </xsd:complexType>
 
 
 </xsd:schema>
