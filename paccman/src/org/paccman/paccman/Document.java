@@ -32,14 +32,41 @@ import java.util.Vector;
  */
 public class Document extends PaccmanObject {
     
-    String title;
-    
+    private String title;
+    private Calendar creationDate;
+    private Calendar lastUpdateDate;
+    private String version;
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
             
     public String getTitle() {
         return title;
+    }
+
+    public Calendar getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Calendar creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Calendar getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Calendar lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
             
     /** Creates a new instance of Document */
@@ -221,5 +248,5 @@ public class Document extends PaccmanObject {
         }
         return total;
     }
-    
+
 }
