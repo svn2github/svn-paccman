@@ -68,17 +68,17 @@
     -->
     <!-- XMLBeans -->
     
-    <!-- LINUX -->
+    <!-- LINUX - ->
     <property name="xmlbeans-home" location="/opt/xmlbeans" />
     <property name="scomp-cmd" value="scomp" />
     <property name="java-compiler" location="/opt/jdk/bin/javac" />
-    <!-- -->
-
-    <!-- WINDOWS - ->
-    <property name="xmlbeans-home" location="D:\Tools\xmlbeans-2.0.0" />
-    <property name="scomp-cmd" value="scomp.cmd" />
-    <property name="java-compiler" location="D:\Tools\jdk1.5.0_04\bin\javac.exe" />
     <!- - -->
+
+    <!-- WINDOWS -->
+    <property name="xmlbeans-home" location="T:\xmlbeans-2.3.0" />
+    <property name="scomp-cmd" value="scomp.cmd" />
+    <property name="java-compiler" location="${jdk.home}\bin\javac.exe" />
+    <!-- -->
     
     <!-- Version of paccman file format version -->
     <property name="paccman-version" value="1_0_0_0" />
@@ -95,7 +95,7 @@
     
     <target name="invoke-scomp" depends="chkSchemaChanged" unless="schema.unchanged" >
         <exec executable="${xmlbeans-home}\bin\${scomp-cmd}" >
-            <arg line="-compiler ${java-compiler} -out ${build.xml.jar} ${schema.dir}/paccman.xsd ${schema.dir}/paccman.xsdconfig -javasource 1.5" />
+            <arg line="-compiler &quot;${java-compiler}&quot; -out ${build.xml.jar} ${schema.dir}/paccman.xsd ${schema.dir}/paccman.xsdconfig -javasource 1.5" />
         </exec>
     </target>
     
@@ -104,5 +104,4 @@
     <target name="-post-jar">
         <copy file="${build.xml.jar}" tofile="${dist.xml.jar}" />
     </target>
-
 </project>

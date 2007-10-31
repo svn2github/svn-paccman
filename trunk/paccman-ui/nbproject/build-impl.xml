@@ -308,9 +308,7 @@ is divided into following sections:
         <ant antfile="${project.paccman-calc}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-ctrl}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-io}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.paccman-io-1_0_0_0}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-res}/build.xml" inheritall="false" target="jar"/>
-        <ant antfile="${project.paccman-tools}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-ui-common}/build.xml" inheritall="false" target="jar"/>
     </target>
     <target depends="init,deps-jar" name="-pre-pre-compile">
@@ -623,9 +621,7 @@ is divided into following sections:
         <ant antfile="${project.paccman-calc}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-ctrl}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-io}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.paccman-io-1_0_0_0}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-res}/build.xml" inheritall="false" target="clean"/>
-        <ant antfile="${project.paccman-tools}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-ui-common}/build.xml" inheritall="false" target="clean"/>
     </target>
     <target depends="init" name="-do-clean">
