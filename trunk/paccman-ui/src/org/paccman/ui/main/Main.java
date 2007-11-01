@@ -402,6 +402,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             documentControllerUpdated();
             updateAction();
             documentController.notifyChange();
+            //:TODO:handle error when opening
         }
     }
 
