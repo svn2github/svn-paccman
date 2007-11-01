@@ -68,17 +68,17 @@
     -->
     <!-- XMLBeans -->
     
-    <!-- LINUX - ->
+    <!-- LINUX -->
     <property name="xmlbeans-home" location="/opt/xmlbeans" />
     <property name="scomp-cmd" value="scomp" />
-    <property name="java-compiler" location="/opt/jdk/bin/javac" />
-    <!- - -->
+    <property name="java-compiler" location="${jdk.home}/bin/javac" />
+    <!-- -->
 
-    <!-- WINDOWS -->
+    <!-- WINDOWS - ->
     <property name="xmlbeans-home" location="T:\xmlbeans-2.3.0" />
     <property name="scomp-cmd" value="scomp.cmd" />
     <property name="java-compiler" location="${jdk.home}\bin\javac.exe" />
-    <!-- -->
+    <!- - -->
     
     <!-- Version of paccman file format version -->
     <property name="paccman-version" value="1_0_0_0" />
