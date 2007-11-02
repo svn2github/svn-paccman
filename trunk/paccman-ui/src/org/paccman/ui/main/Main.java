@@ -1,18 +1,23 @@
 /*
-Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-http://paccman.sourceforge.net
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
+ 
+    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
 package org.paccman.ui.main;
 
 import java.awt.Frame;
@@ -20,12 +25,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.channels.FileChannel;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
@@ -35,11 +40,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
-import javax.swing.UIManager;
 import org.paccman.calc.CalculatorFrame;
 import org.paccman.controller.AccountController;
 import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
+import org.paccman.db.PaccmanDao;
 import org.paccman.preferences.ui.MainPrefs;
 import org.paccman.ui.*;
 import org.paccman.ui.accounts.AccountFormTab;
@@ -243,11 +248,23 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         MainPrefs.setOpenLastSelectedFile(!MainPrefs.getOpenLastSelectedFile());
     }//GEN-LAST:event_openLastFileMnuActionPerformed
 
+    /**
+     * Result for <code>Open</code> when user opens a file.
+     */
     public enum OperationStatus {
 
-        OK, CANCEL, FAILED
-    }
-     {
+        /**
+         * The user selected a file and the file was succesfully opened.
+         */
+        OK,
+        /**
+         * The user cancelled the operation.
+         */
+        CANCEL,
+        /**
+         * The user selected a file to open, but the operation failed.
+         */
+        FAILED
     }
 
     private int confirmSave() {
@@ -473,7 +490,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
     }
 
+    /**
+     * Saves the current document to the specified location.
+     * @param saveFile The location where the document is saved.
+     * @return {@link OperationStatus.OK} or {@link OperationStatus.FAILED}.
+     */
     public OperationStatus saveDocument(File saveFile) {
+        //:TODO:START:this will be obsolete:
         PaccmanFile pf = new PaccmanFile();
         try {
             pf.write(saveFile, documentController);
@@ -481,6 +504,16 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             pie.printStackTrace();
             return OperationStatus.FAILED;
         }
+        //:TODO:END:this will be obsolete
+
+        PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db"  /*:TODO:END:*/);
+        try {
+            db.save(documentController);
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         return OperationStatus.OK;
     }
 
@@ -930,17 +963,5 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         saveAsMnu.getAction().setEnabled(isDocumentLoaded());
         propertiesMnu.getAction().setEnabled(isDocumentLoaded());
     }
-
-    //
-    // Logging
-    //
-
-    private static Logger logger = Logger.getLogger("org.paccman");
-    private static Handler consoleHandler = new ConsoleHandler();
-     {
-        consoleHandler.setLevel(Level.ALL);
-        logger.setLevel(Level.ALL);
-        logger.addHandler(consoleHandler);
-        logger.setUseParentHandlers(false);
-    }
+    Logger logger = org.paccman.tools.Logger.getDefaultLogger(Main.class);
 }

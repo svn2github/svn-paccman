@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.GregorianCalendar;
 import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -98,6 +99,15 @@ public class PaccmanFile {
         
         // Do read
         read(filein, document, formatVersion);
+        
+        //:TODO:WORKAROUND. KEEP BUT WILL BE DELETED ANYWAY:
+        if (document.getDocument().getCreationDate() == null) {
+            document.getDocument().setCreationDate(new GregorianCalendar());
+        }
+        if (document.getDocument().getLastUpdateDate() == null) {
+            document.getDocument().setLastUpdateDate(new GregorianCalendar());
+        }
+        //:TODO:WORKAROUND. KEEP BUT WILL BE DELETED ANYWAY:
         
     }
     

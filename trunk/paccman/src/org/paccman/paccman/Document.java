@@ -35,24 +35,7 @@ public class Document extends PaccmanObject {
     private String title;
     private Calendar creationDate;
     private Calendar lastUpdateDate;
-    private String version;
-
-    /**
-     * 
-     * @return
-     */
-    public String getVersion() {
-        return version;
-    }
-
-    /**
-     * 
-     * @param version
-     */
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
+    
     /**
      * 
      * @param title

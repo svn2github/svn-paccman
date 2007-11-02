@@ -1,15 +1,16 @@
-/*
-    PAccMan document creation script for database.
-*/
+--
+--    PAccMan document creation script for database.
+--
+
+-- 
+-- Document information table. Contains various information for this account file.
+--    -> title: the title of the document
+--    -> version: format (model) version
+--    -> creation_utc: creation date and time (in UTC)
+--    -> update_utc: last update date (in UTC)
+--
 
 CREATE TABLE DOCINFO(
-/* 
-Document information table. Contains various information for this account file.
-    -> title: the title of the document
-    -> version: format (model) version
-    -> creation_utc: creation date and time (in UTC)
-    -> update_utc: last update date (in UTC)
-*/
     NAME VARCHAR(100) NOT NULL CONSTRAINT DOCINFO_PK PRIMARY KEY,
     VALUE VARCHAR(100) NOT NULL
 );

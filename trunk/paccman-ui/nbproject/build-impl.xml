@@ -307,6 +307,7 @@ is divided into following sections:
         <ant antfile="${project.paccman}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-calc}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-ctrl}/build.xml" inheritall="false" target="jar"/>
+        <ant antfile="${project.paccman-db}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-io}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-res}/build.xml" inheritall="false" target="jar"/>
         <ant antfile="${project.paccman-tools}/build.xml" inheritall="false" target="jar"/>
@@ -621,6 +622,7 @@ is divided into following sections:
         <ant antfile="${project.paccman}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-calc}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-ctrl}/build.xml" inheritall="false" target="clean"/>
+        <ant antfile="${project.paccman-db}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-io}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-res}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.paccman-tools}/build.xml" inheritall="false" target="clean"/>

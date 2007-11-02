@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.paccman.controller.DocumentController;
 import org.paccman.paccman.Document;
+import static org.paccman.db.PaccmanDbUtils.*;
 
 /**
  *
@@ -52,11 +53,9 @@ public class PaccmanLoad {
         while (rs.next()) {
             final String name = rs.getString("NAME");
             final String value = rs.getString("VALUE");
-            if (name.equals("title")) {
+            if (name.equals(DOCUMENT_TITLE_KEY)) {
                 doc.setTitle(value);
-            } else if (name.equals("version")) {
-                doc.setVersion(value);
-            } else if (name.equals("creation_utc")) {
+            } else if (name.equals(CREATEDOC_DATE_KEY)) {
                 try {
                     Calendar c = new GregorianCalendar();
                     c.setTime(new SimpleDateFormat().parse(value));
@@ -65,7 +64,7 @@ public class PaccmanLoad {
                     //:TODO:
                     Logger.getLogger(PaccmanLoad.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else if (name.equals("update_utc")) {
+            } else if (name.equals(UPDATEDOC_DATE_KEY)) {
                 try {
                     Calendar c = new GregorianCalendar();
                     c.setTime(new SimpleDateFormat().parse(value));
