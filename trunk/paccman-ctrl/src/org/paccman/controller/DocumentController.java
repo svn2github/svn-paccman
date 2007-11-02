@@ -35,6 +35,10 @@ public class DocumentController extends Controller {
         super(new Document());
     }
     
+    /**
+     * 
+     * @return
+     */
     public Document getDocument() {
         return (Document)super.getObject();
     }

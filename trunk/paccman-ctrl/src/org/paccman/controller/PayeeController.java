@@ -34,10 +34,15 @@ public class PayeeController extends Controller {
         super(new Payee());
     }
     
+    /**
+     * 
+     * @return
+     */
     public Payee getPayee() {
         return (Payee)getObject();
     }
     
+    @Override
     public String toString() {
         return getPayee().getName();
     }

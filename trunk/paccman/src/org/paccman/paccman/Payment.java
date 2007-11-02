@@ -34,10 +34,18 @@ abstract public class Payment extends TransactionBase {
     public Payment() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public Payee getPayee() {
         return payee;
     }
     
+    /**
+     * 
+     * @param payee
+     */
     public void setPayee(Payee payee) {
         this.payee = payee;
     }
@@ -57,12 +65,18 @@ abstract public class Payment extends TransactionBase {
 
     /**
      * Setter for property paymentType.
-     * @param paymentType New value of property paymentType.
+     * 
+     * @param paymentMethod 
      */
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
     
+    /**
+     * 
+     * @param transaction
+     */
+    @Override
     public void copyTo(TransactionBase transaction) {
         assert transaction instanceof Payment;
         

@@ -33,14 +33,23 @@ public class Bank extends PaccmanObject {
     public Bank() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
     
+    @Override
     public String toString() {
         return name;
     }
@@ -81,7 +90,8 @@ public class Bank extends PaccmanObject {
 
     /**
      * Setter for property adressLine1.
-     * @param adressLine1 New value of property adressLine1.
+     * 
+     * @param addressLine1 
      */
     public void setAddressLine1(String addressLine1)  {
         this.addressLine1 = addressLine1;

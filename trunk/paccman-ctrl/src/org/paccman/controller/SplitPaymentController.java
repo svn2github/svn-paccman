@@ -35,6 +35,10 @@ public class SplitPaymentController extends TransactionBaseController {
         super(new SplitPayment());
     }
     
+    /**
+     * 
+     * @return
+     */
     public SplitPayment getPayment() {
         return (SplitPayment)paccObj;
     }

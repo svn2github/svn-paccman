@@ -38,18 +38,34 @@ public class SplitTransaction extends PaccmanObject {
     public SplitTransaction() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public BigDecimal getAmount() {
         return amount;
     }
     
+    /**
+     * 
+     * @param amount
+     */
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
+    /**
+     * 
+     * @return
+     */
     public CategoryBase getCategory() {
         return category;
     }
     
+    /**
+     * 
+     * @param category
+     */
     public void setCategory(CategoryBase category) {
         this.category = category;
     }

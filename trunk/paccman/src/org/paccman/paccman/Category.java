@@ -22,7 +22,6 @@
 package org.paccman.paccman;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  *
@@ -36,14 +35,27 @@ public class Category extends CategoryBase {
     public Category() {
     }
     
+    /**
+     * 
+     * @param subCategory
+     */
     public void addSubCategory(SubCategory subCategory) {
         subCategories.add(subCategory);
     }
     
+    /**
+     * 
+     * @return
+     */
     public ArrayList<SubCategory> getSubCategories() {
         return subCategories;
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public SubCategory getSubCategoory(String name) {
         for (SubCategory sc: subCategories) {
             if (sc.getName().equals(name)) {

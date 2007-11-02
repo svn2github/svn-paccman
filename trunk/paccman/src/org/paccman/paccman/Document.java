@@ -37,34 +37,66 @@ public class Document extends PaccmanObject {
     private Calendar lastUpdateDate;
     private String version;
 
+    /**
+     * 
+     * @return
+     */
     public String getVersion() {
         return version;
     }
 
+    /**
+     * 
+     * @param version
+     */
     public void setVersion(String version) {
         this.version = version;
     }
 
+    /**
+     * 
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
             
+    /**
+     * 
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Calendar getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * 
+     * @param creationDate
+     */
     public void setCreationDate(Calendar creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Calendar getLastUpdateDate() {
         return lastUpdateDate;
     }
 
+    /**
+     * 
+     * @param lastUpdateDate
+     */
     public void setLastUpdateDate(Calendar lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
@@ -77,23 +109,46 @@ public class Document extends PaccmanObject {
     
     Vector<Account>     accounts     = new Vector<Account>   ();
 
+    /**
+     * 
+     * @param account
+     * @return
+     */
     public int addAccount(Account account) {
         accounts.add(account);
         return accounts.size() - 1;
     }
     
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public Account getAccount(int index) {
         return accounts.get(index);
     }
     
+    /**
+     * 
+     * @return
+     */
     public Vector<Account> getAccounts() {
         return accounts;
     }
     
+    /**
+     * 
+     * @return
+     */
     public int getNumberOfAccounts() {
         return accounts.size();
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public Account getAccount(String name) {
         for (Account account: accounts) {
             if (account.getName().equals(name)) {
@@ -107,19 +162,37 @@ public class Document extends PaccmanObject {
     
     ArrayList<Category>    categories   = new ArrayList<Category>  ();
     
+    /**
+     * 
+     * @param category
+     * @return
+     */
     public int addCategory(Category category) {
         categories.add(category);
         return categories.size() - 1;
     }
 
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public Category getCategory(int index) {
         return categories.get(index);
     }
     
+    /**
+     * 
+     * @return
+     */
     public int getNumberOfCategories() {
         return categories.size();
     }
     
+    /**
+     * 
+     * @return
+     */
     public ArrayList<Category> getCategories() {
         return categories;
     }
@@ -128,19 +201,37 @@ public class Document extends PaccmanObject {
     
     ArrayList<PaymentMethod>    paymentMethods = new ArrayList<PaymentMethod>  ();
     
+    /**
+     * 
+     * @param paymentMethod
+     * @return
+     */
     public int addPaymentMethod(PaymentMethod paymentMethod) {
         paymentMethods.add(paymentMethod);
         return paymentMethods.size() - 1;
     }
 
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public PaymentMethod getPaymentMethod(int index) {
         return paymentMethods.get(index);
     }
     
+    /**
+     * 
+     * @return
+     */
     public int getNumberOfPaymentMethods() {
         return paymentMethods.size();
     }
     
+    /**
+     * 
+     * @return
+     */
     public ArrayList<PaymentMethod> getPaymentMethods() {
         return paymentMethods;
     }
@@ -149,19 +240,38 @@ public class Document extends PaccmanObject {
     // -- Banks 
     
     Vector<Bank>        banks        = new Vector<Bank>      ();
+    /**
+     * 
+     * @param bank
+     * @return
+     */
     public int addBank(Bank bank) {
         banks.add(bank);
         return banks.size() - 1;
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getNumberOfBanks() {
         return banks.size();
     }
     
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public Bank getBank(int index) {
         return banks.get(index);
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public Bank getBank(String name) {
         for (Bank bank: banks) {
             if (bank.getName().equals(name)) {
@@ -171,6 +281,11 @@ public class Document extends PaccmanObject {
         return null;
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public Category getCategory(String name) {
         for (Category category: categories) {
             if (category.getName().equals(name)) {
@@ -180,6 +295,12 @@ public class Document extends PaccmanObject {
         return null;
     }
     
+    /**
+     * 
+     * @param categoryName
+     * @param subCategoryName
+     * @return
+     */
     public SubCategory getCategory(String categoryName, String subCategoryName) {
         Category category = getCategory(categoryName);
         if (category != null) {
@@ -188,6 +309,11 @@ public class Document extends PaccmanObject {
         return null;
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public PaymentMethod getPaymentType(String name) {
         for (PaymentMethod payment: paymentMethods) {
             if (payment.getName().equals(name)) {
@@ -197,6 +323,11 @@ public class Document extends PaccmanObject {
         return null;
     }
     
+    /**
+     * 
+     * @param name
+     * @return
+     */
     public Payee getPayee(String name) {
         for (Payee payee: payees) {
             if (payee.getName().equals(name)) {
@@ -206,6 +337,10 @@ public class Document extends PaccmanObject {
         return null;
     }
     
+    /**
+     * 
+     * @return
+     */
     public Vector<Bank> getBanks() {
         return banks;
     }
@@ -214,25 +349,47 @@ public class Document extends PaccmanObject {
     // -- Payees
     
     Vector<Payee>  payees = new Vector<Payee>();
+    /**
+     * 
+     * @param payee
+     * @return
+     */
     public int addPayee(Payee payee) {
         payees.add(payee);
         return payees.size() - 1;
     }
     
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public Payee getPayee(int index) {
         return payees.get(index);
     }
     
+    /**
+     * 
+     * @return
+     */
     public int getNumberOfPayees() {
         return payees.size();
     }
     
+    /**
+     * 
+     * @return
+     */
     public Vector<Payee> getPayees() {
         return payees;
     }
     
     // -- General
     
+    /**
+     * 
+     * @return
+     */
     public BigDecimal getTotalBalance() {
         BigDecimal total = new BigDecimal(0);
         for (Account account: accounts) {
@@ -241,6 +398,11 @@ public class Document extends PaccmanObject {
         return total;
     }
     
+    /**
+     * 
+     * @param date
+     * @return
+     */
     public BigDecimal getTotalBalance(Calendar date) {
         BigDecimal total = new BigDecimal(0);
         for (Account account: accounts) {

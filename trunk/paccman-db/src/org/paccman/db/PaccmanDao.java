@@ -25,6 +25,10 @@ public class PaccmanDao {
         this.database = database;
     }
     
+    /**
+     * 
+     * @throws java.sql.SQLException
+     */
     public void create() throws SQLException {
         String connectionString = new String("jdbc:derby:");
         connectionString = connectionString + database;
@@ -32,6 +36,10 @@ public class PaccmanDao {
         connection = DriverManager.getConnection(connectionString);
     }
     
+    /**
+     * 
+     * @throws java.sql.SQLException
+     */
     public void open() throws SQLException {
         String connectionString = new String("jdbc:derby:");
         connectionString = connectionString + database;

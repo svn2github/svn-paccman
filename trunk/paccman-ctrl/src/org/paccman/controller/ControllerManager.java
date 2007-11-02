@@ -33,16 +33,25 @@ public class ControllerManager {
     
     static private Map<PaccmanObject, Controller> controllers = new HashMap<PaccmanObject, Controller>();
     
-    /** Creates a new instance of ControllerManager */
-    public ControllerManager() {
-    }
-    
+    /**
+     * 
+     * @param paccObj
+     * @return
+     */
     static public Controller getController(PaccmanObject paccObj) {
         return controllers.get(paccObj);
     }
     
+    /**
+     * 
+     * @param paccObj
+     * @param controller
+     */
     static public void addController(PaccmanObject paccObj, Controller controller) {
         controllers.put(paccObj, controller);
+    }
+
+    private ControllerManager() {
     }
     
 }

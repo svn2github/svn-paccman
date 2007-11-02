@@ -30,15 +30,22 @@ import org.paccman.paccman.SubCategory;
  */
 public class SubCategoryController extends CategoryBaseController {
     
-    /** Creates a new instance of DocumentController */
+    /** Creates a new instance of DocumentController
+     * @param parentCategory 
+     */
     public SubCategoryController(Category parentCategory) {
         super(new SubCategory(parentCategory));
     }
     
+    /**
+     * 
+     * @return
+     */
     public SubCategory getSubCategory() {
         return (SubCategory)paccObj;
     }
     
+    @Override
     public String toString() {
         return getSubCategory().getName();
     }

@@ -36,6 +36,10 @@ public class SplitPayment extends Payment {
     public SplitPayment() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public BigDecimal getTotal() {
         BigDecimal total = BigDecimal.ZERO;
         for (SplitTransaction t: transactionList) {
@@ -44,18 +48,30 @@ public class SplitPayment extends Payment {
         return total;
     }
     
+    /**
+     * 
+     * @return
+     */
     public ArrayList<SplitTransaction> getSplitTransactions() {
         return transactionList;
     }
     
+    /**
+     * 
+     * @param transaction
+     */
     public void addSplitTransaction(SplitTransaction transaction) {
         transactionList.add(transaction);
     }
 
+    /**
+     * 
+     */
     public void clearSplitTransactions() {
         transactionList.clear();
     }
     
+    @Override
     public void copyTo(TransactionBase transaction) {
         assert transaction instanceof SplitPayment;
         

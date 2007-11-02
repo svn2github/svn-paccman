@@ -8,20 +8,21 @@ package org.paccman.ui.common;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.Component;
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import org.paccman.ui.common.*;
 
 /**
  * @author joao
  */
-public class MyDateChooser extends JDateChooser implements Serializable {
+public class MyDateChooser extends JDateChooser {
     
+    /**
+     * 
+     */
     public MyDateChooser() {
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         
         for (Component comp: getComponents()) {
@@ -30,6 +31,10 @@ public class MyDateChooser extends JDateChooser implements Serializable {
         super.setEnabled(enabled);
     }
 
+    /**
+     * 
+     * @return
+     */
     public Calendar getCalendarDate() {
         Calendar retVal = new GregorianCalendar();
         retVal.setTime(getDate());

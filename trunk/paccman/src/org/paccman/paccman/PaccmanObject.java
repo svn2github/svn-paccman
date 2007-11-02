@@ -26,9 +26,4 @@ package org.paccman.paccman;
  * @author joao
  */
 public class PaccmanObject {
-    
-    /** Creates a new instance of PaccmanObject */
-    public PaccmanObject() {
-    }
-    
 }

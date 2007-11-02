@@ -20,7 +20,6 @@
 */
 
 package org.paccman.controller;
-import org.paccman.controller.TransactionBaseController;
 import org.paccman.paccman.Transfer;
 
 /**
@@ -34,10 +33,18 @@ public class TransferController extends TransactionBaseController {
         super(new Transfer());
     }
     
+    /**
+     * 
+     * @param transfer
+     */
     public TransferController(Transfer transfer) {
         super(transfer);
     }
 
+    /**
+     * 
+     * @return
+     */
     public Transfer getTransfer() {
         return (Transfer)paccObj;
     }

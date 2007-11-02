@@ -35,6 +35,10 @@ public abstract class CategoryBaseController extends Controller {
 	super(categoryBase);
     }
 
+    /**
+     * 
+     * @return
+     */
     public CategoryBase getCategoryBase() {
 	return (CategoryBase)getObject();
     }

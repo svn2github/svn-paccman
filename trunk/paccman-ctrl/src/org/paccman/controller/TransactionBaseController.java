@@ -30,11 +30,17 @@ import org.paccman.paccman.TransactionBase;
  */
 public class TransactionBaseController extends Controller {
     
-    /** Creates a new instance of TransactionController */
+    /** Creates a new instance of TransactionController
+     * @param paccObj 
+     */
     public TransactionBaseController(PaccmanObject paccObj) {
         super(paccObj);
     }
     
+    /**
+     * 
+     * @return
+     */
     public TransactionBase getTransactionBase() {
         return (TransactionBase)paccObj;
     }

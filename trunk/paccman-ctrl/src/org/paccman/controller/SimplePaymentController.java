@@ -20,8 +20,8 @@
 */
 
 package org.paccman.controller;
-import org.paccman.paccman.SimplePayment;
 
+import org.paccman.paccman.SimplePayment;
 
 /**
  *
@@ -29,11 +29,17 @@ import org.paccman.paccman.SimplePayment;
  */
 public class SimplePaymentController extends TransactionBaseController {
     
-    /** Creates a new instance of DocumentController */
+    /**
+     * 
+     */
     public SimplePaymentController() {
         super(new SimplePayment());
     }
     
+    /**
+     * 
+     * @return
+     */
     public SimplePayment getPayment() {
         return (SimplePayment)paccObj;
     }

@@ -34,8 +34,6 @@ import java.util.Comparator;
  */
 public class Account extends PaccmanObject {
     
-    private boolean balanceUpdated = true;
-    
     private String     name          ;
     private BigDecimal initialBalance;
     private Bank       bank          ;
@@ -107,15 +105,12 @@ public class Account extends PaccmanObject {
                 balance = balance.add(transactions.get(i).getAmount());
                 transactions.get(i).setBalance(balance);
             }
-        } else {
-            balanceUpdated = false;
-        }
+        } 
         return index;
     }
     
-    // add split payment
     /**
-     * 
+     * Adds a split payment to this account.
      * @param p 
      * @param updateBalances 
      * @return 
@@ -124,9 +119,8 @@ public class Account extends PaccmanObject {
         return addTransactionBase(p, updateBalances);
     }
     
-    // add simple payment
     /**
-     * 
+     * Adds a simple payment to this account.
      * @param p 
      * @param updateBalances 
      * @return 
@@ -137,20 +131,19 @@ public class Account extends PaccmanObject {
     
     // add a transaction. return the index where the transaction has been inserted
     /**
-     * 
+     * Adds a transaction. 
      * @param transfer 
-     * @param updateBalances 
+     * @param updateBalances If <code>true</code>, reset the balances of transactions.
      * @return 
      */
     public int addTransfer(Transfer transfer, boolean updateBalances) {
         return addTransactionBase(transfer, updateBalances);
     }
     
-    // add a scheduled transaction
     /**
-     * 
-     * @param scheduledTransaction 
-     * @return 
+     * Adds a scheduled transaction.
+     * @param scheduledTransaction The scheduled transactin to be added.
+     * @return The index of the added scheduled transaction.
      */
     public int addScheduledTransaction(ScheduledTransaction scheduledTransaction) {
         scheduledTransactions.add(scheduledTransaction);
@@ -200,11 +193,12 @@ public class Account extends PaccmanObject {
     }
     
     /**
-     * 
+     * Updates the current balance of all transactions in this account.
      */
     public void updateBalances() {
-        if (transactions.size() == 0)
+        if (transactions.size() == 0) {
             return;
+        }
         updateBalances(0);
     }
     
@@ -224,6 +218,7 @@ public class Account extends PaccmanObject {
         this.name = name;
     }
     
+    @Override
     public String toString() {
         return name;
     }
@@ -361,7 +356,6 @@ public class Account extends PaccmanObject {
             balance = balance.add(t.getAmount());
             t.setBalance(balance);
         }
-        balanceUpdated = true;
     }
 
     /**

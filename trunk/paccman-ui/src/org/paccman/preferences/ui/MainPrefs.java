@@ -33,7 +33,7 @@ public class MainPrefs {
     static Preferences prefs = Preferences.userNodeForPackage(MainPrefs.class);
     
     /** Creates a new instance of MainPrefs */
-    public MainPrefs() {
+    private MainPrefs() {
     }
 
     /**

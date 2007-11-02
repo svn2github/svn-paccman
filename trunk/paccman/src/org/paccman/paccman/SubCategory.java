@@ -29,19 +29,21 @@ public class SubCategory extends CategoryBase {
     
     Category parentCategory;
     
-    /** Creates a new instance of SubCategory */
+    /** Creates a new instance of SubCategory
+     * @param parentCategory 
+     */
     public SubCategory(Category parentCategory) {
         this.parentCategory = parentCategory;
     }
 
+    /**
+     * 
+     * @return
+     */
     public Category getParentCategory() {
         return parentCategory;
     }
 
-//    public void setParentCategory(Category parentCategory) {
-//        this.parentCategory = parentCategory;
-//    }
-//
     public boolean isIncome() {
         return parentCategory.isIncome();
     }

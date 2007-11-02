@@ -34,10 +34,15 @@ public class PaymentMethodController extends Controller {
         super(new PaymentMethod());
     }
     
+    /**
+     * 
+     * @return
+     */
     public PaymentMethod getPaymentMethod() {
         return (PaymentMethod)paccObj;
     }
     
+    @Override
     public String toString() {
         return getPaymentMethod().getName();
     }

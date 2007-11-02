@@ -26,5 +26,9 @@ package org.paccman.controller;
  * @author joao
  */
 public interface PaccmanView {
+    /**
+     * 
+     * @param controller
+     */
     void onChange(Controller controller);
 }

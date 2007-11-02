@@ -30,44 +30,76 @@ import java.util.Calendar;
  */
 public abstract class TransactionBase extends PaccmanObject {
     
-    protected BigDecimal amount ;
-    protected Calendar   valueDate   ;
-    protected BigDecimal balance;
+    private BigDecimal amount ;
+    private Calendar   valueDate   ;
+    private BigDecimal balance;
     
     /** Creates a new instance of TransactionBase */
     public TransactionBase() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public BigDecimal getAmount() {
         return amount;
     }
     
+    /**
+     * 
+     * @param amount
+     */
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
     
+    /**
+     * 
+     * @return
+     */
     public BigDecimal getBalance() {
         return balance;
     }
     
+    /**
+     * 
+     * @param balance
+     */
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
     
+    /**
+     * 
+     * @return
+     */
     public Calendar getValueDate() {
 
         return valueDate;
     }
     
+    /**
+     * 
+     * @param date
+     */
     public void setValueDate(Calendar date) {
 
         this.valueDate = date;
     }
     
+    /**
+     * 
+     * @return
+     */
     public boolean isWithdrawal() {
         return amount.signum() < 0;
     }
     
+    /**
+     * 
+     * @return
+     */
     public boolean isDeposit() {
         return ! isWithdrawal();
     }
@@ -118,10 +150,22 @@ public abstract class TransactionBase extends PaccmanObject {
         this.label = label;
     }
 
+    /**
+     * 
+     */
     public enum ReconciliationState {
-	UNRECONCILED,
-	MARKED      ,
-	RECONCILED  
+        /**
+         * 
+         */
+        UNRECONCILED,
+        /**
+         * 
+         */
+        MARKED      ,
+        /**
+         * 
+         */
+        RECONCILED
     };
 
     /**
@@ -189,6 +233,10 @@ public abstract class TransactionBase extends PaccmanObject {
         this.transactionDate = transactionDate;
     }
 
+    /**
+     * 
+     * @param transaction
+     */
     public void copyTo(TransactionBase transaction) {
         transaction.setAmount(this.amount);
         transaction.setBalance(this.balance);

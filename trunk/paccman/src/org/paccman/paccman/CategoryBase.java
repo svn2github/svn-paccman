@@ -33,18 +33,31 @@ public abstract class CategoryBase extends PaccmanObject {
     public CategoryBase() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
     
+    @Override
     public String toString() {
         return name;
     }
 
+    /**
+     * 
+     * @return
+     */
     public abstract boolean isIncome();
     /**
      * Holds value of property description.

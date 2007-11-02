@@ -37,10 +37,18 @@ public class ScheduledTransactionController extends Controller {
         super(new ScheduledTransaction());
     }
     
+    /**
+     * 
+     * @return
+     */
     public ScheduledTransaction getScheduledTransaction() {
         return (ScheduledTransaction)paccObj;
     }
     
+    /**
+     * 
+     * @return
+     */
     public TransactionBaseController newInstance() {
         
         TransactionBaseController tbc = null;

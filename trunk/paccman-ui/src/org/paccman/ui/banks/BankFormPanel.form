@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.3" maxVersion="1.3" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
-    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
@@ -22,12 +23,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="nameLbl" min="-2" pref="84" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bankNameEdt" pref="444" max="32767" attributes="0"/>
+                      <Component id="bankNameEdt" pref="452" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="agencyLbl" min="-2" pref="84" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="agencyEdt" pref="444" max="32767" attributes="0"/>
+                      <Component id="agencyEdt" pref="452" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -109,7 +110,7 @@
                               <Component id="addressLine1Edt" pref="303" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="countryCmb" pref="433" max="32767" attributes="0"/>
+                      <Component id="countryCmb" pref="437" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -205,11 +206,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="emailEdt" pref="429" max="32767" attributes="0"/>
-                      <Component id="faxEdt" pref="429" max="32767" attributes="0"/>
-                      <Component id="phoneEdt" alignment="0" pref="429" max="32767" attributes="0"/>
+                      <Component id="emailEdt" pref="434" max="32767" attributes="0"/>
+                      <Component id="faxEdt" pref="434" max="32767" attributes="0"/>
+                      <Component id="phoneEdt" alignment="0" pref="434" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="internetEdt" pref="372" max="32767" attributes="0"/>
+                          <Component id="internetEdt" pref="398" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="goBtn" min="-2" max="-2" attributes="0"/>
                       </Group>

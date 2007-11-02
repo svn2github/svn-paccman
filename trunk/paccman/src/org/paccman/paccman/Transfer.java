@@ -33,19 +33,31 @@ public class Transfer extends TransactionBase {
     public Transfer() {
     }
     
+    /**
+     * 
+     * @return
+     */
     public Account getToFromAccount() {
         return toFromAccount;
     }
     
+    /**
+     * 
+     * @param toFromAccount
+     */
     public void setToFromAccount(Account toFromAccount) {
         this.toFromAccount = toFromAccount;
     }
     
-    /* isSource == true if it is a transfer from *this* account to another */
+    /**
+     * 
+     * @return true if it is a transfer from <i>this</i> account to another
+     */
     public boolean isSource() {
         return isWithdrawal();
     }
     
+    @Override
     public void copyTo(TransactionBase transaction) {
         assert transaction instanceof Transfer;
         
