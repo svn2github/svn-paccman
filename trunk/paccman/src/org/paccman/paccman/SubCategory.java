@@ -25,8 +25,9 @@ package org.paccman.paccman;
  *
  * @author joao
  */
+//:TODO:this class will be replaced by Category (as in database)
 public class SubCategory extends CategoryBase {
-    
+
     Category parentCategory;
     
     /** Creates a new instance of SubCategory

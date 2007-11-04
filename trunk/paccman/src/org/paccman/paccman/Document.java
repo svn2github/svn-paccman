@@ -287,7 +287,7 @@ public class Document extends PaccmanObject {
     public SubCategory getCategory(String categoryName, String subCategoryName) {
         Category category = getCategory(categoryName);
         if (category != null) {
-            return category.getSubCategoory(subCategoryName);
+            return category.getSubCategory(subCategoryName);
         }
         return null;
     }

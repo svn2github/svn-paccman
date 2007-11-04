@@ -27,6 +27,24 @@ package org.paccman.paccman;
  */
 public abstract class CategoryBase extends PaccmanObject {
     
+    private long categoryId;
+    
+    /**
+     * Gets the ID of this category.
+     * @return This category's ID.
+     */
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    /**
+     * Sets the ID of this category.
+     * @param categoryId The ID to be set.
+     */
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
+    
     private String name;
     
     /** Creates a new instance of Category */

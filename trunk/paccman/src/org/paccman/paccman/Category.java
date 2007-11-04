@@ -56,7 +56,7 @@ public class Category extends CategoryBase {
      * @param name
      * @return
      */
-    public SubCategory getSubCategoory(String name) {
+    public SubCategory getSubCategory(String name) {
         for (SubCategory sc: subCategories) {
             if (sc.getName().equals(name)) {
                 return sc;

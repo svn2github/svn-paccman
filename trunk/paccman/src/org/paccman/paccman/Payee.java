@@ -27,6 +27,24 @@ package org.paccman.paccman;
  */
 public class Payee extends PaccmanObject {
     
+    private long payeeId;
+
+    /**
+     * Gets the ID of this payee.
+     * @return This payee's ID.
+     */
+    public long getPayeeId() {
+        return payeeId;
+    }
+
+    /**
+     * Sets the ID of this payee.
+     * @param payeeId The ID to be set.
+     */
+    public void setPayeeId(long payeeId) {
+        this.payeeId = payeeId;
+    }
+    
     private String name;
     
     /** Creates a new instance of Payee */

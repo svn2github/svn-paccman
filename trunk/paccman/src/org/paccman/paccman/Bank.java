@@ -26,6 +26,24 @@ package org.paccman.paccman;
  * @author joao
  */
 public class Bank extends PaccmanObject {
+
+    private long bankId;
+    
+    /**
+     * Gets the ID of this bank.
+     * @return This bank's ID.
+     */
+    public long getBankId() {
+        return bankId;
+    }
+
+    /**
+     * Sets the ID of this bank.
+     * @param bankId The ID to be set.
+     */
+    public void setBankId(long bankId) {
+        this.bankId = bankId;
+    }
     
     private String name;
     

@@ -28,33 +28,50 @@ public class PaccmanDao {
         this.database = database;
     }
     
+    private String getConnectionString(String option) {
+        return "jdbc:derby:" + database + ";" + option;
+    }
+    
     /**
-     * 
+     * Open databse connection. If connection does not exist, it is created.
      * @throws java.sql.SQLException
      * @throws java.io.UnsupportedEncodingException 
      */
-    public void create() throws SQLException, UnsupportedEncodingException {
-        String connectionString = new String("jdbc:derby:");
-        connectionString = connectionString + database;
-        connectionString = connectionString + ";create=true";
+    private void create() throws SQLException, UnsupportedEncodingException {
+        String connectionString = getConnectionString("create=true");
         connection = DriverManager.getConnection(connectionString);
         
         String path = "/scripts/create.sql";
         InputStream is = getClass().getResourceAsStream(path);
         int res = org.apache.derby.tools.ij.runScript(connection, is, "UTF-8", System.out, "UTF-8");
         if ((res != -1) && (res != 0)) {
-            throw new Error(":TODO:handle dthis better please");
+            throw new Error(":TODO:handle this better please");
         }
     }
     
     /**
-     * 
+     * Open database connection.
      * @throws java.sql.SQLException
      */
-    public void open() throws SQLException {
-        String connectionString = new String("jdbc:derby:");
-        connectionString = connectionString + database;
+    private void open() throws SQLException {
+        String connectionString = getConnectionString("");
         connection = DriverManager.getConnection(connectionString);
+    }
+    
+    /**
+     * Close database connection.
+     * @throws java.sql.SQLException
+     */
+    private void shutdown() throws SQLException {
+        String connectionString = getConnectionString("shutdown=true");
+        try {
+            connection = DriverManager.getConnection(connectionString);
+        } catch (SQLException ex) {
+            if (! "08006".equals(ex.getSQLState())) {
+                // If not "shutdown" (expected) exception, rethrows exception.
+                throw ex;
+            } 
+        }
     }
     
     /**
@@ -70,6 +87,9 @@ public class PaccmanDao {
         // Do actually save the document
         PaccmanSave pl = new PaccmanSave();
         pl.saveDocument(connection, ctrl);
+        
+        // Close database
+        shutdown();
     }
     
 }

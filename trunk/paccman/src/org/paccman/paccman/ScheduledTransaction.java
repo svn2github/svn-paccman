@@ -24,8 +24,8 @@ package org.paccman.paccman;
 import java.util.Calendar;
 
 /**
- *
- * @author jfer
+ * 
+ * @author joao
  */
 public class ScheduledTransaction extends PaccmanObject {
     

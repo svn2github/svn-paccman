@@ -39,6 +39,23 @@ public class Account extends PaccmanObject {
     private Bank       bank          ;
     private String     accountNumber ;
     private String     note          ;
+    private long       accountId     ;
+
+    /**
+     * Gets the ID of this account.
+     * @return This account's ID.
+     */
+    public long getAccountId() {
+        return accountId;
+    }
+
+    /**
+     * Sets the ID of this account.
+     * @param accountId The ID to be set.
+     */
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
+    }
     
     private ArrayList<TransactionBase> transactions = new ArrayList<TransactionBase>();
     private ArrayList<ScheduledTransaction> scheduledTransactions = new ArrayList<ScheduledTransaction>();

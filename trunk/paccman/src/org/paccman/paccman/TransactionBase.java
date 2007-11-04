@@ -18,7 +18,6 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  
 */
-
 package org.paccman.paccman;
 
 import java.math.BigDecimal;
@@ -29,15 +28,32 @@ import java.util.Calendar;
  * @author joao
  */
 public abstract class TransactionBase extends PaccmanObject {
-    
-    private BigDecimal amount ;
-    private Calendar   valueDate   ;
+
+    private BigDecimal amount;
+    private Calendar valueDate;
     private BigDecimal balance;
-    
+    private long transactionId;
+
+    /**
+     * Gets the ID of this transaction.
+     * @return This transaction's ID.
+     */
+    public long getTransactionId() {
+        return transactionId;
+    }
+
+    /**
+     * Sets the ID of this transaction.
+     * @param transactionId The ID to be set.
+     */
+    public void setTransactionId(long transactionId) {
+        this.transactionId = transactionId;
+    }
+
     /** Creates a new instance of TransactionBase */
     public TransactionBase() {
     }
-    
+
     /**
      * 
      * @return
@@ -45,7 +61,7 @@ public abstract class TransactionBase extends PaccmanObject {
     public BigDecimal getAmount() {
         return amount;
     }
-    
+
     /**
      * 
      * @param amount
@@ -53,7 +69,7 @@ public abstract class TransactionBase extends PaccmanObject {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-    
+
     /**
      * 
      * @return
@@ -61,7 +77,7 @@ public abstract class TransactionBase extends PaccmanObject {
     public BigDecimal getBalance() {
         return balance;
     }
-    
+
     /**
      * 
      * @param balance
@@ -69,7 +85,7 @@ public abstract class TransactionBase extends PaccmanObject {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
-    
+
     /**
      * 
      * @return
@@ -78,7 +94,7 @@ public abstract class TransactionBase extends PaccmanObject {
 
         return valueDate;
     }
-    
+
     /**
      * 
      * @param date
@@ -87,7 +103,7 @@ public abstract class TransactionBase extends PaccmanObject {
 
         this.valueDate = date;
     }
-    
+
     /**
      * 
      * @return
@@ -95,15 +111,14 @@ public abstract class TransactionBase extends PaccmanObject {
     public boolean isWithdrawal() {
         return amount.signum() < 0;
     }
-    
+
     /**
      * 
      * @return
      */
     public boolean isDeposit() {
-        return ! isWithdrawal();
+        return !isWithdrawal();
     }
-    
     /**
      * Holds value of property note.
      */
@@ -157,16 +172,20 @@ public abstract class TransactionBase extends PaccmanObject {
         /**
          * 
          */
+
         UNRECONCILED,
         /**
          * 
          */
-        MARKED      ,
+        MARKED,
         /**
          * 
          */
         RECONCILED
-    };
+    }
+     
+    
+    ;
 
     /**
      * Holds value of property reconciliationState.

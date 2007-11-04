@@ -27,6 +27,24 @@ package org.paccman.paccman;
  */
 public class PaymentMethod extends PaccmanObject {
     
+    private long paymentMethodId;
+
+    /**
+     * Gets the ID of this payment method.
+     * @return This payment method's ID.
+     */
+    public long getPaymentMethodId() {
+        return paymentMethodId;
+    }
+
+    /**
+     * Sets the ID of this payment method.
+     * @param paymentMethodId The ID to be set.
+     */
+    public void setPaymentMethodId(long paymentMethodId) {
+        this.paymentMethodId = paymentMethodId;
+    }
+    
     /** Creates a new instance of PaymentMethod */
     public PaymentMethod() {
     }
