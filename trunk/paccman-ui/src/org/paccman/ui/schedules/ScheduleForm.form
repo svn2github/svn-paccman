@@ -47,7 +47,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="descriptionLbl" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="descriptionEdt" pref="559" max="32767" attributes="0"/>
+                  <Component id="descriptionEdt" pref="567" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -106,20 +106,20 @@
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="periodSpin" alignment="1" pref="159" max="32767" attributes="0"/>
-                      <Component id="scheduleDaysSpin" alignment="0" pref="159" max="32767" attributes="0"/>
+                      <Component id="periodSpin" alignment="1" pref="175" max="32767" attributes="0"/>
+                      <Component id="scheduleDaysSpin" alignment="0" pref="175" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="periodUnitCmb" alignment="0" pref="159" max="32767" attributes="0"/>
-                      <Component id="automaticChb" alignment="0" pref="159" max="32767" attributes="0"/>
+                      <Component id="periodUnitCmb" alignment="0" pref="175" max="32767" attributes="0"/>
+                      <Component id="automaticChb" alignment="0" pref="175" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="nextDateLbl" min="-2" pref="47" max="-2" attributes="1"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="fixedAmountChb" alignment="1" pref="159" max="32767" attributes="0"/>
-                      <Component id="nextDateChooser" alignment="0" pref="159" max="32767" attributes="2"/>
+                      <Component id="fixedAmountChb" alignment="1" pref="176" max="32767" attributes="0"/>
+                      <Component id="nextDateChooser" alignment="0" pref="176" max="32767" attributes="2"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>

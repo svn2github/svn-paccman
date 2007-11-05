@@ -25,11 +25,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import org.paccman.controller.AccountController;
 import org.paccman.controller.CategoryBaseController;
@@ -443,7 +441,7 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
         toAccountCmb = new org.paccman.ui.transactions.AccountSelectorComboBox();
         splitBtn = new javax.swing.JButton();
 
-        categoryLbl.setText("Categoryy");
+        categoryLbl.setText("Category");
 
         categorySelectorCmb.setEnabled(false);
 
@@ -507,13 +505,13 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
                         .addGap(4, 4, 4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEdt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addComponent(labelEdt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(toAccountCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(transactionDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(categorySelectorCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(paymentMethodCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                            .addComponent(toAccountCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(transactionDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(categorySelectorCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(paymentMethodCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(amountLbl, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -521,11 +519,11 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
                             .addComponent(payeeLbl, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(payeeCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(splitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(amountEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                            .addComponent(valueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
-                    .addComponent(noteScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE))
+                            .addComponent(payeeCmb, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                            .addComponent(splitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                            .addComponent(amountEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                            .addComponent(valueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)))
+                    .addComponent(noteScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

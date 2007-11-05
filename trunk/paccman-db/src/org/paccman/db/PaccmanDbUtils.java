@@ -99,6 +99,8 @@ public class PaccmanDbUtils {
         return rs.getBigDecimal(1).longValue();
     }
 
+    static final String ISO_8601_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    
     private PaccmanDbUtils() {
     }
 }

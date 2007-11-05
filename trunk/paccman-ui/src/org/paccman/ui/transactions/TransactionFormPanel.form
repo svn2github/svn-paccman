@@ -32,13 +32,13 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labelEdt" alignment="1" pref="549" max="32767" attributes="0"/>
+                  <Component id="labelEdt" alignment="1" pref="551" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="toAccountCmb" pref="226" max="32767" attributes="2"/>
-                          <Component id="transactionDateChooser" alignment="0" pref="226" max="32767" attributes="2"/>
-                          <Component id="categorySelectorCmb" alignment="0" pref="226" max="32767" attributes="2"/>
-                          <Component id="paymentMethodCmb" alignment="0" pref="226" max="32767" attributes="2"/>
+                          <Component id="toAccountCmb" pref="240" max="32767" attributes="2"/>
+                          <Component id="transactionDateChooser" alignment="0" pref="240" max="32767" attributes="2"/>
+                          <Component id="categorySelectorCmb" alignment="0" pref="240" max="32767" attributes="2"/>
+                          <Component id="paymentMethodCmb" alignment="0" pref="240" max="32767" attributes="2"/>
                       </Group>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -48,13 +48,13 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="payeeCmb" alignment="0" pref="226" max="32767" attributes="0"/>
-                          <Component id="splitBtn" alignment="0" pref="226" max="32767" attributes="0"/>
-                          <Component id="amountEdt" alignment="0" pref="226" max="32767" attributes="2"/>
-                          <Component id="valueDateChooser" alignment="0" pref="226" max="32767" attributes="2"/>
+                          <Component id="payeeCmb" alignment="0" pref="241" max="32767" attributes="0"/>
+                          <Component id="splitBtn" alignment="0" pref="241" max="32767" attributes="0"/>
+                          <Component id="amountEdt" alignment="0" pref="241" max="32767" attributes="2"/>
+                          <Component id="valueDateChooser" alignment="0" pref="241" max="32767" attributes="2"/>
                       </Group>
                   </Group>
-                  <Component id="noteScrollPane1" alignment="0" pref="549" max="32767" attributes="0"/>
+                  <Component id="noteScrollPane1" alignment="0" pref="551" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -113,7 +113,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="categoryLbl">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Categoryy"/>
+        <Property name="text" type="java.lang.String" value="Category"/>
       </Properties>
     </Component>
     <Component class="org.paccman.ui.transactions.CategorySelectorComboBox" name="categorySelectorCmb">

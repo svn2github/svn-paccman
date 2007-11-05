@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 import org.paccman.controller.DocumentController;
 import org.paccman.paccman.Account;
@@ -111,11 +113,12 @@ public class PaccmanSave {
         stat.executeUpdate();
 
         stat.setString(1, CREATEDOC_DATE_KEY);
-        stat.setDate(2, calendarToSqlDate(doc.getCreationDate()));
+        DateFormat df = new SimpleDateFormat(ISO_8601_DATE_FORMAT);
+        stat.setString(2, df.format(doc.getCreationDate().getTime()));
         stat.executeUpdate();
 
         stat.setString(1, UPDATEDOC_DATE_KEY);
-        stat.setDate(2, calendarToSqlDate(doc.getLastUpdateDate()));
+        stat.setString(2, df.format(doc.getLastUpdateDate().getTime()));
         stat.executeUpdate();
 
     }
@@ -276,7 +279,6 @@ public class PaccmanSave {
             }
         }
     }
-    
     static private final String SAVE_TRANSFER_SQL =
             "INSERT INTO OBJ_TRANSFERS(" +
             "TRANSACTION_ID," +
@@ -360,26 +362,25 @@ public class PaccmanSave {
         stat.setString(4, t.getNote());
         stat.executeUpdate();
     }
-
     static private final String SAVE_SCHED_TRANSACTION_SQL =
             "INSERT INTO OBJ_SCHED_TRANSACTIONS(" +
-            "AUTOMATIC ,"+
+            "AUTOMATIC ," +
             "DESCRIPTION," +
-            "FIXED_AMOUNT,"+
-            "NEXT_OCCURENCE,"+
-            "PERIOD,"+
-            "PERIOD_UNIT,"+
+            "FIXED_AMOUNT," +
+            "NEXT_OCCURENCE," +
+            "PERIOD," +
+            "PERIOD_UNIT," +
             "SCHED_DAYS," +
-            "TRANSACTION_ID "+
+            "TRANSACTION_ID " +
             ")" +
             "VALUES(?,?,?,?,?,?,?,?)";
-    
+
     private void saveSchedTransactions() throws SQLException {
-        PreparedStatement stat = connection.prepareStatement(SAVE_SCHED_TRANSACTION_SQL, Statement.RETURN_GENERATED_KEYS);        
-        for (Account account: doc.getAccounts()) {
-            for (ScheduledTransaction t: account.getScheduledTransactions()) {
+        PreparedStatement stat = connection.prepareStatement(SAVE_SCHED_TRANSACTION_SQL, Statement.RETURN_GENERATED_KEYS);
+        for (Account account : doc.getAccounts()) {
+            for (ScheduledTransaction t : account.getScheduledTransactions()) {
                 saveTransaction(account, t.getTransactionBase(), true);
-                
+
                 stat.setBoolean(1, t.isAutomatic());
                 stat.setString(2, t.getDescription());
                 stat.setBoolean(3, t.isFixedAmount());
@@ -388,9 +389,9 @@ public class PaccmanSave {
                 stat.setString(6, periodUnitToDbUnit(t.getPeriodUnit()));
                 stat.setInt(7, t.getScheduleDays());
                 stat.setLong(8, t.getTransactionBase().getTransactionId());
-                
+
                 stat.executeUpdate();
-                
+
             }
         }
     }

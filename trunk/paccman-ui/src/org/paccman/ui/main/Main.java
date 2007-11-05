@@ -64,6 +64,10 @@ import org.paccman.xml.PaccmanIOException;
  */
 public class Main extends javax.swing.JFrame implements PaccmanView {
 
+    boolean saveToDatabase = false;
+    boolean saveToXml = true;
+    boolean readFromXml = false;
+    
     DocumentController documentController;
 
     public TransactionFormTab getTransactionFormTab() {
@@ -359,24 +363,36 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         @Override
         protected Object doInBackground() throws Exception {
-            PaccmanFile paccmanFile = new PaccmanFile();
             DocumentController newDocumentController = new DocumentController();
-            logger.fine("Opening file " + file.getAbsolutePath());
-            paccmanFile.read(file, newDocumentController);
-            logger.fine("File opened");
+            if (readFromXml) {
+                PaccmanFile paccmanFile = new PaccmanFile();
+                logger.fine("Opening file " + file.getAbsolutePath());
+                paccmanFile.read(file, newDocumentController);
+                logger.fine("File opened");
 
-            // Make a copy of the file
-            File fileOut = new File(file.getAbsolutePath() + new SimpleDateFormat("-yyMMddHHmmss").format(new Date()));
-            try {
-                copyFile(file, fileOut);
-                logger.fine("Copied file to " + fileOut.getAbsolutePath());
+                // Make a copy of the file
+                File fileOut = new File(file.getAbsolutePath() + new SimpleDateFormat("-yyMMddHHmmss").format(new Date()));
                 try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
+                    copyFile(file, fileOut);
+                    logger.fine("Copied file to " + fileOut.getAbsolutePath());
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                } catch (IOException ex) {
+                    throw new PaccmanIOException("Failed to make a save copy of the file");
                 }
-            } catch (IOException ex) {
-                throw new PaccmanIOException("Failed to make a save copy of the file");
+
+            } else {
+                PaccmanDao db = new PaccmanDao(new File(file.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
+                try {
+                    db.load(newDocumentController);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (UnsupportedEncodingException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             // Register views
@@ -497,23 +513,29 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      */
     public OperationStatus saveDocument(File saveFile) {
         //:TODO:START:this will be obsolete:
-        PaccmanFile pf = new PaccmanFile();
-        try {
-            pf.write(saveFile, documentController);
-        } catch (PaccmanIOException pie) {
-            pie.printStackTrace();
-            return OperationStatus.FAILED;
+        if (saveToXml) {
+            PaccmanFile pf = new PaccmanFile();
+            try {
+                pf.write(saveFile, documentController);
+            } catch (PaccmanIOException pie) {
+                pie.printStackTrace();
+                return OperationStatus.FAILED;
+            }
+
         }
         //:TODO:END:this will be obsolete
 
-        PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db"  /*:TODO:END:*/);
-        try {
-            db.save(documentController);
-        } catch (SQLException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        if (saveToDatabase) {
+            PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
+            try {
+                db.save(documentController);
+            } catch (SQLException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
         return OperationStatus.OK;
     }
 
@@ -826,6 +848,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             }
         }
     }
+
     static StartOption startOption;
     static {
         startOption = new StartOption();

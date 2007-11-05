@@ -92,4 +92,22 @@ public class PaccmanDao {
         shutdown();
     }
     
+    /**:TODO:
+     * Save the document associated to the specified controller to the database file.
+     * @param ctrl The document controller providing the document to save.
+     * @throws java.sql.SQLException
+     * @throws java.io.UnsupportedEncodingException 
+     */
+    public void load(DocumentController ctrl) throws SQLException, UnsupportedEncodingException {
+        // First create the database
+        open();
+        
+        // Do actually save the document
+        PaccmanLoad pl = new PaccmanLoad();
+        pl.loadDocument(connection, ctrl);
+        
+        // Close database
+        shutdown();
+    }
+    
 }

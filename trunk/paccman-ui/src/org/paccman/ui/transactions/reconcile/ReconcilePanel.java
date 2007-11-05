@@ -9,7 +9,6 @@ package org.paccman.ui.transactions.reconcile;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  *

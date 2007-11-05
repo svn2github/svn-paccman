@@ -51,7 +51,7 @@ public class PaccmanLoad {
         this.connection = connection;
 
         // Doc info
-        loadDocInfo();
+        loadDocInfo(ctrl);
 
         loadBanks();
 
@@ -111,7 +111,7 @@ public class PaccmanLoad {
 
     private final static String SEL_CATEGORIES_SQL =
             "SELECT CATEGORY_ID, NAME, DESCRIPTION, IS_INCOME " +
-            "FROM OBJ_CATGEORIES WHERE PARENT_CATEGORY_ID IS NOT NULL";
+            "FROM OBJ_CATEGORIES WHERE PARENT_CATEGORY_ID IS NOT NULL";
 
     private void loadCategories() throws SQLException {
         Statement stat = connection.createStatement();
@@ -175,19 +175,21 @@ public class PaccmanLoad {
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    private void loadDocInfo() throws SQLException {
+    private void loadDocInfo(DocumentController ctrl) throws SQLException {
         Statement stat = connection.createStatement();
         ResultSet rs = stat.executeQuery("select NAME, VALUE from DOCINFO");
 
         while (rs.next()) {
             final String name = rs.getString("NAME");
             final String value = rs.getString("VALUE");
-            if (name.equals(DOCUMENT_TITLE_KEY)) {
+            if (name.equals(DOCVERSION_KEY)) {
+                ctrl.setLoadVersion(value);
+            } else if (name.equals(DOCUMENT_TITLE_KEY)) {
                 doc.setTitle(value);
             } else if (name.equals(CREATEDOC_DATE_KEY)) {
                 try {
                     Calendar c = new GregorianCalendar();
-                    c.setTime(new SimpleDateFormat().parse(value));
+                    c.setTime(new SimpleDateFormat(ISO_8601_DATE_FORMAT).parse(value));
                     doc.setCreationDate(c);
                 } catch (ParseException ex) {
                     //:TODO:
