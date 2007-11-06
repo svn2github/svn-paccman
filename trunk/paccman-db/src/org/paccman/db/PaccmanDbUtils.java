@@ -8,7 +8,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import org.paccman.paccman.ScheduledTransaction.PeriodUnit;
 import org.paccman.paccman.TransactionBase;
 
@@ -47,6 +49,21 @@ public class PaccmanDbUtils {
      */
     static final Date calendarToSqlDate(Calendar c) {
         return c == null ? null : new Date(c.getTimeInMillis());
+    }
+
+    /**
+     * Converts the given SQL Date to a Calendar.
+     * @param date The SQL date to convert.
+     * @return The SQL date equivalent of the <code>c</code> Calendar.
+     */
+    static final Calendar sqlDateToCalendar(Timestamp date) {
+        if (date == null) {
+            return null; 
+        } else {
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(date);
+            return gc;
+        }
     }
 
     /**
