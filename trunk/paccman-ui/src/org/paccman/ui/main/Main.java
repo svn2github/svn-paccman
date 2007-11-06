@@ -389,8 +389,10 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 try {
                     db.load(newDocumentController);
                 } catch (SQLException ex) {
+                    //:TODO:do better error handling here
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (UnsupportedEncodingException ex) {
+                    //:TODO:do better error handling here
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

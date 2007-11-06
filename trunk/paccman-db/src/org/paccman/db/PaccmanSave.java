@@ -22,7 +22,6 @@ import org.paccman.paccman.Payment;
 import org.paccman.paccman.PaymentMethod;
 import org.paccman.paccman.ScheduledTransaction;
 import org.paccman.paccman.SimplePayment;
-import org.paccman.paccman.SimplePayment;
 import org.paccman.paccman.SplitPayment;
 import org.paccman.paccman.SplitTransaction;
 import org.paccman.paccman.SubCategory;
@@ -312,6 +311,7 @@ public class PaccmanSave {
         } else {
             stat.setNull(3, Types.BIGINT);
         }
+        stat.executeUpdate();
         if (payment instanceof SimplePayment) {
             saveSimplePayment((SimplePayment) payment, transactionBaseId);
         } else if (payment instanceof SplitPayment) {

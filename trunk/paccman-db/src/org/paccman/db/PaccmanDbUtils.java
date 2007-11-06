@@ -19,6 +19,9 @@ import org.paccman.paccman.TransactionBase;
  * @author joao
  */
 public class PaccmanDbUtils {
+    public static final String DB_MARKED = "M";
+    public static final String DB_RECONCILIED = "R";
+    public static final String DB_UNRECONCILIED = "U";
 
     /**
      * Current version of database model.
@@ -74,11 +77,27 @@ public class PaccmanDbUtils {
     static final String reconcileToDbReconcile(TransactionBase.ReconciliationState state) {
         switch (state) {
             case MARKED:
-                return "M";
+                return DB_MARKED;
             case RECONCILED:
-                return "R";
+                return DB_RECONCILIED;
             case UNRECONCILED:
-                return "U";
+                return DB_UNRECONCILIED;
+        }
+        throw new AssertionError("Unrecognize reconciliation state");
+    }
+
+    /**
+     * Converts the value stored in datebase to the reconcile enum.
+     * @param state The state to be converted.
+     * @return The reconcilied enum value.
+     */
+    static final TransactionBase.ReconciliationState dbReconcileToReconcile(String state) {
+        if (state.equals(DB_MARKED)) {
+            return TransactionBase.ReconciliationState.MARKED;
+        } else if (state.equals(DB_RECONCILIED)) {
+            return TransactionBase.ReconciliationState.RECONCILED;
+        } else if (state.equals(DB_UNRECONCILIED)) {
+            return TransactionBase.ReconciliationState.UNRECONCILED;
         }
         throw new AssertionError("Unrecognize reconciliation state");
     }
@@ -95,7 +114,7 @@ public class PaccmanDbUtils {
             case WEEK:
                 return "W";
             case MONTH:
-                return "M";
+                return DB_MARKED;
             case YEAR:
                 return "Y";
         }
