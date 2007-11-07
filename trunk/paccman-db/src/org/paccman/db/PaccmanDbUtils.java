@@ -19,9 +19,16 @@ import org.paccman.paccman.TransactionBase;
  * @author joao
  */
 public class PaccmanDbUtils {
+    // Reconcilied status
     public static final String DB_MARKED = "M";
     public static final String DB_RECONCILIED = "R";
     public static final String DB_UNRECONCILIED = "U";
+    
+    // Period units
+    public static final String DB_PERIOD_UNIT_DAY = "D";
+    public static final String DB_PERIOD_UNIT_WEEK = "W";
+    public static final String DB_PERIOD_UNIT_MONTH = "M";
+    public static final String DB_PERIOD_UNIT_YEAR = "Y";
 
     /**
      * Current version of database model.
@@ -107,16 +114,34 @@ public class PaccmanDbUtils {
      * @param periodUnit The period unit to be converted.
      * @return The database value.
      */
-    static final String periodUnitToDbUnit(PeriodUnit periodUnit) {
+    static final String periodUnitToDbPeriodUnit(PeriodUnit periodUnit) {
         switch (periodUnit) {
             case DAY:
-                return "D";
+                return DB_PERIOD_UNIT_DAY;
             case WEEK:
-                return "W";
+                return DB_PERIOD_UNIT_WEEK;
             case MONTH:
-                return DB_MARKED;
+                return DB_PERIOD_UNIT_MONTH;
             case YEAR:
-                return "Y";
+                return DB_PERIOD_UNIT_YEAR;
+        }
+        throw new AssertionError("Unrecognize period unit");
+    }
+
+    /**
+     * Converts the period unit stored in database to the equivalent enum.
+     * @param periodUnit The database period unit to be converted.
+     * @return The enum value.
+     */
+    static final PeriodUnit dbPeriodUnitToPeriodUnit(String periodUnit) {
+        if (periodUnit.equals(DB_PERIOD_UNIT_DAY)) {
+            return PeriodUnit.DAY;
+        } else if (periodUnit.equals(DB_PERIOD_UNIT_WEEK)) {
+            return PeriodUnit.WEEK;
+        } else if (periodUnit.equals(DB_PERIOD_UNIT_MONTH)) {
+            return PeriodUnit.MONTH;
+        } else if (periodUnit.equals(DB_PERIOD_UNIT_YEAR)) {
+            return PeriodUnit.YEAR;
         }
         throw new AssertionError("Unrecognize period unit");
     }

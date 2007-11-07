@@ -388,7 +388,7 @@ public class PaccmanSave {
                 stat.setBoolean(4, t.isFixedAmount());
                 stat.setDate(5, calendarToSqlDate(t.getNextOccurence()));
                 stat.setInt(6, t.getPeriod());
-                stat.setString(7, periodUnitToDbUnit(t.getPeriodUnit()));
+                stat.setString(7, periodUnitToDbPeriodUnit(t.getPeriodUnit()));
                 stat.setInt(8, t.getScheduleDays());
                 stat.setLong(9, t.getTransactionBase().getTransactionId());
 
