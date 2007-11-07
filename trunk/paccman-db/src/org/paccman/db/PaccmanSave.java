@@ -364,6 +364,7 @@ public class PaccmanSave {
     }
     static private final String SAVE_SCHED_TRANSACTION_SQL =
             "INSERT INTO OBJ_SCHED_TRANSACTIONS(" +
+            "ACCOUNT_ID, " +
             "AUTOMATIC ," +
             "DESCRIPTION," +
             "FIXED_AMOUNT," +
@@ -371,9 +372,9 @@ public class PaccmanSave {
             "PERIOD," +
             "PERIOD_UNIT," +
             "SCHED_DAYS," +
-            "TRANSACTION_ID " +
+            "TRANSACTION_ID" +
             ")" +
-            "VALUES(?,?,?,?,?,?,?,?)";
+            "VALUES(?,?,?,?,?,?,?,?,?)";
 
     private void saveSchedTransactions() throws SQLException {
         PreparedStatement stat = connection.prepareStatement(SAVE_SCHED_TRANSACTION_SQL, Statement.RETURN_GENERATED_KEYS);
@@ -381,14 +382,15 @@ public class PaccmanSave {
             for (ScheduledTransaction t : account.getScheduledTransactions()) {
                 saveTransaction(account, t.getTransactionBase(), true);
 
-                stat.setBoolean(1, t.isAutomatic());
-                stat.setString(2, t.getDescription());
-                stat.setBoolean(3, t.isFixedAmount());
-                stat.setDate(4, calendarToSqlDate(t.getNextOccurence()));
-                stat.setInt(5, t.getPeriod());
-                stat.setString(6, periodUnitToDbUnit(t.getPeriodUnit()));
-                stat.setInt(7, t.getScheduleDays());
-                stat.setLong(8, t.getTransactionBase().getTransactionId());
+                stat.setLong(1, account.getAccountId());
+                stat.setBoolean(2, t.isAutomatic());
+                stat.setString(3, t.getDescription());
+                stat.setBoolean(4, t.isFixedAmount());
+                stat.setDate(5, calendarToSqlDate(t.getNextOccurence()));
+                stat.setInt(6, t.getPeriod());
+                stat.setString(7, periodUnitToDbUnit(t.getPeriodUnit()));
+                stat.setInt(8, t.getScheduleDays());
+                stat.setLong(9, t.getTransactionBase().getTransactionId());
 
                 stat.executeUpdate();
 

@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package org.paccman.db;
 
 import java.sql.Connection;
@@ -34,6 +35,7 @@ import org.paccman.paccman.Payee;
 import org.paccman.paccman.PaymentMethod;
 import org.paccman.paccman.SimplePayment;
 import org.paccman.paccman.SplitPayment;
+import org.paccman.paccman.SplitTransaction;
 import org.paccman.paccman.SubCategory;
 import org.paccman.paccman.TransactionBase;
 import org.paccman.paccman.Transfer;
@@ -88,6 +90,7 @@ public class PaccmanLoad {
         updateAllBalances();
 
     }
+
     private final static String SEL_BANKS_SQL =
             "SELECT BANK_ID, NAME, AGENCY, ADDRESS_NUMBER, ADDRESS_LINE1, ADDRESS_LINE2, " +
             "ADDRESS_CITY, ADDRESS_ZIP, ADDRESS_COUNTRY, TELEPHONE, FAX, INTERNET, EMAIL " +
@@ -119,6 +122,7 @@ public class PaccmanLoad {
             logger.finest("Loaded Bank: " + bank.getName());
         }
     }
+
     private final static String SEL_CATEGORIES_SQL =
             "SELECT CATEGORY_ID, NAME, DESCRIPTION, IS_INCOME " +
             "FROM OBJ_CATEGORIES WHERE PARENT_CATEGORY_ID IS NULL";
@@ -142,6 +146,7 @@ public class PaccmanLoad {
             logger.finest("Loaded Category: " + category.getName());
         }
     }
+
     private final static String SEL_SUBCATEGORIES_SQL =
             "SELECT CATEGORY_ID, NAME, DESCRIPTION " +
             "FROM OBJ_CATEGORIES WHERE PARENT_CATEGORY_ID = ?";
@@ -163,6 +168,7 @@ public class PaccmanLoad {
             logger.finest("Loaded SubCategory: " + subCategory.getName());
         }
     }
+
     private final static String SEL_PAYEES_SQL =
             "SELECT PAYEE_ID, NAME " +
             "FROM OBJ_PAYEES";
@@ -179,6 +185,7 @@ public class PaccmanLoad {
             doc.addPayee(payee);
         }
     }
+
     private final static String SEL_PAYMENTMETHODS_SQL =
             "SELECT PAYMENT_METHOD_ID, NAME " +
             "FROM OBJ_PAYMENT_METHODS";
@@ -195,6 +202,7 @@ public class PaccmanLoad {
             doc.addPaymentMethod(paymentMethod);
         }
     }
+
     private final static String SEL_ACCOUNTS_SQL =
             "SELECT " +
             "ACCOUNT_ID, OBJ_ACCOUNTS.NAME as NAME, OBJ_BANKS.NAME as BANK_NAME," +
@@ -226,7 +234,7 @@ public class PaccmanLoad {
 
             // Reconciliation data
             account.setLastReconciliationBalance(rs.getBigDecimal("LAST_RECONCILIATION_BALANCE"));
-            account.setLastReconciliationDate(sqlDateToCalendar(rs.getTimestamp("LAST_RECONCILIATION_BALANCE")));
+            account.setLastReconciliationDate(sqlDateToCalendar(rs.getTimestamp("LAST_RECONCILIATION_DATE")));
             account.setPendingReconciliation(rs.getBoolean("PENDING_RECONCILIATION"));
             if (account.isPendingReconciliation()) {
                 account.setPendingReconciliationBalance(rs.getBigDecimal("PENDING_RECONCILIATION_BALANCE"));
@@ -245,6 +253,7 @@ public class PaccmanLoad {
     private void loadScheduledTransactions() {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
     private final String SEL_TRANSFERS_SQL =
             "SELECT TO_FROM_ACCOUNTS.NAME AS ACCOUNT_NAME, OBJ_TRANSACTIONS.TRANSACTION_ID FROM OBJ_TRANSFERS " +
             "INNER JOIN OBJ_TRANSACTIONS ON OBJ_TRANSACTIONS.TRANSACTION_ID = OBJ_TRANSFERS.TRANSACTION_ID " +
@@ -265,7 +274,15 @@ public class PaccmanLoad {
             "LEFT JOIN OBJ_CATEGORIES AS PARENT_CATEGORIES ON OBJ_CATEGORIES.PARENT_CATEGORY_ID = PARENT_CATEGORIES.CATEGORY_ID " +
             "WHERE (OBJ_ACCOUNTS.ACCOUNT_ID = ?) AND (OBJ_TRANSACTIONS.IS_SCHEDTRANSACTION = ?) ";
     private final String SEL_SPLITPAYMENTS_SQL =
-            ":TODO:";
+            "SELECT OBJ_PAYEES.NAME AS PAYEE_NAME, OBJ_PAYMENT_METHODS.NAME AS PAYMENT_METHOD_NAME," +
+            "OBJ_TRANSACTIONS.TRANSACTION_ID " +
+            "FROM OBJ_SPLIT_PAYMENTS " +
+            "INNER JOIN OBJ_PAYMENTS ON OBJ_PAYMENTS.TRANSACTION_ID = OBJ_SPLIT_PAYMENTS.TRANSACTION_ID  " +
+            "INNER JOIN OBJ_TRANSACTIONS ON OBJ_TRANSACTIONS.TRANSACTION_ID = OBJ_PAYMENTS.TRANSACTION_ID  " +
+            "INNER JOIN OBJ_ACCOUNTS ON OBJ_ACCOUNTS.ACCOUNT_ID = OBJ_TRANSACTIONS.ACCOUNT_ID  " +
+            "INNER JOIN OBJ_PAYMENT_METHODS ON OBJ_PAYMENTS.PAYMENT_METHOD_ID = OBJ_PAYMENT_METHODS.PAYMENT_METHOD_ID  " +
+            "INNER JOIN OBJ_PAYEES ON OBJ_PAYMENTS.PAYEE_ID = OBJ_PAYEES.PAYEE_ID " +
+            "WHERE (OBJ_ACCOUNTS.ACCOUNT_ID = ?) AND (OBJ_TRANSACTIONS.IS_SCHEDTRANSACTION = ?)";
 
     CategoryBase getCategory(String name, String parentName) {
         if (parentName == null) {
@@ -274,17 +291,21 @@ public class PaccmanLoad {
             return doc.getCategory(parentName).getSubCategory(name);
         }
     }
-    
+
     private void loadTransactions() throws SQLException {
+        PreparedStatement statTransfer = connection.prepareStatement(SEL_TRANSFERS_SQL);
+        PreparedStatement statSimplePayment = connection.prepareStatement(SEL_SIMPLEPAYMENTS_SQL);
+        PreparedStatement statSplitPayment = connection.prepareStatement(SEL_SPLITPAYMENTS_SQL);
+        PreparedStatement statTransactionBase = connection.prepareStatement(SEL_TRANSACTIONBASE_SQL);
+
         for (Account account : doc.getAccounts()) {
             logger.finest("Loading transactions for account : " + account.getName());
 
             // -- Transfers
             {
-                PreparedStatement stat = connection.prepareStatement(SEL_TRANSFERS_SQL);
-                stat.setLong(1, account.getAccountId());
-                stat.setBoolean(2, false);
-                ResultSet rs = stat.executeQuery();
+                statTransfer.setLong(1, account.getAccountId());
+                statTransfer.setBoolean(2, false);
+                ResultSet rs = statTransfer.executeQuery();
                 while (rs.next()) {
                     logger.finest("Transaction no: " + account.getTransactions().size());
                     Transfer transfer = new TransferController().getTransfer();
@@ -292,7 +313,7 @@ public class PaccmanLoad {
                     transfer.setToFromAccount(doc.getAccount(rs.getString("ACCOUNT_NAME")));
                     long transactionId = rs.getLong("TRANSACTION_ID");
 
-                    loadTransactionBase(transfer, transactionId, account.getAccountId(), false);
+                    loadTransactionBase(statTransactionBase, transfer, transactionId, account.getAccountId(), false);
 
                     account.addTransfer(transfer, false);
                 }
@@ -300,10 +321,9 @@ public class PaccmanLoad {
 
             // -- Simple Payments
             {
-                PreparedStatement stat = connection.prepareStatement(SEL_SIMPLEPAYMENTS_SQL);
-                stat.setLong(1, account.getAccountId());
-                stat.setBoolean(2, false);
-                ResultSet rs = stat.executeQuery();
+                statSimplePayment.setLong(1, account.getAccountId());
+                statSimplePayment.setBoolean(2, false);
+                ResultSet rs = statSimplePayment.executeQuery();
                 while (rs.next()) {
                     logger.finest("Transaction no: " + account.getTransactions().size());
                     SimplePayment simplePayment = new SimplePaymentController().getPayment();
@@ -312,7 +332,7 @@ public class PaccmanLoad {
                     simplePayment.setPayee(doc.getPayee(rs.getString("PAYEE_NAME")));
                     simplePayment.setPaymentMethod(doc.getPaymentType(rs.getString("PAYMENT_METHOD_NAME")));
                     simplePayment.setCategory(getCategory(rs.getString("CATEGORY_NAME"), rs.getString("PARENT_CATEGORY_NAME")));
-                    loadTransactionBase(simplePayment, transactionId, account.getAccountId(), false);
+                    loadTransactionBase(statTransactionBase, simplePayment, transactionId, account.getAccountId(), false);
 
                     account.addSimplePayment(simplePayment, false);
                 }
@@ -320,23 +340,44 @@ public class PaccmanLoad {
 
             // -- Split payments
             {
-                PreparedStatement stat = connection.prepareStatement(SEL_SPLITPAYMENTS_SQL);
-                stat.setLong(1, account.getAccountId());
-                stat.setBoolean(2, false);
-                ResultSet rs = stat.executeQuery();
+                statSplitPayment.setLong(1, account.getAccountId());
+                statSplitPayment.setBoolean(2, false);
+                ResultSet rs = statSplitPayment.executeQuery();
                 while (rs.next()) {
                     logger.finest("Transaction no: " + account.getTransactions().size());
                     SplitPayment splitPayment = new SplitPaymentController().getPayment();
 
                     long transactionId = rs.getLong("TRANSACTION_ID");
-
-                    //:TODO:
-                    loadTransactionBase(splitPayment, transactionId, account.getAccountId(), false);
+                    splitPayment.setPayee(doc.getPayee(rs.getString("PAYEE_NAME")));
+                    splitPayment.setPaymentMethod(doc.getPaymentType(rs.getString("PAYMENT_METHOD_NAME")));
+                    loadSplitTransactions(splitPayment);
+                    loadTransactionBase(statTransactionBase, splitPayment, transactionId, account.getAccountId(), false);
 
                     account.addSplitPayment(splitPayment, false);
                 }
             }
 
+        }
+    }
+
+    private final String SEL_SPLIT_TRANSACTIONS_SQL =
+            "select AMOUNT, OBJ_CATEGORIES.NAME as CAT_NAME, PARENT_CATEGORIES.NAME as PARENT_CAT_NAME, NOTE " +
+            "from OBJ_SPLIT_TRANSACTIONS " +
+            "inner join OBJ_CATEGORIES on OBJ_CATEGORIES.CATEGORY_ID = OBJ_SPLIT_TRANSACTIONS.CATEGORY_ID " +
+            "inner join OBJ_CATEGORIES AS PARENT_CATEGORIES ON OBJ_CATEGORIES.PARENT_CATEGORY_ID = PARENT_CATEGORIES.CATEGORY_ID " +
+            "where OBJ_SPLIT_TRANSACTIONS.TRANSACTION_ID = ?";
+
+    private void loadSplitTransactions(SplitPayment payment) throws SQLException {
+        PreparedStatement stat = connection.prepareStatement(SEL_SPLIT_TRANSACTIONS_SQL);
+        stat.setLong(1, payment.getTransactionId());
+        ResultSet rs = stat.executeQuery();
+        while (rs.next()) {
+            SplitTransaction st = new SplitTransaction();
+            st.setAmount(rs.getBigDecimal("AMOUNT"));
+            st.setCategory(getCategory("CAT_NAME", "PARENT_CAT_NAME"));
+            st.setNote(rs.getString("NOTE"));
+            
+            payment.addSplitTransaction(st);
         }
     }
 
@@ -379,6 +420,7 @@ public class PaccmanLoad {
             account.updateBalances();
         }
     }
+
     private final String SEL_TRANSACTIONBASE_SQL =
             "SELECT AMOUNT, VALUE_DATE,TRANSACTION_DATE, NOTE, LABEL," +
             "RECONCILIATION_STATE, RECONCILIATION_DATE " +
@@ -386,11 +428,10 @@ public class PaccmanLoad {
             "WHERE (TRANSACTION_ID = ?) AND " +
             "      (ACCOUNT_ID = ?)";
 
-    private void loadTransactionBase(TransactionBase transaction, long transactionId, long accountId, boolean isScheduled) throws SQLException {
-        PreparedStatement stat = connection.prepareStatement(SEL_TRANSACTIONBASE_SQL);
-        stat.setLong(1, transactionId);
-        stat.setLong(2, accountId);
-        ResultSet rs = stat.executeQuery();
+    private void loadTransactionBase(PreparedStatement statTransactionBase, TransactionBase transaction, long transactionId, long accountId, boolean isScheduled) throws SQLException {
+        statTransactionBase.setLong(1, transactionId);
+        statTransactionBase.setLong(2, accountId);
+        ResultSet rs = statTransactionBase.executeQuery();
         rs.next();
         transaction.setAmount(rs.getBigDecimal("AMOUNT"));
         transaction.setValueDate(sqlDateToCalendar(rs.getTimestamp("VALUE_DATE")));
@@ -400,4 +441,5 @@ public class PaccmanLoad {
         transaction.setReconciliationState(dbReconcileToReconcile(rs.getString("RECONCILIATION_STATE")));
         transaction.setReconciliationDate(sqlDateToCalendar(rs.getTimestamp("RECONCILIATION_DATE")));
     }
+
 }

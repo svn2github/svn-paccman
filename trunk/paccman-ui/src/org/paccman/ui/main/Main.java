@@ -394,6 +394,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 } catch (UnsupportedEncodingException ex) {
                     //:TODO:do better error handling here
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    //:TODO:do better error handling here
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -532,9 +535,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             try {
                 db.save(documentController);
             } catch (SQLException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
             }
 
         }
