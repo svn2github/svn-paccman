@@ -66,7 +66,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
     boolean saveToDatabase = false;
     boolean saveToXml = true;
-    boolean readFromXml = false;
+    boolean readFromXml = false; // = ! readFromDatabase
     
     DocumentController documentController;
 

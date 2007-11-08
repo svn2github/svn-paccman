@@ -243,7 +243,7 @@ public class PaccmanSave {
             "RECONCILIATION_STATE," +
             "RECONCILIATION_DATE," +
             "ACCOUNT_ID," +
-            "IS_SCHEDTRANSACTION)" +
+            "IS_TEMPLATE)" +
             "VALUES(?,?,?,?,?,?,?,?,?)";
 
     private void saveTransaction(Account account, TransactionBase t, boolean isScheduled) throws SQLException, SQLException {
