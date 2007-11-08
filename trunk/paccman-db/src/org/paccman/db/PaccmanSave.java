@@ -223,10 +223,10 @@ public class PaccmanSave {
             stat.setString(6, account.getNote());
             stat.setString(7, account.getHolderName());
             stat.setString(8, account.getHolderAddress());
-            stat.setDate(9, calendarToSqlDate(account.getLastReconciliationDate()));
+            stat.setTimestamp(9, calendarToSqlDate(account.getLastReconciliationDate()));
             stat.setBigDecimal(10, account.getLastReconciliationBalance());
             stat.setBoolean(11, account.isPendingReconciliation());
-            stat.setDate(12, calendarToSqlDate(account.getLastReconciliationDate()));
+            stat.setTimestamp(12, calendarToSqlDate(account.getLastReconciliationDate()));
             stat.setBigDecimal(13, account.getPendingReconciliationBalance());
             stat.executeUpdate();
 
@@ -250,12 +250,12 @@ public class PaccmanSave {
         PreparedStatement stat = connection.prepareStatement(SAVE_TRANSACTIONS_SQL, Statement.RETURN_GENERATED_KEYS);
 
         stat.setBigDecimal(1, t.getAmount());
-        stat.setDate(2, calendarToSqlDate(t.getValueDate()));
-        stat.setDate(3, calendarToSqlDate(t.getTransactionDate()));
+        stat.setTimestamp(2, calendarToSqlDate(t.getValueDate()));
+        stat.setTimestamp(3, calendarToSqlDate(t.getTransactionDate()));
         stat.setString(4, t.getNote());
         stat.setString(5, t.getLabel());
         stat.setString(6, reconcileToDbReconcile(t.getReconciliationState()));
-        stat.setDate(7, calendarToSqlDate(t.getReconciliationDate()));
+        stat.setTimestamp(7, calendarToSqlDate(t.getReconciliationDate()));
         stat.setLong(8, account.getAccountId());
         stat.setBoolean(9, isScheduled);
 
@@ -386,7 +386,7 @@ public class PaccmanSave {
                 stat.setBoolean(2, t.isAutomatic());
                 stat.setString(3, t.getDescription());
                 stat.setBoolean(4, t.isFixedAmount());
-                stat.setDate(5, calendarToSqlDate(t.getNextOccurence()));
+                stat.setTimestamp(5, calendarToSqlDate(t.getNextOccurence()));
                 stat.setInt(6, t.getPeriod());
                 stat.setString(7, periodUnitToDbPeriodUnit(t.getPeriodUnit()));
                 stat.setInt(8, t.getScheduleDays());

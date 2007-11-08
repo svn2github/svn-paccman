@@ -53,12 +53,12 @@ public class PaccmanDbUtils {
     static final String DOCVERSION_KEY = "dbversion";
 
     /**
-     * Converts the given calendar to a SQL Date.
+     * Converts the given calendar to a SQL Timestamp.
      * @param c The calendar to convert.
-     * @return The SQL date equivalent of the <code>c</code> Calendar.
+     * @return The SQL timestamp equivalent of the <code>c</code> Calendar.
      */
-    static final Date calendarToSqlDate(Calendar c) {
-        return c == null ? null : new Date(c.getTimeInMillis());
+    static final Timestamp calendarToSqlDate(Calendar c) {
+        return c == null ? null : new Timestamp(c.getTimeInMillis());
     }
 
     /**
