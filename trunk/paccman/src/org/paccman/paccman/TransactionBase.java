@@ -18,13 +18,14 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  
 */
+
 package org.paccman.paccman;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
 
 /**
- *
+ * 
  * @author joao
  */
 public abstract class TransactionBase extends PaccmanObject {
@@ -122,6 +123,7 @@ public abstract class TransactionBase extends PaccmanObject {
     /**
      * Holds value of property note.
      */
+
     private String note;
 
     /**
@@ -172,7 +174,6 @@ public abstract class TransactionBase extends PaccmanObject {
         /**
          * 
          */
-
         UNRECONCILED,
         /**
          * 
@@ -183,6 +184,7 @@ public abstract class TransactionBase extends PaccmanObject {
          */
         RECONCILED
     }
+
      
     
     ;
@@ -266,5 +268,6 @@ public abstract class TransactionBase extends PaccmanObject {
         transaction.setTransactionDate(this.transactionDate);
         transaction.setValueDate(this.valueDate);
     }
+
 }
 
