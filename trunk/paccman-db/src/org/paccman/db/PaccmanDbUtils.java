@@ -1,10 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
+    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
+
 package org.paccman.db;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,15 +36,15 @@ import org.paccman.paccman.TransactionBase;
  */
 public class PaccmanDbUtils {
     // Reconcilied status
-    public static final String DB_MARKED = "M";
-    public static final String DB_RECONCILIED = "R";
-    public static final String DB_UNRECONCILIED = "U";
+    static final String DB_MARKED = "M";
+    static final String DB_RECONCILIED = "R";
+    static final String DB_UNRECONCILIED = "U";
     
     // Period units
-    public static final String DB_PERIOD_UNIT_DAY = "D";
-    public static final String DB_PERIOD_UNIT_WEEK = "W";
-    public static final String DB_PERIOD_UNIT_MONTH = "M";
-    public static final String DB_PERIOD_UNIT_YEAR = "Y";
+    static final String DB_PERIOD_UNIT_DAY = "D";
+    static final String DB_PERIOD_UNIT_WEEK = "W";
+    static final String DB_PERIOD_UNIT_MONTH = "M";
+    static final String DB_PERIOD_UNIT_YEAR = "Y";
 
     /**
      * Current version of database model.
@@ -143,7 +159,7 @@ public class PaccmanDbUtils {
         } else if (periodUnit.equals(DB_PERIOD_UNIT_YEAR)) {
             return PeriodUnit.YEAR;
         }
-        throw new AssertionError("Unrecognize period unit");
+        throw new AssertionError("Unrecognized period unit.");
     }
 
     /**

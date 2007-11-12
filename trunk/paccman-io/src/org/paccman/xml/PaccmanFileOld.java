@@ -39,8 +39,10 @@ import org.paccman.paccman.Document;
 /**
  *
  * @author joao
+ * @deprecated 
  */
-public class PaccmanFile {
+@Deprecated
+public class PaccmanFileOld {
     
     // Version of paccman file format
     private static final String  FILE_VERSION      = "1.0.0.0"       ;
@@ -52,7 +54,7 @@ public class PaccmanFile {
     // Document jar entry name
     private static final String  DOCUMENT_ENTRY_NAME = "document.xml";
     
-    public PaccmanFile() {
+    public PaccmanFileOld() {
     }
     
     private void read(File filein, DocumentController document, String version) throws PaccmanIOException {
@@ -119,7 +121,7 @@ public class PaccmanFile {
             Attributes attribs = new Attributes();
             attribs.putValue(FORMAT_VERSION, FILE_VERSION);
             
-            manifest.getEntries().put(PaccmanFile.MANIFEST_DOCUMENT, attribs);
+            manifest.getEntries().put(PaccmanFileOld.MANIFEST_DOCUMENT, attribs);
             JarOutputStream jos = new JarOutputStream(new FileOutputStream(fileout), manifest);
             
             JarEntry je = new JarEntry("document.xml");
