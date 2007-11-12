@@ -51,6 +51,10 @@ public class PropertiesFrame extends JFrame implements PaccmanView {
         fileEdt = new javax.swing.JTextField();
         fileVersionLbl = new javax.swing.JLabel();
         fileVersionEdt = new javax.swing.JTextField();
+        creationDateLbl = new javax.swing.JLabel();
+        creationDateEdt = new javax.swing.JTextField();
+        lastUpdateLbl = new javax.swing.JLabel();
+        lastUpdateEdt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Account file properties");
@@ -74,25 +78,37 @@ public class PropertiesFrame extends JFrame implements PaccmanView {
 
         fileVersionEdt.setEnabled(false);
 
+        creationDateLbl.setText("Creation date");
+
+        creationDateEdt.setEnabled(false);
+
+        lastUpdateLbl.setText("Last update");
+
+        lastUpdateEdt.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(closeBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fileVersionLbl)
                             .addComponent(titleLbl)
-                            .addComponent(fileLbl))
+                            .addComponent(fileLbl)
+                            .addComponent(creationDateLbl)
+                            .addComponent(lastUpdateLbl))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(fileEdt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleEdt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fileVersionEdt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fileEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                            .addComponent(titleEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                            .addComponent(fileVersionEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                            .addComponent(creationDateEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                            .addComponent(lastUpdateEdt, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)))
+                    .addComponent(closeBtn, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +125,15 @@ public class PropertiesFrame extends JFrame implements PaccmanView {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fileVersionLbl)
                     .addComponent(fileVersionEdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationDateLbl)
+                    .addComponent(creationDateEdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lastUpdateLbl)
+                    .addComponent(lastUpdateEdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(closeBtn)
                 .addContainerGap())
         );
@@ -130,18 +154,26 @@ public class PropertiesFrame extends JFrame implements PaccmanView {
             // Document may not have a file yet (case of a new document)
             fileEdt.setText(docCtrl.getFile().getAbsolutePath());
             fileVersionEdt.setText(docCtrl.getLoadVersion());
+            creationDateEdt.setText(docCtrl.getDocument().getCreationDate().getTime().toString());
+            lastUpdateEdt.setText(docCtrl.getDocument().getLastUpdateDate().getTime().toString());
         } else {
             fileEdt.setText("(not saved yet)");
             fileVersionEdt.setText("(not saved yet)");
+            creationDateEdt.setText("(not saved yet)");
+            lastUpdateEdt.setText("(not saved yet)");
         }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton closeBtn;
+    public javax.swing.JTextField creationDateEdt;
+    public javax.swing.JLabel creationDateLbl;
     public javax.swing.JTextField fileEdt;
     public javax.swing.JLabel fileLbl;
     public javax.swing.JTextField fileVersionEdt;
     public javax.swing.JLabel fileVersionLbl;
+    public javax.swing.JTextField lastUpdateEdt;
+    public javax.swing.JLabel lastUpdateLbl;
     public javax.swing.JTextField titleEdt;
     public javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables

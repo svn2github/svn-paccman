@@ -18,6 +18,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  
 */
+
 package org.paccman.ui.main;
 
 import java.awt.Frame;
@@ -55,8 +56,10 @@ import org.paccman.ui.payees.PayeeFormTab;
 import org.paccman.ui.schedules.ScheduleFormTab;
 import org.paccman.ui.transactions.TransactionFormTab;
 import org.paccman.ui.welcome.WelcomePaneTab;
-import org.paccman.xml.PaccmanFile;
 import org.paccman.xml.PaccmanIOException;
+import static org.paccman.ui.main.ContextMain.*;
+        
+import org.paccman.xml.PaccmanFileOld;
 
 /**
  *
@@ -64,11 +67,9 @@ import org.paccman.xml.PaccmanIOException;
  */
 public class Main extends javax.swing.JFrame implements PaccmanView {
 
-    boolean saveToDatabase = false;
-    boolean saveToXml = true;
-    boolean readFromXml = false; // = ! readFromDatabase
-    
-    DocumentController documentController;
+    private boolean saveToDatabase = false;
+    private boolean saveToXml = true;
+    private boolean readFromXml = false; // = ! readFromDatabase
 
     public TransactionFormTab getTransactionFormTab() {
         return transactionFormTab;
@@ -253,32 +254,33 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     }//GEN-LAST:event_openLastFileMnuActionPerformed
 
     /**
-     * Result for <code>Open</code> when user opens a file.
+     * Result for <code>Open</code>, <code>Close</code> and <code>Save</code> operation.
      */
-    public enum OperationStatus {
+    enum OperationStatus {
 
         /**
-         * The user selected a file and the file was succesfully opened.
+         * The operation was successfully performed.
          */
         OK,
         /**
-         * The user cancelled the operation.
+         * The operation was cancelled by the user.
          */
         CANCEL,
         /**
-         * The user selected a file to open, but the operation failed.
+         * The operation failed.
          */
         FAILED
     }
 
     private int confirmSave() {
-        assert (documentController != null) && documentController.isHasChanged();
+        assert (getDocumentController() != null) && 
+                getDocumentController().isHasChanged();
 
         return JOptionPane.showConfirmDialog(this, "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
 
     private File selectSaveFile() {
-        assert (documentController != null);
+        assert (getDocumentController() != null);
 
         PaccmanFileChooser pfc = new PaccmanFileChooser();
         if (pfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -307,13 +309,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         assert isDocumentLoaded() : "Can not close if no document is loaded";
 
         // Save changes if any
-        if (documentController.isHasChanged()) {
+        if (getDocumentController().isHasChanged()) {
             int save = confirmSave();
             if (save == JOptionPane.CANCEL_OPTION) {
                 return OperationStatus.CANCEL;
             } else if (save == JOptionPane.YES_OPTION) {
                 OperationStatus saveDiag;
-                if (documentController.getFile() == null) {
+                if (getDocumentController().getFile() == null) {
                     saveDiag = saveAsDocument();
                 } else {
                     saveDiag = saveDocument();
@@ -328,7 +330,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         // Remove all the tabs from the main tabbed pane
         mainTabbedPane.removeAll();
 
-        documentController = null;
+        setDocumentController(null);
         documentControllerUpdated();
 
         updateAction();
@@ -365,7 +367,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         protected Object doInBackground() throws Exception {
             DocumentController newDocumentController = new DocumentController();
             if (readFromXml) {
-                PaccmanFile paccmanFile = new PaccmanFile();
+                PaccmanFileOld paccmanFile = new PaccmanFileOld();
                 logger.fine("Opening file " + file.getAbsolutePath());
                 paccmanFile.read(file, newDocumentController);
                 logger.fine("File opened");
@@ -405,9 +407,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             // Register views
             newDocumentController.notifyChange();
             // Register views
-            documentController = newDocumentController;
+            setDocumentController(newDocumentController);
 
-            documentController.setFile(file);
+            getDocumentController().setFile(file);
 
             // Keep last directory in preferences
             String path = file.getParent();
@@ -435,9 +437,10 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             super.done();
             documentControllerUpdated();
             updateAction();
-            documentController.notifyChange();
+            getDocumentController().notifyChange();
         //:TODO:handle error when opening
         }
+
     }
 
     public void openFile(File file) throws PaccmanIOException {
@@ -496,9 +499,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         String title = (String) JOptionPane.showInputDialog(this, "Enter the title for the new account file", "Document title",
                 JOptionPane.QUESTION_MESSAGE, null, null, "NewDocument");
         if (title != null) {
-            documentController = new DocumentController();
-            documentController.getDocument().setTitle(title);
-            documentController.setHasChanged(true);
+            setDocumentController(new DocumentController());
+            getDocumentController().getDocument().setTitle(title);
+            getDocumentController().setHasChanged(true);
 
             documentControllerUpdated();
 
@@ -519,9 +522,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public OperationStatus saveDocument(File saveFile) {
         //:TODO:START:this will be obsolete:
         if (saveToXml) {
-            PaccmanFile pf = new PaccmanFile();
+            PaccmanFileOld pf = new PaccmanFileOld();
             try {
-                pf.write(saveFile, documentController);
+                pf.write(saveFile, getDocumentController());
             } catch (PaccmanIOException pie) {
                 pie.printStackTrace();
                 return OperationStatus.FAILED;
@@ -533,7 +536,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         if (saveToDatabase) {
             PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
             try {
-                db.save(documentController);
+                db.save(getDocumentController());
             } catch (SQLException ex) {
                 org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
@@ -546,13 +549,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
     public OperationStatus saveDocument() {
         assert isDocumentLoaded() : "'save' should not be called when no document loaded";
-        assert documentController.getFile() != null : "'save' should be called when the document has a file";
+        assert getDocumentController().getFile() != null : "'save' should be called when the document has a file";
 
         // Actually save the document to the file
-        if (saveDocument(documentController.getFile()) == OperationStatus.OK) {
+        if (saveDocument(getDocumentController().getFile()) == OperationStatus.OK) {
 
             // Update document controller
-            documentController.setFile(documentController.getFile());
+            getDocumentController().setFile(getDocumentController().getFile());
             setDocumentChanged(false);
 
             return OperationStatus.OK;
@@ -575,7 +578,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         if (saveDocument(saveFile) == OperationStatus.OK) {
 
             // Update document controller
-            documentController.setFile(saveFile);
+            getDocumentController().setFile(saveFile);
             setDocumentChanged(false);
 
             return OperationStatus.OK;
@@ -618,6 +621,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public PaccmanAction(String name, Icon icon) {
             super(name, icon);
         }
+
     }
 
     public final class NewAction extends PaccmanAction {
@@ -630,6 +634,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             newDocument();
         }
+
     }
 
     public final class OpenAction extends PaccmanAction {
@@ -642,6 +647,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             openDocument(null);
         }
+
     }
 
     public final class CloseAction extends PaccmanAction {
@@ -654,6 +660,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             closeDocument();
         }
+
     }
 
     public final class SaveAction extends PaccmanAction {
@@ -664,12 +671,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
-            if (documentController.getFile() != null) {
+            if (getDocumentController().getFile() != null) {
                 saveDocument();
             } else {
                 saveAsDocument();
             }
         }
+
     }
 
     public final class SaveAsAction extends PaccmanAction {
@@ -682,6 +690,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             saveAsDocument();
         }
+
     }
 
     public final class QuitAction extends PaccmanAction {
@@ -694,6 +703,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         public void actionPerformed(java.awt.event.ActionEvent e) {
             quit();
         }
+
     }
 
     public final class PropertiesAction extends PaccmanAction {
@@ -705,10 +715,11 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent e) {
             PropertiesFrame pf = new PropertiesFrame();
-            documentController.registerView(pf);
-            pf.onChange(documentController);
+            getDocumentController().registerView(pf);
+            pf.onChange(getDocumentController());
             pf.setVisible(true);
         }
+
     }
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -770,7 +781,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     }
 
     private void showTabbedPanes() {
-        assert documentController != null : "The document controller must exists";
+        assert getDocumentController() != null : "The document controller must exists";
 
         // Welcome pane
         welcomePane = new WelcomePaneTab();
@@ -829,14 +840,11 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             return JOptionPane.NO_OPTION;
         }
     }
+
     static Main main;
 
     public static Main getMain() {
         return main;
-    }
-
-    public static DocumentController getDocumentCtrl() {
-        return main != null ? main.documentController : null;
     }
 
     static class StartOption {
@@ -852,6 +860,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 filename = options[0];
             }
         }
+
     }
 
     static StartOption startOption;
@@ -886,6 +895,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                         }
                         main.setVisible(true);
                     }
+
                 });
     }
 
@@ -946,7 +956,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      * @return Value of property documentLoaded.
      */
     public boolean isDocumentLoaded() {
-        return documentController != null;
+        return getDocumentController() != null;
     }
 
     /**
@@ -955,13 +965,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     private final String NO_DOCUMENT_TITLE = "[No document]";
 
     private String getTitleString() {
-        if (documentController == null) {
+        if (getDocumentController() == null) {
             return NO_DOCUMENT_TITLE;
         } else {
-            if (documentController.isHasChanged()) {
-                return documentController.getDocument().getTitle() + "*";
+            if (getDocumentController().isHasChanged()) {
+                return getDocumentController().getDocument().getTitle() + "*";
             } else {
-                return documentController.getDocument().getTitle();
+                return getDocumentController().getDocument().getTitle();
             }
         }
     }
@@ -970,26 +980,31 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      * Called when the DocumentController changes
      */
     private void documentControllerUpdated() {
-        if (documentController == null) {
+        if (getDocumentController() == null) {
             mainTabbedPane.removeAll();
             setTitle(getTitleString());
         } else {
             showTabbedPanes();
-            documentController.registerView(this);
-            documentController.notifyChange();
+            getDocumentController().registerView(this);
+            getDocumentController().notifyChange();
         }
     }
 
     public static void setDocumentChanged(boolean changed) {
-        main.getDocumentCtrl().setHasChanged(changed);
-        main.onChange(main.getDocumentCtrl());
+        getDocumentController().setHasChanged(changed);
+        main.onChange(getDocumentController());
     }
 
     private void updateAction() {
         closeMnu.getAction().setEnabled(isDocumentLoaded());
-        saveMnu.getAction().setEnabled(isDocumentLoaded() && (documentController.isHasChanged()));
+        saveMnu.getAction().setEnabled(isDocumentLoaded() && (getDocumentController().isHasChanged()));
         saveAsMnu.getAction().setEnabled(isDocumentLoaded());
         propertiesMnu.getAction().setEnabled(isDocumentLoaded());
     }
+
+    // 
+    // Logging 
+    //
+    
     Logger logger = org.paccman.tools.Logger.getDefaultLogger(Main.class);
 }

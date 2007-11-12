@@ -27,7 +27,7 @@ import javax.swing.table.AbstractTableModel;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 class AccountTableModel extends AbstractTableModel implements PaccmanView {
     
@@ -35,7 +35,7 @@ class AccountTableModel extends AbstractTableModel implements PaccmanView {
     }
     
     public Object getValueAt(int rowIndex, int columnIndex) {
-        DocumentController documentCtrl = Main.getDocumentCtrl();
+        DocumentController documentCtrl = getDocumentController();
         
         switch (columnIndex) {
             
@@ -55,11 +55,11 @@ class AccountTableModel extends AbstractTableModel implements PaccmanView {
     }
     
     public boolean isTotalRow(int row) {
-        return row == Main.getDocumentCtrl().getDocument().getAccounts().size();
+        return row == getDocumentController().getDocument().getAccounts().size();
     }
     
     public int getRowCount() {
-        DocumentController documentCtrl = Main.getDocumentCtrl();
+        DocumentController documentCtrl = getDocumentController();
         if (documentCtrl != null) {
             return documentCtrl.getDocument().getAccounts().size() + 1; // +1 for the total line
         } else {
@@ -76,7 +76,7 @@ class AccountTableModel extends AbstractTableModel implements PaccmanView {
     }
 
     public void onChange(org.paccman.controller.Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             fireTableDataChanged();
         } else {
             //:TODO:account controlelr of one row changed

@@ -23,7 +23,7 @@ package org.paccman.ui.categories;
 
 import javax.swing.JTree;
 import org.paccman.controller.PaccmanView;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -58,8 +58,9 @@ public class CategoryTree extends JTree implements PaccmanView {
     }
 
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
+    
     public void onChange(org.paccman.controller.Controller controller) {
         repaint();
     }

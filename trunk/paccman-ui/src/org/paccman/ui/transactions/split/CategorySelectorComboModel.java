@@ -22,15 +22,13 @@
 package org.paccman.ui.transactions.split;
 
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import org.paccman.controller.CategoryBaseController;
-import org.paccman.controller.CategoryController;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Category;
 import org.paccman.paccman.SubCategory;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -74,7 +72,7 @@ public class CategorySelectorComboModel extends DefaultComboBoxModel implements 
         // Non actual "categories"
         addElement(NULL_LIST_ELEM          );
         
-        ArrayList<Category> categories = Main.getDocumentCtrl().getDocument().getCategories();
+        ArrayList<Category> categories = getDocumentController().getDocument().getCategories();
         
         // Categories and subcategories
         for (Category category: categories) {

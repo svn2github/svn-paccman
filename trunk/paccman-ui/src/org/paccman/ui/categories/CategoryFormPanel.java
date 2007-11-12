@@ -31,7 +31,10 @@ import org.paccman.controller.SubCategoryController;
 import org.paccman.paccman.Category;
 import org.paccman.paccman.SubCategory;
 import org.paccman.ui.form.BadInputException;
-import org.paccman.ui.form.PaccmanForm;/**
+import org.paccman.ui.form.PaccmanForm;
+import static org.paccman.ui.main.ContextMain.*;
+
+/**
  *
  * @author  joao
  */
@@ -90,7 +93,7 @@ public class CategoryFormPanel extends PaccmanForm implements ListSelectionListe
         String name = nameEdt.getText();
         
         // In case of a new category, check that the name is not already used for another category
-        if (editingNew && (Main.getDocumentCtrl().getDocument().getCategory(name) != null)) {
+        if (editingNew && (getDocumentController().getDocument().getCategory(name) != null)) {
             throw new BadInputException("A category with the same name already exists", nameEdt);
         }
         

@@ -30,7 +30,7 @@ import org.paccman.paccman.ScheduledTransaction;
 import org.paccman.paccman.TransactionBase;
 import org.paccman.ui.common.table.TableModel;
 import org.paccman.ui.common.table.TableModel.ColumnDescriptor;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 public class ScheduledTableModel extends TableModel implements PaccmanView {
     
@@ -76,11 +76,11 @@ public class ScheduledTableModel extends TableModel implements PaccmanView {
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public void onChange(org.paccman.controller.Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             fireTableChanged(new TableModelEvent(this));
         } else if (controller == accountCtrl) {
             fireTableChanged(new TableModelEvent(this));

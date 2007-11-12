@@ -9,9 +9,8 @@ package org.paccman.ui.payees;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import org.paccman.controller.PayeeController;
-import org.paccman.ui.main.Main;
-import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -114,8 +113,8 @@ public class PayeeFormTab extends javax.swing.JPanel implements ControllerSelect
                 selectedThirdParty.notifyChange();
             } else {
                 // New thirdParty added
-                Main.getDocumentCtrl().getDocument().addPayee(validatedThirdParty.getPayee());
-                Main.getDocumentCtrl().notifyChange();
+                getDocumentController().getDocument().addPayee(validatedThirdParty.getPayee());
+                getDocumentController().notifyChange();
                 jThirdPartySelectorPanel.selectThirdParty(validatedThirdParty);
             }
         } else {

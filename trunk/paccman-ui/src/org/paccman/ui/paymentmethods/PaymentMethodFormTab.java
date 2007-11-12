@@ -9,9 +9,8 @@ package org.paccman.ui.paymentmethods;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import org.paccman.controller.PaymentMethodController;
-import org.paccman.ui.main.Main;
-import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -114,8 +113,8 @@ public class PaymentMethodFormTab extends javax.swing.JPanel implements Controll
                 selectedPaymentMethod.notifyChange();
             } else {
                 // New payment added
-                Main.getDocumentCtrl().getDocument().addPaymentMethod(validatedPaymentMethod.getPaymentMethod());
-                Main.getDocumentCtrl().notifyChange();
+                getDocumentController().getDocument().addPaymentMethod(validatedPaymentMethod.getPaymentMethod());
+                getDocumentController().notifyChange();
                 jPaymentMethodSelectorPanel.selectPaymentMethod(validatedPaymentMethod);
             }
         } 

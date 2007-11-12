@@ -22,12 +22,10 @@
 package org.paccman.ui.accounts;
 
 import java.awt.BorderLayout;
-import javax.swing.JOptionPane;
 import org.paccman.controller.AccountController;
-import org.paccman.ui.main.Main;
 import org.paccman.ui.accountselector.AccountSelectorPanel;
-import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -123,8 +121,8 @@ public class AccountFormTab extends javax.swing.JPanel implements ControllerSele
                 selectedAccount.notifyChange();
             } else {
                 // New account added
-                Main.getDocumentCtrl().getDocument().addAccount(validatedAccount.getAccount());
-                Main.getDocumentCtrl().notifyChange();
+                getDocumentController().getDocument().addAccount(validatedAccount.getAccount());
+                getDocumentController().notifyChange();
                 jAccountSelectorPanel.selectAccount(validatedAccount);
             }
         }

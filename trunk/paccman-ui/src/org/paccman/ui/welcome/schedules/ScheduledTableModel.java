@@ -30,6 +30,7 @@ import org.paccman.ui.common.table.TableModel.ColumnDescriptor;
 import org.paccman.ui.main.Main;
 import org.paccman.ui.scheduling.ExpiredScheduledTransaction;
 import org.paccman.ui.scheduling.Scheduler;
+import static org.paccman.ui.main.ContextMain.*;
 
 public class ScheduledTableModel extends TableModel implements PaccmanView {
     
@@ -82,7 +83,7 @@ public class ScheduledTableModel extends TableModel implements PaccmanView {
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public ExpiredScheduledTransaction getExpiredScheduledTransaction(int index) {
@@ -95,7 +96,7 @@ public class ScheduledTableModel extends TableModel implements PaccmanView {
     }
     
     public void onChange(org.paccman.controller.Controller controller) {
-         if (controller == Main.getDocumentCtrl()) {
+         if (controller == getDocumentController()) {
              // Unregister current scheduled transaction if any
              for (ExpiredScheduledTransaction est: expiredSchedTransactions) {
                  est.unregisterView(this);

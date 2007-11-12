@@ -13,9 +13,9 @@ import org.paccman.controller.Controller;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.PaymentMethod;
-import org.paccman.ui.main.Main;
 import org.paccman.ui.selector.ControllerSelectionButton;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -53,11 +53,11 @@ public class PaymentMethodSelectorPanel extends javax.swing.JPanel implements Pa
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public void onChange(Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             
             // Remove all buttons
             for (ControllerSelectionButton acb: selButtons) {
@@ -69,7 +69,7 @@ public class PaymentMethodSelectorPanel extends javax.swing.JPanel implements Pa
             selButtons.clear();
             
             // Add the new buttons
-            Collection<PaymentMethod> paymentMethods = Main.getDocumentCtrl().getDocument().getPaymentMethods();
+            Collection<PaymentMethod> paymentMethods = getDocumentController().getDocument().getPaymentMethods();
             for (PaymentMethod paymentMethod: paymentMethods) {
                 ControllerSelectionButton asb = new ControllerSelectionButton((PaymentMethodController)ControllerManager.getController(paymentMethod));
                 asb.addActionListener(this);

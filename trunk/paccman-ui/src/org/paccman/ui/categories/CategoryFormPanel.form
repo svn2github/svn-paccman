@@ -35,8 +35,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="incomeRb" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="descriptionScrollPane" alignment="1" pref="412" max="32767" attributes="0"/>
-                          <Component id="nameEdt" alignment="1" pref="412" max="32767" attributes="0"/>
+                          <Component id="descriptionScrollPane" alignment="1" pref="430" max="32767" attributes="0"/>
+                          <Component id="nameEdt" alignment="1" pref="430" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

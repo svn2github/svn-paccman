@@ -33,6 +33,7 @@ import org.paccman.paccman.CategoryBase;
 import org.paccman.ui.main.Main;
 import org.paccman.ui.selector.ControllerSelectionButton;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -70,11 +71,11 @@ public class CategorySelectorPanel extends javax.swing.JPanel implements Paccman
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public void onChange(Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             
             // Remove all buttons
             for (ControllerSelectionButton acb: selButtons) {
@@ -86,7 +87,7 @@ public class CategorySelectorPanel extends javax.swing.JPanel implements Paccman
             selButtons.clear();
             
             // Add the new buttons
-            ArrayList<Category> categorys = Main.getDocumentCtrl().getDocument().getCategories();
+            ArrayList<Category> categorys = getDocumentController().getDocument().getCategories();
             for (CategoryBase category: categorys) {
                 ControllerSelectionButton asb = new ControllerSelectionButton((CategoryController)ControllerManager.getController(category));
                 asb.addActionListener(this);

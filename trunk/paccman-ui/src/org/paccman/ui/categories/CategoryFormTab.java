@@ -27,6 +27,7 @@ import org.paccman.controller.CategoryController;
 import org.paccman.ui.main.Main;
 import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -135,8 +136,8 @@ public class CategoryFormTab extends javax.swing.JPanel implements ControllerSel
                 selectedCategory.notifyChange();
             } else {
                 // New category added
-                Main.getDocumentCtrl().getDocument().addCategory(validatedCategory.getCategory());
-                Main.getDocumentCtrl().notifyChange();
+                getDocumentController().getDocument().addCategory(validatedCategory.getCategory());
+                getDocumentController().notifyChange();
                 jCategorySelectorPanel.selectCategory(validatedCategory);
             }
         } 

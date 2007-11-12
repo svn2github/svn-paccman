@@ -36,6 +36,7 @@ import org.paccman.ui.main.Main;
 import org.paccman.ui.transactions.CategorySelectorComboModel;
 import org.paccman.ui.transactions.TransactionFormPanel;
 import org.paccman.ui.transactions.TransactionFormTab;
+import static org.paccman.ui.main.ContextMain.*;
 
 public class SplitForm extends JPanel implements ListSelectionListener {
     
@@ -291,7 +292,7 @@ public class SplitForm extends JPanel implements ListSelectionListener {
     }//GEN-LAST:event_cancelBtnActionPerformed
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(categoryCmb.getModel());
+        getDocumentController().registerView(categoryCmb.getModel());
     }
     
     BigDecimal currentTotal  = BigDecimal.ZERO;

@@ -27,7 +27,7 @@ import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.controller.PayeeController;
 import org.paccman.paccman.Payee;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -63,8 +63,8 @@ public class PayeeSelectorComboModel extends DefaultComboBoxModel implements Pac
         removeAllElements();
         
         addElement(null);
-        if (controller == Main.getDocumentCtrl()) {
-            Vector<Payee> payees = Main.getDocumentCtrl().getDocument().getPayees();
+        if (controller == getDocumentController()) {
+            Vector<Payee> payees = getDocumentController().getDocument().getPayees();
             
             // Categories and subcategories
             for (Payee payee: payees) {

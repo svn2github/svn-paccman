@@ -27,9 +27,8 @@ import org.paccman.controller.AccountController;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Account;
-import org.paccman.paccman.Category;
-import org.paccman.paccman.SubCategory;
 import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -69,8 +68,8 @@ public class AccountSelectorComboModel extends DefaultComboBoxModel implements P
         removeAllElements();
         
         addElement(null);
-//:TODO:        if (controller == Main.getDocumentCtrl()) {
-            Vector<Account> accounts = Main.getDocumentCtrl().getDocument().getAccounts();
+//:TODO:        if (controller == getDocumentController()) {
+            Vector<Account> accounts = getDocumentController().getDocument().getAccounts();
             
             // Categories and subcategories
             for (Account account: accounts) {
@@ -88,7 +87,7 @@ public class AccountSelectorComboModel extends DefaultComboBoxModel implements P
 
     public void setExcludedAccount(AccountController excludedAccount) {
         this.excludedAccount = excludedAccount;
-        onChange(Main.getDocumentCtrl()); //:TODO: try to do this more "nicely"
+        onChange(getDocumentController()); //:TODO: try to do this more "nicely"
     }
     
 }

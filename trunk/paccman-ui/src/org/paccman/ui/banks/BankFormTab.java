@@ -24,9 +24,8 @@ package org.paccman.ui.banks;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import org.paccman.controller.BankController;
-import org.paccman.ui.main.Main;
-import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -132,8 +131,8 @@ public class BankFormTab extends javax.swing.JPanel implements ControllerSelecti
                 selectedBank.notifyChange();
             } else {
                 // New bank added
-                    Main.getDocumentCtrl().getDocument().addBank(validatedBank.getBank());
-                Main.getDocumentCtrl().notifyChange();
+                    getDocumentController().getDocument().addBank(validatedBank.getBank());
+                getDocumentController().notifyChange();
                 jBankSelectorPanel.selectBank(validatedBank);
             }
         } else {

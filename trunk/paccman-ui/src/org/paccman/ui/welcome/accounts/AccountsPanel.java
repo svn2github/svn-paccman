@@ -20,9 +20,9 @@
 */
 
 package org.paccman.ui.welcome.accounts;
+
 import java.awt.BorderLayout;
-import org.paccman.controller.PaccmanView;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -36,7 +36,7 @@ public class AccountsPanel extends javax.swing.JPanel {
     }
 
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(accountTable.getModel());
+        getDocumentController().registerView(accountTable.getModel());
     }
     
     /** This method is called from within the constructor to

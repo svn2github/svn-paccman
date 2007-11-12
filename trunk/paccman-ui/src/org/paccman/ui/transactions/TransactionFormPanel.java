@@ -47,6 +47,7 @@ import org.paccman.ui.form.PaccmanForm;
 import org.paccman.ui.selector.ControllerSelectionListener;
 import org.paccman.ui.transactions.TransactionFormPanel.TransactionType;
 import org.paccman.ui.transactions.split.SplitForm;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -283,10 +284,10 @@ public class TransactionFormPanel extends PaccmanForm implements ItemListener, C
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView((CategorySelectorComboModel)categorySelectorCmb.getModel());
-        Main.getDocumentCtrl().registerView((AccountSelectorComboModel)toAccountCmb.getModel());
-        Main.getDocumentCtrl().registerView((PayeeSelectorComboModel)payeeCmb.getModel());
-        Main.getDocumentCtrl().registerView((PaymentMethodSelectorComboModel)paymentMethodCmb.getModel());
+        getDocumentController().registerView((CategorySelectorComboModel)categorySelectorCmb.getModel());
+        getDocumentController().registerView((AccountSelectorComboModel)toAccountCmb.getModel());
+        getDocumentController().registerView((PayeeSelectorComboModel)payeeCmb.getModel());
+        getDocumentController().registerView((PaymentMethodSelectorComboModel)paymentMethodCmb.getModel());
     }
     
     public org.paccman.controller.Controller getNewController() {

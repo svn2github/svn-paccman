@@ -27,7 +27,7 @@ import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.controller.PaymentMethodController;
 import org.paccman.paccman.PaymentMethod;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -63,8 +63,8 @@ public class PaymentMethodSelectorComboModel extends DefaultComboBoxModel implem
         removeAllElements();
         
         addElement(null);
-        if (controller == Main.getDocumentCtrl()) {
-            ArrayList<PaymentMethod> payments = Main.getDocumentCtrl().getDocument().getPaymentMethods();
+        if (controller == getDocumentController()) {
+            ArrayList<PaymentMethod> payments = getDocumentController().getDocument().getPaymentMethods();
             
             // Categories and subcategories
             for (PaymentMethod paymentMethod: payments) {

@@ -22,25 +22,29 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="closeBtn" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="fileVersionLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="titleLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="fileLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="creationDateLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lastUpdateLbl" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="fileEdt" alignment="0" max="32767" attributes="1"/>
-                          <Component id="titleEdt" alignment="0" max="32767" attributes="1"/>
-                          <Component id="fileVersionEdt" alignment="0" pref="411" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="fileEdt" alignment="0" pref="429" max="32767" attributes="2"/>
+                          <Component id="titleEdt" alignment="0" pref="429" max="32767" attributes="2"/>
+                          <Component id="fileVersionEdt" alignment="0" pref="429" max="32767" attributes="2"/>
+                          <Component id="creationDateEdt" alignment="0" pref="429" max="32767" attributes="2"/>
+                          <Component id="lastUpdateEdt" alignment="0" pref="429" max="32767" attributes="2"/>
                       </Group>
                   </Group>
+                  <Component id="closeBtn" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,9 +66,19 @@
                   <Component id="fileVersionLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="fileVersionEdt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="closeBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="creationDateLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="creationDateEdt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lastUpdateLbl" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lastUpdateEdt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="closeBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,6 +118,26 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="fileVersionEdt">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="creationDateLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Creation date"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="creationDateEdt">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lastUpdateLbl">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Last update"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="lastUpdateEdt">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>

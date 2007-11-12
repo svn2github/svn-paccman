@@ -23,16 +23,15 @@ package org.paccman.ui.accounts;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import javax.swing.JOptionPane;
 import org.paccman.controller.AccountController;
 import org.paccman.controller.BankController;
-import org.paccman.controller.Controller;
 import org.paccman.controller.ControllerManager;
 import org.paccman.paccman.Account;
 import org.paccman.paccman.Bank;
 import org.paccman.ui.main.Main;
 import org.paccman.ui.form.BadInputException;
 import org.paccman.ui.form.PaccmanForm;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -69,7 +68,7 @@ public class AccountFormPanel extends PaccmanForm {
     }
     
     public void registerToDocumentCtrl() {
-        jBankCb.setDocumentController(Main.getDocumentCtrl());
+        jBankCb.setDocumentController(getDocumentController());
     }
     
     public void clearForm() {
@@ -90,13 +89,13 @@ public class AccountFormPanel extends PaccmanForm {
         
         // In case of a new account, check that the name is not already used for another account
         if (editingNew ) {
-            if (Main.getDocumentCtrl().getDocument().getAccount(name) != null) {
+            if (getDocumentController().getDocument().getAccount(name) != null) {
                 throw new BadInputException("An account with the same name already exists", accountNameEdt);
             }
         } else {
             // If the name has changed, checks that is not already used
             if (! name.equals(accountCtrl.getAccount().getName())) {
-                if (Main.getDocumentCtrl().getDocument().getAccount(name) != null) {
+                if (getDocumentController().getDocument().getAccount(name) != null) {
                     throw new BadInputException("An account with the same name already exists", accountNameEdt);
                 }
             }

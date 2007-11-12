@@ -27,6 +27,7 @@ import javax.swing.table.TableColumn;
 import org.paccman.controller.AccountController;
 import org.paccman.controller.ControllerManager;
 import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -126,7 +127,7 @@ public class AccountTable extends javax.swing.JTable {
         public void mouseClicked(java.awt.event.MouseEvent e) {
             int row = rowAtPoint(e.getPoint());
             if ((row != -1) && ! getModel().isTotalRow(row)) {
-                AccountController selectedAccount = (AccountController)ControllerManager.getController(Main.getDocumentCtrl().getDocument().getAccount(row));
+                AccountController selectedAccount = (AccountController)ControllerManager.getController(getDocumentController().getDocument().getAccount(row));
                 Main.getMain().gotoAccountTransactionTab(selectedAccount); 
             }
         }

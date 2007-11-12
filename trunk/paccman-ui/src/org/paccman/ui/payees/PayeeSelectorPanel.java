@@ -13,9 +13,9 @@ import org.paccman.controller.Controller;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Payee;
-import org.paccman.ui.main.Main;
 import org.paccman.ui.selector.ControllerSelectionButton;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -53,11 +53,11 @@ public class PayeeSelectorPanel extends javax.swing.JPanel implements PaccmanVie
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public void onChange(Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             
             // Remove all buttons
             for (ControllerSelectionButton acb: selButtons) {
@@ -69,7 +69,7 @@ public class PayeeSelectorPanel extends javax.swing.JPanel implements PaccmanVie
             selButtons.clear();
             
             // Add the new buttons
-            Collection<Payee> thirdPartys = Main.getDocumentCtrl().getDocument().getPayees();
+            Collection<Payee> thirdPartys = getDocumentController().getDocument().getPayees();
             for (Payee thirdParty: thirdPartys) {
                 ControllerSelectionButton asb = new ControllerSelectionButton((PayeeController)ControllerManager.getController(thirdParty));
                 asb.addActionListener(this);

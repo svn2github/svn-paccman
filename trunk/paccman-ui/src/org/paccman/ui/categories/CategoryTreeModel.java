@@ -28,7 +28,7 @@ import javax.swing.tree.TreeModel;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Category;
 import org.paccman.paccman.SubCategory;
-import org.paccman.ui.main.Main;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -39,7 +39,7 @@ public class CategoryTreeModel implements TreeModel, PaccmanView {
     ArrayList<Category> categories;
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     /** Creates a new instance of CategoryTreeModel */
@@ -81,7 +81,7 @@ public class CategoryTreeModel implements TreeModel, PaccmanView {
     }
     
     public void onChange(org.paccman.controller.Controller controller) {
-        categories = Main.getDocumentCtrl().getDocument().getCategories();
+        categories = getDocumentController().getDocument().getCategories();
         fireTreeStructureChanged();
     }
     

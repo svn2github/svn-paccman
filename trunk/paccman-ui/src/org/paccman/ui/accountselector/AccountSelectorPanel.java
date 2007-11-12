@@ -29,9 +29,9 @@ import org.paccman.controller.Controller;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.PaccmanView;
 import org.paccman.paccman.Account;
-import org.paccman.ui.main.Main;
 import org.paccman.ui.selector.ControllerSelectionButton;
 import org.paccman.ui.selector.ControllerSelectionListener;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -67,11 +67,11 @@ public class AccountSelectorPanel extends javax.swing.JPanel implements PaccmanV
     }
     
     public void registerToDocumentCtrl() {
-        Main.getDocumentCtrl().registerView(this);
+        getDocumentController().registerView(this);
     }
     
     public void onChange(Controller controller) {
-        if (controller == Main.getDocumentCtrl()) {
+        if (controller == getDocumentController()) {
             
             // Remove all buttons
             for (ControllerSelectionButton acb: selButtons) {
@@ -83,7 +83,7 @@ public class AccountSelectorPanel extends javax.swing.JPanel implements PaccmanV
             selButtons.clear();
             
             // Add the new buttons
-            Collection<Account> accounts = Main.getDocumentCtrl().getDocument().getAccounts();
+            Collection<Account> accounts = getDocumentController().getDocument().getAccounts();
             for (Account acc: accounts) {
                 ControllerSelectionButton asb = new ControllerSelectionButton((AccountController)ControllerManager.getController(acc));
                 asb.addActionListener(this);

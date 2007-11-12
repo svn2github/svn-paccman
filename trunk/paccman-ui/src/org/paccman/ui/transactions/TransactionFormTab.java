@@ -40,6 +40,7 @@ import org.paccman.ui.selector.ControllerSelectionListener;
 import org.paccman.ui.transactions.reconcile.ReconcileContext;
 import org.paccman.ui.transactions.split.SplitForm;
 import org.paccman.ui.transactions.table.TransactionTableModel;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
  *
@@ -497,7 +498,7 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
                     }
                     
                     expScheduledTransaction.setRegistered(true);
-                    Main.getDocumentCtrl().notifyChange(); //:TODO:expScheduledTransaction.notifyChange(); 
+                    getDocumentController().notifyChange(); //:TODO:expScheduledTransaction.notifyChange(); 
                     Main.getMain().gotoWelcomeTab();
                     expScheduledTransaction = null;
                 }
