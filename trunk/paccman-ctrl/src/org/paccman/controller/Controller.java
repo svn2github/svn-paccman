@@ -30,10 +30,10 @@ import org.paccman.paccman.PaccmanObject;
  * @author joao
  */
 public class Controller {
-    
-    List<PaccmanView>     viewList = new ArrayList<PaccmanView>();
-    PaccmanObject  paccObj;
-    
+
+    List<PaccmanView> viewList = new ArrayList<PaccmanView>();
+    PaccmanObject paccObj;
+
     /**
      * 
      * @return 
@@ -41,7 +41,7 @@ public class Controller {
     public PaccmanObject getObject() {
         return paccObj;
     }
-    
+
     /** Creates a new instance of Controller 
      * @param paccObj 
      */
@@ -49,17 +49,17 @@ public class Controller {
         this.paccObj = paccObj;
         ControllerManager.addController(paccObj, this);
     }
-    
+
     /**
      * 
      * @param view 
      */
     public void registerView(PaccmanView view) {
-        if (! viewList.contains(view)) {
+        if (!viewList.contains(view)) {
             viewList.add(view);
         }
     }
-    
+
     /**
      * 
      * @param view 
@@ -67,14 +67,14 @@ public class Controller {
     public void unregisterView(PaccmanView view) {
         viewList.remove(view);
     }
-    
+
     /**
      * 
      */
     public void notifyChange() {
-        for (PaccmanView v: viewList) {
+        for (PaccmanView v : viewList) {
             v.onChange(this);
         }
     }
-    
+
 }

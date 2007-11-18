@@ -16,7 +16,7 @@
  
 */
 
-package derbyant.btools.org.paccman;
+package org.paccman.derbyant.btools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

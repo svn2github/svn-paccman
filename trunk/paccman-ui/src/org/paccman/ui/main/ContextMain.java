@@ -29,11 +29,19 @@ import org.paccman.controller.DocumentController;
  */
 public class ContextMain {
     
+    /**
+     * Check if a document is currently edited (new or loaded)
+     * @return <code>true</code> if a document is currentlty edited (new or loaded). <code>false</code> otherwise.
+     */
+    public static boolean isDocumentEdited() {
+        return documentController != null;
+    }
+
     private static DocumentController documentController;
 
     /**
      * Return the current document controller.
-     * @return The current document controller or null if none has been loaded 
+     * @return The current document controller or <code>null</code> if none has been loaded 
      * or created.     
      */
     public static DocumentController getDocumentController() {
@@ -41,11 +49,22 @@ public class ContextMain {
     }
 
     /**
-     * Set the current document controller.
+     * Set the current document controller. If the new controller is not <code>null</code>, 
+     * the <code>Main</code> frame is registered to the new controller and its tabs 
+     * are displayed. Otherwise the tabs are hidden (removed).
      * @param documentController The document controller to set.
      */
     public static void setDocumentController(DocumentController documentController) {
+        if (documentController != null) {
+            documentController.unregisterView(Main.getMain());
+        }
         ContextMain.documentController = documentController;
+        if (documentController != null) {
+            documentController.registerView(Main.getMain());
+            Main.getMain().showTabbedPanes();
+        } else {
+            Main.getMain().hideTabbedPanes();
+        }
     }
     
     private ContextMain() {

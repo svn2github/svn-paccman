@@ -30,9 +30,9 @@ import org.paccman.paccman.PaccmanObject;
  * @author joao
  */
 public class ControllerManager {
-    
+
     static private Map<PaccmanObject, Controller> controllers = new HashMap<PaccmanObject, Controller>();
-    
+
     /**
      * 
      * @param paccObj
@@ -41,7 +41,7 @@ public class ControllerManager {
     static public Controller getController(PaccmanObject paccObj) {
         return controllers.get(paccObj);
     }
-    
+
     /**
      * 
      * @param paccObj
@@ -53,5 +53,5 @@ public class ControllerManager {
 
     private ControllerManager() {
     }
-    
+
 }

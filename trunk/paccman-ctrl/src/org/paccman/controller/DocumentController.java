@@ -20,7 +20,9 @@
 */
 
 package org.paccman.controller;
+
 import java.io.File;
+import java.util.Calendar;
 import org.paccman.paccman.Document;
 
 
@@ -29,10 +31,23 @@ import org.paccman.paccman.Document;
  * @author joao
  */
 public class DocumentController extends Controller {
-    
+
     /** Creates a new instance of DocumentController */
     public DocumentController() {
         super(new Document());
+    }
+
+    /**
+     * Create a new empty document with the specified title and the current date 
+     * as the <code>creationDate</code>
+     * @param title The title of the document.
+     * @return The new document.
+     */
+    public static DocumentController newDocument(String title) {
+        DocumentController doc = new DocumentController();
+        doc.getDocument().setTitle(title);
+        doc.getDocument().setCreationDate(Calendar.getInstance());
+        return doc;
     }
     
     /**
@@ -40,7 +55,7 @@ public class DocumentController extends Controller {
      * @return
      */
     public Document getDocument() {
-        return (Document)super.getObject();
+        return (Document) super.getObject();
     }
 
     /**
