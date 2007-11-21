@@ -13,45 +13,43 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software               
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  */
+
 package org.paccman.derbyant.btools;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-/**
- * 
- * @author joao
- */
-public class CreateTask extends Task {
+public class BackupTask extends Task {
 
     private String connectionString;
 
-    /**
-     * 
-     * @param connectionString
-     */
     public void setConnectionString(String connectionString) {
         this.connectionString = connectionString;
     }
+    private String todir;
 
-    /**
-     * 
-     * @throws org.apache.tools.ant.BuildException
-     */
+    public void setTodir(String destination) {
+        this.todir = destination;
+    }
+
     @Override
     public void execute() throws BuildException {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            Connection connection = DriverManager.getConnection(connectionString + ";create=true");
-            connection.close();
+            Connection connection = DriverManager.getConnection(connectionString);
+            String sqlstmt = "CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE(?)";
+            CallableStatement cs = connection.prepareCall(sqlstmt);
+            cs.setString(1, todir);
+            cs.execute();
+            cs.close();
             DriverManager.getConnection("jdbc:derby:;shutdown=true");
         } catch (SQLException e) {
-            //:TODO:
+            throw new BuildException(e);
         } catch (Exception e) {
-            System.err.println("Failed to create database: '" + connectionString + ";create=true'");
             throw new BuildException(e);
         }
     }
