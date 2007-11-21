@@ -24,6 +24,7 @@ package org.paccman.preferences.ui;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.prefs.Preferences;
+
 /**
  *
  * @author joao

@@ -18,11 +18,9 @@ package org.paccman.ui.main;
 
 import java.awt.Frame;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.channels.FileChannel;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,6 +40,7 @@ import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
 import org.paccman.db.PaccmanDao;
 import org.paccman.preferences.ui.MainPrefs;
+import org.paccman.tools.FileUtils;
 import org.paccman.ui.*;
 import org.paccman.ui.accounts.AccountFormTab;
 import org.paccman.ui.banks.BankFormTab;
@@ -327,21 +326,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         return OK;
     }
 
-    private void copyFile(File inputFile, File outputFile) throws IOException {
-        // Create channel on the source
-        FileChannel srcChannel = new FileInputStream(inputFile).getChannel();
-
-        // Create channel on the destination
-        FileChannel dstChannel = new FileOutputStream(outputFile).getChannel();
-
-        // Copy file contents from source to destination
-        dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
-
-        // Close the channels
-        srcChannel.close();
-        dstChannel.close();
-    }
-
     class ReadWorker extends SwingWorker<Object, Object> {
 
         File file;
@@ -364,7 +348,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 // Make a copy of the file
                 File fileOut = new File(file.getAbsolutePath() + new SimpleDateFormat("-yyMMddHHmmss").format(new Date()));
                 try {
-                    copyFile(file, fileOut);
+                    FileUtils.copyFile(file, fileOut);
                     logger.fine("Copied file to " + fileOut.getAbsolutePath());
                     try {
                         Thread.sleep(1000);
@@ -510,6 +494,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      * Saves the current document to the specified location.
      * @param saveFile The location where the document is saved.
      * @return {@link OK} or {@link FAILED}.
+     * @deprecated 
      */
     @Deprecated
     public Actions.ActionResult saveDocument(File saveFile) {
@@ -531,10 +516,12 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             try {
                 db.save(getDocumentController());
             } catch (SQLException ex) {
-                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedEncodingException ex) {
-                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
-            }
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (URISyntaxException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } 
 
         }
         return OK;

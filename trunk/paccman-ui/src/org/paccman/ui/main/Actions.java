@@ -1,32 +1,39 @@
 /*
- 
-    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net 
-
-    This program is free software; you can redistribute it and/or modify      
-    it under the terms of the GNU General Public License as published by      
-    the Free Software Foundation; either version 2 of the License, or         
-    (at your option) any later version.                                       
-
-    This program is distributed in the hope that it will be useful,           
-    but WITHOUT ANY WARRANTY; without even the implied warranty of            
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-    GNU General Public License for more details.                              
-
-    You should have received a copy of the GNU General Public License         
-    along with this program; if not, write to the Free Software               
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- 
-*/
+ * 
+ *    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
+ *                     http://paccman.sourceforge.net 
+ *
+ *    This program is free software; you can redistribute it and/or modify      
+ *    it under the terms of the GNU General Public License as published by      
+ *    the Free Software Foundation; either version 2 of the License, or         
+ *    (at your option) any later version.                                       
+ *
+ *    This program is distributed in the hope that it will be useful,           
+ *    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+ *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+ *    GNU General Public License for more details.                              
+ *
+ *    You should have received a copy of the GNU General Public License         
+ *    along with this program; if not, write to the Free Software               
+ *    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ * 
+ */
 
 package org.paccman.ui.main;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.paccman.controller.DocumentController;
+import org.paccman.db.PaccmanDao;
 import org.paccman.ui.PaccmanFileChooser;
 import static org.paccman.ui.main.ContextMain.*;
 
@@ -78,13 +85,11 @@ public class Actions {
         PaccmanAction(String name, String iconFileName) {
             super(name, new javax.swing.ImageIcon(PaccmanAction.class.getResource(ROOT_PATH_RESSOURCES + iconFileName)));
         }
-
     }
 
     //--------------------------------------------------------------------------
     // New Action
     //--------------------------------------------------------------------------
-
     static class NewAction extends PaccmanAction {
 
         public NewAction() {
@@ -103,7 +108,6 @@ public class Actions {
                     throw new AssertionError("Unhandled ActionResult: " + res.toString());
             }
         }
-
     }
 
     private static ActionResult newDocument() {
@@ -135,7 +139,6 @@ public class Actions {
     //--------------------------------------------------------------------------
     // Close Action
     //--------------------------------------------------------------------------
-
     static class CloseAction extends PaccmanAction {
 
         public CloseAction() {
@@ -154,7 +157,6 @@ public class Actions {
                     throw new AssertionError("Unhandled ActionResult: " + res.toString());
             }
         }
-
     }
 
     private static ActionResult closeDocument() {
@@ -190,7 +192,6 @@ public class Actions {
     //--------------------------------------------------------------------------
     // Save Action
     //--------------------------------------------------------------------------
-
     static class SaveAction extends PaccmanAction {
 
         public SaveAction() {
@@ -214,7 +215,6 @@ public class Actions {
                     throw new AssertionError("Unhandled ActionResult: " + res.toString());
             }
         }
-
     }
 
     private static ActionResult saveDocument() {
@@ -226,7 +226,7 @@ public class Actions {
 
             // Update document controller
             getDocumentController().setFile(getDocumentController().getFile());
-            getDocumentController().setHasChanged(true);
+            getDocumentController().setHasChanged(false);
             getDocumentController().notifyChange();
 
             return ActionResult.OK;
@@ -237,25 +237,23 @@ public class Actions {
     }
 
     private static ActionResult doSaveDocument(File saveFile) {
-//:TODO:
-//        if (saveToDatabase) {
-//            PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
-//            try {
-//                db.save(getDocumentController());
-//            } catch (SQLException ex) {
-//                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
-//            } catch (UnsupportedEncodingException ex) {
-//                org.paccman.tools.Logger.getDefaultLogger(this).log(Level.SEVERE, null, ex);
-//            }
-//
-//        }
-        return ActionResult.FAILED;
+        PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
+        try {
+            getDocumentController().getDocument().setLastUpdateDate(Calendar.getInstance());
+            db.save(getDocumentController());
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } catch (URISyntaxException ex) {
+            logger.log(Level.SEVERE, null, ex);
+        } 
+        return ActionResult.OK;
     }
 
     //--------------------------------------------------------------------------
     // Save As Action
     //--------------------------------------------------------------------------
-
     static class SaveAsAction extends PaccmanAction {
 
         public SaveAsAction() {
@@ -274,7 +272,6 @@ public class Actions {
                     throw new AssertionError("Unhandled ActionResult: " + res.toString());
             }
         }
-
     }
 
     private static File selectSaveFile() {
@@ -315,7 +312,6 @@ public class Actions {
     //--------------------------------------------------------------------------
     // Open Action
     //--------------------------------------------------------------------------
-
     static class OpenAction extends PaccmanAction {
 
         public OpenAction() {
@@ -334,7 +330,6 @@ public class Actions {
                     throw new AssertionError("Unhandled ActionResult: " + res.toString());
             }
         }
-
     }
 
     private static ActionResult openDocument() {
@@ -345,8 +340,11 @@ public class Actions {
     //--------------------------------------------------------------------------
     // Constructor
     //--------------------------------------------------------------------------
-
     private Actions() {
     }
 
+    // -------------------------------------------------------------------------
+    // Logging
+    // -------------------------------------------------------------------------
+    private static Logger logger = org.paccman.tools.Logger.getDefaultLogger(Actions.class);
 }

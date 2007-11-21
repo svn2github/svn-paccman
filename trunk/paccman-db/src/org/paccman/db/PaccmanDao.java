@@ -1,34 +1,34 @@
 /*
- 
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net 
-
-    This program is free software; you can redistribute it and/or modify      
-    it under the terms of the GNU General Public License as published by      
-    the Free Software Foundation; either version 2 of the License, or         
-    (at your option) any later version.                                       
-
-    This program is distributed in the hope that it will be useful,           
-    but WITHOUT ANY WARRANTY; without even the implied warranty of            
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-    GNU General Public License for more details.                              
-
-    You should have received a copy of the GNU General Public License         
-    along with this program; if not, write to the Free Software               
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- 
-*/
+Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+http://paccman.sourceforge.net 
+This program is free software; you can redistribute it and/or modify      
+it under the terms of the GNU General Public License as published by      
+the Free Software Foundation; either version 2 of the License, or         
+(at your option) any later version.                                       
+This program is distributed in the hope that it will be useful,           
+but WITHOUT ANY WARRANTY; without even the implied warranty of            
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+GNU General Public License for more details.                              
+You should have received a copy of the GNU General Public License         
+along with this program; if not, write to the Free Software               
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ */
 
 package org.paccman.db;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.paccman.controller.DocumentController;
+import org.paccman.tools.FileUtils;
 
 /**
  *
@@ -52,19 +52,45 @@ public class PaccmanDao {
     }
 
     /**
-     * Open database connection. If connection does not exist, it is created.
+     * Create a new database file by copying the template database to the <code>database<code> location.
      * @throws java.sql.SQLException
      * @throws java.io.UnsupportedEncodingException 
      */
-    private void create() throws SQLException, UnsupportedEncodingException {
-        String connectionString = getConnectionString("create=true");
+    private void create() throws IOException, SQLException, URISyntaxException {
+        // Copy template database
+        extractZip("/data/template.paccmandb.zip", database);
+
+        // Open new database
+        String connectionString = getConnectionString("");
         connection = DriverManager.getConnection(connectionString);
 
-        String path = "/scripts/create.sql";
-        InputStream is = getClass().getResourceAsStream(path);
-        int res = org.apache.derby.tools.ij.runScript(connection, is, "UTF-8", System.out, "UTF-8");
-        if ((res != -1) && (res != 0)) {
-            throw new Error(":TODO:handle this better please");
+    }
+
+    private void extractZip(String zipFile, String destDir) throws IOException, URISyntaxException {
+        final File createTempFile = File.createTempFile("templatedb", "zip");
+
+        // Extract zip from jar to a temporary file
+        OutputStream os = new FileOutputStream(createTempFile);
+        InputStream is = getClass().getResourceAsStream(zipFile);
+        FileUtils.copyFile(is, os);
+
+        // Actually unzip the file to the specified directory
+        final File fileDestDir = new File(destDir);
+        assert !fileDestDir.exists() : "Target must not exist";
+        fileDestDir.mkdir();
+        java.util.zip.ZipFile zip = new java.util.zip.ZipFile(createTempFile);
+        java.util.Enumeration _enum = zip.entries();
+        while (_enum.hasMoreElements()) {
+            java.util.zip.ZipEntry file = (java.util.zip.ZipEntry) _enum.nextElement();
+            java.io.File f = new java.io.File(destDir + java.io.File.separator + file.getName());
+            if (file.isDirectory()) { // if its a directory, create it
+                f.mkdir();
+                continue;
+            } else {
+                InputStream fis = zip.getInputStream(file); // get the input stream
+                OutputStream fos = new java.io.FileOutputStream(f);
+                FileUtils.copyFile(fis, fos);
+            }
         }
     }
 
@@ -97,9 +123,10 @@ public class PaccmanDao {
      * Save the document associated to the specified controller to the database file.
      * @param ctrl The document controller providing the document to save.
      * @throws java.sql.SQLException
-     * @throws java.io.UnsupportedEncodingException 
+     * @throws java.io.IOException
+     * @throws java.net.URISyntaxException 
      */
-    public void save(DocumentController ctrl) throws SQLException, UnsupportedEncodingException {
+    public void save(DocumentController ctrl) throws SQLException, IOException, URISyntaxException {
         // First create the database
         create();
 
@@ -147,8 +174,7 @@ public class PaccmanDao {
      * @param exportTo
      */
     public void export(File exportTo) {
-        //:TODO:raw export all table to a jar file
+    //:TODO:raw export all table to a jar file
     }
-
     java.util.logging.Logger logger = org.paccman.tools.Logger.getDefaultLogger(this.getClass());
 }
