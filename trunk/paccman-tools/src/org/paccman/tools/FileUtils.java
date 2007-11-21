@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.paccman.tools;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -73,16 +74,18 @@ public class FileUtils {
         ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(destFile));
         assert srcDir.isDirectory();
 
+        File rootDir = srcDir.getAbsoluteFile();
         for (File f : srcDir.listFiles()) {
-            addFileToZip(zos, f);
+            addFileToZip(zos, f, rootDir);
         }
 
         zos.close();
     }
 
-    private static void addFileToZip(ZipOutputStream zos, File file) throws IOException {
+    private static void addFileToZip(ZipOutputStream zos, File file, File rootDir) throws IOException {
         if (file.isFile()) {
-            ZipEntry ze = new ZipEntry(file.getPath());
+            File relativeFile = new File(file.getAbsolutePath().substring(rootDir.getPath().length() + 1));
+            ZipEntry ze = new ZipEntry(relativeFile.getPath());
             zos.putNextEntry(ze);
             int count;
             byte data[] = new byte[BUF_SIZE];
@@ -92,17 +95,42 @@ public class FileUtils {
             }
             origin.close();
         } else {
-            //:TODO:I WAS HERE
+            for (File f : file.listFiles()) {
+                addFileToZip(zos, f, rootDir);
+            }
         }
     }
 
     /**
-     * Unzip the content of the specified zip into the specified directory.
+     * Unzip the content of the specified zip into the specified directory. 
+     * The destination directory must exists.
      * @param srcZip The zip file.
      * @param destDir The directory to which unzip the file.
      */
-    public static void unzipDirectory(String srcZip, String destDir) {
-    //:TODO:
+    public static void unzipDirectory(File srcZip, File destDir) throws IOException {
+        assert destDir.isDirectory();
+        String rootDir = destDir.getAbsolutePath();
+
+        ZipInputStream zis = new ZipInputStream(new FileInputStream(srcZip));
+        ZipEntry ze;
+        while ((ze = zis.getNextEntry()) != null) {
+            String fullPath = rootDir + File.separator + new File(ze.getName()).getParent();
+            new File(fullPath).mkdirs();
+            String fileName = new File(ze.getName()).getName();
+            extractFile(zis, fullPath, fileName);
+        }
+        zis.close();
+    }
+
+    private static void extractFile(ZipInputStream zin, String fullPath, String fileName) throws FileNotFoundException, IOException {
+        FileOutputStream fos = new FileOutputStream(fullPath + File.separator + fileName);
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        int count;
+        byte data[] = new byte[BUF_SIZE];
+        while ((count = zin.read(data, 0, BUF_SIZE)) != -1) {
+            bos.write(data, 0, count);
+        }
+        bos.close();
     }
 
     private FileUtils() {
