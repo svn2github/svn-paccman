@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.Calendar;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -133,6 +134,36 @@ public class FileUtils {
         bos.close();
     }
 
+    /**
+     * Construct a string based on the current date and time. It is used to 
+     * build "unique" file names.
+     * @return A string formatted as <code>YYYYMMDDhhmmss<code>
+     */
+    synchronized public static String getTimeString() {
+        return String.format("%1$tY%1$tm%1$tH%1$tM%1$tS", Calendar.getInstance());
+    }
+    
+    /**
+     * Recursively delete directory.
+     * @param dir The directory to be deleted.
+     * @throws java.io.IOException 
+     */
+    public static void deleteDir(File dir) throws IOException {
+        if (! dir.isDirectory()) {
+            throw new IllegalArgumentException(dir + " is not a directory.");
+        }
+        for (File f: dir.listFiles()) {
+            if (f.isDirectory()) {
+                deleteDir(f);
+            } else {
+                if (! f.delete()) {
+                    throw new IOException("Unable to delete file: " + f.getAbsolutePath());
+                }
+            }
+        }
+        dir.delete();
+    }
+    
     private FileUtils() {
     }
 }

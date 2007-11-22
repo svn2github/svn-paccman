@@ -62,6 +62,7 @@ public class ContextMain {
         if (documentController != null) {
             documentController.registerView(Main.getMain());
             Main.getMain().showTabbedPanes();
+            documentController.notifyChange();
         } else {
             Main.getMain().hideTabbedPanes();
         }

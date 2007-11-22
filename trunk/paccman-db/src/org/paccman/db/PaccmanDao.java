@@ -144,7 +144,7 @@ public class PaccmanDao {
      * @throws java.sql.SQLException
      * @throws java.io.UnsupportedEncodingException 
      */
-    public void load(DocumentController ctrl) throws SQLException, UnsupportedEncodingException {
+    public void load(DocumentController ctrl) throws SQLException {
         // First create the database
         open();
 

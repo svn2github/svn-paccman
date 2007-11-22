@@ -37,12 +37,16 @@ public class Logger {
      * @return
      */
     public static java.util.logging.Logger getDefaultLogger(String name) {
-        java.util.logging.Logger logger = java.util.logging.Logger.getLogger(name);
-        Handler consoleHandler = new ConsoleHandler();
-        consoleHandler.setLevel(Level.ALL);
-        logger.setLevel(Level.ALL);
-        logger.addHandler(consoleHandler);
-        logger.setUseParentHandlers(false);
+        
+        java.util.logging.Logger logger = java.util.logging.LogManager.getLogManager().getLogger(name);
+        if (logger == null) {
+            logger = java.util.logging.Logger.getLogger(name);
+            Handler consoleHandler = new ConsoleHandler();
+            consoleHandler.setLevel(Level.ALL);
+            logger.setLevel(Level.ALL);
+            logger.addHandler(consoleHandler);
+            logger.setUseParentHandlers(false);
+        }
         return logger;
     }
 

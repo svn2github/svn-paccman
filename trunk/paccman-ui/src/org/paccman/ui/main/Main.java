@@ -277,6 +277,8 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
     }
 
+    @Deprecated
+    // Move to Actions
     private File selectOpenFile() {
 
         JFileChooser fc = new PaccmanFileChooser();
@@ -320,8 +322,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         setDocumentController(null);
         documentControllerUpdated();
-
-        updateAction();
 
         return OK;
     }
@@ -409,7 +409,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         protected void done() {
             super.done();
             documentControllerUpdated();
-            updateAction();
             getDocumentController().notifyChange();
         //:TODO:handle error when opening
         }
@@ -480,8 +479,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             getDocumentController().setHasChanged(true);
 
             documentControllerUpdated();
-
-            updateAction();
 
             return OK;
         } else {
@@ -748,7 +745,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
             switch (opt) {
                 case OPEN_FILE:
                     documentControllerUpdated();
-                    updateAction();
                     break;
                 case NEW_FILE:
                     break;
@@ -839,9 +835,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     QuitAction quitAction = new QuitAction();
 
     /**
-     * Title when no document is being edited
-     */
-    /**
      * Called when the DocumentController changes
      */
     private void documentControllerUpdated() {
@@ -860,14 +853,21 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         main.onChange(getDocumentController());
     }
 
-    @Deprecated
-    private void updateAction() {
-        closeMnu.getAction().setEnabled(isDocumentEdited());
-        saveMnu.getAction().setEnabled(isDocumentEdited() && (getDocumentController().isHasChanged()));
-        saveAsMnu.getAction().setEnabled(isDocumentEdited());
-        propertiesMnu.getAction().setEnabled(isDocumentEdited());
-    }
-
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
 
     // -------------------------------------------------------------------------
     // Tabs
@@ -942,7 +942,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     // DocumentController methods
     // -------------------------------------------------------------------------
     public void onChange(org.paccman.controller.Controller controller) {
-        DocumentController docCtrl = (DocumentController) controller;
 
         // Update enable status of Actions
         closeMnu.getAction().setEnabled(isDocumentEdited());
@@ -950,6 +949,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         saveAsMnu.getAction().setEnabled(isDocumentEdited());
         propertiesMnu.getAction().setEnabled(isDocumentEdited());
 
+        // Updates title
         setTitle(getTitleString());
     }
 

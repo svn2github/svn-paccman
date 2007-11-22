@@ -18,7 +18,6 @@
  *    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  * 
  */
-
 package org.paccman.ui.main;
 
 import java.awt.event.ActionEvent;
@@ -34,6 +33,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.paccman.controller.DocumentController;
 import org.paccman.db.PaccmanDao;
+import org.paccman.preferences.ui.MainPrefs;
+import org.paccman.tools.FileUtils;
 import org.paccman.ui.PaccmanFileChooser;
 import static org.paccman.ui.main.ContextMain.*;
 
@@ -221,33 +222,42 @@ public class Actions {
         assert isDocumentEdited() : "'Save' should not be called when no document loaded";
         assert getDocumentController().getFile() != null : "'Save' should be called when the document has a file";
 
-        // Actually save the document to the file
-        if (doSaveDocument(getDocumentController().getFile()) == ActionResult.OK) {
+        // Backup previous file
+        String backupFileName = getDocumentController().getFile() + FileUtils.getTimeString();
+        getDocumentController().getFile().renameTo(new File(backupFileName));
 
-            // Update document controller
+        // Actually save the document to the file
+        return doSaveDocument(getDocumentController().getFile());
+    }
+
+    private static ActionResult doSaveDocument(File saveFile) {
+        String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
+                "paccman_" + FileUtils.getTimeString();
+        PaccmanDao db = new PaccmanDao(tempDb);
+        try {
+            // Write document to database 
+            getDocumentController().getDocument().setLastUpdateDate(Calendar.getInstance());
+            db.save(getDocumentController());
+
+            // Zip to destination file
+            final File tempDbFile = new File(tempDb);
+            FileUtils.zipDirectory(tempDbFile, saveFile);
+
+            // Remove temporary directory
+            FileUtils.deleteDir(tempDbFile);
+
+            // Update document controller and notify listeners
             getDocumentController().setFile(getDocumentController().getFile());
             getDocumentController().setHasChanged(false);
             getDocumentController().notifyChange();
 
-            return ActionResult.OK;
-        } else {
-
-            return ActionResult.FAILED;
-        }
-    }
-
-    private static ActionResult doSaveDocument(File saveFile) {
-        PaccmanDao db = new PaccmanDao(new File(saveFile.getAbsolutePath()).getPath() /*:TODO:START:Temporary until using only database*/ + "db" /*:TODO:END:*/);
-        try {
-            getDocumentController().getDocument().setLastUpdateDate(Calendar.getInstance());
-            db.save(getDocumentController());
         } catch (SQLException ex) {
             logger.log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             logger.log(Level.SEVERE, null, ex);
         } catch (URISyntaxException ex) {
             logger.log(Level.SEVERE, null, ex);
-        } 
+        }
         return ActionResult.OK;
     }
 
@@ -296,17 +306,8 @@ public class Actions {
         }
 
         // Actually save the document to the file
-        if (doSaveDocument(saveFile) == ActionResult.OK) {
+        return doSaveDocument(saveFile);
 
-            // Update document controller
-            getDocumentController().setFile(saveFile);
-            getDocumentController().setHasChanged(false);
-
-            return ActionResult.OK;
-        } else {
-
-            return ActionResult.FAILED;
-        }
     }
 
     //--------------------------------------------------------------------------
@@ -332,9 +333,74 @@ public class Actions {
         }
     }
 
+    private static File selectOpenFile() {
+
+        JFileChooser fc = new PaccmanFileChooser();
+
+        // Actually show the open file dialog
+        int s = fc.showOpenDialog(Main.getMain());
+
+        // Check return value
+        if (s == JFileChooser.APPROVE_OPTION) {
+            return fc.getSelectedFile();
+        } else {
+            return null;
+        }
+    }
+
     private static ActionResult openDocument() {
-        //:TODO:
-        throw new UnsupportedOperationException("Not yet implemented");
+
+        // Close current document if open
+        if (isDocumentEdited()) {
+            Actions.ActionResult closeDiag = closeDocument();
+            if (closeDiag != ActionResult.OK) {
+                return closeDiag;
+            }
+        }
+
+        // Do open a new document
+        Actions.ActionResult result = ActionResult.FAILED;
+
+        File fileToOpen = selectOpenFile();
+        while (result == ActionResult.FAILED) {
+            if (fileToOpen == null) {
+                return ActionResult.CANCEL;
+            } else {
+                result = doOpenFile(fileToOpen);
+                if (result == ActionResult.FAILED) {
+                    fileToOpen = selectOpenFile();
+                }
+            }
+        }
+        return null;
+    }
+
+    private static ActionResult doOpenFile(File fileToOpen) {
+        try {
+            DocumentController newDocumentController = new DocumentController();
+            PaccmanDao db = new PaccmanDao(new File(fileToOpen.getAbsolutePath()).getPath());
+            db.load(newDocumentController);
+
+            // Register views
+            setDocumentController(newDocumentController);
+
+            // Keep last directory in preferences
+            String path = fileToOpen.getParent();
+            MainPrefs.putDataDirectory(path);
+
+            // Add file to MRU list
+            try {
+                // Add file to MRU list
+                MainPrefs.addFilenameToMru(fileToOpen.getCanonicalPath());
+                MainPrefs.setLastSelectedFile(fileToOpen.getCanonicalPath());
+            } catch (IOException ex) {
+                ex.printStackTrace(); //:TODO:
+            }
+            return ActionResult.OK;
+        } catch (SQLException ex) {
+            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+            return ActionResult.FAILED;
+        }
     }
 
     //--------------------------------------------------------------------------
