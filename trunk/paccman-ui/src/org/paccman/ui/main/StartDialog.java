@@ -21,13 +21,11 @@
 
 package org.paccman.ui.main;
 
-import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.paccman.preferences.ui.MainPrefs;
 import org.paccman.ui.*;
-import org.paccman.xml.PaccmanIOException;
 
 /**
  *
