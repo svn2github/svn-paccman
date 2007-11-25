@@ -16,7 +16,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" max="32767" attributes="0"/>
-          <Component id="transactionFormPanel" pref="697" max="32767" attributes="0"/>
+          <Component id="transactionFormPanel" pref="726" max="32767" attributes="0"/>
           <Component id="schedulingFormPanel" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -47,7 +47,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="descriptionLbl" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="descriptionEdt" pref="567" max="32767" attributes="0"/>
+                  <Component id="descriptionEdt" pref="590" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

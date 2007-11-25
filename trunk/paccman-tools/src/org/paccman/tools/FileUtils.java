@@ -1,7 +1,24 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
+    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
+
 package org.paccman.tools;
 
 import java.io.BufferedInputStream;
@@ -107,6 +124,7 @@ public class FileUtils {
      * The destination directory must exists.
      * @param srcZip The zip file.
      * @param destDir The directory to which unzip the file.
+     * @throws java.io.IOException 
      */
     public static void unzipDirectory(File srcZip, File destDir) throws IOException {
         assert destDir.isDirectory();
@@ -115,7 +133,13 @@ public class FileUtils {
         ZipInputStream zis = new ZipInputStream(new FileInputStream(srcZip));
         ZipEntry ze;
         while ((ze = zis.getNextEntry()) != null) {
-            String fullPath = rootDir + File.separator + new File(ze.getName()).getParent();
+            final File file = new File(ze.getName());
+            String fullPath;
+            if (file.getParent() != null) {
+                fullPath = rootDir + File.separator + file.getParent();
+            } else {
+                fullPath = rootDir;
+            }
             new File(fullPath).mkdirs();
             String fileName = new File(ze.getName()).getName();
             extractFile(zis, fullPath, fileName);
@@ -142,28 +166,28 @@ public class FileUtils {
     synchronized public static String getTimeString() {
         return String.format("%1$tY%1$tm%1$tH%1$tM%1$tS", Calendar.getInstance());
     }
-    
+
     /**
      * Recursively delete directory.
      * @param dir The directory to be deleted.
      * @throws java.io.IOException 
      */
     public static void deleteDir(File dir) throws IOException {
-        if (! dir.isDirectory()) {
+        if (!dir.isDirectory()) {
             throw new IllegalArgumentException(dir + " is not a directory.");
         }
-        for (File f: dir.listFiles()) {
+        for (File f : dir.listFiles()) {
             if (f.isDirectory()) {
                 deleteDir(f);
             } else {
-                if (! f.delete()) {
+                if (!f.delete()) {
                     throw new IOException("Unable to delete file: " + f.getAbsolutePath());
                 }
             }
         }
         dir.delete();
     }
-    
+
     private FileUtils() {
     }
 }

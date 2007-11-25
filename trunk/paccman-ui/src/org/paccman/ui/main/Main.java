@@ -1,25 +1,29 @@
 /*
-Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-http://paccman.sourceforge.net 
-This program is free software; you can redistribute it and/or modify      
-it under the terms of the GNU General Public License as published by      
-the Free Software Foundation; either version 2 of the License, or         
-(at your option) any later version.                                       
-This program is distributed in the hope that it will be useful,           
-but WITHOUT ANY WARRANTY; without even the implied warranty of            
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-GNU General Public License for more details.                              
-You should have received a copy of the GNU General Public License         
-along with this program; if not, write to the Free Software               
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- */
+ 
+    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
 
 package org.paccman.ui.main;
 
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -65,14 +69,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     private boolean saveToDatabase = false;
     private boolean saveToXml = true;
     private boolean readFromXml = false; // = ! readFromDatabase
-
-    /**
-     * Creates new form Main
-     */
-    public Main() {
-        initComponents();
-        initMyComponents();
-    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -236,10 +232,10 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     ////////////////////////////////////////////////////////////////////////////////    
 ////////////////////////////////////////////////////////////////////////////////    
 ////////////////////////////////////////////////////////////////////////////////
+    @Deprecated
     public TransactionFormTab getTransactionFormTab() {
         return transactionFormTab;
     }
-
     CalculatorFrame calculatorFrame = new CalculatorFrame();
 
     private void calculatorMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatorMnuActionPerformed
@@ -266,6 +262,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         return JOptionPane.showConfirmDialog(this, "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
 
+    @Deprecated
     private File selectSaveFile() {
         assert (getDocumentController() != null);
 
@@ -326,6 +323,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         return OK;
     }
 
+    @Deprecated
     class ReadWorker extends SwingWorker<Object, Object> {
 
         File file;
@@ -364,9 +362,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 try {
                     db.load(newDocumentController);
                 } catch (SQLException ex) {
-                    //:TODO:do better error handling here
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (UnsupportedEncodingException ex) {
                     //:TODO:do better error handling here
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (Exception ex) {
@@ -421,6 +416,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         rw.execute();
     }
 
+    @Deprecated
     private Actions.ActionResult doOpenFile(File filein) {
         try {
             openFile(filein);
@@ -707,73 +703,24 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
 
     }
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        quit();
-    }//GEN-LAST:event_formWindowClosing
-
-    private void showStartDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStartDialogActionPerformed
+    
+    @Deprecated
+   private void showStartDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStartDialogActionPerformed
         MainPrefs.setShowStartDialog(!MainPrefs.getShowStartDialog());
     }//GEN-LAST:event_showStartDialogActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        String fileToOpen = null;
-
-        if (startOption.getFilename() != null) {
-            // If the user entered a filename in the command line, open the
-            // entered file
-            fileToOpen = startOption.getFilename();
-        } else if (MainPrefs.getOpenLastSelectedFile()) {
-            // If the "Open last file" option is set, open the last file
-            fileToOpen = MainPrefs.getLastSelectedFile();
-        }
-
-        if (fileToOpen != null) {
-            //:DEBUG             try {
-            //                openFile(new File(fileToOpen));
-            openDocument(new File(fileToOpen));
-            return;
-        /*:DEBUG            } catch (PaccmanIOException ex) {
-        ex.printStackTrace();//:TODO:
-        }*/
-        }
-
-        // If "show start dialog" option is true, show the start dialog
-        if (MainPrefs.getShowStartDialog()) {
-            StartDialog startDialog = new StartDialog(this, true);
-            StartDialog.Option opt = startDialog.doModal();
-            switch (opt) {
-                case OPEN_FILE:
-                    documentControllerUpdated();
-                    break;
-                case NEW_FILE:
-                    break;
-                case CANCEL:
-                    break;
-                default:
-                    break;
-            }
-            showStartDialog.setSelected(MainPrefs.getShowStartDialog());
-        }
-    }//GEN-LAST:event_formWindowOpened
-
-    private void initMyComponents() {
-        // Look and feel menu
-        optionMnu.addSeparator();
-        optionMnu.add(new LookAndFeelMenu(this));
-
-        calculatorFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-    }
-
+    @Deprecated
     public void gotoAccountTransactionTab(AccountController account) {
         transactionFormTab.setSelectedAccount(account);
         mainTabbedPane.setSelectedComponent(transactionFormTab);
     }
 
+    @Deprecated
     public void gotoWelcomeTab() {
         mainTabbedPane.setSelectedComponent(welcomePane);
     }
 
+    @Deprecated
     private int showQuitDialog() {
         if (JOptionPane.showConfirmDialog(this, "Do you really want to quit ?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             return JOptionPane.YES_OPTION;
@@ -782,27 +729,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
     }
 
-    static class StartOption {
 
-        String filename;
-
-        public String getFilename() {
-            return filename;
-        }
-
-        public void parse(String[] options) {
-            if (options.length == 1) {
-                filename = options[0];
-            }
-        }
-
-    }
-
-    static StartOption startOption;
-
-    static {
-        startOption = new StartOption();
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton backBtn;
     public javax.swing.JMenuItem calculatorMnu;
@@ -832,11 +759,11 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public javax.swing.JPanel toolbarsPanel;
     public javax.swing.JMenu toolsMnu;
     // End of variables declaration//GEN-END:variables
-    QuitAction quitAction = new QuitAction();
 
     /**
      * Called when the DocumentController changes
      */
+    @Deprecated
     private void documentControllerUpdated() {
         if (getDocumentController() == null) {
             mainTabbedPane.removeAll();
@@ -848,6 +775,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
     }
 
+    @Deprecated
     public static void setDocumentChanged(boolean changed) {
         getDocumentController().setHasChanged(changed);
         main.onChange(getDocumentController());
@@ -937,6 +865,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     Actions.CloseAction closeAction = new Actions.CloseAction();
     Actions.SaveAction saveAction = new Actions.SaveAction();
     Actions.SaveAsAction saveAsAction = new Actions.SaveAsAction();
+    Actions.QuitAction quitAction = new Actions.QuitAction();
 
     // -------------------------------------------------------------------------
     // DocumentController methods
@@ -967,7 +896,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         }
     }
 
-
     // -------------------------------------------------------------------------
     // Logging
     // -------------------------------------------------------------------------
@@ -977,7 +905,62 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     // -------------------------------------------------------------------------
     // Main
     // -------------------------------------------------------------------------
+
+    private void initMyComponents() {
+        // Look and feel menu
+        optionMnu.addSeparator();
+        optionMnu.add(new LookAndFeelMenu(this));
+
+        calculatorFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+    }
+
+    StartOption startOption = new StartOption();
+    
     /**
+     * Constructor for <code>Main<code> 
+     */
+    public Main() {
+        initComponents();
+        initMyComponents();
+    }
+    
+    /**
+     * Constructor for <code>Main<code> which takes the arguments passed in the command 
+     * line.
+     * @param args The arguments passed in the command line.
+     */
+    public Main(String[] args) {
+        this();
+        startOption.parse(args);
+    }
+
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO quit();
+    }//GEN-LAST:event_formWindowClosing
+
+     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+         String fileToOpen = null;
+
+         // If file passed in the comand line, this is the fiole to open
+         if (startOption.getFilename() != null) {
+             fileToOpen = startOption.getFilename();
+         }
+
+         if (fileToOpen != null) {
+             Actions.ActionResult res = Actions.doOpenFile(new File(fileToOpen));
+             switch (res) {
+                 case OK:
+                     break;
+                 case FAILED:
+                     JOptionPane.showMessageDialog(Main.getMain(), "Failed to open file", 
+                             "Error", JOptionPane.ERROR_MESSAGE);
+                     break;
+             }
+         }
+    }//GEN-LAST:event_formWindowOpened
+
+     /**
      * <em>The</em> Main
      * @return Main.
      */
@@ -992,11 +975,11 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      * @param args Options and arguments for PAccMan. See StartOption#parse(args).
      */
     public static void main(String[] args) {
-        startOption.parse(args);
+        final String[] lArgs = args;
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                main = new Main();
+                main = new Main(lArgs);
                 main.setLocation(MainPrefs.getLocation());
                 if (MainPrefs.isMaximized()) {
                     main.setState(MAXIMIZED_BOTH);
@@ -1005,7 +988,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
                 }
                 main.setVisible(true);
             }
-
         });
     }
 

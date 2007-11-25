@@ -61,7 +61,7 @@ public class LookAndFeelMenu extends JMenu implements ActionListener {
             addActionListener(lafMenu);
             lafMenu.add(this);
             String currentLookAndFeelClassName = UIManager.getLookAndFeel().getClass().getName();
-            if (lafInfo.getClassName() == currentLookAndFeelClassName) {
+            if (lafInfo.getClassName().equals(currentLookAndFeelClassName)) {
                 setSelected(true);
             }
         }

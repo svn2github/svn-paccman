@@ -1,25 +1,27 @@
 /*
- * 
- *    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
- *                     http://paccman.sourceforge.net 
- *
- *    This program is free software; you can redistribute it and/or modify      
- *    it under the terms of the GNU General Public License as published by      
- *    the Free Software Foundation; either version 2 of the License, or         
- *    (at your option) any later version.                                       
- *
- *    This program is distributed in the hope that it will be useful,           
- *    but WITHOUT ANY WARRANTY; without even the implied warranty of            
- *    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
- *    GNU General Public License for more details.                              
- *
- *    You should have received a copy of the GNU General Public License         
- *    along with this program; if not, write to the Free Software               
- *    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- * 
- */
+ 
+    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
+
 package org.paccman.ui.main;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -223,7 +225,7 @@ public class Actions {
         assert getDocumentController().getFile() != null : "'Save' should be called when the document has a file";
 
         // Backup previous file
-        String backupFileName = getDocumentController().getFile() + FileUtils.getTimeString();
+        String backupFileName = getDocumentController().getFile() + "_" + FileUtils.getTimeString();
         getDocumentController().getFile().renameTo(new File(backupFileName));
 
         // Actually save the document to the file
@@ -231,6 +233,8 @@ public class Actions {
     }
 
     private static ActionResult doSaveDocument(File saveFile) {
+        logger.log(Level.INFO, "Saving to file {0}", saveFile);
+
         String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
                 "paccman_" + FileUtils.getTimeString();
         PaccmanDao db = new PaccmanDao(tempDb);
@@ -258,6 +262,7 @@ public class Actions {
         } catch (URISyntaxException ex) {
             logger.log(Level.SEVERE, null, ex);
         }
+        logger.log(Level.INFO, "Done");
         return ActionResult.OK;
     }
 
@@ -367,19 +372,36 @@ public class Actions {
                 return ActionResult.CANCEL;
             } else {
                 result = doOpenFile(fileToOpen);
-                if (result == ActionResult.FAILED) {
-                    fileToOpen = selectOpenFile();
+                switch (result) {
+                    case FAILED:
+                        fileToOpen = selectOpenFile();
+                        break;
+                    case CANCEL:
+                        break;
+                    case OK:
+                        break;
                 }
             }
         }
-        return null;
+        return result;
     }
 
-    private static ActionResult doOpenFile(File fileToOpen) {
+    static ActionResult doOpenFile(File fileToOpen) {
+        logger.log(Level.INFO, "Loading file {0}", fileToOpen);
         try {
+            // Unzip file (= zip of directory database) to temporary folder...
+            String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
+                    "paccman_" + FileUtils.getTimeString();
+            final File tempDbFile = new File(tempDb);
+            FileUtils.unzipDirectory(fileToOpen, tempDbFile);
+
+            // ...open database
             DocumentController newDocumentController = new DocumentController();
-            PaccmanDao db = new PaccmanDao(new File(fileToOpen.getAbsolutePath()).getPath());
+            PaccmanDao db = new PaccmanDao(new File(tempDbFile.getAbsolutePath()).getPath());
             db.load(newDocumentController);
+
+            // ... remove temporary folder
+            FileUtils.deleteDir(tempDbFile);
 
             // Register views
             setDocumentController(newDocumentController);
@@ -395,12 +417,71 @@ public class Actions {
                 MainPrefs.setLastSelectedFile(fileToOpen.getCanonicalPath());
             } catch (IOException ex) {
                 ex.printStackTrace(); //:TODO:
+                return ActionResult.FAILED;
             }
-            return ActionResult.OK;
+        } catch (IOException ex) {
+            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
             return ActionResult.FAILED;
         }
+        
+        // Everything has gone right. Set current file name.
+        getDocumentController().setFile(fileToOpen);
+        logger.info("Done");
+        return ActionResult.OK;
+    }
+
+
+    //--------------------------------------------------------------------------
+    // Quit Action
+    //--------------------------------------------------------------------------
+    static class QuitAction extends PaccmanAction {
+
+        public QuitAction() {
+            super("Quit", "exit.png");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            ActionResult res = quit();
+            switch (res) {
+                case OK:
+                    System.exit(0);
+                    break;
+                case CANCEL:
+                case FAILED:
+                    //:TODO:do the appropriate
+                    return;
+                default:
+                    throw new AssertionError("Unhandled ActionResult: " + res.toString());
+            }
+        }
+    }
+
+    /**
+     * Called when the user is existing the application.
+     * @return OK, CANCEL or FAILED.
+     */
+    static Actions.ActionResult quit() {
+
+        // Close current document if open
+        if (isDocumentEdited()) {
+            Actions.ActionResult closeDiag = closeDocument();
+            if (closeDiag != ActionResult.OK) {
+                return closeDiag;
+            }
+        }
+
+        // Save preferences
+        if ((Main.getMain().getState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
+            MainPrefs.setMaximized(true);
+        } else {
+            MainPrefs.setMaximized(false);
+            MainPrefs.putLocation(Main.getMain().getLocationOnScreen());
+            MainPrefs.putSize(Main.getMain().getSize());
+        }
+
+        return ActionResult.OK;
     }
 
     //--------------------------------------------------------------------------

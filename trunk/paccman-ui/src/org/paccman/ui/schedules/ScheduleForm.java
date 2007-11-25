@@ -43,30 +43,40 @@ public class ScheduleForm extends PaccmanForm implements ItemListener {
         initComponents();
     }
     
-    private static final String[] schedulePeriodUnits =
-    {
+    private static final String[] schedulePeriodUnits = {
         "Day",
-                "Week",
-                "Month",
-                "Year"
+        "Week",
+        "Month",
+        "Year"
     };
     
     ScheduledTransaction.PeriodUnit getPeriodUnit(String schedulePeriodUnit) {
-        //:TODO:try and do this better
-        if (schedulePeriodUnit == schedulePeriodUnits[0]) return ScheduledTransaction.PeriodUnit.DAY;
-        if (schedulePeriodUnit == schedulePeriodUnits[1]) return ScheduledTransaction.PeriodUnit.WEEK;
-        if (schedulePeriodUnit == schedulePeriodUnits[2]) return ScheduledTransaction.PeriodUnit.MONTH;
-        if (schedulePeriodUnit == schedulePeriodUnits[3]) return ScheduledTransaction.PeriodUnit.YEAR;
-        return null;
+        if (schedulePeriodUnit.equals(schedulePeriodUnits[0])) {
+            return ScheduledTransaction.PeriodUnit.DAY;
+        } else if (schedulePeriodUnit.equals(schedulePeriodUnits[1])) {
+            return ScheduledTransaction.PeriodUnit.WEEK;
+        } else if (schedulePeriodUnit.equals(schedulePeriodUnits[2])) {
+            return ScheduledTransaction.PeriodUnit.MONTH;
+        } else if (schedulePeriodUnit.equals(schedulePeriodUnits[3])) {
+            return ScheduledTransaction.PeriodUnit.YEAR;
+        } else {
+            throw new AssertionError("Unhandled peridoUnit: " + schedulePeriodUnit);
+        }
     }
     
     String getPeriodUnit(ScheduledTransaction.PeriodUnit periodUnid) {
-        //:TODO:try and do this better
-        if (periodUnid == ScheduledTransaction.PeriodUnit.DAY) return schedulePeriodUnits[0];
-        if (periodUnid == ScheduledTransaction.PeriodUnit.WEEK) return schedulePeriodUnits[1];
-        if (periodUnid == ScheduledTransaction.PeriodUnit.MONTH) return schedulePeriodUnits[2];
-        if (periodUnid == ScheduledTransaction.PeriodUnit.YEAR) return schedulePeriodUnits[3];
-        return null;
+        switch (periodUnid) {
+            case DAY:
+                return schedulePeriodUnits[0];
+            case WEEK:
+                return schedulePeriodUnits[1];
+            case MONTH:
+                return schedulePeriodUnits[2];
+            case YEAR:
+                return schedulePeriodUnits[3];
+            default:
+                throw new AssertionError("Unhandled periodUnit: " + periodUnid);
+        }
     }
     
     public void setForm(org.paccman.controller.Controller controller) {

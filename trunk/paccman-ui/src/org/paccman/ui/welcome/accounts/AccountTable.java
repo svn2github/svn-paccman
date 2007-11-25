@@ -84,11 +84,11 @@ public class AccountTable extends javax.swing.JTable {
         
         TableColumn balanceColumn = getColumnModel().getColumn(CURRENT_BALANCE_COL);
         balanceColumn.setHeaderRenderer(new BalanceHeaderRenderer("Current balance"));
-        balanceColumn.setCellRenderer(new BalanceCellRenderer(this));
+        balanceColumn.setCellRenderer(new BalanceCellRenderer());
         
         TableColumn availBalanceColumn = getColumnModel().getColumn(AVAILABLE_BALANCE_COL);
         availBalanceColumn.setHeaderRenderer(new BalanceHeaderRenderer("Available balance"));
-        availBalanceColumn.setCellRenderer(new BalanceCellRenderer(this));
+        availBalanceColumn.setCellRenderer(new BalanceCellRenderer());
         
     }
     

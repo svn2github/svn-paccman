@@ -30,12 +30,9 @@ import org.paccman.ui.common.AmountCellRenderer;
  */
 public class BalanceCellRenderer extends AmountCellRenderer {
     
-    AccountTable accountTable;
-    
     /** Creates a new instance of BalanceCellRenderer */
-    public BalanceCellRenderer(AccountTable table) {
+    public BalanceCellRenderer() {
         super(true, Color.RED, true);
-        this.accountTable= table;
         setFont(new java.awt.Font("SansSerif", 1, 36)); //:TODO:
     }
     

@@ -19,31 +19,27 @@
  
 */
 
-package org.paccman.derbyant.btools;
+package org.paccman.ui.main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
+/**
+ * This class is used to handle the command line arguments passed to PAccMan.
+ * @author joao
+ */
+class StartOption {
 
-public class ShutdownTask extends Task {
+    String filename;
 
-    private String connectionString;
-
-    public void setConnectionString(String connectionString) {
-        this.connectionString = connectionString;
+    public String getFilename() {
+        return filename;
     }
 
-    @Override
-    public void execute() throws BuildException {
-        try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            Connection connection = DriverManager.getConnection(connectionString + ";shutdown=true");
-        } catch (SQLException ex) {
-            System.out.println("Database has been shutdown");
-        } catch (Exception e) {
-            throw new BuildException(e);
+    /**
+     * Parse the arguments and initiliaze the <code>StartOption</code> fields.
+     * @param arguments The arguments passed in the command line.
+     */
+    public void parse(String[] arguments) {
+        if (arguments.length == 1) {
+            filename = arguments[0];
         }
     }
 }

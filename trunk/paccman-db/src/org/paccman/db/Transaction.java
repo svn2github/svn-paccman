@@ -1,6 +1,6 @@
 /*
  
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
                      http://paccman.sourceforge.net 
 
     This program is free software; you can redistribute it and/or modify      
