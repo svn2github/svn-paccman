@@ -29,7 +29,6 @@ import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -420,9 +419,9 @@ public class Actions {
                 return ActionResult.FAILED;
             }
         } catch (IOException ex) {
-            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
             return ActionResult.FAILED;
         }
         
@@ -493,5 +492,5 @@ public class Actions {
     // -------------------------------------------------------------------------
     // Logging
     // -------------------------------------------------------------------------
-    private static Logger logger = org.paccman.tools.Logger.getDefaultLogger(Actions.class);
+    private static java.util.logging.Logger logger = org.paccman.tools.Logger.getDefaultLogger(Actions.class);
 }

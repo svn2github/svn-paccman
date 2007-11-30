@@ -112,10 +112,13 @@ public class FileUtils {
                 zos.write(data, 0, count);
             }
             origin.close();
-        } else {
+        } else if (file.isDirectory()) {
             for (File f : file.listFiles()) {
                 addFileToZip(zos, f, rootDir);
             }
+        } else {
+            //:TODO:add log
+            throw new IOException("Bad file to add to zip (nor file, nor directory)");
         }
     }
 
@@ -142,7 +145,9 @@ public class FileUtils {
             }
             new File(fullPath).mkdirs();
             String fileName = new File(ze.getName()).getName();
-            extractFile(zis, fullPath, fileName);
+            if (! ze.isDirectory()) {
+                extractFile(zis, fullPath, fileName);
+            }
         }
         zis.close();
     }

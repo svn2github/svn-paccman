@@ -17,34 +17,72 @@
     along with this program; if not, write to the Free Software               
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  
-*/
+ */
 
 package org.paccman.tools;
 
+import java.io.File;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 
 /**
- *
+ * The logger of PAccMan. The default logger writes to the console and to log rotating
+ * files in the log directory under the working directory (i.e. in <b>workdir</b>/log)
  * @author joao
  */
 public class Logger {
 
     /**
-     * 
-     * @param name
-     * @return
+     * Name pattern for log files.
+     */
+    static final String PACCCMAN_FILE_LOG_PATTERN = "paccman%g.log";
+    /**
+     * Max number of log files.
+     */
+    static final int PACCMAN_FILE_LOG_CNT = 10;
+    /**
+     * Max log fileHandler size.
+     */
+    static final int PACCMAN_FILE_LOG_MAX_SIZE = 10 * 1024 * 1024;
+    /**
+     * FileHandler for PAccMan. All logs go to this file.
+     */
+    static private FileHandler fileLogHandler;
+
+    static {
+        try {
+            String fullLogPattern = System.getProperty("user.dir") + 
+                    File.separator + "log" + File.separator + PACCCMAN_FILE_LOG_PATTERN;
+            fileLogHandler = new FileHandler(fullLogPattern,
+                    PACCMAN_FILE_LOG_MAX_SIZE, PACCMAN_FILE_LOG_CNT);
+        } catch (Exception e) {
+            ErrorManager.fatal(e, "Logger.static");
+        }
+    }
+
+    /**
+     * Create or get the logger with the specified name.
+     * @param name Name of the logger.
+     * @return The logger with the specified name.
      */
     public static java.util.logging.Logger getDefaultLogger(String name) {
-        
+
         java.util.logging.Logger logger = java.util.logging.LogManager.getLogManager().getLogger(name);
         if (logger == null) {
+            // Create the new logger and set level.
             logger = java.util.logging.Logger.getLogger(name);
-            Handler consoleHandler = new ConsoleHandler();
-            consoleHandler.setLevel(Level.ALL);
             logger.setLevel(Level.ALL);
+
+            // Console handler.
+            Handler consoleHandler = new ConsoleHandler();
             logger.addHandler(consoleHandler);
+
+            // File handler.
+            logger.addHandler(fileLogHandler);
+
+            // Not using parent handlers
             logger.setUseParentHandlers(false);
         }
         return logger;
@@ -58,7 +96,7 @@ public class Logger {
     public static java.util.logging.Logger getDefaultLogger(Object o) {
         return getDefaultLogger(o.getClass());
     }
-    
+
     /**
      * Create or get the logger with the name of the given class.
      * @param c The class.
@@ -67,7 +105,7 @@ public class Logger {
     public static java.util.logging.Logger getDefaultLogger(Class c) {
         return getDefaultLogger(c.getName());
     }
-    
+
     private Logger() {
     }
 }
