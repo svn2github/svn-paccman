@@ -26,6 +26,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
+import java.util.logging.XMLFormatter;
 
 /**
  * The logger of PAccMan. The default logger writes to the console and to log rotating
@@ -37,7 +38,7 @@ public class Logger {
     /**
      * Name pattern for log files.
      */
-    static final String PACCCMAN_FILE_LOG_PATTERN = "paccman%g.log";
+    static final String PACCCMAN_FILE_LOG_PATTERN = "paccman%g.log.xml";
     /**
      * Max number of log files.
      */
@@ -45,18 +46,29 @@ public class Logger {
     /**
      * Max log fileHandler size.
      */
-    static final int PACCMAN_FILE_LOG_MAX_SIZE = 10 * 1024 * 1024;
+    static final int PACCMAN_FILE_LOG_MAX_SIZE = 1 * 1024 * 1024;
     /**
      * FileHandler for PAccMan. All logs go to this file.
      */
     static private FileHandler fileLogHandler;
 
+    static class PaccmanLogFormatter extends XMLFormatter {
+
+        @Override
+        public String getHead(Handler h) {
+            String s = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>" + new String(new char[] { Character.LINE_SEPARATOR });
+            s += "<?xml-stylesheet type=\"text/xsl\" href=\"paccmanlog.xslt\"?>" + new String(new char[] { Character.LINE_SEPARATOR });
+            return s + "<log>";
+        }
+    }
+    
     static {
         try {
             String fullLogPattern = System.getProperty("user.dir") + 
                     File.separator + "log" + File.separator + PACCCMAN_FILE_LOG_PATTERN;
             fileLogHandler = new FileHandler(fullLogPattern,
                     PACCMAN_FILE_LOG_MAX_SIZE, PACCMAN_FILE_LOG_CNT);
+            fileLogHandler.setFormatter(new PaccmanLogFormatter());
         } catch (Exception e) {
             ErrorManager.fatal(e, "Logger.static");
         }
