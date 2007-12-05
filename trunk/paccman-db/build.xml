@@ -81,7 +81,7 @@
                 <pathelement location="${file.reference.derby.jar}"/>
             </classpath>
         </taskdef>
-        <taskdef name="shutdowndb" classname="org.paccman.derbyant.btools.ShutdownTask">
+        <taskdef name="derbysql" classname="org.paccman.derbyant.btools.ExecScriptTask">
             <classpath>
                 <pathelement location="${reference.derby-ant.jar}"/>
                 <pathelement location="${file.reference.derby.jar}"/>
@@ -118,25 +118,20 @@
         
         <!-- Initialize database -->
         <echo level="info">Initializing database ${templatedb.path}</echo>
-        <sql
-            driver="org.apache.derby.jdbc.EmbeddedDriver"
-            url="jdbc:derby:${templatedb.path};create=true"
-            userid=""
-            password=""
-            caching="false"
-            autocommit="true">
+        <!-- 
+            derbysql is nothing less that the sql ant task. It just add the 
+            'shutdown' command to the execute.
+        -->
+        <derbysql
+            url="jdbc:derby:${templatedb.path}">
             <path>
                 <fileset refid="sql-script-files" />
             </path>
             <classpath>
                 <pathelement location="${file.reference.derby.jar}"/>
             </classpath>
-        </sql>
+        </derbysql>
 
-        <!-- Shutdown database -->
-        <echo level="info">Shutting down database ${templatedb.path}</echo>
-        <shutdowndb connectionString="jdbc:derby:${templatedb.path}"/>
-        
         <!-- Zip file -->
         <zip destfile="${templatedb.path.zip}">
             <zipfileset dir="${templatedb.path}" />

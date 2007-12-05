@@ -21,45 +21,39 @@
 
 package org.paccman.derbyant.btools;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
 
 /**
- * 
+ * Utility class for derby embedded database.
  * @author joao
  */
-public class BackupTask extends Task {
-
-    private String connectionString;
-
-    public void setConnectionString(String connectionString) {
-        this.connectionString = connectionString;
-    }
-    private String todir;
-
-    public void setTodir(String destination) {
-        this.todir = destination;
-    }
-
-    @Override
-    public void execute() throws BuildException {
+public class DerbyUtils {
+    
+    /**
+     * 
+     */
+    public static final String DERBY_DRIVER_NAME = "org.apache.derby.jdbc.EmbeddedDriver";
+    
+    /**
+     * Shutdown the specified database. It is used basically to handle the derby
+     * shutdown exception ("shutdown always throws an exception" - sic)
+     * @param database The URL of the database to be shutdown.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException 
+     */
+    public static void shutdownDb(String database) throws SQLException, ClassNotFoundException {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            Connection connection = DriverManager.getConnection(connectionString);
-            String sqlstmt = "CALL SYSCS_UTIL.SYSCS_BACKUP_DATABASE(?)";
-            CallableStatement cs = connection.prepareCall(sqlstmt);
-            cs.setString(1, todir);
-            cs.execute();
-            cs.close();
-            DriverManager.getConnection("jdbc:derby:;shutdown=true");
-        } catch (SQLException e) {
-            throw new BuildException(e);
-        } catch (Exception e) {
-            throw new BuildException(e);
+            Class.forName(DERBY_DRIVER_NAME);
+            DriverManager.getConnection(database + ";shutdown=true");
+        } catch (SQLException ex) {
+            if (!"08006".equals(ex.getSQLState())) {
+                // If not (expected) "shutdown" exception, re-throws exception.
+                throw ex;
+            }
         }
+    }
+
+    private DerbyUtils() {
     }
 }

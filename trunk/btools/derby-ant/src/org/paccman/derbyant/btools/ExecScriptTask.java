@@ -25,25 +25,50 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.apache.tools.ant.BuildException;
-import org.apache.tools.ant.Task;
+import org.apache.tools.ant.taskdefs.SQLExec;
 
-public class ShutdownTask extends Task {
+/**
+ * Execute script ant task. This is the SQLExec ant task plus the shutdown.
+ * @author joao
+ */
+public class ExecScriptTask extends SQLExec {
 
-    private String connectionString;
-
-    public void setConnectionString(String connectionString) {
-        this.connectionString = connectionString;
+    /**
+     * Creates the connection used to execute the task.
+     * We don't use getConnection from JDBCTask which uses a <code>Driver</code> to 
+     * create the connection (the shutdown fails if we dont do that.
+     * @return The connection to use for SQL operation.
+     * @throws org.apache.tools.ant.BuildException
+     */
+    @Override
+    protected Connection getConnection() throws BuildException {
+        try {
+            Class.forName(DerbyUtils.DERBY_DRIVER_NAME);
+            Connection cnx = DriverManager.getConnection(getUrl());
+            return cnx;
+        } catch (ClassNotFoundException ex) {
+            throw new BuildException(ex);
+        } catch (SQLException ex) {
+            throw new BuildException(ex);
+        }
     }
 
+    /**
+     * Execute script ant task body.
+     * @throws org.apache.tools.ant.BuildException
+     */
     @Override
     public void execute() throws BuildException {
+        // Do execute
+        super.execute();
+
+        // Shutdown database
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            Connection connection = DriverManager.getConnection(connectionString + ";shutdown=true");
+            DerbyUtils.shutdownDb(getUrl());
         } catch (SQLException ex) {
-            System.out.println("Database has been shutdown");
-        } catch (Exception e) {
-            throw new BuildException(e);
+            throw new BuildException(ex);
+        } catch (ClassNotFoundException ex) {
+            throw new BuildException(ex);
         }
     }
 }

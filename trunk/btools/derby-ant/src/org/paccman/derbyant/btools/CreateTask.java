@@ -23,12 +23,11 @@ package org.paccman.derbyant.btools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 /**
- * 
+ * Create ant task.
  * @author joao
  */
 public class CreateTask extends Task {
@@ -36,7 +35,7 @@ public class CreateTask extends Task {
     private String connectionString;
 
     /**
-     * 
+     * Connection string attribute.
      * @param connectionString
      */
     public void setConnectionString(String connectionString) {
@@ -44,20 +43,17 @@ public class CreateTask extends Task {
     }
 
     /**
-     * 
+     * Create ant task body.
      * @throws org.apache.tools.ant.BuildException
      */
     @Override
     public void execute() throws BuildException {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Class.forName(DerbyUtils.DERBY_DRIVER_NAME);
             Connection connection = DriverManager.getConnection(connectionString + ";create=true");
             connection.close();
-            DriverManager.getConnection("jdbc:derby:;shutdown=true");
-        } catch (SQLException e) {
-            //:TODO:
+            DerbyUtils.shutdownDb(connectionString);
         } catch (Exception e) {
-            System.err.println("Failed to create database: '" + connectionString + ";create=true'");
             throw new BuildException(e);
         }
     }
