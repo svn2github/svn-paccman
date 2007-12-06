@@ -83,6 +83,7 @@ public class PaccmanDao {
         final File fileDestDir = new File(destDir);
         assert !fileDestDir.exists() : "Target must not exist";
         fileDestDir.mkdir();
+        //:TODO:use FileUtils in paccman-tools to unzip
         java.util.zip.ZipFile zip = new java.util.zip.ZipFile(createTempFile);
         java.util.Enumeration _enum = zip.entries();
         while (_enum.hasMoreElements()) {
@@ -178,8 +179,9 @@ public class PaccmanDao {
      * @param exportTo
      */
     public void export(File exportTo) {
-    //:TODO:raw export all table to a jar file
+    //:TODO:raw export all tables to a jar file
     }
+    
     // -------------------------------------------------------------------------
     // Logging
     // -------------------------------------------------------------------------

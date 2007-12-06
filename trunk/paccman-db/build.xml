@@ -93,6 +93,7 @@
     <property name="sql.scripts.dir" location="sql-scripts" />
     <fileset dir="${sql.scripts.dir}" id="sql-script-files">
         <include name="create.sql"/>
+        <include name="initialize.sql" />
     </fileset>
     
     <!-- Checks if database template needs to be rebuilt -->
