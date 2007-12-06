@@ -1,17 +1,31 @@
 /*
- * PaccmanForm.java
- *
- * Created on 23 juin 2005, 07:33
- *
- * To change this template, choose Tools | Options and locate the template under
- * the Source Creation and Management node. Right-click the template and choose
- * Open. You can then make changes to the template in the Source Editor.
- */
+ 
+    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+                     http://paccman.sourceforge.net 
+
+    This program is free software; you can redistribute it and/or modify      
+    it under the terms of the GNU General Public License as published by      
+    the Free Software Foundation; either version 2 of the License, or         
+    (at your option) any later version.                                       
+
+    This program is distributed in the hope that it will be useful,           
+    but WITHOUT ANY WARRANTY; without even the implied warranty of            
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+    GNU General Public License for more details.                              
+
+    You should have received a copy of the GNU General Public License         
+    along with this program; if not, write to the Free Software               
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ 
+*/
 
 package org.paccman.ui.form;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.paccman.controller.Controller;
+import org.paccman.ui.main.ContextMain;
+
 /**
  *
  * @author joao
@@ -202,7 +216,8 @@ public abstract class PaccmanForm extends JPanel implements PaccmanFormInterface
                     
             }
             
-            org.paccman.ui.main.Main.setDocumentChanged(true);
+            ContextMain.getDocumentController().setHasChanged(true);
+            ContextMain.getDocumentController().notifyChange();
             
             return retVal;
         } catch (BadInputException bie) {

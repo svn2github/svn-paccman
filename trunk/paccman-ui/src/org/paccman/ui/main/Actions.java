@@ -424,7 +424,7 @@ public class Actions {
             logger.log(Level.SEVERE, null, ex);
             return ActionResult.FAILED;
         }
-        
+
         // Everything has gone right. Set current file name.
         getDocumentController().setFile(fileToOpen);
         logger.info("Done");

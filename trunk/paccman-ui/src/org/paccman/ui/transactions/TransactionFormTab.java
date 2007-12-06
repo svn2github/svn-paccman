@@ -1,21 +1,21 @@
 /*
  
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net
+Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+http://paccman.sourceforge.net
  
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
  
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
  
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
  */
 
@@ -34,6 +34,7 @@ import org.paccman.controller.ScheduledTransactionController;
 import org.paccman.controller.TransactionBaseController;
 import org.paccman.controller.TransferController;
 import org.paccman.paccman.TransactionBase;
+import org.paccman.ui.main.ContextMain;
 import org.paccman.ui.main.Main;
 import org.paccman.ui.scheduling.Scheduler;
 import org.paccman.ui.selector.ControllerSelectionListener;
@@ -47,26 +48,26 @@ import static org.paccman.ui.main.ContextMain.*;
  * @author  joao
  */
 public class TransactionFormTab extends javax.swing.JPanel implements ControllerSelectionListener, ListSelectionListener {
-    
+
     /** Creates new form TransactionsTab */
     public TransactionFormTab() {
         initComponents();
         accountSelectorPanel.addListener(this);
         accountSelectorPanel.addListener(transactionFormPanel);
         transactionTable.getSelectionModel().addListSelectionListener(this);
-        
+
         setTransactionFormPanelVisible(true);
     }
-    
+
     public void controllerSelected(org.paccman.controller.Controller accountCtrl) {
         if (selectedAccount != accountCtrl) {
-            selectedAccount = (AccountController)accountCtrl;
+            selectedAccount = (AccountController) accountCtrl;
             transactionTable.getTransactionTableModel().setAccountController(selectedAccount);
             newBtn.setEnabled(true);
             reconcileBtn.setEnabled(true);
         }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -248,34 +249,33 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
         add(splitPanelCard, "SPLIT_CARD");
 
     }// </editor-fold>//GEN-END:initComponents
-
     boolean transactionFormPanelVisible = true;
-    
+
     private void setTransactionFormPanelVisible(boolean visible) {
         transactionFormPanelVisible = visible;
-        
+
         transactionFormPanel.setVisible(transactionFormPanelVisible);
-        validateCancelPanel.setVisible(transactionFormPanelVisible);   
+        validateCancelPanel.setVisible(transactionFormPanelVisible);
         if (transactionFormPanelVisible) {
             showHideBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/paccman/ui/resources/images/transaction_hide.png")));
         } else {
             showHideBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/paccman/ui/resources/images/transaction_show.png")));
         }
     }
-    
+
     private void showHideBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHideBtnActionPerformed
-        assert ! editing: "Show/Hide button should be disable in edit mode";
-        
-        setTransactionFormPanelVisible( ! transactionFormPanelVisible );
+        assert !editing : "Show/Hide button should be disable in edit mode";
+
+        setTransactionFormPanelVisible(!transactionFormPanelVisible);
     }//GEN-LAST:event_showHideBtnActionPerformed
-    
+
     private void cancelReconcileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelReconcileBtnActionPerformed
         reconciling = false;
         reconcileBtn.setEnabled(true);
         transactionTable.getTransactionTableModel().setMode(TransactionTableModel.Mode.VIEW_MODE);
         showAccountSelector();
     }//GEN-LAST:event_cancelReconcileBtnActionPerformed
-    
+
     private void finishBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishBtnActionPerformed
         ReconcileContext context = reconcileDataPanel.getData();
         if (context.diffMarkedBalance.compareTo(BigDecimal.ZERO) == 0) {
@@ -283,18 +283,19 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             // transactions to "Reconciled".
             transactionTable.getTransactionTableModel().setMode(TransactionTableModel.Mode.VIEW_MODE);
             transactionTable.getTransactionTableModel().validateReconciliation();
-            
+
             // Update account reconciliation data
             selectedAccount.getAccount().setLastReconciliationDate(context.newDate);
             selectedAccount.getAccount().setLastReconciliationBalance(context.newBalance);
             selectedAccount.getAccount().setPendingReconciliation(false);
             selectedAccount.getAccount().setPendingReconciliationBalance(null);
             selectedAccount.getAccount().setPendingReconciliationDate(null);
-            
+
             // Notification
             selectedAccount.notifyChange();
-            org.paccman.ui.main.Main.setDocumentChanged(true);
-            
+            ContextMain.getDocumentController().setHasChanged(true);
+            ContextMain.getDocumentController().notifyChange();
+
             reconciling = false;
             reconcileBtn.setEnabled(true);
             showAccountSelector();
@@ -303,7 +304,7 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             // - leave a pending reconciliation (will be saved)
             // - cancel the finish (stay in reconcile mode)
             // - abort the reconciliation (cancel the reconciliation)
-            String[] choices = { "Keep pending", "Cancel", "Abort"};
+            String[] choices = {"Keep pending", "Cancel", "Abort"};
             Object diag = JOptionPane.showInputDialog(this, "The reconciliation is not finished:TODO:make better message:", "Confirm",
                     JOptionPane.OK_OPTION, null, choices, choices[0]);
             if (diag == choices[0]) {
@@ -311,16 +312,17 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
                 // transactions to "Reconciled".
                 transactionTable.getTransactionTableModel().setMode(TransactionTableModel.Mode.VIEW_MODE);
                 transactionTable.getTransactionTableModel().setPendingReconciliation();
-                
+
                 // Update account reconciliation data
                 selectedAccount.getAccount().setPendingReconciliation(true);
                 selectedAccount.getAccount().setPendingReconciliationBalance(context.newBalance);
                 selectedAccount.getAccount().setPendingReconciliationDate(context.newDate);
-                
+
                 // Notification
                 selectedAccount.notifyChange();
-                org.paccman.ui.main.Main.setDocumentChanged(true);
-                
+                ContextMain.getDocumentController().setHasChanged(true);
+                ContextMain.getDocumentController().notifyChange();
+
                 reconciling = false;
                 reconcileBtn.setEnabled(true);
                 showAccountSelector();
@@ -331,7 +333,7 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             }
         }
     }//GEN-LAST:event_finishBtnActionPerformed
-    
+
     private void transactionTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionTableMouseClicked
         if (reconciling) {
             int col = transactionTable.columnAtPoint(evt.getPoint());
@@ -341,37 +343,35 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             }
         }
     }//GEN-LAST:event_transactionTableMouseClicked
-    
     boolean reconciling;
-    
+
     private void showReconcilePanel() {
-        CardLayout cl = (CardLayout)leftTransactionPanel.getLayout();
+        CardLayout cl = (CardLayout) leftTransactionPanel.getLayout();
         cl.show(leftTransactionPanel, "RECONCILE");
     }
-    
+
     private void showAccountSelector() {
-        CardLayout cl = (CardLayout)leftTransactionPanel.getLayout();
+        CardLayout cl = (CardLayout) leftTransactionPanel.getLayout();
         cl.show(leftTransactionPanel, "ACCOUNT_SELECTOR_PANEL");
     }
-    
-    
+
     private void reconcileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reconcileBtnActionPerformed
         assert selectedAccount != null;
-        assert ! reconciling: "Button should be disabled when reconciling.";
+        assert !reconciling : "Button should be disabled when reconciling.";
         transactionTable.getTransactionTableModel().setMode(TransactionTableModel.Mode.STATUS_EDIT_MODE);
-        Calendar      date = selectedAccount.getAccount().getLastReconciliationDate   ();
+        Calendar date = selectedAccount.getAccount().getLastReconciliationDate();
         BigDecimal balance = selectedAccount.getAccount().getLastReconciliationBalance();
         if (balance == null) {
             // No previous reconciliation.
             //
-            
+
             // Balance = initial balance
             balance = selectedAccount.getAccount().getInitialBalance();
             // Date date of first transaction if any. Otherwise today (nothing to reconcile in this case)
             if (selectedAccount.getAccount().getNumberOfTransactions() > 0) {
                 date = selectedAccount.getAccount().getTransaction(0).getTransactionDate();
             } else {
-                date    = new GregorianCalendar();
+                date = new GregorianCalendar();
             }
         }
         Calendar pendingDate;
@@ -387,27 +387,28 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             markedAmount = BigDecimal.ZERO;
         }
         reconcileDataPanel.setData(date, balance, pendingDate, pendingBalance, markedAmount);
-        
+
         reconcileBtn.setEnabled(false);
         reconciling = true;
-        
+
         showReconcilePanel();
         
     }//GEN-LAST:event_reconcileBtnActionPerformed
-    
+
     private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
         assert selectedTransaction != null;
-        
+
         unselectTransaction();
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this transaction ?",
                 "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (confirm == JOptionPane.YES_OPTION) {
             selectedAccount.getAccount().removeTransaction(selectedTransactionIndex);
             selectedAccount.notifyChange();
-            org.paccman.ui.main.Main.setDocumentChanged(true);
+            ContextMain.getDocumentController().setHasChanged(true);
+            ContextMain.getDocumentController().notifyChange();
         }
     }//GEN-LAST:event_removeBtnActionPerformed
-    
+
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         setEditMode(false);
         transactionFormPanel.onCancel();
@@ -418,18 +419,16 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             expScheduledTransaction = null;
         }
     }//GEN-LAST:event_cancelBtnActionPerformed
-    
+
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
         setEditMode(true);
         transactionFormPanel.onEdit();
     }//GEN-LAST:event_editBtnActionPerformed
-    
-    AccountController          selectedAccount         ;
-    TransactionBaseController  selectedTransaction     ;
-    int                        selectedTransactionIndex;
-    
+    AccountController selectedAccount;
+    TransactionBaseController selectedTransaction;
+    int selectedTransactionIndex;
     boolean editing;
-    
+
     public void setEditMode(boolean editing) {
         this.editing = editing;
         newBtn.setEnabled(!editing && (selectedAccount != null));
@@ -439,17 +438,17 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
         transactionTable.setEnabled(!editing);
         splitPanelCard.setEditMode(editing);
     }
-    
+
     public void showSplitCard() {
-        CardLayout cl = (CardLayout)getLayout();
+        CardLayout cl = (CardLayout) getLayout();
         cl.show(this, "SPLIT_CARD");
     }
-    
+
     public void showTransactionCard() {
-        CardLayout cl = (CardLayout)getLayout();
+        CardLayout cl = (CardLayout) getLayout();
         cl.show(this, "TRANSACTION_CARD");
     }
-    
+
     // When adding a transfer, we must add a transfer in the destination account
     protected void addOtherTransfer(TransferController transfer) {
         TransferController destTransfer = new TransferController();
@@ -460,78 +459,78 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
         destTransfer.getTransfer().setLabel(transfer.getTransfer().getLabel());
         transfer.getTransfer().getToFromAccount().addTransfer(destTransfer.getTransfer(), true);
     }
-    
+
     private void validateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validateBtnActionPerformed
         TransactionBaseController validatedTransaction = null;
         validatedTransaction = (TransactionBaseController) transactionFormPanel.onValidate();
-        if ( validatedTransaction != null) {
-            
+        if (validatedTransaction != null) {
+
             setEditMode(false);
-            
+
             if (transactionFormPanel.isEditingNew()) {
-                
+
                 // New transaction added
                 int newTransactionIx = selectedAccount.getAccount().addTransaction(validatedTransaction.getTransactionBase(), true);
-                
+
                 if (validatedTransaction instanceof TransferController) {
-                    addOtherTransfer((TransferController)validatedTransaction);
+                    addOtherTransfer((TransferController) validatedTransaction);
                 }
-                
+
                 selectedAccount.notifyChange();
                 newTransactionIx = transactionTable.getTransactionTableModel().transactionIndexToTransactionRow(newTransactionIx);
                 transactionTable.getSelectionModel().setSelectionInterval(newTransactionIx, newTransactionIx);
-                
+
                 // If this is a scheduled transaction that has been entered, update it
                 if (expScheduledTransaction != null) {
                     // Update ScheduledTransaction
                     ScheduledTransactionController stc = expScheduledTransaction.getScheduledTransaction();
-                    
+
                     // Current next occurence for the scheduled transaction
                     Calendar scheduledNextOccurence = stc.getScheduledTransaction().getNextOccurence();
                     // Next occurence after the expired one
-                    Calendar expiredNextOccurence   = expScheduledTransaction.getOccurence();
-                    Scheduler.computeNextOccurence(expiredNextOccurence, stc.getScheduledTransaction().getPeriodUnit(), 
+                    Calendar expiredNextOccurence = expScheduledTransaction.getOccurence();
+                    Scheduler.computeNextOccurence(expiredNextOccurence, stc.getScheduledTransaction().getPeriodUnit(),
                             stc.getScheduledTransaction().getPeriod());
-                    
+
                     if (scheduledNextOccurence.compareTo(expiredNextOccurence) < 0) {
                         stc.getScheduledTransaction().setNextOccurence(expiredNextOccurence);
                     }
-                    
+
                     expScheduledTransaction.setRegistered(true);
                     getDocumentController().notifyChange(); //:TODO:expScheduledTransaction.notifyChange(); 
                     Main.getMain().gotoWelcomeTab();
                     expScheduledTransaction = null;
                 }
-                
+
             } else {
-                
+
                 // Transaction updated
                 assert selectedTransaction.getTransactionBase().getReconciliationState() !=
                         TransactionBase.ReconciliationState.RECONCILED;
-                
+
                 if (validatedTransaction != selectedTransaction) {
-                    
+
                     // Transaction changed of type (split -> transfer, transfer -> split....)
-                    
+
                     //  Removed the old one
                     selectedAccount.getAccount().removeTransaction(selectedTransactionIndex);
-                    
+
                     // Add the new one
                     int newTransactionIx = selectedAccount.getAccount().addTransaction(validatedTransaction.getTransactionBase(), true);
-                    
+
                     if (validatedTransaction instanceof TransferController) {
-                        addOtherTransfer((TransferController)validatedTransaction);
+                        addOtherTransfer((TransferController) validatedTransaction);
                     }
-                    
+
                     TransactionBase oldTransactionBase = selectedTransaction.getTransactionBase();
                     TransactionBase newTransactionBase = validatedTransaction.getTransactionBase();
-                    
+
                     newTransactionIx = transactionTable.getTransactionTableModel().transactionIndexToTransactionRow(newTransactionIx);
                     selectedAccount.notifyChange();
                     transactionTable.getSelectionModel().setSelectionInterval(newTransactionIx, newTransactionIx);
-                    
+
                 } else {
-                    
+
                     int transactionRow = transactionTable.getSelectedRow();
                     int transactionIndex = transactionTable.getTransactionTableModel().transactionRowToTransactionIndex(transactionRow);
                     int updatedTransactionIx = selectedAccount.getAccount().updateTransaction(transactionIndex);
@@ -539,18 +538,18 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
                     selectedAccount.notifyChange();
                     selectedTransaction.notifyChange();
                     transactionTable.getSelectionModel().setSelectionInterval(updatedTransactionRow, updatedTransactionRow);
-                    
+
                 }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Failed to validate", "Validation failed", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_validateBtnActionPerformed
-    
+
     private void newBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBtnActionPerformed
         newTransaction(null);
     }//GEN-LAST:event_newBtnActionPerformed
-    
+
     public void newTransaction(TransactionBaseController transaction) {
         setEditMode(true);
         if (transaction == null) {
@@ -560,16 +559,16 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             transactionFormPanel.onNew(transaction);
         }
     }
-    
+
     public void registerToDocumentCtrl() {
         accountSelectorPanel.registerToDocumentCtrl();
         transactionFormPanel.registerToDocumentCtrl();
         splitPanelCard.registerToDocumentCtrl();
     }
-    
+
     public boolean selectionEnabled() {
         if (transactionFormPanel.isEditing()) {
-            int diag= JOptionPane.showConfirmDialog(this, "You are editing a transaction. Abort ?",
+            int diag = JOptionPane.showConfirmDialog(this, "You are editing a transaction. Abort ?",
                     "Confirm", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
             if (diag == JOptionPane.OK_OPTION) {
                 cancelBtnActionPerformed(null);
@@ -581,62 +580,62 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
             return true;
         }
     }
-    
+
     public void valueChanged(javax.swing.event.ListSelectionEvent e) {
         //Ignore extra messages.
-        if (e.getValueIsAdjusting()) return;
-        
-        ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-        
+        if (e.getValueIsAdjusting()) {
+            return;
+        }
+
+        ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+
         boolean selectionEmpty = lsm.isSelectionEmpty();
-        
+
         if (selectionEmpty) {
             unselectTransaction();
         } else {
             selectedTransactionIndex = lsm.getMinSelectionIndex();
             selectedTransactionIndex = transactionTable.getTransactionTableModel().transactionRowToTransactionIndex(selectedTransactionIndex);
-            selectedTransaction = (TransactionBaseController)ControllerManager.getController(selectedAccount.getAccount().getTransaction(selectedTransactionIndex));
+            selectedTransaction = (TransactionBaseController) ControllerManager.getController(selectedAccount.getAccount().getTransaction(selectedTransactionIndex));
             transactionFormPanel.onSelect(selectedTransaction);
         }
-        
-        editBtn.setEnabled(! selectionEmpty &&
+
+        editBtn.setEnabled(!selectionEmpty &&
                 (selectedTransaction.getTransactionBase().getReconciliationState() != TransactionBase.ReconciliationState.RECONCILED));
-        removeBtn.setEnabled(! selectionEmpty &&
+        removeBtn.setEnabled(!selectionEmpty &&
                 (selectedTransaction.getTransactionBase().getReconciliationState() != TransactionBase.ReconciliationState.RECONCILED));
-        
+
     }
-    
+
     public void unselectTransaction() {
         transactionFormPanel.onUnselect();
     }
-    
+
     public void setSelectedAccount(AccountController accountCtrl) {
         accountSelectorPanel.selectAccount(accountCtrl);
     }
-    
+
     public SplitForm getSplitForm() {
         return splitPanelCard;
     }
-    
+
     public void switchReconciliationStatus(TransactionBase transaction, int rowIndex) {
         switch (transactionTable.getTransactionTableModel().getStatus(transaction)) {
             case RECONCILED:
                 // nothing to do
                 break;
-                
+
             case MARKED:
                 transactionTable.getTransactionTableModel().setTransactionStatus(transaction, rowIndex, TransactionBase.ReconciliationState.UNRECONCILED);
                 reconcileDataPanel.unmarkTransactionAmount(transaction.getAmount());
                 break;
-                
+
             case UNRECONCILED:
                 transactionTable.getTransactionTableModel().setTransactionStatus(transaction, rowIndex, TransactionBase.ReconciliationState.MARKED);
                 reconcileDataPanel.markTransactionAmount(transaction.getAmount());
                 break;
         }
     }
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.paccman.ui.accountselector.AccountSelectorPanel accountSelectorPanel;
     private javax.swing.JButton cancelBtn;
@@ -664,7 +663,6 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
     private javax.swing.JButton validateBtn;
     private javax.swing.JPanel validateCancelPanel;
     // End of variables declaration//GEN-END:variables
-
     /**
      * Holds value of property expScheduledTransaction.
      */
@@ -687,5 +685,4 @@ public class TransactionFormTab extends javax.swing.JPanel implements Controller
     public void setScheduledTransaction(org.paccman.ui.scheduling.ExpiredScheduledTransaction scheduledTransaction) {
         this.expScheduledTransaction = scheduledTransaction;
     }
-    
 }

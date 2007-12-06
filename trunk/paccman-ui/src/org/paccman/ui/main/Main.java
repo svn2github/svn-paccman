@@ -21,30 +21,17 @@
 
 package org.paccman.ui.main;
 
-import java.awt.Frame;
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
-import javax.swing.SwingWorker;
 import org.paccman.calc.CalculatorFrame;
 import org.paccman.controller.AccountController;
-import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
-import org.paccman.db.PaccmanDao;
 import org.paccman.preferences.ui.MainPrefs;
-import org.paccman.tools.FileUtils;
 import org.paccman.ui.*;
 import org.paccman.ui.accounts.AccountFormTab;
 import org.paccman.ui.banks.BankFormTab;
@@ -62,10 +49,6 @@ import static org.paccman.ui.main.Actions.ActionResult.*;
  * @author  joao
  */
 public class Main extends javax.swing.JFrame implements PaccmanView {
-
-    private boolean saveToDatabase = false;
-    private boolean saveToXml = true;
-    private boolean readFromXml = false; // = ! readFromDatabase
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -252,43 +235,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     }//GEN-LAST:event_openLastFileMnuActionPerformed
 
     @Deprecated
-    private int confirmSave() {
-        assert (getDocumentController() != null) &&
-                getDocumentController().isHasChanged();
-
-        return JOptionPane.showConfirmDialog(this, "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-    }
-
-    @Deprecated
-    private File selectSaveFile() {
-        assert (getDocumentController() != null);
-
-        PaccmanFileChooser pfc = new PaccmanFileChooser();
-        if (pfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            return pfc.getSelectedFile();
-        } else {
-            return null;
-        }
-    }
-
-    @Deprecated
-    // Move to Actions
-    private File selectOpenFile() {
-
-        JFileChooser fc = new PaccmanFileChooser();
-
-        // Actually show the open file dialog
-        int s = fc.showOpenDialog(this);
-
-        // Check return value
-        if (s == JFileChooser.APPROVE_OPTION) {
-            return fc.getSelectedFile();
-        } else {
-            return null;
-        }
-    }
-
-    @Deprecated
     public abstract class PaccmanAction extends AbstractAction {
 
         public PaccmanAction(String name, Icon icon, boolean enabled) {
@@ -335,16 +281,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         mainTabbedPane.setSelectedComponent(welcomePane);
     }
 
-    @Deprecated
-    private int showQuitDialog() {
-        if (JOptionPane.showConfirmDialog(this, "Do you really want to quit ?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            return JOptionPane.YES_OPTION;
-        } else {
-            return JOptionPane.NO_OPTION;
-        }
-    }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton backBtn;
     public javax.swing.JMenuItem calculatorMnu;
@@ -374,27 +310,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public javax.swing.JPanel toolbarsPanel;
     public javax.swing.JMenu toolsMnu;
     // End of variables declaration//GEN-END:variables
-
-    /**
-     * Called when the DocumentController changes
-     */
-    @Deprecated
-    private void documentControllerUpdated() {
-        if (getDocumentController() == null) {
-            mainTabbedPane.removeAll();
-            setTitle(getTitleString());
-        } else {
-            showTabbedPanes();
-            getDocumentController().registerView(this);
-            getDocumentController().notifyChange();
-        }
-    }
-
-    @Deprecated
-    public static void setDocumentChanged(boolean changed) {
-        getDocumentController().setHasChanged(changed);
-        main.onChange(getDocumentController());
-    }
 
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------

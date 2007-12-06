@@ -27,7 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import org.paccman.controller.AccountController;
 import org.paccman.controller.ControllerManager;
 import org.paccman.controller.ScheduledTransactionController;
-import org.paccman.ui.form.BadInputException;
+import org.paccman.ui.main.ContextMain;
 import org.paccman.ui.selector.ControllerSelectionListener;
 
 /**
@@ -241,7 +241,8 @@ public class ScheduleFormTab extends javax.swing.JPanel implements ControllerSel
             unselectScheduledTransaction();
             selectedAccount.getAccount().removeScheduledTransaction(selectedScheduledTransactionIndex);
             selectedAccount.notifyChange();
-            org.paccman.ui.main.Main.setDocumentChanged(true);
+            ContextMain.getDocumentController().setHasChanged(true);
+            ContextMain.getDocumentController().notifyChange();
         }
     }//GEN-LAST:event_removeBtnActionPerformed
     
