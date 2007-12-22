@@ -478,15 +478,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
          }
 
          if (fileToOpen != null) {
-             Actions.ActionResult res = Actions.doOpenFile(new File(fileToOpen));
-             switch (res) {
-                 case OK:
-                     break;
-                 case FAILED:
-                     JOptionPane.showMessageDialog(Main.getMain(), "Failed to open file", 
-                             "Error", JOptionPane.ERROR_MESSAGE);
-                     break;
-             }
+             Actions.doOpenFile(new File(fileToOpen));
          }
     }//GEN-LAST:event_formWindowOpened
 

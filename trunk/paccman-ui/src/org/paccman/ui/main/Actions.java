@@ -1,24 +1,23 @@
 /*
- 
-    Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net 
-
-    This program is free software; you can redistribute it and/or modify      
-    it under the terms of the GNU General Public License as published by      
-    the Free Software Foundation; either version 2 of the License, or         
-    (at your option) any later version.                                       
-
-    This program is distributed in the hope that it will be useful,           
-    but WITHOUT ANY WARRANTY; without even the implied warranty of            
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-    GNU General Public License for more details.                              
-
-    You should have received a copy of the GNU General Public License         
-    along with this program; if not, write to the Free Software               
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- 
-*/
-
+ *
+ *  Copyright (C)    2007 Joao F. (joaof@sourceforge.net)
+ *                   http://paccman.sourceforge.net 
+ *
+ *  This program is free software; you can redistribute it and/or modify      
+ *  it under the terms of the GNU General Public License as published by      
+ *  the Free Software Foundation; either version 2 of the License, or         
+ *  (at your option) any later version.                                       
+ *
+ *  This program is distributed in the hope that it will be useful,           
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+ *  GNU General Public License for more details.                              
+ *
+ *  You should have received a copy of the GNU General Public License         
+ *  along with this program; if not, write to the Free Software               
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ *
+ */
 package org.paccman.ui.main;
 
 import java.awt.Frame;
@@ -28,10 +27,13 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 import org.paccman.controller.DocumentController;
 import org.paccman.db.PaccmanDao;
 import org.paccman.preferences.ui.MainPrefs;
@@ -324,16 +326,7 @@ public class Actions {
         }
 
         public void actionPerformed(ActionEvent e) {
-            ActionResult res = openDocument();
-            switch (res) {
-                case OK:
-                case CANCEL:
-                case FAILED:
-                    //:TODO:do the appropriate
-                    return;
-                default:
-                    throw new AssertionError("Unhandled ActionResult: " + res.toString());
-            }
+            openDocument();
         }
     }
 
@@ -352,85 +345,86 @@ public class Actions {
         }
     }
 
-    private static ActionResult openDocument() {
+    private static void openDocument() {
 
         // Close current document if open
         if (isDocumentEdited()) {
             Actions.ActionResult closeDiag = closeDocument();
             if (closeDiag != ActionResult.OK) {
-                return closeDiag;
+                return; // result = closeDiag;
             }
         }
 
         // Do open a new document
-        Actions.ActionResult result = ActionResult.FAILED;
+        final File fileToOpen = selectOpenFile();
+        if (fileToOpen == null) {
+            return; // result = ActionResult.CANCEL;
+        } else {
+            doOpenFile(fileToOpen);
+        }
+    }
 
-        File fileToOpen = selectOpenFile();
-        while (result == ActionResult.FAILED) {
-            if (fileToOpen == null) {
-                return ActionResult.CANCEL;
-            } else {
-                result = doOpenFile(fileToOpen);
-                switch (result) {
-                    case FAILED:
-                        fileToOpen = selectOpenFile();
-                        break;
-                    case CANCEL:
-                        break;
-                    case OK:
-                        break;
+    public static void doOpenFile(final File fileToOpen) {
+        new DialogWaitableWorker<Void, Void>("Opening file", 4, Main.getMain()) {
+
+            private DocumentController newDocumentCtrl;
+
+            @Override
+            public void whenDone() {
+                try {
+                    get();
+
+                    setDocumentController(newDocumentCtrl);
+                    getDocumentController().setFile(fileToOpen);
+                    logger.info("Done");
+                } catch (InterruptedException ex) {
+                    //:TODO:
+                    logger.log(Level.SEVERE, null, ex);
+                } catch (ExecutionException ex) {
+                    //:TODO:
+                    logger.log(Level.SEVERE, null, ex);
                 }
             }
-        }
-        return result;
-    }
 
-    static ActionResult doOpenFile(File fileToOpen) {
-        logger.log(Level.INFO, "Loading file {0}", fileToOpen);
-        try {
-            // Unzip file (= zip of directory database) to temporary folder...
-            String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
-                    "paccman_" + FileUtils.getTimeString();
-            final File tempDbFile = new File(tempDb);
-            FileUtils.unzipDirectory(fileToOpen, tempDbFile);
+            @Override
+            public Void backgroundTask() throws Exception {
+                nextStep("Unzipping file");
+                // Unzip file (= zip of directory database) to temporary folder...
+                String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
+                        "paccman_" + FileUtils.getTimeString();
+                final File tempDbFile = new File(tempDb);
+                FileUtils.unzipDirectory(fileToOpen, tempDbFile);
 
-            // ...open database
-            DocumentController newDocumentController = new DocumentController();
-            PaccmanDao db = new PaccmanDao(new File(tempDbFile.getAbsolutePath()).getPath());
-            db.load(newDocumentController);
+                // ...open database
+                nextStep("Opening database");
+                newDocumentCtrl = new DocumentController();
+                PaccmanDao db = new PaccmanDao(new File(tempDbFile.getAbsolutePath()).getPath());
+                db.load(newDocumentCtrl);
 
-            // ... remove temporary folder
-            FileUtils.deleteDir(tempDbFile);
+                // ... remove temporary folder
+                nextStep("Cleaning");
+                FileUtils.deleteDir(tempDbFile);
 
-            // Register views
-            setDocumentController(newDocumentController);
+                // Keep last directory in preferences
+                nextStep("Updating preferences");
+                String path = fileToOpen.getParent();
+                MainPrefs.putDataDirectory(path);
 
-            // Keep last directory in preferences
-            String path = fileToOpen.getParent();
-            MainPrefs.putDataDirectory(path);
-
-            // Add file to MRU list
-            try {
                 // Add file to MRU list
-                MainPrefs.addFilenameToMru(fileToOpen.getCanonicalPath());
-                MainPrefs.setLastSelectedFile(fileToOpen.getCanonicalPath());
-            } catch (IOException ex) {
-                ex.printStackTrace(); //:TODO:
-                return ActionResult.FAILED;
+                try {
+                    // Add file to MRU list
+                    MainPrefs.addFilenameToMru(fileToOpen.getCanonicalPath());
+                    MainPrefs.setLastSelectedFile(fileToOpen.getCanonicalPath());
+                } catch (IOException ex) {
+                    ex.printStackTrace(); //:TODO:
+                    return null;
+                }
+
+                return null;
+
             }
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            return ActionResult.FAILED;
-        }
-
-        // Everything has gone right. Set current file name.
-        getDocumentController().setFile(fileToOpen);
-        logger.info("Done");
-        return ActionResult.OK;
+            }.start();
     }
-
 
     //--------------------------------------------------------------------------
     // Quit Action
