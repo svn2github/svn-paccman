@@ -18,6 +18,7 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  *
  */
+
 package org.paccman.ui.main;
 
 import java.awt.Frame;
@@ -30,9 +31,14 @@ import javax.swing.SwingWorker;
 public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
 
     /**
-     * Called in the EDT when the task has finished.
+     * Called in the EDT when the task has sucessfully finished.
      */
     public abstract void whenDone();
+
+    /**
+     * Called in the EDT when the task has raised an exception.
+     */
+    public abstract void whenFailed(Exception e);
 
     /**
      * The task routine of the worker thread performed in background.
@@ -62,13 +68,13 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
         }
         String description;
         int step = -1;
+
         int getProgress() {
-            return (step*100)/cntSteps;
+            return (step * 100) / cntSteps;
         }
     }
-    
     Step currentStep = new Step();
-    
+
     /**
      * Set the next step for this task.
      * @param stepDescription A string describing the step currently performed 
@@ -78,9 +84,8 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
         currentStep.step++;
         currentStep.description = stepDescription;
         firePropertyChange("step", null, currentStep);
-        // try { Thread.sleep(10000); } catch (Exception e) {} //:TODO:for debug only
+    // try { Thread.sleep(10000); } catch (Exception e) {} //:TODO:for debug only
     }
-    
     private WaitDialog waitDialog;
     private int cntSteps;
     private String title;
@@ -94,9 +99,14 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
 
     @Override
     protected void done() {
-        whenDone();
         waitDialog.setVisible(false);
         waitDialog.dispose();
+        try {
+            get();
+            whenDone();
+        } catch (Exception e) {
+            whenFailed(e);
+        }
     }
 
     @Override

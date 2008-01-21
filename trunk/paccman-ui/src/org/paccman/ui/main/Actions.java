@@ -18,27 +18,27 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
  *
  */
+
 package org.paccman.ui.main;
 
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 import org.paccman.controller.DocumentController;
 import org.paccman.db.PaccmanDao;
 import org.paccman.preferences.ui.MainPrefs;
 import org.paccman.tools.FileUtils;
 import org.paccman.ui.PaccmanFileChooser;
+import org.paccman.ui.common.MessageDialog;
 import static org.paccman.ui.main.ContextMain.*;
 
 /**
@@ -371,19 +371,9 @@ public class Actions {
 
             @Override
             public void whenDone() {
-                try {
-                    get();
-
-                    setDocumentController(newDocumentCtrl);
-                    getDocumentController().setFile(fileToOpen);
-                    logger.info("Done");
-                } catch (InterruptedException ex) {
-                    //:TODO:
-                    logger.log(Level.SEVERE, null, ex);
-                } catch (ExecutionException ex) {
-                    //:TODO:
-                    logger.log(Level.SEVERE, null, ex);
-                }
+                setDocumentController(newDocumentCtrl);
+                getDocumentController().setFile(fileToOpen);
+                logger.info("Done");
             }
 
             @Override
@@ -423,7 +413,15 @@ public class Actions {
                 return null;
 
             }
-            }.start();
+
+            @Override
+            public void whenFailed(Exception e) {
+                if (e.getCause() instanceof FileNotFoundException) {
+                    MessageDialog.showErrorMessage(Main.getMain(), "File %s not found", fileToOpen);
+                    System.exit(-1); //:TODO: exit onlywhen argument passed in command line
+                }
+            }
+        }.start();
     }
 
     //--------------------------------------------------------------------------

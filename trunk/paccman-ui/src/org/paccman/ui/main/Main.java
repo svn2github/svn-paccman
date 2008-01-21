@@ -1,23 +1,23 @@
 /*
- 
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net 
-
-    This program is free software; you can redistribute it and/or modify      
-    it under the terms of the GNU General Public License as published by      
-    the Free Software Foundation; either version 2 of the License, or         
-    (at your option) any later version.                                       
-
-    This program is distributed in the hope that it will be useful,           
-    but WITHOUT ANY WARRANTY; without even the implied warranty of            
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-    GNU General Public License for more details.                              
-
-    You should have received a copy of the GNU General Public License         
-    along with this program; if not, write to the Free Software               
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- 
-*/
+ *
+ *  Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+ *                   http://paccman.sourceforge.net 
+ *
+ *  This program is free software; you can redistribute it and/or modify      
+ *  it under the terms of the GNU General Public License as published by      
+ *  the Free Software Foundation; either version 2 of the License, or         
+ *  (at your option) any later version.                                       
+ *
+ *  This program is distributed in the hope that it will be useful,           
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+ *  GNU General Public License for more details.                              
+ *
+ *  You should have received a copy of the GNU General Public License         
+ *  along with this program; if not, write to the Free Software               
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ *
+ */
 
 package org.paccman.ui.main;
 
@@ -86,6 +86,8 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         openLastFileMnu = new javax.swing.JCheckBoxMenuItem();
         toolsMnu = new javax.swing.JMenu();
         calculatorMnu = new javax.swing.JMenuItem();
+        helpMnu = new javax.swing.JMenu();
+        aboutMnu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle(NO_DOCUMENT_TITLE);
@@ -122,7 +124,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
         navigatorToolBar.setVisible(false);
 
-        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/paccman/ui/resources/images/go_back.png"))); // NOI18N
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
@@ -130,7 +131,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         });
         navigatorToolBar.add(backBtn);
 
-        forwardBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/paccman/ui/resources/images/go_forward.png"))); // NOI18N
         forwardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 forwardBtnActionPerformed(evt);
@@ -203,6 +203,18 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         toolsMnu.add(calculatorMnu);
 
         mainMenuBar.add(toolsMnu);
+
+        helpMnu.setText("Help");
+
+        aboutMnu.setText("About");
+        aboutMnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMnuActionPerformed(evt);
+            }
+        });
+        helpMnu.add(aboutMnu);
+
+        mainMenuBar.add(helpMnu);
 
         setJMenuBar(mainMenuBar);
 
@@ -282,11 +294,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenuItem aboutMnu;
     public javax.swing.JButton backBtn;
     public javax.swing.JMenuItem calculatorMnu;
     public javax.swing.JMenuItem closeMnu;
     public javax.swing.JMenu fileMnu;
     public javax.swing.JButton forwardBtn;
+    public javax.swing.JMenu helpMnu;
     public javax.swing.JSeparator jSeparator1;
     public javax.swing.JSeparator jSeparator2;
     public javax.swing.JSeparator jSeparator3;
@@ -472,7 +486,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
      private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
          String fileToOpen = null;
 
-         // If file passed in the comand line, this is the fiole to open
+         // If file passed in the comand line, this is the file to open
          if (startOption.getFilename() != null) {
              fileToOpen = startOption.getFilename();
          }
@@ -481,6 +495,14 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
              Actions.doOpenFile(new File(fileToOpen));
          }
     }//GEN-LAST:event_formWindowOpened
+
+     PaccmanAboutDlg aboutBox;
+     private void aboutMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMnuActionPerformed
+         if (aboutBox == null) {
+             aboutBox = new PaccmanAboutDlg(this);
+         }
+         aboutBox.setVisible(true);
+     }//GEN-LAST:event_aboutMnuActionPerformed
 
      /**
      * <em>The</em> Main
