@@ -1,23 +1,23 @@
 /*
- 
-    Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
-                     http://paccman.sourceforge.net 
-
-    This program is free software; you can redistribute it and/or modify      
-    it under the terms of the GNU General Public License as published by      
-    the Free Software Foundation; either version 2 of the License, or         
-    (at your option) any later version.                                       
-
-    This program is distributed in the hope that it will be useful,           
-    but WITHOUT ANY WARRANTY; without even the implied warranty of            
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
-    GNU General Public License for more details.                              
-
-    You should have received a copy of the GNU General Public License         
-    along with this program; if not, write to the Free Software               
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
- 
-*/
+ *
+ *  Copyright (C)    2005 Joao F. (joaof@sourceforge.net)
+ *                   http://paccman.sourceforge.net 
+ *
+ *  This program is free software; you can redistribute it and/or modify      
+ *  it under the terms of the GNU General Public License as published by      
+ *  the Free Software Foundation; either version 2 of the License, or         
+ *  (at your option) any later version.                                       
+ * 
+ *  This program is distributed in the hope that it will be useful,           
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of            
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             
+ *  GNU General Public License for more details.                              
+ *
+ *  You should have received a copy of the GNU General Public License         
+ *  along with this program; if not, write to the Free Software               
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+ *
+ */
 
 package org.paccman.paccman;
 
@@ -56,7 +56,6 @@ public class Account extends PaccmanObject {
     public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
-
     private ArrayList<TransactionBase> transactions = new ArrayList<TransactionBase>();
     private ArrayList<ScheduledTransaction> scheduledTransactions = new ArrayList<ScheduledTransaction>();
 
@@ -100,7 +99,6 @@ public class Account extends PaccmanObject {
                 return 1;
             }
         }
-
     }
 
     /**
@@ -110,7 +108,6 @@ public class Account extends PaccmanObject {
     }
 
     // add transaction base
-
     private int addTransactionBase(TransactionBase t, boolean updateBalances) {
         int index = Collections.binarySearch(transactions, t, new TransactionDateComparator());
         assert (index < 0);
@@ -156,7 +153,6 @@ public class Account extends PaccmanObject {
      * @param updateBalances If <code>true</code>, reset the balances of transactions.
      * @return 
      */
-
     public int addTransfer(Transfer transfer, boolean updateBalances) {
         return addTransactionBase(transfer, updateBalances);
     }
@@ -184,8 +180,8 @@ public class Account extends PaccmanObject {
             return addSplitPayment((SplitPayment) t, updateBalances);
         } else if (t instanceof SimplePayment) {
             return addSimplePayment((SimplePayment) t, updateBalances);
-        } 
-        throw new AssertionError(String.format("Invalid transaction type: %1$", 
+        }
+        throw new AssertionError(String.format("Invalid transaction type: %1$",
                 t.getClass().getName()));
     }
 
@@ -361,7 +357,6 @@ public class Account extends PaccmanObject {
      * @param index 
      * @return 
      */
-
     public int updateTransaction(int index) {
         TransactionBase t = removeTransaction(index);
         return addTransactionBase(t, true);
@@ -378,7 +373,6 @@ public class Account extends PaccmanObject {
             t.setBalance(balance);
         }
     }
-
     /**
      * Holds value of property holderName.
      */
@@ -399,7 +393,6 @@ public class Account extends PaccmanObject {
     public void setHolderName(String holderName) {
         this.holderName = holderName;
     }
-
     /**
      * Holds value of property holderAddress.
      */
@@ -420,7 +413,6 @@ public class Account extends PaccmanObject {
     public void setHolderAddress(String holderAddress) {
         this.holderAddress = holderAddress;
     }
-
     /**
      * Holds value of property accountNumberKey.
      */
@@ -441,7 +433,6 @@ public class Account extends PaccmanObject {
     public void setAccountNumberKey(String accountNumberKey) {
         this.accountNumberKey = accountNumberKey;
     }
-
     /**
      * Holds value of property lastReconciliationBalance.
      */
@@ -464,7 +455,6 @@ public class Account extends PaccmanObject {
 
         this.lastReconciliationBalance = lastReconciliationBalance;
     }
-
     /**
      * Holds value of property lastReconciliationDate.
      */
@@ -487,7 +477,6 @@ public class Account extends PaccmanObject {
 
         this.lastReconciliationDate = lastReconciliationDate;
     }
-
     /**
      * Holds value of property pendingReconciliationDate.
      */
@@ -510,7 +499,6 @@ public class Account extends PaccmanObject {
 
         this.pendingReconciliationDate = pendingReconciliationDate;
     }
-
     /**
      * Holds value of property pendingReconciliationBalance.
      */
@@ -533,7 +521,6 @@ public class Account extends PaccmanObject {
 
         this.pendingReconciliationBalance = pendingReconciliationBalance;
     }
-
     /**
      * Holds value of property pendingReconciliation.
      */
@@ -570,5 +557,4 @@ public class Account extends PaccmanObject {
         }
         return markedAmount;
     }
-
 }
