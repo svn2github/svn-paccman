@@ -25,8 +25,10 @@ import java.awt.Frame;
 import javax.swing.SwingWorker;
 
 /**
- *
- * @author joao
+ * SwingWorker that has an associated progress (waitable) dialog.
+ * @author jfer
+ * @param T
+ * @param V
  */
 public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
 
@@ -51,6 +53,9 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
      */
     public void start() {
         waitDialog = new WaitDialog(this, parent, title);
+        if (cntSteps == -1) {
+            waitDialog.setIndeterminate();
+        }
         addPropertyChangeListener(waitDialog);
         execute();
         // Display dialog after starting the thread because the dialog is modal.
@@ -84,13 +89,20 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
         currentStep.step++;
         currentStep.description = stepDescription;
         firePropertyChange("step", null, currentStep);
-    // try { Thread.sleep(10000); } catch (Exception e) {} //:TODO:for debug only
+        // try { Thread.sleep(10000); } catch (Exception e) {} //:TODO:for debug only
     }
     private WaitDialog waitDialog;
     private int cntSteps;
     private String title;
     private Frame parent;
 
+    /**
+     * 
+     * @param title
+     * @param cntSteps The number of steps of the task (for progress bar). -1 if 
+     * undefined progress bar is wanted.
+     * @param parent
+     */
     public DialogWaitableWorker(String title, int cntSteps, Frame parent) {
         this.cntSteps = cntSteps;
         this.title = title;

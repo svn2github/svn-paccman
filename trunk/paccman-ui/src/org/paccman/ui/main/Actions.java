@@ -230,10 +230,10 @@ public class Actions {
         getDocumentController().getFile().renameTo(new File(backupFileName));
 
         // Actually save the document to the file
-        return doSaveDocument(getDocumentController().getFile());
+        return doSaveFile(getDocumentController().getFile());
     }
 
-    private static ActionResult doSaveDocument(File saveFile) {
+    private static ActionResult doSaveFile(File saveFile) {
         logger.log(Level.INFO, "Saving to file {0}", saveFile);
 
         String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
@@ -312,7 +312,7 @@ public class Actions {
         }
 
         // Actually save the document to the file
-        return doSaveDocument(saveFile);
+        return doSaveFile(saveFile);
 
     }
 
@@ -358,14 +358,14 @@ public class Actions {
         // Do open a new document
         final File fileToOpen = selectOpenFile();
         if (fileToOpen == null) {
-            return; // result = ActionResult.CANCEL;
+            return; // :TODO:result = ActionResult.CANCEL;
         } else {
             doOpenFile(fileToOpen);
         }
     }
 
     public static void doOpenFile(final File fileToOpen) {
-        new DialogWaitableWorker<Void, Void>("Opening file", 4, Main.getMain()) {
+        new DialogWaitableWorker<Void, Void>("Opening file", -1, Main.getMain()) {
 
             private DocumentController newDocumentCtrl;
 

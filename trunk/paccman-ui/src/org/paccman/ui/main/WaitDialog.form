@@ -30,7 +30,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="cancelBtn" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="progressBar" alignment="2" pref="376" max="32767" attributes="0"/>
+                          <Component id="progressBar" alignment="2" pref="382" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">

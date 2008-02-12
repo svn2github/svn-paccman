@@ -40,6 +40,13 @@ public class WaitDialog extends javax.swing.JDialog implements PropertyChangeLis
         this.worker = worker;
     }
 
+    /**
+     * Called to indicate that we want the progress bar to be indeterminate.
+     */
+    void setIndeterminate() {
+        progressBar.setIndeterminate(true);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -109,7 +116,10 @@ public class WaitDialog extends javax.swing.JDialog implements PropertyChangeLis
         if ("step".equals(evt.getPropertyName())) {
             DialogWaitableWorker.Step s = (DialogWaitableWorker.Step) evt.getNewValue();
             taskDescriptionLbl.setText(s.getDescription());
-            progressBar.setValue(s.getProgress());
+            if (s.getStep() != -1) {
+                progressBar.setValue(s.getProgress());
+            } 
+        } else if ("indeterminate".equals(evt.getPropertyName())) {
         }
     }
     
