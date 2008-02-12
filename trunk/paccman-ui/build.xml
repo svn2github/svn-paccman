@@ -66,4 +66,14 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <target name="-pre-compile">
+        <property name="pathtoinfotemplate" value="${src.dir}/org/paccman/ui/main/PaccmanInfo" />
+        <copy file="${pathtoinfotemplate}.template" tofile="${pathtoinfotemplate}.java" />
+        <replace file="${pathtoinfotemplate}.java" propertyFile="${basedir}/nbproject/paccmaninfo.properties">
+            <replacefilter token="@@MAJOR_VERSION@@" property="paccman.major.version"/>
+            <replacefilter token="@@MINOR_VERSION@@" property="paccman.minor.version"/>
+            <replacefilter token="@@PATCH_VERSION@@" property="paccman.patch.version"/>
+        </replace>
+    </target>
 </project>

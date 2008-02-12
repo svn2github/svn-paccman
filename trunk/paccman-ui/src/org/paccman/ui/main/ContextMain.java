@@ -68,14 +68,12 @@ public class ContextMain {
         }
     }
     
-    private static final String PACCMAN_VERSION = "0.1.0";
-    
     /**
      * 
      * @return
      */
     public static String getPaccmanVersion() {
-        return PACCMAN_VERSION + "dev";
+        return PaccmanInfo.getFullVersion() + "-dev";
     }
     
     private ContextMain() {
