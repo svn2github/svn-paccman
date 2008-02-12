@@ -73,7 +73,7 @@ public class ContextMain {
      * @return
      */
     public static String getPaccmanVersion() {
-        return PaccmanInfo.getFullVersion() + "-dev";
+        return PaccmanInfo.getFullVersion();
     }
     
     private ContextMain() {

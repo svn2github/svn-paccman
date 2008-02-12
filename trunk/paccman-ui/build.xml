@@ -74,6 +74,7 @@
             <replacefilter token="@@MAJOR_VERSION@@" property="paccman.major.version"/>
             <replacefilter token="@@MINOR_VERSION@@" property="paccman.minor.version"/>
             <replacefilter token="@@PATCH_VERSION@@" property="paccman.patch.version"/>
+            <replacefilter token="@@SPECIAL_VERSION@@" property="paccman.special.version"/>
         </replace>
     </target>
 </project>
