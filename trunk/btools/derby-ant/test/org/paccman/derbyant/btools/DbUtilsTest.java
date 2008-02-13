@@ -4,6 +4,7 @@
  */
 package org.paccman.derbyant.btools;
 
+import org.paccman.btools.derbyant.DerbyUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import org.junit.After;

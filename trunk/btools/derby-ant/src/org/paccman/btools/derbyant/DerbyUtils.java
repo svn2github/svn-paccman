@@ -19,7 +19,7 @@
  
 */
 
-package org.paccman.derbyant.btools;
+package org.paccman.btools.derbyant;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
