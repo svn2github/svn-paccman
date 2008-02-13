@@ -19,6 +19,11 @@
  *
  */
 
+/* @TagGeneratedInfo
+ * This file is used to generate the PaccmanInfo.java file from the properties
+ * in paccman-ui/nbproject/paccmaninfo.properties.
+ */
+
 package org.paccman.ui.main;
 
 public class PaccmanInfo {

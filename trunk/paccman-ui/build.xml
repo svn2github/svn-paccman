@@ -67,14 +67,32 @@
 
     -->
     
-    <target name="-pre-compile">
+    <target name="check-paccmaninfo" >
         <property name="pathtoinfotemplate" value="${src.dir}/org/paccman/ui/main/PaccmanInfo" />
-        <copy file="${pathtoinfotemplate}.template" tofile="${pathtoinfotemplate}.java" />
-        <replace file="${pathtoinfotemplate}.java" propertyFile="${basedir}/nbproject/paccmaninfo.properties">
+        <uptodate property="paccmaninfo.uptodate" targetfile="${pathtoinfotemplate}.java" >
+            <srcfiles file="${pathtoinfotemplate}.template" />
+            <srcfiles file="${basedir}/nbproject/paccmaninfo.properties" />
+        </uptodate>
+    </target>
+    
+    <target name="generate-paccman-info" depends="check-paccmaninfo" unless="paccmaninfo.uptodate">
+        <property name="propertyfile" value="${basedir}/nbproject/paccmaninfo.properties"/>
+        <copy file="${pathtoinfotemplate}.template" tofile="${pathtoinfotemplate}.java" overwrite="true" />
+        <replace file="${pathtoinfotemplate}.java" propertyFile="${propertyfile}">
             <replacefilter token="@@MAJOR_VERSION@@" property="paccman.major.version"/>
             <replacefilter token="@@MINOR_VERSION@@" property="paccman.minor.version"/>
             <replacefilter token="@@PATCH_VERSION@@" property="paccman.patch.version"/>
             <replacefilter token="@@SPECIAL_VERSION@@" property="paccman.special.version"/>
         </replace>
+        <replaceregexp 
+            file="${pathtoinfotemplate}.java"
+            flags="sgm"
+            match="\/\* @TagGeneratedInfo.*?\*\/" 
+            replace= "/* File automatically generated from ${pathtoinfotemplate}.template */">
+        </replaceregexp>
+        <echo level="info" message="Generated PaccmanInfo.java"/>
+    </target>
+    
+    <target name="-pre-compile" depends="generate-paccman-info">
     </target>
 </project>
