@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.paccman.derbyant.btools;
+package org.paccman.ant.derby.btools;
 
-import org.paccman.btools.derbyant.DerbyUtils;
+import org.paccman.btools.ant.derby.DerbyUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import org.junit.After;

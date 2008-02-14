@@ -75,15 +75,15 @@
     
     <!-- Custom derby tasks -->
     <target name="-post-init">
-        <taskdef name="createdb" classname="org.paccman.btools.derbyant.CreateTask">
+        <taskdef name="createdb" classname="org.paccman.btools.ant.derby.CreateTask">
             <classpath>
-                <pathelement location="${reference.derby-ant.jar}"/>
+                <pathelement location="${reference.ant.derby.jar}"/>
                 <pathelement location="${file.reference.derby.jar}"/>
             </classpath>
         </taskdef>
-        <taskdef name="derbysql" classname="org.paccman.btools.derbyant.ExecScriptTask">
+        <taskdef name="derbysql" classname="org.paccman.btools.ant.derby.ExecScriptTask">
             <classpath>
-                <pathelement location="${reference.derby-ant.jar}"/>
+                <pathelement location="${reference.ant.derby.jar}"/>
                 <pathelement location="${file.reference.derby.jar}"/>
             </classpath>
         </taskdef>
