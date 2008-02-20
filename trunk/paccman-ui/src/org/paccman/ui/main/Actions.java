@@ -58,6 +58,7 @@ import static org.paccman.ui.main.ContextMain.*;
  * 
  * @author joaof
  */
+@Deprecated
 public class Actions {
 
     /**

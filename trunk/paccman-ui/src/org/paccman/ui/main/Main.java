@@ -157,7 +157,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         saveMnu.setAction(saveAction);
         fileMnu.add(saveMnu);
 
-        saveAsMnu.setAction(saveAsAction);
+        saveAsMnu.setAction(org.paccman.ui.main.actions.Actions.getSaveAsAction());
         fileMnu.add(saveAsMnu);
         fileMnu.add(jSeparator2);
 
