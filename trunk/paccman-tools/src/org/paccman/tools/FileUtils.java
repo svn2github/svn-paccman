@@ -130,7 +130,7 @@ public class FileUtils {
      * @throws java.io.IOException 
      */
     public static void unzipDirectory(File srcZip, File destDir) throws IOException {
-        assert destDir.isDirectory();
+        assert destDir.isDirectory(): destDir.getAbsolutePath() + " is not a directory.";
         String rootDir = destDir.getAbsolutePath();
 
         ZipInputStream zis = new ZipInputStream(new FileInputStream(srcZip));

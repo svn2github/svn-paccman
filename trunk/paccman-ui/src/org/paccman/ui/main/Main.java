@@ -157,7 +157,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         saveMnu.setAction(saveAction);
         fileMnu.add(saveMnu);
 
-        saveAsMnu.setAction(org.paccman.ui.main.actions.Actions.getSaveAsAction());
+        saveAsMnu.setAction(saveAsAction);
         fileMnu.add(saveAsMnu);
         fileMnu.add(jSeparator2);
 
@@ -407,9 +407,9 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     Actions.NewAction newAction = new Actions.NewAction();
     Actions.OpenAction openAction = new Actions.OpenAction();
     Actions.CloseAction closeAction = new Actions.CloseAction();
-    Actions.SaveAction saveAction = new Actions.SaveAction();
-    Actions.SaveAsAction saveAsAction = new Actions.SaveAsAction();
     Actions.QuitAction quitAction = new Actions.QuitAction();
+    AbstractAction saveAction = org.paccman.ui.main.actions.Actions.getSaveAction();
+    AbstractAction saveAsAction = org.paccman.ui.main.actions.Actions.getSaveAsAction();
 
     // -------------------------------------------------------------------------
     // DocumentController methods

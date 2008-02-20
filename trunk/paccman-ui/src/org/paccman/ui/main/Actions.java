@@ -26,10 +26,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.logging.Level;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -57,6 +53,7 @@ import static org.paccman.ui.main.ContextMain.*;
  * </ul>
  * 
  * @author joaof
+ * @deprecated 
  */
 @Deprecated
 public class Actions {
@@ -173,11 +170,11 @@ public class Actions {
             if (save == JOptionPane.CANCEL_OPTION) {
                 return ActionResult.CANCEL;
             } else if (save == JOptionPane.YES_OPTION) {
-                Actions.ActionResult saveDiag;
+                Actions.ActionResult saveDiag /*:TODO:ADDED:*/ = ActionResult.OK /*:TODO:END:*/; 
                 if (getDocumentController().getFile() == null) {
-                    saveDiag = saveAsDocument();
+//TODO:                    saveDiag = saveAsDocument();
                 } else {
-                    saveDiag = saveDocument();
+//:TODO:                    saveDiag = saveDocument();
                 }
                 if (saveDiag != ActionResult.OK) {
                     return saveDiag;
@@ -192,129 +189,6 @@ public class Actions {
         setDocumentController(null);
 
         return ActionResult.OK;
-    }
-
-    //--------------------------------------------------------------------------
-    // Save Action
-    //--------------------------------------------------------------------------
-    static class SaveAction extends PaccmanAction {
-
-        public SaveAction() {
-            super("Save", "save.png");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            ActionResult res;
-            if (getDocumentController().getFile() != null) {
-                res = saveDocument();
-            } else {
-                res = saveAsDocument();
-            }
-            switch (res) {
-                case OK:
-                case CANCEL:
-                case FAILED:
-                    //:TODO:do the appropriate
-                    return;
-                default:
-                    throw new AssertionError("Unhandled ActionResult: " + res.toString());
-            }
-        }
-    }
-
-    private static ActionResult saveDocument() {
-        assert isDocumentEdited() : "'Save' should not be called when no document loaded";
-        assert getDocumentController().getFile() != null : "'Save' should be called when the document has a file";
-
-        // Backup previous file
-        String backupFileName = getDocumentController().getFile() + "_" + FileUtils.getTimeString();
-        getDocumentController().getFile().renameTo(new File(backupFileName));
-
-        // Actually save the document to the file
-        return doSaveFile(getDocumentController().getFile());
-    }
-
-    private static ActionResult doSaveFile(File saveFile) {
-        logger.log(Level.INFO, "Saving to file {0}", saveFile);
-
-        String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
-                "paccman_" + FileUtils.getTimeString();
-        PaccmanDao db = new PaccmanDao(tempDb);
-        try {
-            // Write document to database 
-            getDocumentController().getDocument().setLastUpdateDate(Calendar.getInstance());
-            db.save(getDocumentController());
-
-            // Zip to destination file
-            final File tempDbFile = new File(tempDb);
-            FileUtils.zipDirectory(tempDbFile, saveFile);
-
-            // Remove temporary directory
-            FileUtils.deleteDir(tempDbFile);
-
-            // Update document controller and notify listeners
-            getDocumentController().setFile(getDocumentController().getFile());
-            getDocumentController().setHasChanged(false);
-            getDocumentController().notifyChange();
-
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            logger.log(Level.SEVERE, null, ex);
-        } catch (URISyntaxException ex) {
-            logger.log(Level.SEVERE, null, ex);
-        }
-        logger.log(Level.INFO, "Done");
-        return ActionResult.OK;
-    }
-
-    //--------------------------------------------------------------------------
-    // Save As Action
-    //--------------------------------------------------------------------------
-    static class SaveAsAction extends PaccmanAction {
-
-        public SaveAsAction() {
-            super("Save as...", "save_as.png");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            ActionResult res = saveAsDocument();
-            switch (res) {
-                case OK:
-                case CANCEL:
-                case FAILED:
-                    //:TODO:do the appropriate
-                    return;
-                default:
-                    throw new AssertionError("Unhandled ActionResult: " + res.toString());
-            }
-        }
-    }
-
-    private static File selectSaveFile() {
-        assert (getDocumentController() != null);
-
-        PaccmanFileChooser pfc = new PaccmanFileChooser();
-        final int diagRes = pfc.showSaveDialog(Main.getMain());
-        if (diagRes == JFileChooser.APPROVE_OPTION) {
-            return pfc.getSelectedFile();
-        } else {
-            return null;
-        }
-    }
-
-    private static ActionResult saveAsDocument() {
-        assert isDocumentEdited() : "'saveAs' should not be called when no document loaded";
-
-        // Select the file
-        File saveFile = selectSaveFile();
-        if (saveFile == null) {
-            return ActionResult.CANCEL;
-        }
-
-        // Actually save the document to the file
-        return doSaveFile(saveFile);
-
     }
 
     //--------------------------------------------------------------------------
@@ -384,6 +258,7 @@ public class Actions {
                 String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
                         "paccman_" + FileUtils.getTimeString();
                 final File tempDbFile = new File(tempDb);
+                tempDbFile.mkdirs();
                 FileUtils.unzipDirectory(fileToOpen, tempDbFile);
 
                 // ...open database
@@ -417,6 +292,7 @@ public class Actions {
 
             @Override
             public void whenFailed(Exception e) {
+                e.printStackTrace();
                 if (e.getCause() instanceof FileNotFoundException) {
                     MessageDialog.showErrorMessage(Main.getMain(), "File %s not found", fileToOpen);
                     System.exit(-1); //:TODO: exit onlywhen argument passed in command line

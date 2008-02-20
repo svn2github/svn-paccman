@@ -39,8 +39,9 @@ abstract class PaccmanAction extends AbstractAction {
      */
     private static final String ROOT_PATH_RESSOURCES = "/org/paccman/ui/resources/images/";
 
-    PaccmanAction(String name, String iconFileName) {
+    PaccmanAction(String name, String iconFileName, boolean enabled) {
         super(name, new ImageIcon(PaccmanAction.class.getResource(ROOT_PATH_RESSOURCES + iconFileName)));
+        setEnabled(enabled);
     }
 
     abstract Result doLogic();

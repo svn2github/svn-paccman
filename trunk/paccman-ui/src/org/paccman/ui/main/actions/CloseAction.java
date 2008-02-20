@@ -28,7 +28,7 @@ import static org.paccman.ui.main.ContextMain.*;
 class CloseAction extends PaccmanAction {
 
     public CloseAction() {
-        super("Close", "close.png");
+        super("Close", "close.png", false);
     }
 
     Result doLogic() {

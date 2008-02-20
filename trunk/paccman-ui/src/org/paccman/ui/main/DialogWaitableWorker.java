@@ -85,7 +85,7 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
      * @param stepDescription A string describing the step currently performed 
      * in the worker thread. Should be called in the worker thread routine.
      */
-    protected void nextStep(String stepDescription) {
+    public void nextStep(String stepDescription) {
         currentStep.step++;
         currentStep.description = stepDescription;
         firePropertyChange("step", null, currentStep);

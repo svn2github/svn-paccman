@@ -27,7 +27,7 @@ import org.paccman.ui.main.ContextMain;
 class OpenAction extends PaccmanAction {
 
     public OpenAction() {
-        super("Open", "open.png");
+        super("Open", "open.png", true);
     }
 
     Result doLogic() {

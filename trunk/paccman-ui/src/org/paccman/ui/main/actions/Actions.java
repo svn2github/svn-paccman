@@ -34,16 +34,24 @@ public class Actions {
 
     static OpenAction theOpenAction = new OpenAction();
 
-    static SaveAction theSaveAction = new SaveAction();
+    static SaveAction theSaveAction = new SaveAction(false);
 
-    static SaveAsAction theSaveAsAction = new SaveAsAction();
+    static SaveAction theSaveAsAction = new SaveAction(true);
 
     /**
-     * Provide access to the SaveAsAction.
+     * Provide access to the SaveAction.
      * @return The SaveAs action.
      */
     public static AbstractAction getSaveAsAction() {
         return theSaveAsAction;
+    }
+    
+    /**
+     * Provide access to the SaveAction.
+     * @return The Save action.
+     */
+    public static AbstractAction getSaveAction() {
+        return theSaveAction;
     }
     
     private Actions() {
