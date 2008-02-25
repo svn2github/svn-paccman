@@ -22,21 +22,74 @@
 
 package org.paccman.ui.main.actions;
 
+import java.io.File;
+import javax.swing.JOptionPane;
+import org.paccman.ui.main.ContextMain;
+import org.paccman.ui.main.DialogWaitableWorker;
+import org.paccman.ui.main.Main;
 import static org.paccman.ui.main.ContextMain.*;
 
-
+/**
+ * 
+ * @author joao
+ */
 class CloseAction extends PaccmanAction {
 
+    File fileToSaveTo = null;
+
+    /**
+     * TODO
+     */
     public CloseAction() {
         super("Close", "close.png", false);
     }
 
     Result doLogic() {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
-    
-    void doProcess() {
-        //:TODO: implementation of actual close job.
+        assert ContextMain.isDocumentEdited() : "Can not close when no document edited";
+
+        // Save changes if any
+        if (getDocumentController().isHasChanged()) {
+            int save = JOptionPane.showConfirmDialog(Main.getMain(), "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (save == JOptionPane.CANCEL_OPTION) {
+                return Result.CANCEL;
+            } else if (save == JOptionPane.NO_OPTION) {
+                return Result.OK;
+            } else if (save == JOptionPane.YES_OPTION) {
+                Result saveDiag;
+                saveDiag = Actions.theSaveAction.doLogic();
+                if (saveDiag == Result.CANCEL) {
+                    return Result.CANCEL;
+                }
+                fileToSaveTo = Actions.theSaveAction.fileToSaveTo;
+            }
+        }
+
+        return Result.OK;
     }
 
+    void doProcess() {
+
+        new DialogWaitableWorker<Void, Void>("Closing file", -1, Main.getMain()) {
+
+            @Override
+            public void whenDone() {
+                setDocumentController(null);
+            }
+
+            @Override
+            public void whenFailed(Exception e) {
+                throw new UnsupportedOperationException("Failed to save file: " + e.getMessage());
+            }
+
+            @Override
+            public Void backgroundTask() throws Exception {
+                if (fileToSaveTo != null) {
+                    Actions.getSaveAction().doSaveFile(fileToSaveTo, this);
+                }
+                Thread.sleep(10000); //TODO: remove. for test only.
+                return null;
+            }
+
+        }.start();
+    }
 }

@@ -22,8 +22,6 @@
 
 package org.paccman.ui.main.actions;
 
-import javax.swing.AbstractAction;
-
 /**
  *
  * @author joao
@@ -39,10 +37,18 @@ public class Actions {
     static SaveAction theSaveAsAction = new SaveAction(true);
 
     /**
+     * Provide access to the CloseAction.
+     * @return The Close action.
+     */
+    public static CloseAction getCloseAction() {
+        return theCloseAction;
+    }
+
+    /**
      * Provide access to the SaveAction.
      * @return The SaveAs action.
      */
-    public static AbstractAction getSaveAsAction() {
+    public static SaveAction getSaveAsAction() {
         return theSaveAsAction;
     }
     
@@ -50,7 +56,7 @@ public class Actions {
      * Provide access to the SaveAction.
      * @return The Save action.
      */
-    public static AbstractAction getSaveAction() {
+    public static SaveAction getSaveAction() {
         return theSaveAction;
     }
     

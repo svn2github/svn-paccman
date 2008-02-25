@@ -55,8 +55,8 @@ public class ContextMain {
      * @param documentController The document controller to set.
      */
     public static void setDocumentController(DocumentController documentController) {
-        if (documentController != null) {
-            documentController.unregisterView(Main.getMain());
+        if (ContextMain.documentController != null) {
+            ContextMain.documentController.unregisterView(Main.getMain());
         }
         ContextMain.documentController = documentController;
         if (documentController != null) {
@@ -64,7 +64,7 @@ public class ContextMain {
             Main.getMain().showTabbedPanes();
             documentController.notifyChange();
         } else {
-            Main.getMain().hideTabbedPanes();
+            Main.getMain().close();
         }
     }
     

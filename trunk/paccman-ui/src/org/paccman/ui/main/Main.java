@@ -50,6 +50,14 @@ import static org.paccman.ui.main.Actions.ActionResult.*;
  */
 public class Main extends javax.swing.JFrame implements PaccmanView {
 
+    void close() {
+        Main.getMain().hideTabbedPanes();
+        updateActionStatus();
+
+        // Updates title
+        setTitle(getTitleString());
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -228,6 +236,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     public TransactionFormTab getTransactionFormTab() {
         return transactionFormTab;
     }
+
     CalculatorFrame calculatorFrame = new CalculatorFrame();
 
     private void calculatorMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculatorMnuActionPerformed
@@ -397,7 +406,12 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         scheduleFormTab.registerToDocumentCtrl();
     }
 
-    void hideTabbedPanes() {
+    /**
+     * 
+     * @deprecated Should be replaced when window manager/navigator implemented.
+     */
+    @Deprecated
+    public void hideTabbedPanes() {
         mainTabbedPane.removeAll();
     }
 
@@ -406,21 +420,25 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     // -------------------------------------------------------------------------
     Actions.NewAction newAction = new Actions.NewAction();
     Actions.OpenAction openAction = new Actions.OpenAction();
-    Actions.CloseAction closeAction = new Actions.CloseAction();
     Actions.QuitAction quitAction = new Actions.QuitAction();
     AbstractAction saveAction = org.paccman.ui.main.actions.Actions.getSaveAction();
     AbstractAction saveAsAction = org.paccman.ui.main.actions.Actions.getSaveAsAction();
+    AbstractAction closeAction = org.paccman.ui.main.actions.Actions.getCloseAction();
+    
+    private void updateActionStatus() {
+        // Update enable status of Actions
+        closeMnu.getAction().setEnabled(isDocumentEdited());
+        saveMnu.getAction().setEnabled(isDocumentEdited() && (getDocumentController().isHasChanged()));
+        saveAsMnu.getAction().setEnabled(isDocumentEdited());
+        propertiesMnu.getAction().setEnabled(isDocumentEdited());
+    }
 
     // -------------------------------------------------------------------------
     // DocumentController methods
     // -------------------------------------------------------------------------
     public void onChange(org.paccman.controller.Controller controller) {
 
-        // Update enable status of Actions
-        closeMnu.getAction().setEnabled(isDocumentEdited());
-        saveMnu.getAction().setEnabled(isDocumentEdited() && (getDocumentController().isHasChanged()));
-        saveAsMnu.getAction().setEnabled(isDocumentEdited());
-        propertiesMnu.getAction().setEnabled(isDocumentEdited());
+        updateActionStatus();
 
         // Updates title
         setTitle(getTitleString());

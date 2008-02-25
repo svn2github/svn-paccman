@@ -87,7 +87,7 @@ class SaveAction extends PaccmanAction {
             @Override
             public Void backgroundTask() throws Exception {
                 doSaveFile(fileToSaveTo, this);
-                Thread.sleep(10000);
+                Thread.sleep(10000); //TODO: remove. for debug only.
                 return null;
             }
 
@@ -106,7 +106,7 @@ class SaveAction extends PaccmanAction {
         }
     }
 
-    protected void doSaveFile(File saveFile, DialogWaitableWorker worker) throws Exception {
+    void doSaveFile(File saveFile, DialogWaitableWorker worker) throws Exception {
         logger.log(Level.INFO, "Saving to file {0}", saveFile);
 
         String tempDb = System.getProperty("java.io.tmpdir") + File.separator +
