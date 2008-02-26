@@ -51,7 +51,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="propertiesMnu">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new PropertiesAction()" type="code"/>
+                  <Connection code="propertiesAction" type="code"/>
                 </Property>
               </Properties>
             </MenuItem>

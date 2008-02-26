@@ -22,9 +22,9 @@
 
 package org.paccman.ui.main.actions;
 
+import java.awt.Frame;
 import java.io.File;
-import javax.swing.JOptionPane;
-import org.paccman.ui.main.ContextMain;
+import org.paccman.preferences.ui.MainPrefs;
 import org.paccman.ui.main.DialogWaitableWorker;
 import org.paccman.ui.main.Main;
 import static org.paccman.ui.main.ContextMain.*;
@@ -33,44 +33,38 @@ import static org.paccman.ui.main.ContextMain.*;
  * 
  * @author joao
  */
-public class CloseAction extends PaccmanAction {
+public class QuitAction extends PaccmanAction {
 
     File fileToSaveTo = null;
 
-    CloseAction() {
-        super("Close", "close.png", false);
+    QuitAction() {
+        super("Quit", "exit.png", true);
     }
 
     Result doLogic() {
-        assert ContextMain.isDocumentEdited() : "Can not close when no document edited";
 
-        // Save changes if any
-        if (getDocumentController().isHasChanged()) {
-            int save = JOptionPane.showConfirmDialog(Main.getMain(), "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (save == JOptionPane.CANCEL_OPTION) {
-                return Result.CANCEL;
-            } else if (save == JOptionPane.NO_OPTION) {
+        if (!isDocumentEdited()) {
+            return Result.OK;
+        } else {
+            // A document is edited. Close it.
+            Result closeDiag = Actions.theCloseAction.doLogic();
+            if (closeDiag != Result.CANCEL) {
+                fileToSaveTo = Actions.theCloseAction.fileToSaveTo;
                 return Result.OK;
-            } else if (save == JOptionPane.YES_OPTION) {
-                Result saveDiag;
-                saveDiag = Actions.theSaveAction.doLogic();
-                if (saveDiag == Result.CANCEL) {
-                    return Result.CANCEL;
-                }
-                fileToSaveTo = Actions.theSaveAction.fileToSaveTo;
+            } else {
+                return Result.CANCEL;
             }
         }
 
-        return Result.OK;
     }
 
     void doProcess() {
 
-        new DialogWaitableWorker<Void, Void>("Closing file", -1, Main.getMain()) {
+        new DialogWaitableWorker<Void, Void>("Quitting", -1, Main.getMain()) {
 
             @Override
             public void whenDone() {
-                setDocumentController(null);
+                System.exit(1);
             }
 
             @Override
@@ -80,8 +74,19 @@ public class CloseAction extends PaccmanAction {
 
             @Override
             public Void backgroundTask() throws Exception {
+                // Save file if any to save.
                 if (fileToSaveTo != null) {
                     Actions.getSaveAction().doSaveFile(fileToSaveTo, this);
+                }
+
+                // Save preferences
+                nextStep("Saving preferences");
+                if ((Main.getMain().getState() & Frame.MAXIMIZED_BOTH) == Frame.MAXIMIZED_BOTH) {
+                    MainPrefs.setMaximized(true);
+                } else {
+                    MainPrefs.setMaximized(false);
+                    MainPrefs.putLocation(Main.getMain().getLocationOnScreen());
+                    MainPrefs.putSize(Main.getMain().getSize());
                 }
                 return null;
             }

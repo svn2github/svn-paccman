@@ -36,8 +36,14 @@ public class Actions {
 
     static SaveAction theSaveAsAction = new SaveAction(true);
 
+    static QuitAction theQuitAction = new QuitAction();
+
+    static PropertiesAction thePropertiesAction = new PropertiesAction();
+
+    static NewAction theNewAction = new NewAction();
+
     /**
-     * Provide access to the CloseAction.
+     * Provides access to the CloseAction.
      * @return The Close action.
      */
     public static CloseAction getCloseAction() {
@@ -45,21 +51,57 @@ public class Actions {
     }
 
     /**
-     * Provide access to the SaveAction.
+     * Provides access to the OpenAction.
+     * @return The Open action.
+     */
+    public static OpenAction getOpenAction() {
+        return theOpenAction;
+    }
+
+    /**
+     * Provides access to the NewAction.
+     * @return The New action.
+     */
+    public static NewAction getNewAction() {
+        return theNewAction;
+    }
+
+    /**
+     * Provides access to the SaveAction.
      * @return The SaveAs action.
      */
     public static SaveAction getSaveAsAction() {
         return theSaveAsAction;
     }
-    
+
     /**
-     * Provide access to the SaveAction.
+     * Provides access to the SaveAction.
      * @return The Save action.
      */
     public static SaveAction getSaveAction() {
         return theSaveAction;
     }
-    
+
+    /**
+     * Provides access to the SaveAction.
+     * @return The Save action.
+     */
+    public static QuitAction getQuitAction() {
+        return theQuitAction;
+    }
+
+    /**
+     * Provides access to the PropertiesAction.
+     * @return The Save action.
+     */
+    public static PropertiesAction getPropertiesAction() {
+        return thePropertiesAction;
+    }
+
+    // -------------------------------------------------------------------------
+    // Constructor
+    // -------------------------------------------------------------------------
     private Actions() {
     }
+
 }

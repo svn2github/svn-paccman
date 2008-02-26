@@ -24,62 +24,62 @@ package org.paccman.ui.main.actions;
 
 import java.io.File;
 import javax.swing.JOptionPane;
+import org.paccman.controller.DocumentController;
 import org.paccman.ui.main.ContextMain;
 import org.paccman.ui.main.DialogWaitableWorker;
 import org.paccman.ui.main.Main;
-import static org.paccman.ui.main.ContextMain.*;
 
 /**
  * 
  * @author joao
  */
-public class CloseAction extends PaccmanAction {
+public class NewAction extends PaccmanAction {
 
-    File fileToSaveTo = null;
+    File fileToSaveTo;
 
-    CloseAction() {
-        super("Close", "close.png", false);
+    String title;
+
+    NewAction() {
+        super("New", "new.png", true);
     }
 
     Result doLogic() {
-        assert ContextMain.isDocumentEdited() : "Can not close when no document edited";
-
-        // Save changes if any
-        if (getDocumentController().isHasChanged()) {
-            int save = JOptionPane.showConfirmDialog(Main.getMain(), "Do you want to save the changes ?", "Confirm", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (save == JOptionPane.CANCEL_OPTION) {
+        // Close file if needed
+        if (ContextMain.isDocumentEdited()) {
+            Result closeDiag = Actions.theCloseAction.doLogic();
+            if (closeDiag == Result.CANCEL) {
                 return Result.CANCEL;
-            } else if (save == JOptionPane.NO_OPTION) {
-                return Result.OK;
-            } else if (save == JOptionPane.YES_OPTION) {
-                Result saveDiag;
-                saveDiag = Actions.theSaveAction.doLogic();
-                if (saveDiag == Result.CANCEL) {
-                    return Result.CANCEL;
-                }
-                fileToSaveTo = Actions.theSaveAction.fileToSaveTo;
             }
+            fileToSaveTo = Actions.theCloseAction.fileToSaveTo;
         }
 
-        return Result.OK;
+        // Make a new document
+        title = (String) JOptionPane.showInputDialog(Main.getMain(), "Enter the title for the new account file", "Document title",
+                JOptionPane.QUESTION_MESSAGE, null, null, "NewDocument");
+        return (title != null) ? Result.OK : Result.CANCEL;
+
     }
 
     void doProcess() {
 
-        new DialogWaitableWorker<Void, Void>("Closing file", -1, Main.getMain()) {
+        new DialogWaitableWorker<Void, Void>("Creating new file", -1, Main.getMain()) {
 
             @Override
             public void whenDone() {
-                setDocumentController(null);
+                ContextMain.setDocumentController(DocumentController.newDocument(title));
+                ContextMain.getDocumentController().setHasChanged(true);
+
+                ContextMain.getDocumentController().notifyChange();
             }
 
             @Override
             public void whenFailed(Exception e) {
-                throw new UnsupportedOperationException("Failed to save file: " + e.getMessage());
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public Void backgroundTask() throws Exception {
+                // Save current edited file if required
                 if (fileToSaveTo != null) {
                     Actions.getSaveAction().doSaveFile(fileToSaveTo, this);
                 }

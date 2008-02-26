@@ -22,44 +22,30 @@
 
 package org.paccman.ui.main.actions;
 
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
+import org.paccman.ui.PropertiesFrame;
+import static org.paccman.ui.main.ContextMain.*;
 
 /**
- * 
- * @author joao
+ * Action for "Properties" action.
+ * @author jfer
  */
-abstract public class PaccmanAction extends AbstractAction {
+public class PropertiesAction extends PaccmanAction {
 
-    enum Result {
-
-        OK,
-        CANCEL
+    PropertiesAction() {
+        super("Properties...", "properties.png", false);
     }
 
-    /**
-     * The path to the icon images location.
-     */
-    private static final String ROOT_PATH_RESSOURCES = "/org/paccman/ui/resources/images/";
-
-    PaccmanAction(String name, String iconFileName, boolean enabled) {
-        super(name, new ImageIcon(PaccmanAction.class.getResource(ROOT_PATH_RESSOURCES + iconFileName)));
-        setEnabled(enabled);
+    @Override
+    Result doLogic() {
+        return Result.OK;
     }
 
-    abstract Result doLogic();
-
-    abstract void doProcess();
-
-    public void actionPerformed(ActionEvent e) {
-        if (Result.CANCEL == doLogic()) {
-            return;
-        }
-        doProcess();
+    @Override
+    void doProcess() {
+        PropertiesFrame pf = new PropertiesFrame();
+        getDocumentController().registerView(pf);
+        pf.onChange(getDocumentController());
+        pf.setVisible(true);
     }
 
 }
-
-
-

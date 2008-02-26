@@ -39,12 +39,13 @@ import static org.paccman.ui.main.ContextMain.*;
  * Action for "Save" and "Save As" actions.
  * @author jfer
  */
-class SaveAction extends PaccmanAction {
+public class SaveAction extends PaccmanAction {
 
     File fileToSaveTo;
+
     private boolean saveAs;
 
-    public SaveAction(boolean saveAs) {
+    SaveAction(boolean saveAs) {
         super(saveAs ? "Save As..." : "Save", "save.png", false);
         this.saveAs = saveAs;
     }
@@ -59,7 +60,7 @@ class SaveAction extends PaccmanAction {
             if (fileToSaveTo == null) {
                 return Result.CANCEL;
             }
-        } else if (! saveAs && (ContextMain.getDocumentController().getFile() != null)) {
+        } else if (!saveAs && (ContextMain.getDocumentController().getFile() != null)) {
             fileToSaveTo = ContextMain.getDocumentController().getFile();
         }
         return Result.OK;
@@ -94,7 +95,7 @@ class SaveAction extends PaccmanAction {
         }.start();
     }
 
-    protected File selectSaveFile() {
+    File selectSaveFile() {
         assert (getDocumentController() != null);
 
         PaccmanFileChooser pfc = new PaccmanFileChooser();

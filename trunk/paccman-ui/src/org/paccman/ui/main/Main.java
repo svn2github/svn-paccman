@@ -42,7 +42,6 @@ import org.paccman.ui.schedules.ScheduleFormTab;
 import org.paccman.ui.transactions.TransactionFormTab;
 import org.paccman.ui.welcome.WelcomePaneTab;
 import static org.paccman.ui.main.ContextMain.*;
-import static org.paccman.ui.main.Actions.ActionResult.*;
 
 /**
  *
@@ -169,7 +168,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
         fileMnu.add(saveAsMnu);
         fileMnu.add(jSeparator2);
 
-        propertiesMnu.setAction(new PropertiesAction());
+        propertiesMnu.setAction(propertiesAction);
         fileMnu.add(propertiesMnu);
         fileMnu.add(jSeparator3);
 
@@ -269,23 +268,6 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
     }
 
-    @Deprecated
-    public final class PropertiesAction extends PaccmanAction {
-
-        public PropertiesAction() {
-            super("Properties", new javax.swing.ImageIcon(PropertiesAction.class.getResource("/org/paccman/ui/resources/images/properties.png")), false);
-        }
-
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent e) {
-            PropertiesFrame pf = new PropertiesFrame();
-            getDocumentController().registerView(pf);
-            pf.onChange(getDocumentController());
-            pf.setVisible(true);
-        }
-
-    }
-    
     @Deprecated
    private void showStartDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showStartDialogActionPerformed
         MainPrefs.setShowStartDialog(!MainPrefs.getShowStartDialog());
@@ -408,9 +390,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
 
     /**
      * 
-     * @deprecated Should be replaced when window manager/navigator implemented.
      */
-    @Deprecated
     public void hideTabbedPanes() {
         mainTabbedPane.removeAll();
     }
@@ -418,12 +398,13 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     // -------------------------------------------------------------------------
     // Actions 
     // -------------------------------------------------------------------------
-    Actions.NewAction newAction = new Actions.NewAction();
-    Actions.OpenAction openAction = new Actions.OpenAction();
-    Actions.QuitAction quitAction = new Actions.QuitAction();
     AbstractAction saveAction = org.paccman.ui.main.actions.Actions.getSaveAction();
     AbstractAction saveAsAction = org.paccman.ui.main.actions.Actions.getSaveAsAction();
     AbstractAction closeAction = org.paccman.ui.main.actions.Actions.getCloseAction();
+    AbstractAction quitAction = org.paccman.ui.main.actions.Actions.getQuitAction();
+    AbstractAction propertiesAction = org.paccman.ui.main.actions.Actions.getPropertiesAction();
+    AbstractAction openAction = org.paccman.ui.main.actions.Actions.getOpenAction();
+    AbstractAction newAction = org.paccman.ui.main.actions.Actions.getNewAction();
     
     private void updateActionStatus() {
         // Update enable status of Actions
@@ -510,7 +491,7 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
          }
 
          if (fileToOpen != null) {
-             Actions.doOpenFile(new File(fileToOpen));
+             org.paccman.ui.main.actions.Actions.getOpenAction().doOpenFile(new File(fileToOpen));
          }
     }//GEN-LAST:event_formWindowOpened
 
