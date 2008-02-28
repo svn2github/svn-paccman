@@ -110,7 +110,7 @@ public class PaccmanDbUtils {
     }
 
     /**
-     * Converts the value stored in datebase to the reconcile enum.
+     * Converts the value stored in database to the reconcile enum.
      * @param state The state to be converted.
      * @return The reconcilied enum value.
      */
