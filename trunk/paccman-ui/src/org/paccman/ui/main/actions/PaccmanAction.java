@@ -48,11 +48,19 @@ abstract public class PaccmanAction extends AbstractAction {
         setEnabled(enabled);
     }
 
+    /**
+     * Reset the action context.
+     * Since actions are singleton, when performing the action, we need to 
+     * re-initalize the action context.
+     */
+    abstract void doReset();
+    
     abstract Result doLogic();
 
     abstract void doProcess();
 
     public void actionPerformed(ActionEvent e) {
+        doReset();
         if (Result.CANCEL == doLogic()) {
             return;
         }

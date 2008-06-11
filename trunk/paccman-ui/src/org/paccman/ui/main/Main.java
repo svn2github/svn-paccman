@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import org.paccman.calc.CalculatorFrame;
 import org.paccman.controller.AccountController;
+import org.paccman.controller.DocumentController;
 import org.paccman.controller.PaccmanView;
 import org.paccman.preferences.ui.MainPrefs;
 import org.paccman.ui.*;
@@ -47,7 +48,7 @@ import static org.paccman.ui.main.ContextMain.*;
  *
  * @author  joao
  */
-public class Main extends javax.swing.JFrame implements PaccmanView {
+public class Main extends javax.swing.JFrame /* :TODO:clean: implements PaccmanView */ {
 
     void close() {
         Main.getMain().hideTabbedPanes();
@@ -417,8 +418,12 @@ public class Main extends javax.swing.JFrame implements PaccmanView {
     // -------------------------------------------------------------------------
     // DocumentController methods
     // -------------------------------------------------------------------------
-    public void onChange(org.paccman.controller.Controller controller) {
-
+    public void changeDocumentController(org.paccman.controller.Controller controller) {
+        assert controller instanceof DocumentController :
+                "Main should only be registered to DocumentController";
+        
+        hideTabbedPanes();
+        showTabbedPanes();
         updateActionStatus();
 
         // Updates title

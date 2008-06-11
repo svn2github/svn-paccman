@@ -39,12 +39,14 @@ public abstract class DialogWaitableWorker<T, V> extends SwingWorker<T, V> {
 
     /**
      * Called in the EDT when the task has raised an exception.
+     * @param e 
      */
     public abstract void whenFailed(Exception e);
 
     /**
      * The task routine of the worker thread performed in background.
      * @return T
+     * @throws java.lang.Exception 
      */
     public abstract T backgroundTask() throws Exception;
 

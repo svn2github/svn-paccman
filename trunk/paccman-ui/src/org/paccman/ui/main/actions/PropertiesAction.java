@@ -36,6 +36,10 @@ public class PropertiesAction extends PaccmanAction {
     }
 
     @Override
+    void doReset() {
+    }
+    
+    @Override
     Result doLogic() {
         return Result.OK;
     }

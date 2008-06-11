@@ -43,6 +43,11 @@ public class NewAction extends PaccmanAction {
         super("New", "new.png", true);
     }
 
+    void doReset() {
+        title = null;
+        fileToSaveTo = null;
+    }
+    
     Result doLogic() {
         // Close file if needed
         if (ContextMain.isDocumentEdited()) {
@@ -66,8 +71,9 @@ public class NewAction extends PaccmanAction {
 
             @Override
             public void whenDone() {
-                ContextMain.setDocumentController(DocumentController.newDocument(title));
-                ContextMain.getDocumentController().setHasChanged(true);
+                DocumentController newDocument = DocumentController.newDocument(title);
+                newDocument.setHasChanged(true);
+                ContextMain.setDocumentController(newDocument);
 
                 ContextMain.getDocumentController().notifyChange();
             }

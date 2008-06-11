@@ -41,6 +41,12 @@ public class CloseAction extends PaccmanAction {
         super("Close", "close.png", false);
     }
 
+    @Override
+    void doReset() {
+        fileToSaveTo = null;
+    }
+    
+    @Override
     Result doLogic() {
         assert ContextMain.isDocumentEdited() : "Can not close when no document edited";
 
@@ -64,6 +70,7 @@ public class CloseAction extends PaccmanAction {
         return Result.OK;
     }
 
+    @Override
     void doProcess() {
 
         new DialogWaitableWorker<Void, Void>("Closing file", -1, Main.getMain()) {

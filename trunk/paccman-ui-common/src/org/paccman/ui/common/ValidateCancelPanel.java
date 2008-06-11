@@ -6,8 +6,6 @@
 
 package org.paccman.ui.common;
 
-import java.util.EventListener;
-import javax.swing.JButton;
 import org.paccman.ui.common.*;
 
 /**

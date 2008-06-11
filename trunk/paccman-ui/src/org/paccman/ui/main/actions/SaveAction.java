@@ -51,6 +51,11 @@ public class SaveAction extends PaccmanAction {
     }
 
     @Override
+    void doReset() {
+        fileToSaveTo = null;
+    }
+    
+    @Override
     Result doLogic() {
         assert ContextMain.isDocumentEdited() : "Can not save when no document edited";
 

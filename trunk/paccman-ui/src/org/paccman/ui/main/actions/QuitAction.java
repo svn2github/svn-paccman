@@ -41,6 +41,12 @@ public class QuitAction extends PaccmanAction {
         super("Quit", "exit.png", true);
     }
 
+    @Override
+    void doReset() {
+        fileToSaveTo = null;
+    }
+    
+    @Override
     Result doLogic() {
 
         if (!isDocumentEdited()) {
@@ -58,6 +64,7 @@ public class QuitAction extends PaccmanAction {
 
     }
 
+    @Override
     void doProcess() {
 
         new DialogWaitableWorker<Void, Void>("Quitting", -1, Main.getMain()) {

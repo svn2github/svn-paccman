@@ -39,6 +39,7 @@ import org.paccman.ui.main.Main;
  */
 public class OpenAction extends PaccmanAction {
 
+    boolean close;
     File fileToSaveTo;
     File fileToOpen;
     
@@ -46,12 +47,19 @@ public class OpenAction extends PaccmanAction {
         super("Open", "open.png", true);
     }
 
+    void doReset() {
+        close = false;
+        fileToSaveTo = null;
+        fileToOpen = null;
+    }
+    
     Result doLogic() {
         if (ContextMain.isDocumentEdited()) {
-            Result closeDiag =Actions.theCloseAction.doLogic();
+            Result closeDiag = Actions.theCloseAction.doLogic();
             if (closeDiag == Result.CANCEL) {
                 return Result.CANCEL;
             }
+            close = true;
             fileToSaveTo = Actions.theCloseAction.fileToSaveTo;
         }
         fileToOpen = selectOpenFile();

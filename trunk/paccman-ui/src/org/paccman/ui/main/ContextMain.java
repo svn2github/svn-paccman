@@ -31,7 +31,7 @@ public class ContextMain {
     
     /**
      * Check if a document is currently edited (new or loaded)
-     * @return <code>true</code> if a document is currentlty edited (new or loaded). <code>false</code> otherwise.
+     * @return {@code true} if a document is currentlty edited (new or loaded), {@code false} otherwise.
      */
     public static boolean isDocumentEdited() {
         return documentController != null;
@@ -55,13 +55,9 @@ public class ContextMain {
      * @param documentController The document controller to set.
      */
     public static void setDocumentController(DocumentController documentController) {
-        if (ContextMain.documentController != null) {
-            ContextMain.documentController.unregisterView(Main.getMain());
-        }
         ContextMain.documentController = documentController;
         if (documentController != null) {
-            documentController.registerView(Main.getMain());
-            Main.getMain().showTabbedPanes();
+            Main.getMain().changeDocumentController(documentController);
             documentController.notifyChange();
         } else {
             Main.getMain().close();
