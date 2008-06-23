@@ -82,7 +82,7 @@ public class SplitPayment extends Payment {
             SplitTransaction copySt = new SplitTransaction();
             copySt.setAmount(st.getAmount().add(BigDecimal.ZERO));  
             copySt.setCategory(st.getCategory());
-            copySt.setNote(new String(st.getNote()));
+            copySt.setNote(st.getNote());
             destTransaction.addSplitTransaction(copySt);
         }
     }
