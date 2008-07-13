@@ -5,7 +5,7 @@
 -- 
 -- Document information table. Contains various information for this account file.
 --    -> title: the title of the document
---    -> version: format (model) version
+--    -> version: format (model/schema) version
 --    -> creationdate: creation date and time (in UTC)
 --    -> lastupdate: last update date (in UTC)
 --
