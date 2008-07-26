@@ -26,12 +26,19 @@ import org.jdesktop.application.Action;
 
 public class MainAboutBox extends javax.swing.JDialog {
 
+    /**
+     * Constructor.
+     * @param parent
+     */
     public MainAboutBox(java.awt.Frame parent) {
         super(parent);
         initComponents();
         getRootPane().setDefaultButton(closeButton);
     }
 
+    /**
+     * Close about box action.
+     */
     @Action
     public void closeAboutBox() {
         dispose();

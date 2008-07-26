@@ -39,6 +39,10 @@ import javax.swing.JFrame;
  */
 public class MainView extends FrameView {
 
+    /**
+     * The PAccMan application main view.
+     * @param app
+     */
     public MainView(SingleFrameApplication app) {
         super(app);
 
@@ -108,6 +112,9 @@ public class MainView extends FrameView {
         });
     }
 
+    /**
+     * Show about box action.
+     */
     @Action
     public void showAboutBox() {
         if (aboutBox == null) {
@@ -127,7 +134,6 @@ public class MainView extends FrameView {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mainPanel = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -138,19 +144,8 @@ public class MainView extends FrameView {
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
-
-        mainPanel.setName("mainPanel"); // NOI18N
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 252, Short.MAX_VALUE)
-        );
+        mainPanel = new javax.swing.JTabbedPane();
+        welcomeTaskPaneContainer = new org.jdesktop.swingx.JXTaskPaneContainer();
 
         menuBar.setName("menuBar"); // NOI18N
 
@@ -189,11 +184,11 @@ public class MainView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -211,18 +206,24 @@ public class MainView extends FrameView {
                 .addGap(3, 3, 3))
         );
 
+        mainPanel.setName("mainPanel"); // NOI18N
+
+        welcomeTaskPaneContainer.setName("welcomeTaskPaneContainer"); // NOI18N
+        mainPanel.addTab(resourceMap.getString("welcomeTaskPaneContainer.TabConstraints.tabTitle"), welcomeTaskPaneContainer); // NOI18N
+
         setComponent(mainPanel);
         setMenuBar(menuBar);
         setStatusBar(statusPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel mainPanel;
+    private javax.swing.JTabbedPane mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private org.jdesktop.swingx.JXTaskPaneContainer welcomeTaskPaneContainer;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
