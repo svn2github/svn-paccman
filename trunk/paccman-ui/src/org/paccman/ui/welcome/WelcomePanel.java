@@ -1,4 +1,4 @@
-package org.paccman.ui.main.welcome;
+package org.paccman.ui.welcome;
 
 import org.jdesktop.swingx.JXTaskPaneContainer;
 
