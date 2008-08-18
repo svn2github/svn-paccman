@@ -145,7 +145,7 @@ public class MainView extends FrameView {
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
         mainPanel = new javax.swing.JTabbedPane();
-        welcomeTaskPaneContainer = new org.jdesktop.swingx.JXTaskPaneContainer();
+        welcomePanel = new org.paccman.ui.welcome.WelcomePanel();
 
         menuBar.setName("menuBar"); // NOI18N
 
@@ -208,8 +208,8 @@ public class MainView extends FrameView {
 
         mainPanel.setName("mainPanel"); // NOI18N
 
-        welcomeTaskPaneContainer.setName("welcomeTaskPaneContainer"); // NOI18N
-        mainPanel.addTab(resourceMap.getString("welcomeTaskPaneContainer.TabConstraints.tabTitle"), welcomeTaskPaneContainer); // NOI18N
+        welcomePanel.setName("welcomePanel"); // NOI18N
+        mainPanel.addTab(resourceMap.getString("welcomePanel.TabConstraints.tabTitle"), welcomePanel); // NOI18N
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
@@ -223,7 +223,7 @@ public class MainView extends FrameView {
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
-    private org.jdesktop.swingx.JXTaskPaneContainer welcomeTaskPaneContainer;
+    private org.paccman.ui.welcome.WelcomePanel welcomePanel;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;

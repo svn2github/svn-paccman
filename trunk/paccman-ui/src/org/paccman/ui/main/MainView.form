@@ -131,18 +131,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="org.jdesktop.swingx.JXTaskPaneContainer" name="welcomeTaskPaneContainer">
+        <Component class="org.paccman.ui.welcome.WelcomePanel" name="welcomePanel">
           <Properties>
-            <Property name="name" type="java.lang.String" value="welcomeTaskPaneContainer" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="welcomePanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Welcome">
-                <Property name="tabTitle" type="java.lang.String" resourceKey="welcomeTaskPaneContainer.TabConstraints.tabTitle"/>
+                <Property name="tabTitle" type="java.lang.String" resourceKey="welcomePanel.TabConstraints.tabTitle"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
-        </Container>
+        </Component>
       </SubComponents>
     </Container>
   </NonVisualComponents>
