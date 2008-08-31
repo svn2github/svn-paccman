@@ -23,8 +23,6 @@ public class WelcomePanel extends JXTaskPaneContainer {
     private void initComponents() {
 
         acountTaskPane = new org.jdesktop.swingx.JXTaskPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        accountTable1 = new org.paccman.ui.welcome.accounts.AccountTable();
         schedulesTaskPane = new org.jdesktop.swingx.JXTaskPane();
 
         setName("Form"); // NOI18N
@@ -32,13 +30,6 @@ public class WelcomePanel extends JXTaskPaneContainer {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.paccman.ui.main.Main.class).getContext().getResourceMap(WelcomePanel.class);
         acountTaskPane.setTitle(resourceMap.getString("acountTaskPane.title")); // NOI18N
         acountTaskPane.setName("acountTaskPane"); // NOI18N
-
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
-
-        accountTable1.setName("accountTable1"); // NOI18N
-        jScrollPane1.setViewportView(accountTable1);
-
-        acountTaskPane.getContentPane().add(jScrollPane1);
 
         schedulesTaskPane.setTitle(resourceMap.getString("schedulesTaskPane.title")); // NOI18N
         schedulesTaskPane.setName("schedulesTaskPane"); // NOI18N
@@ -62,9 +53,7 @@ public class WelcomePanel extends JXTaskPaneContainer {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.paccman.ui.welcome.accounts.AccountTable accountTable1;
     private org.jdesktop.swingx.JXTaskPane acountTaskPane;
-    private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXTaskPane schedulesTaskPane;
     // End of variables declaration//GEN-END:variables
 
