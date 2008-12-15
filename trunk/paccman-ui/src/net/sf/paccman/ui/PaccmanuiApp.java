@@ -16,7 +16,7 @@
  *
  */
 
-package paccmanui;
+package net.sf.paccman.ui;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
@@ -29,7 +29,8 @@ public class PaccmanuiApp extends SingleFrameApplication {
     /**
      * At startup create and show the main frame of the application.
      */
-    @Override protected void startup() {
+    @Override
+    protected void startup() {
         show(new PaccmanuiView(this));
     }
 
@@ -38,7 +39,8 @@ public class PaccmanuiApp extends SingleFrameApplication {
      * Windows shown in our application come fully initialized from the GUI
      * builder, so this additional configuration is not needed.
      */
-    @Override protected void configureWindow(java.awt.Window root) {
+    @Override
+    protected void configureWindow(java.awt.Window root) {
     }
 
     /**
@@ -51,8 +53,10 @@ public class PaccmanuiApp extends SingleFrameApplication {
 
     /**
      * Main method launching the application.
+     * @param args the command line arguments.
      */
     public static void main(String[] args) {
         launch(PaccmanuiApp.class, args);
     }
+
 }

@@ -16,7 +16,7 @@
  *
  */
 
-package paccmanui;
+package net.sf.paccman.ui;
 
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -48,10 +48,12 @@ public class PaccmanuiView extends FrameView {
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
         messageTimer = new Timer(messageTimeout, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 statusMessageLabel.setText("");
             }
+
         });
         messageTimer.setRepeats(false);
         int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
@@ -59,11 +61,13 @@ public class PaccmanuiView extends FrameView {
             busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
         }
         busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
                 statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
             }
+
         });
         idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
         statusAnimationLabel.setIcon(idleIcon);
@@ -72,6 +76,7 @@ public class PaccmanuiView extends FrameView {
         // connecting action tasks to status bar via TaskMonitor
         TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
         taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+
             @Override
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String propertyName = evt.getPropertyName();
@@ -89,16 +94,17 @@ public class PaccmanuiView extends FrameView {
                     progressBar.setVisible(false);
                     progressBar.setValue(0);
                 } else if ("message".equals(propertyName)) {
-                    String text = (String)(evt.getNewValue());
+                    String text = (String) (evt.getNewValue());
                     statusMessageLabel.setText((text == null) ? "" : text);
                     messageTimer.restart();
                 } else if ("progress".equals(propertyName)) {
-                    int value = (Integer)(evt.getNewValue());
+                    int value = (Integer) (evt.getNewValue());
                     progressBar.setVisible(true);
                     progressBar.setIndeterminate(false);
                     progressBar.setValue(value);
                 }
             }
+
         });
     }
 
@@ -151,19 +157,19 @@ public class PaccmanuiView extends FrameView {
 
         menuBar.setName("menuBar"); // NOI18N
 
-        fileMenu.setMnemonic(java.util.ResourceBundle.getBundle("paccmanui/resources/PaccmanuiView").getString("fileMenu.mnemonic").charAt(0));
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(paccmanui.PaccmanuiApp.class).getContext().getResourceMap(PaccmanuiView.class);
+        fileMenu.setMnemonic(java.util.ResourceBundle.getBundle("net.sf.paccman.ui/resources/PaccmanuiView").getString("fileMenu.mnemonic").charAt(0));
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getResourceMap(PaccmanuiView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(paccmanui.PaccmanuiApp.class).getContext().getActionMap(PaccmanuiView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getActionMap(PaccmanuiView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
 
         menuBar.add(fileMenu);
 
-        helpMenu.setMnemonic(java.util.ResourceBundle.getBundle("paccmanui/resources/PaccmanuiView").getString("helpMenu.mnemonic").charAt(0));
+        helpMenu.setMnemonic(java.util.ResourceBundle.getBundle("net.sf.paccman.ui/resources/PaccmanuiView").getString("helpMenu.mnemonic").charAt(0));
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
@@ -225,10 +231,15 @@ public class PaccmanuiView extends FrameView {
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
+
     private final Timer busyIconTimer;
+
     private final Icon idleIcon;
+
     private final Icon[] busyIcons = new Icon[15];
+
     private int busyIconIndex = 0;
 
     private JDialog aboutBox;
+
 }

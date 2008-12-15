@@ -16,19 +16,31 @@
  * 
  */
 
-package paccmanui;
+package net.sf.paccman.ui;
 
 import org.jdesktop.application.Action;
 
+/**
+ * Paccman About Box.
+ * @author joaof (joaof at sourceforge.net)
+ */
 public class PaccmanuiAboutBox extends javax.swing.JDialog {
 
+    /**
+     * Paccman About Box constructor.
+     * @param parent
+     */
     public PaccmanuiAboutBox(java.awt.Frame parent) {
         super(parent);
         initComponents();
         getRootPane().setDefaultButton(closeButton);
     }
 
-    @Action public void closeAboutBox() {
+    /**
+     * Close action.
+     */
+    @Action
+    public void closeAboutBox() {
         dispose();
     }
 
@@ -52,13 +64,13 @@ public class PaccmanuiAboutBox extends javax.swing.JDialog {
         javax.swing.JLabel imageLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(paccmanui.PaccmanuiApp.class).getContext().getResourceMap(PaccmanuiAboutBox.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getResourceMap(PaccmanuiAboutBox.class);
         setTitle(resourceMap.getString("title")); // NOI18N
         setModal(true);
         setName("aboutBox"); // NOI18N
         setResizable(false);
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(paccmanui.PaccmanuiApp.class).getContext().getActionMap(PaccmanuiAboutBox.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getActionMap(PaccmanuiAboutBox.class, this);
         closeButton.setAction(actionMap.get("closeAboutBox")); // NOI18N
         closeButton.setName("closeButton"); // NOI18N
 
@@ -143,9 +155,9 @@ public class PaccmanuiAboutBox extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;
     // End of variables declaration//GEN-END:variables
-    
+
 }
