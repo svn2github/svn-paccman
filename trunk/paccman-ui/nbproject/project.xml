@@ -16,7 +16,7 @@
             <definitions>../libs/nblibraries.properties</definitions>
         </libraries>
         <swingapp xmlns="http://www.netbeans.org/ns/form-swingapp/1">
-            <application-class name="paccmanui.PaccmanuiApp"/>
+            <application-class name="net.sf.paccman.ui.PaccmanuiApp"/>
         </swingapp>
     </configuration>
 </project>
