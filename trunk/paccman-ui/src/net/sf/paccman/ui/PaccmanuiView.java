@@ -157,7 +157,7 @@ public class PaccmanuiView extends FrameView {
 
         menuBar.setName("menuBar"); // NOI18N
 
-        fileMenu.setMnemonic(java.util.ResourceBundle.getBundle("net.sf.paccman.ui/resources/PaccmanuiView").getString("fileMenu.mnemonic").charAt(0));
+        fileMenu.setMnemonic(java.util.ResourceBundle.getBundle("net/sf/paccman/ui/resources/PaccmanuiView").getString("fileMenu.mnemonic").charAt(0));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getResourceMap(PaccmanuiView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
@@ -169,7 +169,7 @@ public class PaccmanuiView extends FrameView {
 
         menuBar.add(fileMenu);
 
-        helpMenu.setMnemonic(java.util.ResourceBundle.getBundle("net.sf.paccman.ui/resources/PaccmanuiView").getString("helpMenu.mnemonic").charAt(0));
+        helpMenu.setMnemonic(java.util.ResourceBundle.getBundle("net/sf/paccman/ui/resources/PaccmanuiView").getString("helpMenu.mnemonic").charAt(0));
         helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
         helpMenu.setName("helpMenu"); // NOI18N
 
