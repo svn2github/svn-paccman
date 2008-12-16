@@ -98,4 +98,12 @@ public class PaccmanDatabaseMgr implements Serializable {
         return System.getProperty("user.home") + DATABASESDATABASESXML;
     }
 
+    /**
+     * Get the list of registered account folders.
+     * @return
+     */
+    public List<PaccmanDatabase> getDatabases() {
+        return databases;
+    }
+
 }
