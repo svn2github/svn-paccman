@@ -18,6 +18,7 @@
 
 package net.sf.paccman.ui;
 
+import net.sf.paccman.db.PaccmanDbManager;
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 
@@ -57,6 +58,7 @@ public class PaccmanuiApp extends SingleFrameApplication {
      */
     public static void main(String[] args) {
         launch(PaccmanuiApp.class, args);
+        PaccmanDbManager.getInstance().save(); //:TODO:test
     }
 
 }
