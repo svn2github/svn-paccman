@@ -1,15 +1,24 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * IntroPanel.java
+ * This file is part of paccman.
  *
- * Created on 16 déc. 2008, 22:11:12
+ * paccman is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * paccman is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with paccman.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 package net.sf.paccman.ui.assistant;
+
+import net.sf.paccman.db.PaccmanDatabaseMgr;
 
 /**
  *
@@ -30,52 +39,70 @@ public class IntroPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         selectBtnGrp = new javax.swing.ButtonGroup();
+        paccmanDatabaseMgr = PaccmanDatabaseMgr.getInstance();
         createNewAccountFolderRb = new javax.swing.JRadioButton();
         openAccountFolderRb = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        accountFolderListScrollPane = new javax.swing.JScrollPane();
+        accountFolderList = new javax.swing.JList();
+        alwaysOpenSelectedChb = new javax.swing.JCheckBox();
 
         setName("Form"); // NOI18N
 
         selectBtnGrp.add(createNewAccountFolderRb);
+        createNewAccountFolderRb.setSelected(true);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(net.sf.paccman.ui.PaccmanuiApp.class).getContext().getResourceMap(IntroPanel.class);
         createNewAccountFolderRb.setText(resourceMap.getString("createnewaccountfolder.text")); // NOI18N
         createNewAccountFolderRb.setName("createNewAccountFolderRb"); // NOI18N
 
         selectBtnGrp.add(openAccountFolderRb);
-        openAccountFolderRb.setText(resourceMap.getString("openAccountFolder.text")); // NOI18N
+        openAccountFolderRb.setText(resourceMap.getString("openaccountfolder.text")); // NOI18N
         openAccountFolderRb.setName("openAccountFolderRb"); // NOI18N
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, paccmanDatabaseMgr, org.jdesktop.beansbinding.ELProperty.create("${!empty databases}"), openAccountFolderRb, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane1.setViewportView(jList1);
+        accountFolderListScrollPane.setName("accountFolderListScrollPane"); // NOI18N
 
-        jCheckBox1.setText(resourceMap.getString("alwaysopen.text")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
+        accountFolderList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        accountFolderList.setName("accountFolderList"); // NOI18N
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${databases}");
+        org.jdesktop.swingbinding.JListBinding jListBinding = org.jdesktop.swingbinding.SwingBindings.createJListBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, paccmanDatabaseMgr, eLProperty, accountFolderList);
+        jListBinding.setDetailBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        bindingGroup.addBinding(jListBinding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, openAccountFolderRb, org.jdesktop.beansbinding.ELProperty.create("${selected ? selectedElement : null}"), accountFolderList, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, openAccountFolderRb, org.jdesktop.beansbinding.ELProperty.create("${selected}"), accountFolderList, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        accountFolderListScrollPane.setViewportView(accountFolderList);
+
+        alwaysOpenSelectedChb.setText(resourceMap.getString("alwaysopen.text")); // NOI18N
+        alwaysOpenSelectedChb.setName("alwaysOpenSelectedChb"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, accountFolderList, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), alwaysOpenSelectedChb, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(createNewAccountFolderRb)
-                    .addComponent(openAccountFolderRb)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(accountFolderListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(openAccountFolderRb, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                            .addComponent(createNewAccountFolderRb, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))))
+                        .addGap(28, 28, 28)
+                        .addComponent(alwaysOpenSelectedChb, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -86,21 +113,25 @@ public class IntroPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(openAccountFolderRb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(accountFolderListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(alwaysOpenSelectedChb)
+                .addContainerGap())
         );
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList accountFolderList;
+    private javax.swing.JScrollPane accountFolderListScrollPane;
+    private javax.swing.JCheckBox alwaysOpenSelectedChb;
     private javax.swing.JRadioButton createNewAccountFolderRb;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JList jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton openAccountFolderRb;
+    private net.sf.paccman.db.PaccmanDatabaseMgr paccmanDatabaseMgr;
     private javax.swing.ButtonGroup selectBtnGrp;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
 }
